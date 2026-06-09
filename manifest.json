@@ -1,0 +1,22 @@
+{
+  "name": "Python Sınav Hazırlık ve Test Portalı",
+  "short_name": "AlgoPy Sınav",
+  "description": "Python OOP, Dosyalama, Zaman, PyQt5, NumPy ve Matplotlib Sınav Hazırlık Platformu",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#4f46e5",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

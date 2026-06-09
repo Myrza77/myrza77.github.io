@@ -1,0 +1,675 @@
+[
+  {
+    "id": 1,
+    "test_type": "Teorik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Nesne Yönelimli Programlamada (OOP), gerçek veya soyut dünyadaki bir varlığı modelleyen, kendine ait özellikleri (nitelik) ve davranışları (metot) olan yapıya ne ad verilir?",
+    "code": null,
+    "options": {
+      "A": "Değişken",
+      "B": "Modül",
+      "C": "Nesne",
+      "D": "Döngü",
+      "E": "Sözlük"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 2,
+    "test_type": "Teorik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Nesnelerin üretilmesi için bir şablon veya kalıp görevi gören temel programlama yapısı aşağıdakilerden hangisidir?",
+    "code": null,
+    "options": {
+      "A": "Sınıf (Class)",
+      "B": "Fonksiyon (Function)",
+      "C": "Liste (List)",
+      "D": "Örnek (Instance)",
+      "E": "Paket (Package)"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 3,
+    "test_type": "Teorik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Python'da yeni bir sınıf tanımlamak için kullanılması zorunlu olan anahtar kelime nedir?",
+    "code": null,
+    "options": {
+      "A": "def",
+      "B": "new",
+      "C": "object",
+      "D": "class",
+      "E": "struct"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 4,
+    "test_type": "Teorik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Bir sınıftan yeni bir nesne (örnek) oluşturulduğunda ilk olarak ve otomatik olarak tetiklenen yapıcı (constructor) metot hangisidir?",
+    "code": null,
+    "options": {
+      "A": "`__main__`",
+      "B": "`__init__`",
+      "C": "`__str__`",
+      "D": "`__call__`",
+      "E": "`__new__`"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 5,
+    "test_type": "Teorik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Sınıf içerisindeki metotların, üzerinde işlem yapılan mevcut nesneye (kendisine) erişebilmesi için ilk parametre olarak geleneksel şekilde tanımlanan kelime aşağıdakilerden hangisidir?",
+    "code": null,
+    "options": {
+      "A": "object",
+      "B": "this",
+      "C": "me",
+      "D": "self",
+      "E": "cls"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 6,
+    "test_type": "Teorik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Sınıf içinde tanımlanan fonksiyonlara Nesne Yönelimli Programlama terminolojisinde genel olarak ne ad verilir?",
+    "code": null,
+    "options": {
+      "A": "Nitelik (Attribute)",
+      "B": "Parametre",
+      "C": "Argüman",
+      "D": "Özellik (Property)",
+      "E": "Metot (Method)"
+    },
+    "answer": "E"
+  },
+  {
+    "id": 7,
+    "test_type": "Teorik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Bir nesnenin `print()` fonksiyonu aracılığıyla ekrana yazdırıldığında okunabilir, anlamlı bir metin (string) döndürmesini sağlayan özel metot aşağıdakilerden hangisidir?",
+    "code": null,
+    "options": {
+      "A": "`__text__`",
+      "B": "`__repr__`",
+      "C": "`__str__`",
+      "D": "`__print__`",
+      "E": "`__format__`"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 8,
+    "test_type": "Teorik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Bir sınıfta\nnda, belirlenen adım boyutuna (step) göre eşit aralıklı elemanlar üreten fonksiyon hangisidir?",
+    "code": null,
+    "options": {
+      "A": "linspace()",
+      "B": "arange()",
+      "C": "randint()",
+      "D": "random()",
+      "E": "array()"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 43,
+    "test_type": "Teorik Sınav",
+    "category": "Matplotlib Kütüphanesi",
+    "question": "Python ekosisteminde verileri görselleştirmek ve genellikle 2 boyutlu grafikler (çizgi grafiği, sütun grafiği vb.) oluşturmak için kullanılan temel kütüphane hangisidir?",
+    "code": null,
+    "options": {
+      "A": "OpenCV",
+      "B": "PyQt5",
+      "C": "NumPy",
+      "D": "SciPy",
+      "E": "Matplotlib"
+    },
+    "answer": "E"
+  },
+  {
+    "id": 44,
+    "test_type": "Teorik Sınav",
+    "category": "Matplotlib Kütüphanesi",
+    "question": "Matplotlib kütüphanesinin çizim komutlarını barındıran ve genellikle `plt` takma adıyla projeye dahil edilen ana modülü aşağıdakilerden hangisidir?",
+    "code": null,
+    "options": {
+      "A": "pyplot",
+      "B": "graphic",
+      "C": "canvas",
+      "D": "draw",
+      "E": "axes"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 45,
+    "test_type": "Teorik Sınav",
+    "category": "Matplotlib Kütüphanesi",
+    "question": "Sıralı veri noktalarını alarak bu noktalar arasında birleştirici çizgiler oluşturan (çizgi grafiği çizen) temel fonksiyon nedir?",
+    "code": null,
+    "options": {
+      "A": "bar()",
+      "B": "scatter()",
+      "C": "plot()",
+      "D": "line()",
+      "E": "pie()"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 46,
+    "test_type": "Teorik Sınav",
+    "category": "Matplotlib Kütüphanesi",
+    "question": "Hazırlanan ve hafızada oluşturulan grafiği ekranda gerçek bir pencere halinde görüntülemek için çağrılması gereken en son fonksiyon hangisidir?",
+    "code": null,
+    "options": {
+      "A": "view()",
+      "B": "render()",
+      "C": "show()",
+      "D": "display()",
+      "E": "print()"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 47,
+    "test_type": "Teorik Sınav",
+    "category": "Matplotlib Kütüphanesi",
+    "question": "Grafiğin en üst kısmına ana başlık (title) eklemek için kullanılan fonksiyon aşağıdakilerden hangisidir?",
+    "code": null,
+    "options": {
+      "A": "set_head()",
+      "B": "header()",
+      "C": "label()",
+      "D": "title()",
+      "E": "caption()"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 48,
+    "test_type": "Teorik Sınav",
+    "category": "Matplotlib Kütüphanesi",
+    "question": "Oluşturulan grafiğin X eksenini (yatay eksen) isimlendirmek ve neyi ifade ettiğini yazmak için hangi fonksiyon kullanılır?",
+    "code": null,
+    "options": {
+      "A": "xlabel()",
+      "B": "ylabel()",
+      "C": "xtext()",
+      "D": "xtitle()",
+      "E": "xaxis()"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 49,
+    "test_type": "Teorik Sınav",
+    "category": "Matplotlib Kütüphanesi",
+    "question": "Grafiğin arka planına verilerin daha net okunabilmesi amacıyla ızgara (kareli zemin) çizgileri ekleyen fonksiyon nedir?",
+    "code": null,
+    "options": {
+      "A": "mesh()",
+      "B": "table()",
+      "C": "lines()",
+      "D": "grid()",
+      "E": "background()"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 50,
+    "test_type": "Teorik Sınav",
+    "category": "Matplotlib Kütüphanesi",
+    "question": "Grafik düzleminde belirtilen özel bir X ve Y koordinatına manuel olarak bir açıklama (metin) eklemek için hangi fonksiyon kullanılır?\nburada kac tane soru var\nThe current local time is: 2026-06-09T05:59:17+03:00.",
+    "code": null,
+    "options": {
+      "A": "annotate()",
+      "B": "text()",
+      "C": "insert()",
+      "D": "string()",
+      "E": "legend()"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 1,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Yukarıdaki kodun çıktısı aşağıdakilerden hangisidir?\nA) \nB) \nD) \nE)",
+    "code": "print(type([1, 29, 6, 2]))",
+    "options": {
+      "C": ""
+    },
+    "answer": "C"
+  },
+  {
+    "id": 2,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Yukarıdaki kodun çıktısı nedir?",
+    "code": "class Kisi:\n    def __init__(self, ad, yas):\n        self.ad = ad\n        self.yas = yas\n\nkisi1 = Kisi('Ali', 24)\nprint(kisi1.ad, kisi1.yas, \"yaşındadır.\")",
+    "options": {
+      "A": "self.ad self.yas yaşındadır.",
+      "B": "Ali 24 yaşındadır.",
+      "C": "kisi1.ad kisi1.yas yaşındadır.",
+      "D": "Ali, 24",
+      "E": "Hata verir, kurucu metod yanlış tanımlanmıştır."
+    },
+    "answer": "B"
+  },
+  {
+    "id": 3,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Yukarıdaki tanımlamalara göre `print(id(kisi1) == id(kisi2))` kodunun çıktısı ne olur?",
+    "code": "class Kisi:\n    def __init__(self, ad, yas):\n        self.ad = ad\n        self.yas = yas\n\nkisi1 = Kisi('Ali', 24)\nkisi2 = Kisi('Demet', 32)",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "1",
+      "D": "0",
+      "E": "None"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 4,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "`__str__` metodunun kullanımına göre yukarıdaki kodun çıktısı nedir?\nA)",
+    "code": "class Kisi:\n    def __init__(self, ad, yas):\n        self.ad = ad\n        self.yas = yas\n    def __str__(self):\n        return f\"{self.ad}, {self.yas} yaşındadır.\"\n\nkisi1 = Kisi('Ali', 24)\nprint(kisi1)",
+    "options": {
+      "B": "Kisi nesnesi: Ali",
+      "C": "Ali, 24 yaşındadır.",
+      "D": "('Ali', 24)",
+      "E": "Hata verir."
+    },
+    "answer": "C"
+  },
+  {
+    "id": 5,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "",
+    "code": "class Kisi:\n    def __init__(self, ad, yas):\n        self.ad = ad\n        self.yas = yas\n    def yas_artir(self):\n        self.yas += 1\n\nkisi1 = Kisi('Ali', 24)\nkisi1.yas_artir()\nprint(kisi1.y\n\nanılır?\nA) Mantıksal hataları düzeltmek\nB) Dosya kapatma, veritabanı bağlantısını sonlandırma gibi kaynakları serbest bırakma işlemleri için $\nC) Yeni değişkenler tanımlamak için\nD) Sonsuz döngüden çıkmak için\nE) Sadece hataları loglamak (kaydetmek) için",
+    "options": {},
+    "answer": null
+  },
+  {
+    "id": 46,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Yukarıdaki kodun çıktısı nasıl olur?",
+    "code": "import sys\ntry:\n    print(\"A\")\nfinally:\n    print(\"B\")\n    sys.exit()",
+    "options": {
+      "A": "Sadece A yazar",
+      "B": "Sadece B yazar",
+      "C": "A ve B yazar, ardından program kapanır",
+      "D": "Hata verir ve çöker",
+      "E": "A ve B yazar, döngüye girer"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 47,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Yukarıdaki kod çalıştırıldığında konsolda hangi hata türü görülür?",
+    "code": "def bol(a, b):\n    assert b != 0, \"Sıfıra bölünemez\"\n    return a / b\n\nbol(10, 0)",
+    "options": {
+      "A": "ZeroDivisionError",
+      "B": "ValueError",
+      "C": "AssertionError",
+      "D": "SyntaxError",
+      "E": "TypeError"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 48,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Yukarıdaki kodun ekran çıktısı sırasıyla ne olur?",
+    "code": "try:\n    print(\"X\")\n    raise Exception\n    print(\"Y\")\nexcept Exception:\n    print(\"Z\")",
+    "options": {
+      "A": "X, Y, Z",
+      "B": "X, Z",
+      "C": "Z",
+      "D": "X, Y",
+      "E": "Y, Z"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 49,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Sözdizimi Hataları (Syntax Error) ile İstisnalar (Exceptions) arasındaki temel pratik fark nedir?",
+    "code": null,
+    "options": {
+      "A": "Hiçbir fark yoktur, ikisi de aynıdır.",
+      "B": "Syntax Error kod yazım yanlışıdır ve kod çalışmadan önce yakalanır; Exceptions ise sözdizimi doğru olsa da kod çalışırken (runtime) ortaya çıkar.",
+      "C": "İstisnalar sadece döngülerde olur, sözdizimi hataları her yerde olur.",
+      "D": "Sözdizimi hataları `try-except` ile yakalanabilir, istisnalar yakalanamaz.",
+      "E": "İstisnalar derleyici tarafından otomatik düzeltilir."
+    },
+    "answer": "B"
+  },
+  {
+    "id": 50,
+    "test_type": "Pratik Sınav",
+    "category": "Nesne Yönelimli Programlama (OOP)",
+    "question": "Yukarıdaki iç içe hata yakalama kodunun çıktısı nedir?\nburada kac tane soru var\nThe current local time is: 2026-06-09T06:01:00+03:00.",
+    "code": "try:\n    try:\n        1 / 0\n    except ValueError:\n        print(\"V\")\nexcept ZeroDivisionError:\n    print(\"Z\")",
+    "options": {
+      "A": "V",
+      "B": "Z",
+      "C": "V ve Z",
+      "D": "0",
+      "E": "Hiçbir şey yazdırmaz"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 2,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "Python kodlarını çalıştırmak için hangi uzantıya sahip dosyalar kullanılır?",
+    "code": null,
+    "options": {
+      "A": ".txt",
+      "B": ".html",
+      "C": ".exe",
+      "D": ".py",
+      "E": ".docx"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 3,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "Aşağıdaki ifadelerden hangisi geçerli bir Python değişken adıdır?",
+    "code": null,
+    "options": {
+      "A": "3degisken",
+      "B": "degisken-adi",
+      "C": "degisken adi",
+      "D": "class",
+      "E": "_degisken"
+    },
+    "answer": "E"
+  },
+  {
+    "id": 4,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "Python'da veri tipi belirtmeden değişken oluşturmanın adı nedir?",
+    "code": null,
+    "options": {
+      "A": "Dinamik tanımlama",
+      "B": "Statik tanımlama",
+      "C": "Tip tanımlama",
+      "D": "Otomatik tanımlama",
+      "E": "Manuel tanımlama"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 5,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "Aşağıdaki veri türlerinden hangisi sayısal bir tür değildir?",
+    "code": null,
+    "options": {
+      "A": "int",
+      "B": "str",
+      "C": "complex",
+      "D": "float",
+      "E": "None"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 6,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "Python'da string birleştirme işlemi hangi operatörle yapılır?",
+    "code": null,
+    "options": {
+      "A": "*",
+      "B": "-",
+      "C": "/",
+      "D": "+",
+      "E": "%"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 7,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "`type(\"123\")` ifadesinin sonucu nedir?",
+    "code": null,
+    "options": {
+      "A": "int",
+      "B": "str",
+      "C": "float",
+      "D": "bool",
+      "E": "NoneType"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 8,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "`int(\"10\")` işleminin sonucu nedir?",
+    "code": null,
+    "options": {
+      "A": "10.0",
+      "B": "\"10\"",
+      "C": "10",
+      "D": "Hata verir",
+      "E": "None"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 9,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "`bool(0)` ifadesi Python'da hangi değeri döndürür?",
+    "code": null,
+    "options": {
+      "A": "1",
+      "B": "0",
+      "C": "True",
+      "D": "False",
+      "E": "None"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 10,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "Aşağıdakilerden hangisi Python'da string veri tipine örnektir?",
+    "code": null,
+    "options": {
+      "A": "'Merhaba'",
+      "B": "100",
+      "C": "10.5",
+      "D": "True",
+      "E": "None"
+    },
+    "answer": "A"
+  },
+  {
+    "id": 11,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "`float(\"12.3\")` işleminin sonucu nedir?",
+    "code": null,
+    "options": {
+      "A": "\"12.3\"",
+      "B": "12.3",
+      "C": "12",
+      "D": "Hata verir",
+      "E": "None"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 12,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "Python'da `None` anahtar kelimesi neyi temsil eder?",
+    "code": null,
+    "options": {
+      "A": "0 değerini",
+      "B": "Boş dizeyi",
+      "C": "Tanımlı olmayan değeri",
+      "D": "\"null\" değerini",
+      "E": "Sayısal sıfırı"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 13,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "`5 % 2` işleminin sonucu nedir?",
+    "code": null,
+    "options": {
+      "A": "2",
+      "B": "1",
+      "C": "0",
+      "D": "2.5",
+      "E": "Hata"
+    },
+    "answer": "B"
+  },
+  {
+    "id": 14,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "`2  3` işlemi neyi ifade eder?",
+    "code": null,
+    "options": {
+      "A": "2 + 3",
+      "B": "2 * 3",
+      "C": "2^3",
+      "D": "2'nin 3. kuvvetini",
+      "E": "Hata"
+    },
+    "answer": "D"
+  },
+  {
+    "id": 15,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "Aşağıdakilerden hangisi mantıksal bir operatör değildir?",
+    "code": null,
+    "options": {
+      "A": "and",
+      "B": "or",
+      "C": "not",
+      "D": "==",
+      "E": "xor"
+    },
+    "answer": "E"
+  },
+  {
+    "id": 16,
+    "test_type": "Çıkmış Sorular",
+    "category": "Temel Programlama",
+    "question": "`10 // 3` işleminin sonucu nedir?\n**Sor\ni hangi yapıyla tanımlanır?",
+    "code": null,
+    "options": {
+      "A": "sozluk = [\"elma\", \"armut\"]",
+      "B": "sozluk = {\"meyve\": \"elma\", \"renk\": \"kırmızı\"}",
+      "C": "sozluk = (\"elma\", \"armut\")",
+      "D": "sozluk = {1, 2, 3}",
+      "E": "sozluk = \"meyve\"=\"elma\""
+    },
+    "answer": "B"
+  },
+  {
+    "id": 39,
+    "test_type": "Çıkmış Sorular",
+    "category": "Veri Yapıları",
+    "question": "Küme (set) veri tipi ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
+    "code": null,
+    "options": {
+      "A": "Elemanlar sıralıdır",
+      "B": "Elemanlar yinelenebilir",
+      "C": "Elemanlara indeksle ulaşılabilir",
+      "D": "Aynı eleman birden fazla kez yer alabilir",
+      "E": "Her eleman yalnızca bir kez yer alabilir"
+    },
+    "answer": "E"
+  },
+  {
+    "id": 40,
+    "test_type": "Çıkmış Sorular",
+    "category": "Veri Yapıları",
+    "question": "Aşağıdakilerden hangisi Python'da bir küme (set) tanımıdır?",
+    "code": null,
+    "options": {
+      "A": "kume = [1, 2, 3]",
+      "B": "kume = (1, 2, 3)",
+      "C": "kume = {\"elma\", \"armut\", \"elma\"}",
+      "D": "kume = \"elma\", \"armut\"",
+      "E": "kume = {\"meyve\": \"elma\"}"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 41,
+    "test_type": "Çıkmış Sorular",
+    "category": "Kod Çıktı Analizi",
+    "question": "Yukarıdaki kod parçasının çıktısı nasıldır?",
+    "code": "a = 3\nb = 5\nif a > 2:\n    if b  c and c > a:\n    print(\"Doğru\")\nelse:\n    print(\"Yanlış\")",
+    "options": {
+      "A": "Hata",
+      "B": "None",
+      "C": "Doğru",
+      "D": "Yanlış",
+      "E": "a"
+    },
+    "answer": "C"
+  },
+  {
+    "id": 44,
+    "test_type": "Çıkmış Sorular",
+    "category": "Kod Çıktı Analizi",
+    "question": "Yukarıdaki kod parçasının çıktısı nasıldır?",
+    "code": "x = 10\nif x > 5:\n    print(\"1\")\nelif x > 8:\n    print(\"2\")\nelse:\n    print(\"3\")",
+    "options": {
+      "A": "1 ve 2",
+      "B": "Hata",
+      "C": "3",
+      "D": "2",
+      "E": "1"
+    },
+    "answer": "E"
+  },
+  {
+    "id": 45,
+    "test_type": "Çıkmış Sorular",
+    "category": "Kod Çıktı Analizi",
+    "question": "",
+    "code": "x = 7\nif x > 5:\n    if x \n\nThe current local time is: 2026-06-09T06:38:02+03:00.",
+    "options": {},
+    "answer": null
+  }
+]
