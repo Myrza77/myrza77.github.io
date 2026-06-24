@@ -1,4 +1,4 @@
-const CACHE_NAME = "algopy-v2";
+const CACHE_NAME = "algopy-v3";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
