@@ -566,7 +566,7 @@
         <span class="icon">☕</span>
         <div>
           <h1>Nesneye Dayalı Programlama</h1>
-          <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Java OOP Vize Sınavı (Hafta 1 - 7)</div>
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Java OOP Vize Sınavı (119 Soru)</div>
         </div>
       </div>
       <div class="header-actions">
@@ -585,6 +585,7 @@
   <!-- FILTER PILLS -->
   <div class="filters-wrap" id="filters-container">
     <button class="filter-btn active" onclick="setFilter('all', 0)">Tümü (119)</button>
+    
     <button class="filter-btn" onclick="setFilter('test', 0)">Test (70)</button>
     <button class="filter-btn" onclick="setFilter('fill', 0)">Boşluk (35)</button>
     <button class="filter-btn" onclick="setFilter('code', 0)">Kod Yazma (14)</button>
@@ -700,6 +701,7 @@
       // Filter pool
       pool = ALL_QUESTIONS.filter(q => {
         if (type === "all") return week === 0 || q.week === week;
+        if (type === "cikmis") return q.qType === "cikmis";
         if (type === "test") return q.qType === "test";
         if (type === "fill") return q.qType === "fill";
         if (type === "code") return q.qType === "code";
@@ -764,7 +766,8 @@
       else btnFav.classList.remove("active");
 
       let typeBadge = "";
-      if (q.qType === "test") typeBadge = '<span class="badge badge-test">TEST SORUSU</span>';
+      if (q.qType === "cikmis") typeBadge = '<span class="badge" style="background:#fee2e2; color:#991b1b;">🔥 ÇIKMIŞ SORU</span>';
+      else if (q.qType === "test") typeBadge = '<span class="badge badge-test">TEST SORUSU</span>';
       else if (q.qType === "fill") typeBadge = '<span class="badge badge-fill">BOŞLUK DOLDURMA</span>';
       else if (q.qType === "code") typeBadge = '<span class="badge badge-code">KOD YAZMA / KLASİK</span>';
 
@@ -788,8 +791,8 @@
 
       let interactiveHtml = "";
 
-      // 1. TEST SORULARI
-      if (q.qType === "test") {
+      // 1. TEST & ÇIKMIŞ SORULAR
+      if (q.qType === "test" || q.qType === "cikmis") {
         let optsHtml = "";
         for (const [key, val] of Object.entries(q.options || {})) {
           let cls = "";
@@ -806,7 +809,8 @@
           optsHtml += `
             <button class="option-btn ${cls}" onclick="answerTest('${key}')" ${isAnswered ? 'disabled' : ''}>
               <span class="opt-key">${iconChar}</span>
-              <span class="opt-text">${escapeHtml(val)}</span>
+              <span class="opt-text" style="${val.includes('
+') ? 'white-space:pre-wrap; font-family:Consolas,Monaco,monospace; font-size:12px;' : ''}">${escapeHtml(val)}</span>
             </button>
           `;
         }

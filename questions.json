@@ -6432,5 +6432,594 @@
       "void bilgileriYazdir"
     ],
     "explanation": "Hafta 7 örnek Java çözüm kodu yukarıdaki gibidir."
+  },
+  {
+    "id": 7001,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 1,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Python'a Giriş (Kolay #1)",
+    "question": "Yüksek seviyeli dil ile yazılmış programa kaynak kodu denir. Kaynak kodunun bilgisayar tarafından anlaşılabilmesi için makine diline dönüştürülmesi gerekir. Bu işi aşağıdakilerden hangisi gerçekleştirir?",
+    "code": null,
+    "options": {
+      "A": "compiler",
+      "B": "console",
+      "C": "edit",
+      "D": "format",
+      "E": "debug"
+    },
+    "answer": "A",
+    "explanation": "İpucu: Derleyici (compiler), kaynak kodu derlemeden önce kodları kontrol eder, varsa hataları bildirir ve kodu makine diline dönüştürür."
+  },
+  {
+    "id": 7002,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 1,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Python'a Giriş (Kolay #2)",
+    "question": "Aşağıdakilerden hangisi \"Derleyici\" ve \"Yorumlayıcı\" arasındaki farklardan birisi değildir?",
+    "code": null,
+    "options": {
+      "A": "Derleyici, tüm hatalar tek seferde belirlenerek çıktı verirken; Yorumlayıcı, karşılaşılan ilk hatada çalışmayı durdurur.",
+      "B": "Derleyici, Yorumlayıcı'ya göre daha hızlıdır.",
+      "C": "Derleyici, Yorumlayıcı'dan daha fazla bellek gerektirir.",
+      "D": "Tüm diller derleyici kullanır.",
+      "E": "Makine diline çevrilmiş programın çalışması yüksek seviyeli dillere göre daha hızlıdır."
+    },
+    "answer": "D",
+    "explanation": "İpucu: Tüm diller derleyici kullanmaz. C, C++ gibi diller derleyici kullanırken; Python, Ruby gibi diller yorumlayıcı (interpreter) kullanır."
+  },
+  {
+    "id": 7003,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 2,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Veri Tipleri (Kolay #3)",
+    "question": "Yukarıdaki Python ifadesinin sonucu nedir?",
+    "code": "print(3 * 5 + (15 / 3) * 3 - 2)",
+    "options": {
+      "A": "30",
+      "B": "28",
+      "C": "29",
+      "D": "20",
+      "E": "58"
+    },
+    "answer": "B",
+    "explanation": "İpucu: İlk olarak parantez içi yapılır: (15 / 3) = 5. Ardından çarpmalar: 3 * 5 = 15 ve 5 * 3 = 15. Son olarak: 15 + 15 - 2 = 28."
+  },
+  {
+    "id": 7004,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 2,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Veri Tipleri (Kolay #4)",
+    "question": "Yukarıdaki kodun çıktısı nedir?",
+    "code": "d = '7'\nm = '19'\nprint(int(d) + int(m))",
+    "options": {
+      "A": "26",
+      "B": "12",
+      "C": "Program hata verir.",
+      "D": "133",
+      "E": "2,7"
+    },
+    "answer": "A",
+    "explanation": "İpucu: String olarak tanımlanan '7' ve '19' ifadeleri int() fonksiyonu ile tam sayıya çevrilip toplandığında 7 + 19 = 26 sonucu elde edilir."
+  },
+  {
+    "id": 7005,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 3,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Temel Fonksiyonlar (Kolay #5)",
+    "question": "Bir öğrenci ekrana python yazdırmak istiyor. Fakat yazdırırken bir hata yapıyor ve yukarıdaki gibi yazıyor. Bu durumda ekranda hangi hata mesajı gözükür?",
+    "code": "print(\"python)",
+    "options": {
+      "A": "SyntaxError: unexpected indent",
+      "B": "SyntaxError: EOL while scanning string literal",
+      "C": "SyntaxError: invalid syntax",
+      "D": "SyntaxError: can't assign to literal",
+      "E": "IndentationError: expected an indented block"
+    },
+    "answer": "B",
+    "explanation": "İpucu: String ifadenin kapanış tırnağı unutulduğunda yorumlayıcı satır sonuna (End Of Line - EOL) kadar tırnağı arar ve 'SyntaxError: EOL while scanning string literal' hatası verir."
+  },
+  {
+    "id": 7006,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 3,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Temel Fonksiyonlar (Kolay #6)",
+    "question": "Aşağıdakilerden hangisinde print() fonksiyonunun kullanımı doğrudur?",
+    "code": null,
+    "options": {
+      "A": "print(\"Ankara)",
+      "B": "print(Ankara)",
+      "C": "print(\"\\n Ankara\")",
+      "D": "print('Ankara\")",
+      "E": "print(\"\"Ankara\"\"\")"
+    },
+    "answer": "C",
+    "explanation": "İpucu: print() komutunda açılış ve kapanış tırnakları eşleşmelidir (\"...\"). \\n ise alt satıra geçmek için kullanılan geçerli bir kaçış dizisidir."
+  },
+  {
+    "id": 7007,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 4,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Koşullu İfadeler (Kolay #7)",
+    "question": "Kullanıcıdan alınan 3 sayıdan hangisinin daha büyük olduğunu gösteren programı yazınız.",
+    "code": null,
+    "options": {
+      "A": "a = int(input('a: '))\nb = int(input('b: '))\nc = int(input('c: '))\n\nif (a > b) and (a > c):\n    print('a en büyük sayıdır.')\nelif (b > a) and (b > c):\n    print('b en büyük sayıdır.')\nelif (c > a) and (c > b):\n    print('c en büyük sayıdır.')",
+      "B": "a = int(input('a: '))\nb = int(input('b: '))\nc = int(input('c: '))\n\nif (a > b) or (a > c):\n    print('a en büyük sayıdır.')\nelif (b > a) or (b > c):\n    print('b en büyük sayıdır.')\nelif (c > a) or (c > b):\n    print('c en büyük sayıdır.')",
+      "C": "a = (input('a: '))\nb = (input('b: '))\nc = (input('c: '))\n\nif (a > b) and (a > c):\n    print('a en büyük sayıdır.')\nelif (b > a) and (b > c):\n    print('b en büyük sayıdır.')\nelif (c > a) and (c > b):\n    print('c en büyük sayıdır.')",
+      "D": "a = int(input('a: '))\nb = int(input('b: '))\nc = int(input('c: '))\n\nif (a > b) or (a > c) print('a en büyük sayıdır.')\nelif (b > a) or (b > c) print('b en büyük sayıdır.')\nelif (c > a) or (c > b) print('c en büyük sayıdır.')"
+    },
+    "answer": "A",
+    "explanation": "İpucu: Sayılar int(input()) ile tam sayıya çevrilmeli ve bir sayının en büyük olması için diğer İKİ sayıdan da büyük olması gerektiğinden 'and' bağlacı kullanılmalıdır."
+  },
+  {
+    "id": 7008,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 4,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Koşullu İfadeler (Kolay #8)",
+    "question": "Kullanıcıdan aldığınız (0'dan büyük) sayının çift olup olmadığını kontrol eden Python programını yazınız.",
+    "code": null,
+    "options": {
+      "A": "sayi = int(input('Kontrol edilecek sayıyı giriniz:'))\nif (sayi > 0):\n    if (sayi % 2 == 0):\n        print('Girdiğiniz sayı çift sayıdır.')\n    if\n        print('Girdiğiniz sayı tek sayıdır.')",
+      "B": "sayi = int(input('Kontrol edilecek sayıyı giriniz:'))\nif (sayi > 0):\n    if (sayi % 2 == 0):\n        print('Girdiğiniz sayı çift sayıdır.')\n    else:\n        print('Girdiğiniz sayı tek sayıdır.')",
+      "C": "sayi = int(input('Kontrol edilecek sayıyı giriniz:'))\nif (sayi > 0):\n    if (sayi % 2 == 0):\n        print('Girdiğiniz sayı çift sayıdır.')\n    print('Girdiğiniz sayı tek sayıdır.')",
+      "D": "sayi = int(input('Kontrol edilecek sayıyı giriniz:'))\nif (sayi % 2 == 0):\n    print('Girdiğiniz sayı çift sayıdır.')\nelse:\n    print('Girdiğiniz sayı tek sayıdır.')",
+      "E": "sayi = int(input('Kontrol edilecek sayıyı giriniz:'))\nif (sayi > 0):\n    if (sayi % 2 == 0):\n        print('Girdiğiniz sayı çift sayıdır.')\n    else if:\n        print('Girdiğiniz sayı tek sayıdır.')"
+    },
+    "answer": "B",
+    "explanation": "İpucu: İç içe koşul yapısında sayi > 0 kontrolünden sonra sayi % 2 == 0 ise çift, aksi halde (else:) tek sayıdır."
+  },
+  {
+    "id": 7009,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 6,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Döngü Yapıları (Kolay #9)",
+    "question": "Yukarıdaki Sayilar listesindeki değerleri for döngüsü ile dönüp toplayan kod hangisidir?",
+    "code": "Sayilar = [1, 2, 3, 4, 5, 6, 7]",
+    "options": {
+      "A": "Toplam = 0\nfor sayi in sayilar:\n    Toplam += sayi\nprint(\"Toplam : \", Toplam)",
+      "B": "for sayi in sayilar:\n    Toplam += sayi\nprint(\"Toplam : \", Toplam)",
+      "C": "Toplam = 0\nwhile sayi in sayilar:\n    Toplam += sayi\nprint(\"Toplam : \", Toplam)"
+    },
+    "answer": "A",
+    "explanation": "İpucu: Döngüden önce Toplam = 0 başlangıç değeri tanımlanmalı ve for döngüsü ile her eleman Toplam değişkenine eklenmelidir."
+  },
+  {
+    "id": 7010,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 4,
+    "difficulty": "Kolay",
+    "category": "Çıkmış Soru • Döngüler (Kolay #10)",
+    "question": "Yukarıda verilen Python kodu ne işe yarıyor?",
+    "code": "a = 50\ncarpim = 1\nwhile a < 100:\n    if (a % 5 == 0):\n        carpim = carpim * a\n    a += 1\nprint(carpim)",
+    "options": {
+      "A": "50 ve 100 arasındaki sayıları toplar.",
+      "B": "50 ve 100 arasındaki 5'e bölünen sayıların çarpımı",
+      "C": "50 ve 100 arasındaki 5'e bölünen sayıların toplamı",
+      "D": "50 ve 100 arasındaki tek sayıların toplamını bulur.",
+      "E": "50 ve 100 arasındaki çift sayıların toplamını bulur."
+    },
+    "answer": "B",
+    "explanation": "İpucu: Döngü 50'den 100'e kadar ilerlerken a % 5 == 0 koşuluyla 5'e tam bölünen sayıları carpim değişkeni ile çarpar. (Not: Orijinal cevap anahtarında sehven A yazılmış olsa da kod 5'e bölünenlerin çarpımını bulmaktadır)."
+  },
+  {
+    "id": 7011,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 1,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Python'a Giriş (Orta #1)",
+    "question": "1. Daha fazla bellek gerektirir.\n2. Daha yavaştır.\n3. Hata ayıklamak zordur.\n\nYukarıda derleyici ve yorumlayıcı hakkında bilgiler vardır. Buna göre; hangi seçenekte derleyici ve yorumlayıcı sırası doğru verilmiştir?",
+    "code": null,
+    "options": {
+      "A": "Derleyici - derleyici - yorumlayıcı",
+      "B": "Yorumlayıcı - derleyici - derleyici",
+      "C": "Derleyici - yorumlayıcı - derleyici",
+      "D": "Yorumlayıcı - derleyici - yorumlayıcı",
+      "E": "Derleyici - yorumlayıcı - yorumlayıcı"
+    },
+    "answer": "C",
+    "explanation": "İpucu: 1) Derleyici hedef makine kodu ürettiği için daha fazla bellek gerektirir. 2) Yorumlayıcı satır satır çalıştırdığı için daha yavaştır. 3) Derleyici tüm kodu tek seferde derlediği için hata ayıklamak yorumlayıcıya göre daha zordur (Derleyici - Yorumlayıcı - Derleyici)."
+  },
+  {
+    "id": 7012,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 1,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Python'a Giriş (Orta #2)",
+    "question": "Aşağıdakilerden hangisi kod yazarken yorum satırı kullanma amaçlarından birisi değildir?",
+    "code": null,
+    "options": {
+      "A": "Yazılan kod satırı ile ilgili bilgi vermek.",
+      "B": "Kullanılmayan ya da sonrasında kullanılabilir hale getirmek için yazılan kod satırını görünmez kılmak.",
+      "C": "Hatırlatma oluşturmak.",
+      "D": "Proje bittikten sonra dönüp bakıldığında kodun okunabilirliğini korumasını sağlamak.",
+      "E": "Keyfi olarak proje dışında eğlenme amaçlı yazmak."
+    },
+    "answer": "E",
+    "explanation": "İpucu: Yorum satırlarının amacı kod hakkında bilgi vermek, hatırlatma oluşturmak ve okunabilirliği artırmaktır; keyfi/eğlenme amaçlı kullanılmaz."
+  },
+  {
+    "id": 7013,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 2,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Veri Tipleri ve Operatörler (Orta #3)",
+    "question": "Kullanıcıdan 1 vize ve 1 final notunu alıp ortalama hesaplayınız. Eğer ortalama 50 ve üstündeyse geçti (True) değilse kaldı (False) yazan programı yazınız. (NOT: Vize notu %60, final notu %40 etki etmektedir ve Ortalama 50 olsa bile final notu en az 50 olmalıdır.)",
+    "code": null,
+    "options": {
+      "A": "vize = float(input('vize: '))\nfinal = float(input('final: '))\nortalama = (vize * 0.6) + (final * 0.4)\ngectiMi = (ortalama >= 50) and (final >= 50)\nprint('Öğrencinin ortalaması:', ortalama, 'Öğrenci geçti mi:', gectiMi)",
+      "B": "vize = float(input('vize: '))\nfinal = float(input('final: '))\nortalama = (vize * 0.6) + (final * 0.4)\ngectiMi = (ortalama >= 50) or (final >= 50)\nprint('Öğrencinin ortalaması:', ortalama, 'Öğrenci geçti mi:', gectiMi)",
+      "C": "vize = float(input('vize: '))\nfinal = float(input('final: '))\nortalama = (vize * 0.6) + (final * 0.4)\ngectiMi = (ortalama >= 50) and (final >= 50)\nprint('Öğrencinin ortalaması:' ortalama 'Öğrenci geçti mi:' gectiMi)",
+      "D": "vize = float(input('vize: '))\nfinal = float(input('final: '))\nortalama = (vize * 0.6) + (final * 0.4)\ngectiMi = (ortalama => 50) and (final => 50)\nprint('Öğrencinin ortalaması:', ortalama, 'Öğrenci geçti mi:', gectiMi)"
+    },
+    "answer": "A",
+    "explanation": "İpucu: Hem ortalamanın >= 50 olması hem de finalin >= 50 olması zorunlu olduğundan 'and' operatörü ve '>=' karşılaştırması kullanılmalıdır."
+  },
+  {
+    "id": 7014,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 3,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Veri Tipleri (Orta #4)",
+    "question": "Kullanıcıdan ad (string), yaş (integer) ve boy (float) bilgilerini uygun veri tipine dönüştürerek alarak aşağıdaki formatta ekrana yazdıran programı yazınız:\n\"Adınız: Ali, Yaşınız: 20, Boyunuz: 1.75 metre\"",
+    "code": null,
+    "options": {
+      "A": "ad = input(\"Adınız: \")\nyas = int(input(\"Yaşınız: \"))\nboy = float(input(\"Boyunuz: \"))\nprint(\"Adınız:\", ad, \", Yaşınız:\", yas, \", Boyunuz:\", boy, \"metre\")",
+      "B": "ad = str(input(\"Adınız: \"))\nyas = input(\"Yaşınız: \")\nboy = input(\"Boyunuz: \")\nprint(\"Adınız:\", ad, \", Yaşınız:\", yas, \", Boyunuz:\", boy, \"metre\")",
+      "C": "ad = input(\"Adınız: \")\nyas = float(input(\"Yaşınız: \"))\nboy = int(input(\"Boyunuz: \"))\nprint(\"Adınız:\", ad, \", Yaşınız:\", yas, \", Boyunuz:\", boy, \"metre\")",
+      "D": "ad = input(\"Adınız: \")\nyas = int(input(\"Yaşınız: \"))\nboy = float(input(\"Boyunuz: \"))\nprint(\"Adınız: \" + ad + \" Yaşınız: \" + yas + \" Boyunuz: \" + boy)"
+    },
+    "answer": "A",
+    "explanation": "İpucu: input() varsayılan olarak str döndürür; yaş için int(), boy için float() dönüşümü yapılmalı ve print() içinde virgülle ayrılarak yazdırılmalıdır."
+  },
+  {
+    "id": 7015,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 3,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Temel Fonksiyonlar (Orta #5)",
+    "question": "Kullanıcıdan 2 adet sayı alın ve bunların toplamını bulan programı yazınız.",
+    "code": null,
+    "options": {
+      "A": "a = input(\"Birinci sayi: \")\nb = input(\"İkinci sayi: \")\nprint(\"Toplam:\", a + b)",
+      "B": "a = int(input(\"Birinci sayi: \"))\nb = int(input(\"İkinci sayi: \"))\nprint(\"Toplam:\", a + b)",
+      "C": "a = int(input(Birinci sayi:))\nb = int(input(\"İkinci sayi\"))\nprint(\"Toplam:\", a + b)",
+      "D": "a = (input(\"Birinci sayi: \"))\nb = (input(\"İkinci sayi\"))\nprint(\"Toplam: \" + a + b)",
+      "E": "a = int((\"Birinci sayi: \"))\nb = int((\"İkinci sayi\"))\nprint(\"Toplam:\", a + b)"
+    },
+    "answer": "B",
+    "explanation": "İpucu: Sayısal toplama yapabilmek için input() ile alınan değerler int() fonksiyonu ile tam sayıya dönüştürülmelidir."
+  },
+  {
+    "id": 7016,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 3,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Temel Fonksiyonlar (Orta #6)",
+    "question": "Kullanıcıdan iki sayı alınız. Aldığınız sayılardan birini x kenarına birini y kenarına atayınız ve oluşturduğunuz dik üçgenin hipotenüsünü hesaplayınız.",
+    "code": null,
+    "options": {
+      "A": "x = input(\"x:\")\ny = input(\"y:\")\nh = (x**2 + y**2)\nh = h**2\nprint('Hipotenüs:', h)",
+      "B": "x = input(int(\"x:\"))\ny = input(int(\"y:\"))\nh = (x**2 + y**2)\nh = h**2\nprint('Hipotenüs:', h)",
+      "C": "x = float(input(\"x kenarı için değer giriniz:\"))\ny = float(input(\"y kenarı için değer giriniz:\"))\nh = (x**2 + y**2)**0.5\nprint(\"Hipotenüs:\", h)",
+      "D": "x = input(int(\"x kenarı için değer giriniz:\"))\ny = input(int(\"y kenarı için değer giriniz:\"))\nh = (x**2 + y**2)\nprint(\"Hipotenüs:\", h)"
+    },
+    "answer": "C",
+    "explanation": "İpucu: Hipotenüs formülü c = (x**2 + y**2)**0.5 şeklindedir ve kenar uzunlukları float(input(...)) ile sayısal olarak alınmalıdır."
+  },
+  {
+    "id": 7017,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 4,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Koşullu İfadeler (Orta #7)",
+    "question": "Girilen sayının tek mi çift mi olduğunu bulan programı yazınız.",
+    "code": null,
+    "options": {
+      "A": "sayi = input('Sayı: ')\nif (sayi % 2 == 0):\n    print(\"Sayı Çift\")\nelse:\n    print(\"Sayı Tek\")",
+      "B": "sayi = input('Sayı: ')\nif (int(sayi) / 2 == 0):\n    print(\"Sayı Çift\")\nelse:\n    print(\"Sayı Tek\")",
+      "C": "sayi = int(input('Sayı: '))\nif (sayi % 2 == 0):\n    print(\"Sayı Çift\")\nelse:\n    print(\"Sayı Tek\")"
+    },
+    "answer": "C",
+    "explanation": "İpucu: Kullanıcıdan alınan değer int() ile tam sayıya çevrilmeli ve % (mod) operatörü ile 2'ye bölümünden kalanın 0 olup olmadığı kontrol edilmelidir."
+  },
+  {
+    "id": 7018,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 6,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Döngüler ve Koşullar (Orta #8)",
+    "question": "0 ve 1000 arasındaki çift olan tüm sayıların toplamını ekrana yazdıran Python kodu aşağıdakilerden hangisidir?",
+    "code": null,
+    "options": {
+      "A": "sonuc = 0\nfor i in range(0, 1000):\n    if i % 2 == 0:\n        sonuc = sonuc + i\nprint(\"Sonuç:\", sonuc)",
+      "B": "sonuc = 1\nfor i in range(0, 1000):\n    if i % 2 == 0:\n        sonuc = sonuc + 1\nprint(\"Sonuç:\", sonuc)",
+      "C": "sonuc = 0\nfor i in range(1, 1000):\n    if i % 2 == 0:\n        sonuc = sonuc + 1\nprint(\"Sonuç:\", sonuc)",
+      "D": "sonuc = 0\nfor i in range(0, 1000):\n    if i % 2 == 1:\n        sonuc = sonuc + 1\nprint(\"Sonuç:\", sonuc)",
+      "E": "sonuc = 0\nfor i in range(0, 1000):\n    if i % 2 == 0:\n        print(\"Sonuç:\", sonuc)"
+    },
+    "answer": "A",
+    "explanation": "İpucu: sonuc = 0 ile başlanmalı, range(0, 1000) döngüsü içinde i % 2 == 0 şartını sağlayan her i değeri sonuc = sonuc + i ile toplanmalıdır."
+  },
+  {
+    "id": 7019,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 5,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Listeler (Orta #9)",
+    "question": "Yukarıdaki mesaj listesinin 0'dan 2. indise kadar olan kısmını yazdıran kod hangisidir?",
+    "code": "mesaj = [\"görsel\", \"programlama\", \"dersine\", \"hoş\", \"geldiniz\"]",
+    "options": {
+      "A": "print(mesaj[0, 2])",
+      "B": "print(mesaj[0:2])",
+      "C": "print(mesaj[2:0])",
+      "D": "print(mesaj[0.2])",
+      "E": "print(mesaj[0-2])"
+    },
+    "answer": "B",
+    "explanation": "İpucu: Liste dilimleme (slicing) işleminde iki nokta üst üste [başlangıç:bitiş] kullanılır: print(mesaj[0:2])."
+  },
+  {
+    "id": 7020,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 5,
+    "difficulty": "Orta",
+    "category": "Çıkmış Soru • Listeler (Orta #10)",
+    "question": "Yukarıdaki kumes listesine \"civciv\" elemanını ekleyerek, ciftlik ve kumes listelerini birleştiren kod hangisidir?",
+    "code": "ciftlik = [\"inek\", \"koyun\", \"keçi\"]\nkumes = [\"tavuk\", \"horoz\"]",
+    "options": {
+      "A": "ciftlik.extend(kumes)\nciftlik.append(kumes[civciv])",
+      "B": "kumes.append(\"civciv\")\nciftlik.extend(kumes)",
+      "C": "kumes.append(ciftlik)\nkumes.extend(\"civciv\")",
+      "D": "ciftlik.append(kumes)\nkumes.append(\"civciv\")",
+      "E": "kumes.extend(\"civciv\")\nkumes.append(ciftlik)"
+    },
+    "answer": "B",
+    "explanation": "İpucu: append() listeye tek bir eleman ekler (kumes.append(\"civciv\")), extend() ise bir listeyi diğer listenin sonuna ekleyerek birleştirir (ciftlik.extend(kumes))."
+  },
+  {
+    "id": 7021,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 1,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Python'a Giriş (Zor #1)",
+    "question": "Python'da ekrana yazdırma komutlarından hangisi doğru şekilde yazılmıştır?",
+    "code": null,
+    "options": {
+      "A": "print(merhaba dünya)",
+      "B": "PRİNT(merhaba dünya)",
+      "C": "console.log(\"merhaba dünya\")",
+      "D": "console.log(merhaba dünya)",
+      "E": "print(\"merhaba dünya\")"
+    },
+    "answer": "E",
+    "explanation": "İpucu: Python'da ekrana yazdırma fonksiyonu küçük harfle print() olarak yazılır ve metin (string) ifadeler tırnak içinde verilir."
+  },
+  {
+    "id": 7022,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 2,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Veri Tipleri (Zor #2)",
+    "question": "Yukarıdaki Python kodunun çıktısı ne olur?",
+    "code": "x = 5\ny = \"5\"\nz = 5.0\nprint(x + int(y))\nprint(str(x) + y)\nprint(x == z)\nprint(type(z))",
+    "options": {
+      "A": "10\n55\nTrue\n<class 'float'>",
+      "B": "55\n10\nFalse\n<class 'float'>",
+      "C": "10\n55\nFalse\n<class 'int'>",
+      "D": "10\n10\nTrue\n<class 'float'>",
+      "E": "55\n55\nTrue\n<class 'float'>"
+    },
+    "answer": "A",
+    "explanation": "İpucu: 5 + int('5') = 10 yapar. str(5) + '5' = '55' metin birleştirmesi yapar. 5 == 5.0 değerce eşit olduğundan True döner. z'nin tipi ise <class 'float'>'tır."
+  },
+  {
+    "id": 7023,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 2,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Veri Tipleri (Zor #3)",
+    "question": "Yukarıdaki kodu çalıştırdığımızda konsolda 13 gözükmektedir. Buna göre print(?) içindeki ? yerine ne yazılmalıdır?",
+    "code": "Sayi1 = '5'\nSayi2 = '8'\nprint(?)",
+    "options": {
+      "A": "Sayi1 + Sayi2",
+      "B": "Sayi1, Sayi2",
+      "C": "int(Sayi1) + int(Sayi2)",
+      "D": "str(Sayi1) + str(Sayi2)",
+      "E": "int(Sayi1) + Sayi2"
+    },
+    "answer": "C",
+    "explanation": "İpucu: String olarak tanımlanan '5' ve '8' değerlerinin matematiksel toplamının 13 olması için her ikisi de int() ile tam sayıya çevrilmelidir."
+  },
+  {
+    "id": 7024,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 2,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Veri Tipleri (Zor #4)",
+    "question": "Yukarıdaki Python kodunun çıktısı ne olur?",
+    "code": "x = \"10\"\ny = 5\nz = 2.5\n\nprint(int(x) + y * z)\nprint(x + str(y))",
+    "options": {
+      "A": "22.5\n105",
+      "B": "22.5\n15",
+      "C": "17.5\n10 + 5",
+      "D": "12.5\n105",
+      "E": "Hata verir."
+    },
+    "answer": "A",
+    "explanation": "İpucu: İlk satırda önce çarpma yapılır: 5 * 2.5 = 12.5, ardından int('10') + 12.5 = 22.5. İkinci satırda '10' + str(5) yan yana birleştirilerek '105' yazdırılır."
+  },
+  {
+    "id": 7025,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 4,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Koşullu İfadeler (Zor #5)",
+    "question": "Bir sinema salonunda filmin fiyatı 20 TL'dir ve 18 yaş üstü kişiler girebilir. Kullanıcının bileti alabilmesi için adını, yaşını ve ne kadar parası olduğunu girmesi gereklidir. Bu bilgiye göre kullanıcıdan adını, yaşını ve ne kadar parası olduğunu alıp biletini oluşturan kod hangisidir?",
+    "code": null,
+    "options": {
+      "A": "a = str(input(\"adınızı giriniz: \"))\nb = int(input(\"yaşınızı giriniz: \"))\nc = int(input(\"ne kadarınız var :\"))\n\nif b <= 18 and c >= 20:\n    print(\"Malesef yaşınız tutmuyor\")\nelif b >= 18 and c < 20:\n    print(\"Malesef paranız yetmiyor\")\nelse:\n    print(\"Sayın\", a, \"Biletiniz başarıyla oluşturuldu. İyi seyirler.\")",
+      "B": "a = input(\"adınızı giriniz: \")\nb = input(\"yaşınızı giriniz :\")\nc = input(\"ne kadarınız var:\")\n\nif b <= 18 and c >= 20:\n    print(\"Malesef yaşınız tutmuyor\")\nelif b >= 18 and c < 20:\n    print(\"Malesef paranız yetmiyor\")\nelse:\n    print(\"Sayın\", a, \"Biletiniz başarıyla oluşturuldu. İyi seyirler.\")",
+      "C": "a = str(input(\"adınızı giriniz: \"))\nb = int(input(\"yaşınızı giriniz :\"))\nc = int(input(\"ne kadarınız var :\"))\n\nif b <= 18 or c >= 20:\n    print(\"Malesef yaşınız tutmuyor\")\nelif b >= 18 and c < 20:\n    print(\"Malesef paranız yetmiyor\")\nelse:\n    print(\"Sayın\", a, \"Biletiniz başarıyla oluşturuldu. İyi seyirler.\")",
+      "D": "a = str(input(\"adınızı giriniz: \"))\nb = (input(\"yaşınızı giriniz :\"))\nc = int(input(\"ne kadarınız var :\"))\n\nif b <= 18 and c >= 20:\n    print(\"Malesef yaşınız tutmuyor\")\nelif b >= 18 and c < 20:\n    print(\"Malesef paranız yetmiyor\")\nelse:\n    print(\"Sayın\", a, \"Biletiniz başarıyla oluşturuldu. İyi seyirler.\")"
+    },
+    "answer": "A",
+    "explanation": "İpucu: Yaş (b) ve para (c) değerleri int(input()) ile tam sayıya dönüştürülmeli ve koşullarda 'and' operatörü ile kontrol edilmelidir."
+  },
+  {
+    "id": 7026,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 2,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Operatörler (Zor #6)",
+    "question": "Yukarıdaki Python kodunun çıktısı nedir?",
+    "code": "print((7 + 13) * 2)",
+    "options": {
+      "A": "30",
+      "B": "40",
+      "C": "19",
+      "D": "11",
+      "E": "Program çalışmaz."
+    },
+    "answer": "B",
+    "explanation": "İpucu: İşlem önceliği her zaman parantez içindedir: (7 + 13) = 20, ardından 20 * 2 = 40."
+  },
+  {
+    "id": 7027,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 4,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Koşullu İfadeler & Datetime (Zor #7)",
+    "question": "Trafiğe çıkış bilgisi alınan aracın her yıl bakımı yapılmaktadır. Buna göre kaçıncı bakım yılında olduğunu hesaplayan programı yazınız (3 bakım olarak sınırlandırın).",
+    "code": null,
+    "options": {
+      "A": "import datetime\n\ntarih = input('aracınız hangi tarihte trafiğe çıktı (2020/8/9): ')\ntarih = tarih.split('/')\ntrafigeCikis = datetime.datetime(int(tarih[0]), int(tarih[1]), int(tarih[2]))\n\nsimdi = datetime.datetime.now()\nfark = simdi - trafigeCikis\ndays = fark.days\n\nif days <= 365:\n    print('1.servis aralığı')\nelif days > 365 and days <= 365 * 2:\n    print('2.servis aralığı')\nelif days > 365 * 2 and days <= 365 * 3:\n    print('3.servis aralığı')\nelse:\n    print('hatalı süre.')",
+      "B": "import datetime\ntarih = input('tarih: ')\nsimdi = datetime.now()\nfark = simdi + tarih\nprint('1.servis aralığı')",
+      "C": "tarih = input('aracınız hangi tarihte trafiğe çıktı: ')\nif tarih <= 365:\n    print('1.servis aralığı')",
+      "D": "import time\ntarih = int(input('tarih: '))\nprint(tarih / 365)"
+    },
+    "answer": "A",
+    "explanation": "İpucu: datetime modülü ile bugünün tarihi (datetime.datetime.now()) alınır, trafiğe çıkış tarihi çıkarılarak fark.days üzerinden 365 günün katları kontrol edilir."
+  },
+  {
+    "id": 7028,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 3,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Temel Fonksiyonlar (Zor #8)",
+    "question": "Kullanıcıdan kenar1 ve kenar2 olarak iki girdi alınız, aldığınız değerlere göre dörtgenin alanını hesaplayınız.",
+    "code": null,
+    "options": {
+      "A": "int kenar1, kenar2\nkenar1 = input(\"İlk kenar için değer giriniz:\")\nkenar2 = input(\"İkinci kenar için değer giriniz:\")\ndortgen_alan = (kenar1 * kenar2)\nprint(\"Dörtgenin alanı:\", dortgen_alan)",
+      "B": "kenar1 = input(\"İlk kenar için değer giriniz:\")\nkenar2 = input(\"İkinci kenar için değer giriniz:\")\ndortgen_alan = (kenar1 * kenar2)\nprint(\"Dörtgenin alanı:\", dortgen_alan)",
+      "C": "int kenar1, kenar2\nkenar1 = input(\"İlk kenar için değer giriniz:\")\nkenar2 = input(\"İkinci kenar için değer giriniz:\")\ndortgen_alan = (kenar1 * kenar2) * 2\nprint(\"Dörtgenin alanı:\", dortgen_alan)",
+      "D": "int kenar1, kenar2\nkenar = input(\"İlk kenar için değer giriniz:\")\nkenar = input(\"İkinci kenar için değer giriniz:\")\nalan = (kenar * kenar)\nprint(\"Dörtgenin alanı:\", dortgen_alan)",
+      "E": "int kenar1\nfloat kenar2\nkenar1 = input(\"İlk kenar için değer giriniz:\")\nkenar2 = input(\"İkinci kenar için değer giriniz:\")\ndortgen_alan = (kenar1 * kenar2)\nprint(\"Dörtgenin alanı:\")"
+    },
+    "answer": "A",
+    "explanation": "İpucu: Sınav soru bankası cevap anahtarında A şıkkı doğru kabul edilmiştir (Not: Gerçek Python sözdiziminde int(input(...)) şeklinde tip dönüşümü yapılır)."
+  },
+  {
+    "id": 7029,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 5,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Listeler (Zor #9)",
+    "question": "Yukarıdaki listeden 'armut' elemanını silen kodu yazınız.",
+    "code": "liste = ['elma', 'armut', 'portakal']",
+    "options": {
+      "A": "liste.pop(\"armut\")",
+      "B": "liste.delete(\"armut\")",
+      "C": "liste.del(\"armut\")",
+      "D": "liste.remove(\"armut\")"
+    },
+    "answer": "D",
+    "explanation": "İpucu: pop() metodu indis numarası ile silme yapar; eleman değerine göre silmek için liste.remove(\"armut\") kullanılır."
+  },
+  {
+    "id": 7030,
+    "course": "gorsel_vize",
+    "test_type": "Görsel Programlama I - Çıkmış Sorular",
+    "qType": "cikmis",
+    "week": 5,
+    "difficulty": "Zor",
+    "category": "Çıkmış Soru • Listeler (Zor #10)",
+    "question": "Yukarıdaki kodun çıktısı nedir?",
+    "code": "Liste1 = [\"Görsel Programlama\"]\nListe2 = [\"Dersinde\"]\nListe3 = [\"Python\"]\nListe4 = [\"Öğreniyoruz\"]\n\nprint(Liste1)",
+    "options": {
+      "A": "Dersinde",
+      "B": "Görsel Programlama Dersinde",
+      "C": "Python",
+      "D": "Görsel Programlama (['Görsel Programlama'])",
+      "E": "Python Öğreniyoruz"
+    },
+    "answer": "D",
+    "explanation": "İpucu: print(Liste1) komutu doğrudan Liste1 değişkeninin içeriği olan ['Görsel Programlama'] ifadesini ekrana yazdırır."
   }
 ]
