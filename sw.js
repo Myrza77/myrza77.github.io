@@ -11,7 +11,9 @@ const ASSETS_TO_CACHE = [
   "./icon-192.png",
   "./icon-512.png",
   "./assets/index-BmIPd1Bi.js",
-  "./assets/index-Cz-Qj7UB.css"
+  "./assets/index-BmIPd1Bi.js?v=8",
+  "./assets/index-Cz-Qj7UB.css",
+  "./assets/index-Cz-Qj7UB.css?v=8"
 ];
 
 // Install Event
