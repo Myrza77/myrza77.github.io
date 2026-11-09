@@ -1,12 +1,17 @@
-const CACHE_NAME = "algopy-v3";
+const CACHE_NAME = "algopy-v7";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
+  "./gorsel.html",
+  "./nesne.html",
+  "./offline.html",
   "./manifest.json",
   "./favicon.svg",
   "./icons.svg",
   "./icon-192.png",
-  "./icon-512.png"
+  "./icon-512.png",
+  "./assets/index-BmIPd1Bi.js",
+  "./assets/index-Cz-Qj7UB.css"
 ];
 
 // Install Event

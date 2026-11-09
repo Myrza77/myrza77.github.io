@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Nesneye Dayalı Programlama - Mobil Sınav Portalı</title>
+  <style>
+    /* Safe-fallback polyfill for localStorage in mobile WebView or file:// */
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --code-bg: #0f172a;
+      --code-text: #f1f5f9;
+      --correct: #10b981;
+      --correct-bg: #ecfdf5;
+      --correct-border: #a7f3d0;
+      --wrong: #ef4444;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #fecaca;
+    }
+    .dark {
+      --bg: #090d16;
+      --card-bg: #131b2e;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #1e293b;
+      --code-bg: #050811;
+      --code-text: #e2e8f0;
+      --correct: #10b981;
+      --correct-bg: rgba(16, 185, 129, 0.15);
+      --correct-border: rgba(16, 185, 129, 0.4);
+      --wrong: #f43f5e;
+      --wrong-bg: rgba(244, 63, 94, 0.15);
+      --wrong-border: rgba(244, 63, 94, 0.4);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      touch-action: manipulation;
+      overflow-x: hidden;
+      padding-bottom: 90px;
+    }
+    /* Top Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 14px;
+      padding-top: max(10px, env(safe-area-inset-top));
+      backdrop-filter: blur(10px);
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .title-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+    .title-box .icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+    .title-box h1 {
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text);
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-icon {
+      background: var(--border);
+      color: var(--text);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .progress-pill {
+      background: rgba(79, 70, 229, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4f46e5, #10b981);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    /* Filters Container */
+    .filters-wrap {
+      padding: 8px 12px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      gap: 6px;
+    }
+    .filters-wrap::-webkit-scrollbar {
+      display: none;
+    }
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+    /* Main Content */
+    main {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 12px;
+      flex: 1;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .q-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-week { background: #e0e7ff; color: #3730a3; }
+    .badge-test { background: #dbeafe; color: #1e40af; }
+    .badge-fill { background: #d1fae5; color: #065f46; }
+    .badge-code { background: #fef3c7; color: #92400e; }
+    .badge-fav { background: #fef08a; color: #854d0e; cursor: pointer; }
+    .dark .badge-week { background: #312e81; color: #c7d2fe; }
+    .dark .badge-test { background: #1e3a8a; color: #bfdbfe; }
+    .dark .badge-fill { background: #064e3b; color: #a7f3d0; }
+    .dark .badge-code { background: #78350f; color: #fde68a; }
+
+    .q-text {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    /* Code block */
+    .code-box {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .code-header {
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #94a3b8;
+      font-family: monospace;
+    }
+    .code-copy {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #cbd5e1;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      cursor: pointer;
+    }
+    .code-box pre {
+      padding: 12px;
+      margin: 0;
+      overflow-x: auto;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--code-text);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    /* Options for Test */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      min-height: 48px;
+    }
+    .option-btn:active {
+      transform: scale(0.99);
+    }
+    .opt-key {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .opt-text {
+      flex: 1;
+      line-height: 1.4;
+    }
+    .option-btn.correct {
+      border-color: var(--correct);
+      background: var(--correct-bg);
+      color: #065f46;
+    }
+    .dark .option-btn.correct {
+      color: #6ee7b7;
+    }
+    .option-btn.correct .opt-key {
+      background: var(--correct);
+      color: #fff;
+    }
+    .option-btn.wrong {
+      border-color: var(--wrong);
+      background: var(--wrong-bg);
+      color: #991b1b;
+    }
+    .dark .option-btn.wrong {
+      color: #fca5a5;
+    }
+    .option-btn.wrong .opt-key {
+      background: var(--wrong);
+      color: #fff;
+    }
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      animation: fadeIn 0.25s ease;
+    }
+    .explanation-box.success {
+      background: var(--correct-bg);
+      border: 1px solid var(--correct-border);
+      color: #065f46;
+    }
+    .dark .explanation-box.success {
+      color: #6ee7b7;
+    }
+    .explanation-box.danger {
+      background: var(--wrong-bg);
+      border: 1px solid var(--wrong-border);
+      color: #991b1b;
+    }
+    .dark .explanation-box.danger {
+      color: #fca5a5;
+    }
+    /* Fill-in-the-blank styling */
+    .fill-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .fill-input {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px; /* Prevents iOS auto-zoom! */
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: monospace;
+      outline: none;
+    }
+    .fill-input:focus {
+      border-color: var(--primary);
+    }
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      flex: 1;
+    }
+    .btn-secondary {
+      background: var(--border);
+      color: var(--text);
+    }
+    /* Code writing question */
+    .code-editor {
+      width: 100%;
+      height: 130px;
+      padding: 12px;
+      font-size: 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--code-bg);
+      color: var(--code-text);
+      font-family: Consolas, Monaco, monospace;
+      outline: none;
+      resize: vertical;
+    }
+    /* Fixed Bottom Nav */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border);
+      padding: 10px 14px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .nav-btn {
+      flex: 1;
+      padding: 12px 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: none;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .nav-btn.prev {
+      background: var(--border);
+      color: var(--text);
+    }
+    .nav-btn.next {
+      background: var(--primary);
+      color: #fff;
+    }
+    .nav-btn.fav {
+      flex: 0 0 44px;
+      background: var(--border);
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+    .nav-btn.fav.active {
+      background: #fef08a;
+      color: #ca8a04;
+    }
+    .dark .nav-btn.fav.active {
+      background: #854d0e;
+      color: #fef08a;
+    }
+    /* Question Jump Drawer / Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 100;
+      backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-height: 80vh;
+      background: var(--card-bg);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      padding: 16px;
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+      gap: 8px;
+      padding: 4px 0;
+    }
+    .q-jump-btn {
+      height: 44px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .q-jump-btn.current {
+      border: 2px solid var(--primary);
+    }
+    .q-jump-btn.correct {
+      background: var(--correct);
+      color: #fff;
+      border-color: var(--correct);
+    }
+    .q-jump-btn.wrong {
+      background: var(--wrong);
+      color: #fff;
+      border-color: var(--wrong);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SAFE LOCALSTORAGE POLYFILL FOR MOBILE (PREVENTS WHITE SCREEN ON FILE://) -->
+  <script>
+    (function() {
+      try {
+        var test = '__st_test__';
+        window.localStorage.setItem(test, test);
+        window.localStorage.removeItem(test);
+      } catch(e) {
+        console.warn('Storage sandboxed or file:// active. Polyfilling memory storage.');
+        var mem = {};
+        window.localStorage = {
+          getItem: function(k) { return mem.hasOwnProperty(k) ? mem[k] : null; },
+          setItem: function(k, v) { mem[k] = String(v); },
+          removeItem: function(k) { delete mem[k]; },
+          clear: function() { mem = {}; }
+        };
+      }
+    })();
+  </script>
+
+  <!-- TOP HEADER -->
+  <header>
+    <div class="header-row">
+      <div class="title-box">
+        <span class="icon">☕</span>
+        <div>
+          <h1>Nesneye Dayalı Programlama</h1>
+          <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;">Java OOP Vize Sınavı (Hafta 1 - 7)</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="progress-pill" id="btn-jump-modal" onclick="openGridModal()">
+          <span id="header-counter">1 / 119</span>
+          <span>▾</span>
+        </button>
+        <button class="btn-icon" id="btn-theme" onclick="toggleTheme()" title="Karanlık/Aydınlık Mod">🌙</button>
+      </div>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-bar"></div>
+    </div>
+  </header>
+
+  <!-- FILTER PILLS -->
+  <div class="filters-wrap" id="filters-container">
+    <button class="filter-btn active" onclick="setFilter('all', 0)">Tümü (119)</button>
+    <button class="filter-btn" onclick="setFilter('test', 0)">Test (70)</button>
+    <button class="filter-btn" onclick="setFilter('fill', 0)">Boşluk (35)</button>
+    <button class="filter-btn" onclick="setFilter('code', 0)">Kod Yazma (14)</button>
+    <button class="filter-btn" onclick="setFilter('wrong', 0)">✗ Yanlışlarım (<span id="wrong-count">0</span>)</button>
+    <button class="filter-btn" onclick="setFilter('fav', 0)">⭐ Favoriler (<span id="fav-count">0</span>)</button>
+    <span style="display:inline-block; width:1px; height:18px; background:var(--border); margin:auto 4px;"></span>
+    <button class="filter-btn" onclick="setFilter('week', 1)">1. Hafta</button>
+    <button class="filter-btn" onclick="setFilter('week', 2)">2. Hafta</button>
+    <button class="filter-btn" onclick="setFilter('week', 3)">3. Hafta</button>
+    <button class="filter-btn" onclick="setFilter('week', 4)">4. Hafta</button>
+    <button class="filter-btn" onclick="setFilter('week', 5)">5. Hafta</button>
+    <button class="filter-btn" onclick="setFilter('week', 6)">6. Hafta</button>
+    <button class="filter-btn" onclick="setFilter('week', 7)">7. Hafta</button>
+  </div>
+
+  <!-- MAIN QUESTION DISPLAY -->
+  <main id="app">
+    <div class="card" id="q-card">
+      <!-- Dynamic Question Content Injected by JS -->
+    </div>
+  </main>
+
+  <!-- FIXED BOTTOM NAVIGATION -->
+  <footer>
+    <button class="nav-btn prev" onclick="prevQuestion()">◄ Önceki</button>
+    <button class="nav-btn fav" id="btn-fav" onclick="toggleFav()" title="Favoriye Ekle">⭐</button>
+    <button class="nav-btn next" onclick="nextQuestion()">Sonraki ►</button>
+  </footer>
+
+  <!-- QUESTION SELECTION MODAL (DRAWER) -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeGridModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">Sorular Listesi</div>
+        <button class="btn-icon" onclick="closeGridModal()">✕</button>
+      </div>
+      <div style="font-size: 12px; color: var(--text-muted); display:flex; gap:12px; flex-wrap:wrap;">
+        <span style="display:flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--correct);"></span> Doğru: <strong id="modal-correct-cnt">0</strong></span>
+        <span style="display:flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--wrong);"></span> Yanlış: <strong id="modal-wrong-cnt">0</strong></span>
+        <span style="display:flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--bg); border:1px solid var(--border);"></span> Çözülmedi: <strong id="modal-unanswered-cnt">119</strong></span>
+      </div>
+      <div class="grid-container" id="modal-grid">
+        <!-- Injected by JS -->
+      </div>
+      <div style="display:flex; gap:8px; margin-top:8px;">
+        <button class="btn btn-secondary" style="flex:1;" onclick="resetAllAnswers()">Cevapları Sıfırla</button>
+        <button class="btn btn-primary" style="flex:1;" onclick="closeGridModal()">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // DATA INJECTION
+    const ALL_QUESTIONS = [{"id": 4001, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Kolay]", "question": "Java programlama dili ilk olarak hangi teknoloji firması bünyesinde ve kimin liderliğinde geliştirilmeye başlanmıştır?", "code": null, "options": {"A": "Bell Labs – Dennis Ritchie", "B": "Sun Microsystems – James Gosling", "C": "Microsoft – Anders Hejlsberg", "D": "Netscape – Brendan Eich"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Sun Microsystems - James Gosling).", "B": "Doğru: Sun Microsystems - James Gosling", "C": "Yanlış: Doğru cevap B seçeneğidir (Sun Microsystems - James Gosling).", "D": "Yanlış: Doğru cevap B seçeneğidir (Sun Microsystems - James Gosling)."}}, {"id": 4002, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Kolay]", "question": "Java yazılım geliştirmede kullanılan aşağıdaki araçlardan hangisi doğrudan Java ekosistemi için tasarlanmış yaygın IDE'lerden biri değildir?", "code": null, "options": {"A": "PyCharm", "B": "Eclipse", "C": "IntelliJ IDEA", "D": "NetBeans"}, "answer": "A", "explanations": {"A": "Doğru: PyCharm Python içindir; Java için IntelliJ, Eclipse, NetBeans kullanılır", "B": "Yanlış: Doğru cevap A seçeneğidir (PyCharm Python içindir; Java için IntelliJ, Eclipse, NetBeans kullanılır).", "C": "Yanlış: Doğru cevap A seçeneğidir (PyCharm Python içindir; Java için IntelliJ, Eclipse, NetBeans kullanılır).", "D": "Yanlış: Doğru cevap A seçeneğidir (PyCharm Python içindir; Java için IntelliJ, Eclipse, NetBeans kullanılır)."}}, {"id": 4003, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Kolay]", "question": "Java'nın \"Bir kere yaz, her yerde çalıştır\" (WORA - Write Once, Run Anywhere) felsefesini zemin/platform bağımsız olarak hayata geçiren temel bileşen hangisidir?", "code": null, "options": {"A": "İşletim sistemi çekirdeği", "B": "Java Sanal Makinesi (JVM) ve Bayt Kodu (Bytecode)", "C": "Garbage Collector (Çöp Toplayıcı)", "D": "Doğrudan makine diline derleyen C derleyicisi"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (JVM ve Bytecode platform bağımsızlığını sağlar).", "B": "Doğru: JVM ve Bytecode platform bağımsızlığını sağlar", "C": "Yanlış: Doğru cevap B seçeneğidir (JVM ve Bytecode platform bağımsızlığını sağlar).", "D": "Yanlış: Doğru cevap B seçeneğidir (JVM ve Bytecode platform bağımsızlığını sağlar)."}}, {"id": 4004, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Orta]", "question": "Nesneye yönelik programlama paradigmasında, bir sınıfın sahip olduğu veriler (durumlar) ile bu veriler üzerinde işlem yapan eylemler sırasıyla nasıl adlandırılır?", "code": null, "options": {"A": "Metot (Method) – Alan (Field)", "B": "Paket (Package) – Değişken (Variable)", "C": "Alan (Field / Veri) – Metot (Method / Fonksiyon)", "D": "Arayüz (Interface) – Referans"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (Veriler alan/field, eylemler metot/methoddur).", "B": "Yanlış: Doğru cevap C seçeneğidir (Veriler alan/field, eylemler metot/methoddur).", "C": "Doğru: Veriler alan/field, eylemler metot/methoddur", "D": "Yanlış: Doğru cevap C seçeneğidir (Veriler alan/field, eylemler metot/methoddur)."}}, {"id": 4005, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Orta]", "question": "Java'nın sözdizimsel ve yapısal olarak esinlendiği, nesneye dayalı felsefesini şekillendiren diller grubu hangisidir?", "code": null, "options": {"A": "HTML, CSS, JavaScript", "B": "Smalltalk, Eiffel, Objective-C ve C++", "C": "Cobol, Fortran, Pascal", "D": "SQL, R, Matlab"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Smalltalk, Eiffel, Objective-C, C++).", "B": "Doğru: Smalltalk, Eiffel, Objective-C, C++", "C": "Yanlış: Doğru cevap B seçeneğidir (Smalltalk, Eiffel, Objective-C, C++).", "D": "Yanlış: Doğru cevap B seçeneğidir (Smalltalk, Eiffel, Objective-C, C++)."}}, {"id": 4006, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Orta]", "question": "Java dilinde bir sınıfın (class) bellekte somutlaşmış, yaşayan ve durum barındıran örneğine ne ad verilir?", "code": null, "options": {"A": "Nesne (Object / Instance)", "B": "Paket (Package)", "C": "Statik Alan (Static Area)", "D": "Bayt Kodu (Bytecode)"}, "answer": "A", "explanations": {"A": "Doğru: Sınıfın örneğine nesne / object denir", "B": "Yanlış: Doğru cevap A seçeneğidir (Sınıfın örneğine nesne / object denir).", "C": "Yanlış: Doğru cevap A seçeneğidir (Sınıfın örneğine nesne / object denir).", "D": "Yanlış: Doğru cevap A seçeneğidir (Sınıfın örneğine nesne / object denir)."}}, {"id": 4007, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Zor]", "question": "Java'da new anahtar kelimesi ile dinamik olarak tahsis edilen nesnelerin kendileri belleğin hangi bölgesinde saklanır?", "code": null, "options": {"A": "Stack (Yığıt)", "B": "Heap (Öbek)", "C": "Statik Alan (Method Area)", "D": "Non-RAM Bellek"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Nesnelerin kendileri Heap'te depolanır).", "B": "Doğru: Nesnelerin kendileri Heap'te depolanır", "C": "Yanlış: Doğru cevap B seçeneğidir (Nesnelerin kendileri Heap'te depolanır).", "D": "Yanlış: Doğru cevap B seçeneğidir (Nesnelerin kendileri Heap'te depolanır)."}}, {"id": 4008, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Zor]", "question": "Stack (Yığıt) bellek alanı ve yerel referanslar ile ilgili aşağıda verilen ifadelerden hangisi doğrudur?", "code": null, "options": {"A": "Heap'teki nesnelere işaret eden adres referansları ve yerel ilkel değişkenler Stack'te tutulur.", "B": "Program boyunca yaşayan sınıf düzeyindeki statik değişkenler Stack'te barındırılır.", "C": "Stack bellek alanı, işletim sistemindeki sabit disk üzerinde saklanan sanal alandır.", "D": "Atık Veri Toplayıcı (Garbage Collector) yalnızca Stack bölgesindeki verileri temizler."}, "answer": "A", "explanations": {"A": "Doğru: Stack yerel değişkenleri ve nesne referans adreslerini tutar", "B": "Yanlış: Doğru cevap A seçeneğidir (Stack yerel değişkenleri ve nesne referans adreslerini tutar).", "C": "Yanlış: Doğru cevap A seçeneğidir (Stack yerel değişkenleri ve nesne referans adreslerini tutar).", "D": "Yanlış: Doğru cevap A seçeneğidir (Stack yerel değişkenleri ve nesne referans adreslerini tutar)."}}, {"id": 4009, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Zor]", "question": "C ve C++ dillerinde programcının belleği free() veya delete ile boşaltmayı unutması sonucu oluşan bellek sızıntısı (memory leak) riskini Java'da ortadan kaldıran sistem hangisidir?", "code": null, "options": {"A": "Statik Optimizasyon Motoru", "B": "Atık Veri Toplayıcı (Garbage Collector)", "C": "JIT (Just-In-Time) Derleyicisi", "D": "Sınıf Yükleyici (Class Loader)"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Garbage Collector bellek sızıntılarını önler).", "B": "Doğru: Garbage Collector bellek sızıntılarını önler", "C": "Yanlış: Doğru cevap B seçeneğidir (Garbage Collector bellek sızıntılarını önler).", "D": "Yanlış: Doğru cevap B seçeneğidir (Garbage Collector bellek sızıntılarını önler)."}}, {"id": 4010, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 1 - Java [Zor]", "question": "Belleğin Statik Alanında (Static Area / Metot Alanı) tutulan değişkenlerin yaşam döngüsü hakkında hangisi doğrudur?", "code": null, "options": {"A": "Yalnızca tanımlandıkları metodun yürütülmesi bitene kadar bellekte kalırlar.", "B": "Programın çalışmaya başladığı andan uygulamanın sonlanmasına kadar yaşamaya devam ederler.", "C": "İlk nesne örneği çöp toplayıcı tarafından silindiğinde derhal bellekten silinirler.", "D": "Yalnızca kullanıcı klavyeden giriş yaptığında oluşturulurlar."}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Statik veriler program sonlanana kadar yaşar).", "B": "Doğru: Statik veriler program sonlanana kadar yaşar", "C": "Yanlış: Doğru cevap B seçeneğidir (Statik veriler program sonlanana kadar yaşar).", "D": "Yanlış: Doğru cevap B seçeneğidir (Statik veriler program sonlanana kadar yaşar)."}}, {"id": 5001, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 1 - Boşluk Doldurma", "question": "C++ dilindeki manuel bellek iadesi yerine Java'da sahipsiz nesneleri arka planda tespit edip temizleyen mekanizmaya __________ adı verilir.", "code": null, "answer": "DOGRU", "official_answer": "Garbage Collector (Atık Veri Toplayıcı)", "accepted": ["garbage collector (atık veri toplayıcı)", "garbage collector", "atık veri toplayıcı", "çöp toplayıcı", "garbage collection", "gc"], "explanation": "Doğru cevap: Garbage Collector (Atık Veri Toplayıcı)."}, {"id": 5002, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 1 - Boşluk Doldurma", "question": "Java mimarisinde verilerin depolandığı ana bellek bölgeleri; Stack, Heap, __________ ve Non-RAM Bellek'tir.", "code": null, "answer": "DOGRU", "official_answer": "Statik Alan (Static Area)", "accepted": ["statik alan (static area)", "statik alan", "static area", "method area", "metot alanı", "statik"], "explanation": "Doğru cevap: Statik Alan (Static Area)."}, {"id": 5003, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 1 - Boşluk Doldurma", "question": "Bir sınıftan bellekte yer ayrılarak türetilmiş somut örneğe o sınıfın __________ (instance) denir.", "code": null, "answer": "DOGRU", "official_answer": "nesnesi / örneği", "accepted": ["nesnesi / örneği", "nesnesi", "örneği", "nesne", "örnek", "object", "instance"], "explanation": "Doğru cevap: nesnesi / örneği."}, {"id": 5004, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 1 - Boşluk Doldurma", "question": "Stack üzerinde karmaşık nesnelerin kendisi değil, nesnelerin Heap üzerindeki adresini gösteren __________ tutulur.", "code": null, "answer": "DOGRU", "official_answer": "referanslar (adresler)", "accepted": ["referanslar (adresler)", "referanslar", "referans", "adresler", "adres", "reference"], "explanation": "Doğru cevap: referanslar (adresler)."}, {"id": 5005, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 1 - Boşluk Doldurma", "question": "Java'nın yerleşik TCP/IP ağ protokollerini doğrudan destekleyerek uzak sistemlerle haberleşebilmesini ifade eden özellik dilin __________ yapıda olduğunu gösterir.", "code": null, "answer": "DOGRU", "official_answer": "dağıtık (distributed)", "accepted": ["dağıtık (distributed)", "dağıtık", "dagitik", "distributed", "ağ yönelimli"], "explanation": "Doğru cevap: dağıtık (distributed)."}, {"id": 6001, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 1 - Klasik & Kod Yazma", "question": "Konsol ekranına \"Java Nesneye Yonelimli Programlama\" çıktısını veren, standart Main sınıfını ve ana metodunu (main) eksiksiz içeren Java programını yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Java Nesneye Yonelimli Programlama\");\n    }\n}", "keywords": ["class Main", "public static void main", "System.out.print", "Java Nesneye Yonelimli Programlama"], "explanation": "Hafta 1 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 6002, "course": "nesne_vize", "lang": "java", "week": 1, "week_title": "Hafta 1: Java Temelleri, JVM Mimarisi ve Bellek Yönetimi", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 1 - Klasik & Kod Yazma", "question": "Araba isimli bir sınıf oluşturunuz. Sınıf içerisinde String marka; alanı ve çağrıldığında konsola \"Araba calisiyor\" yazdıran public void calis() metodunu tanımlayınız.", "code": null, "answer": "DOGRU", "solution_code": "public class Araba {\n    String marka;\n\n    public void calis() {\n        System.out.println(\"Araba calisiyor\");\n    }\n}", "keywords": ["class Araba", "String marka", "void calis", "System.out.print"], "explanation": "Hafta 1 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 4011, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Kolay]", "question": "Java'da yürütülebilir standart bir konsol uygulamasının başlangıç noktası olan main metodunun doğru bildirimi hangisidir?", "code": null, "options": {"A": "public static void main(String[] args)", "B": "public void main(String args)", "C": "static void start(String[] args)", "D": "private static int main()"}, "answer": "A", "explanations": {"A": "Doğru: `public static void main(String[] args)`", "B": "Yanlış: Doğru cevap A seçeneğidir (`public static void main(String[] args)`).", "C": "Yanlış: Doğru cevap A seçeneğidir (`public static void main(String[] args)`).", "D": "Yanlış: Doğru cevap A seçeneğidir (`public static void main(String[] args)`)."}}, {"id": 4012, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Kolay]", "question": "Java dilinde değişken adlandırma kuralları (identifier naming) ile ilgili hangisi doğrudur?", "code": null, "options": {"A": "Değişken adları her zaman bir rakamla başlamak zorundadır.", "B": "Değişken adlarında Türkçe karakterler (ö, ü, ş, ı, ç, ğ) kullanılmamalıdır.", "C": "Değişken adları yalnızca büyük harflerle yazılabilir.", "D": "Değişken adlarında alt tire (_) simgesi kesinlikle kullanılamaz."}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Türkçe karakterler değişken isminde kullanılmamalıdır).", "B": "Doğru: Türkçe karakterler değişken isminde kullanılmamalıdır", "C": "Yanlış: Doğru cevap B seçeneğidir (Türkçe karakterler değişken isminde kullanılmamalıdır).", "D": "Yanlış: Doğru cevap B seçeneğidir (Türkçe karakterler değişken isminde kullanılmamalıdır)."}}, {"id": 4013, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Kolay]", "question": "Java'da blokları, gövdeleri ve etki alanlarını (scope) sınırlandırmak için kullanılan özel ayraç sembolü hangisidir?", "code": null, "options": {"A": "Köşeli Parantez [ ]", "B": "Süslü Parantez { }", "C": "Yay Ayraç ( )", "D": "Açılı Ayraç < >"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Süslü parantez `{ }`).", "B": "Doğru: Süslü parantez `{ }`", "C": "Yanlış: Doğru cevap B seçeneğidir (Süslü parantez `{ }`).", "D": "Yanlış: Doğru cevap B seçeneğidir (Süslü parantez `{ }`)."}}, {"id": 4014, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Orta]", "question": "Bellekte 1 byte (8 bit) yer kaplayan ve -128 ile +127 arasındaki tam sayı değerlerini tutabilen ilkel veri tipi hangisidir?", "code": null, "options": {"A": "short", "B": "byte", "C": "int", "D": "char"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`byte` 1 byte'tır ve -128 ile 127 aralığındadır).", "B": "Doğru: `byte` 1 byte'tır ve -128 ile 127 aralığındadır", "C": "Yanlış: Doğru cevap B seçeneğidir (`byte` 1 byte'tır ve -128 ile 127 aralığındadır).", "D": "Yanlış: Doğru cevap B seçeneğidir (`byte` 1 byte'tır ve -128 ile 127 aralığındadır)."}}, {"id": 4015, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Orta]", "question": "Aşağıdaki ilkel sayısal veri tiplerinden hangisi bellekte 4 byte yer kaplar?", "code": null, "options": {"A": "byte", "B": "short", "C": "int", "D": "double"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (`int` 4 byte'tır).", "B": "Yanlış: Doğru cevap C seçeneğidir (`int` 4 byte'tır).", "C": "Doğru: `int` 4 byte'tır", "D": "Yanlış: Doğru cevap C seçeneğidir (`int` 4 byte'tır)."}}, {"id": 4016, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Orta]", "question": "int a = 20 % 3; satırı yürütüldüğünde a değişkeninin değeri kaç olur?", "code": null, "options": {"A": "6", "B": "2", "C": "0", "D": "1"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`20 % 3 = 2` kalan).", "B": "Doğru: `20 % 3 = 2` kalan", "C": "Yanlış: Doğru cevap B seçeneğidir (`20 % 3 = 2` kalan).", "D": "Yanlış: Doğru cevap B seçeneğidir (`20 % 3 = 2` kalan)."}}, {"id": 4017, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Zor]", "question": "Aşağıdaki kod parçasının çalıştırılması sonucunda x ve y değerleri ne olur?", "code": "int x = 5;\nint y = ++x * 2;", "options": {"A": "x = 5, y = 10", "B": "x = 6, y = 10", "C": "x = 6, y = 12", "D": "x = 5, y = 12"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (`++x` önce x'i 6 yapar, sonra `6 * 2 = 12` atar; $x=6, y=12$).", "B": "Yanlış: Doğru cevap C seçeneğidir (`++x` önce x'i 6 yapar, sonra `6 * 2 = 12` atar; $x=6, y=12$).", "C": "Doğru: `++x` önce x'i 6 yapar, sonra `6 * 2 = 12` atar; $x=6, y=12$", "D": "Yanlış: Doğru cevap C seçeneğidir (`++x` önce x'i 6 yapar, sonra `6 * 2 = 12` atar; $x=6, y=12$)."}}, {"id": 4018, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Zor]", "question": "Aşağıdaki bölme işlemlerinden hangisinin sonucu bir tam sayı değil, kayan noktalı 0.5 değeridir?", "code": null, "options": {"A": "1 / 2", "B": "(int)(1.0 / 2.0)", "C": "1.0 / 2.0", "D": "(double)(1 / 2)"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (`1.0 / 2.0 = 0.5`).", "B": "Yanlış: Doğru cevap C seçeneğidir (`1.0 / 2.0 = 0.5`).", "C": "Doğru: `1.0 / 2.0 = 0.5`", "D": "Yanlış: Doğru cevap C seçeneğidir (`1.0 / 2.0 = 0.5`)."}}, {"id": 4019, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Zor]", "question": "i += 8 birleşik atama ifadesinin açık matematiksel ve Java karşılığı hangisidir?", "code": null, "options": {"A": "i = 8;", "B": "i = i + 8;", "C": "i + 8 = i;", "D": "i = 8 + 8;"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`i = i + 8;`).", "B": "Doğru: `i = i + 8;`", "C": "Yanlış: Doğru cevap B seçeneğidir (`i = i + 8;`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`i = i + 8;`)."}}, {"id": 4020, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 2 - Java [Zor]", "question": "Aşağıdaki Java kod parçası yürütüldüğünde konsola ne basılır?", "code": " byte b = 127;\n b++;\n System.out.println(b);", "options": {"A": "128", "B": "-128", "C": "Derleme hatası verir", "D": "0"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (127'ye 1 eklenince byte taşması olur ve döngüsel olarak -128'e döner).", "B": "Doğru: 127'ye 1 eklenince byte taşması olur ve döngüsel olarak -128'e döner", "C": "Yanlış: Doğru cevap B seçeneğidir (127'ye 1 eklenince byte taşması olur ve döngüsel olarak -128'e döner).", "D": "Yanlış: Doğru cevap B seçeneğidir (127'ye 1 eklenince byte taşması olur ve döngüsel olarak -128'e döner)."}}, {"id": 5006, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 2 - Boşluk Doldurma", "question": "Java dilinde her ifade satırının sonuna ifade sonlandırıcı (statement terminator) olarak __________ sembolü konulur.", "code": null, "answer": "DOGRU", "official_answer": "noktalı virgül (;)", "accepted": ["noktalı virgül (;)", ";", "noktalı virgül", "noktali virgul"], "explanation": "Doğru cevap: noktalı virgül (;)."}, {"id": 5007, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 2 - Boşluk Doldurma", "question": "Java kaynak kodunda tek satırlık açıklama veya yorum eklemek için satır başına __________ işareti yerleştirilir.", "code": null, "answer": "DOGRU", "official_answer": "çift eğik çizgi (//)", "accepted": ["çift eğik çizgi (//)", "//", "çift eğik çizgi", "cift egik cizgi"], "explanation": "Doğru cevap: çift eğik çizgi (//)."}, {"id": 5008, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 2 - Boşluk Doldurma", "question": "short veri türü bellekte __________ byte yer kaplar ve -32768 ile +32767 arasında değer alır.", "code": null, "answer": "DOGRU", "official_answer": "2", "accepted": ["2", "iki", "2 byte"], "explanation": "Doğru cevap: 2."}, {"id": 5009, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 2 - Boşluk Doldurma", "question": "Dizi tanımlamalarında ve dizi elemanlarına indisle erişimde kullanılan özel sembol __________ parantezdir ([ ]).", "code": null, "answer": "DOGRU", "official_answer": "köşeli ([ ])", "accepted": ["köşeli ([ ])", "köşeli", "koseli", "[]", "[ ]", "köşeli parantez"], "explanation": "Doğru cevap: köşeli ([ ])."}, {"id": 5010, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 2 - Boşluk Doldurma", "question": "Ondalıklı sayılarda varsayılan tip double olup bellekte 4 byte yer kaplayan kayan noktalı ilkel veri tipi __________ türüdür.", "code": null, "answer": "DOGRU", "official_answer": "float", "accepted": ["float"], "explanation": "Doğru cevap: float."}, {"id": 6003, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 2 - Klasik & Kod Yazma", "question": "s1 değişkenine 300, s2 değişkenine 30 değerini atayarak; bu iki sayının çarpımını (*) ve bölümünü (/) hesaplayıp ekrana alt alta yazdıran Java kodunu yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class Hafta2_1 {\n    public static void main(String[] args) {\n        int s1 = 300;\n        int s2 = 30;\n        int carpim = s1 * s2;\n        int bolum = s1 / s2;\n        System.out.println(\"Çarpım: \" + carpim);\n        System.out.println(\"Bölüm: \" + bolum);\n    }\n}", "keywords": ["300", "30", "*", "/", "System.out.print"], "explanation": "Hafta 2 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 6004, "course": "nesne_vize", "lang": "java", "week": 2, "week_title": "Hafta 2: Java Kod Anatomisi, Veri Tipleri ve Operatörler", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 2 - Klasik & Kod Yazma", "question": "int x = 15; başlangıç değeri üzerinden; artırılmış atama operatörlerini (+=, %=) kullanarak önce sayıyı 5 artıran, ardından 6'ya göre modunu alıp son değeri ekrana yazdıran Java kodunu yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class Hafta2_2 {\n    public static void main(String[] args) {\n        int x = 15;\n        x += 5; // x = 20 oldu\n        x %= 6; // 20 % 6 = 2 kaldı\n        System.out.println(\"Sonuç: \" + x);\n    }\n}", "keywords": ["15", "+=", "%=", "System.out.print"], "explanation": "Hafta 2 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 4021, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Kolay]", "question": "Java'da klavyeden girilen standart veri akışını temsil eden sistem nesnesi hangisidir?", "code": null, "options": {"A": "System.out", "B": "System.in", "C": "System.err", "D": "System.exit"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`System.in`).", "B": "Doğru: `System.in`", "C": "Yanlış: Doğru cevap B seçeneğidir (`System.in`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`System.in`)."}}, {"id": 4022, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Kolay]", "question": "Konsolda metinlerin ve hata mesajlarının varsayılan olarak kırmızı renkle yazdırılmasını sağlayan standart çıkış akışı hangisidir?", "code": null, "options": {"A": "System.out", "B": "System.err", "C": "System.in", "D": "System.warn"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`System.err`).", "B": "Doğru: `System.err`", "C": "Yanlış: Doğru cevap B seçeneğidir (`System.err`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`System.err`)."}}, {"id": 4023, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Kolay]", "question": "Scanner sınıfını bir Java programında doğrudan adıyla kullanabilmek için dosyanın en başına hangi import bildirimi eklenmelidir?", "code": null, "options": {"A": "include java.util.Scanner;", "B": "import java.util.Scanner;", "C": "using java.Scanner;", "D": "load package.Scanner;"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`import java.util.Scanner;`).", "B": "Doğru: `import java.util.Scanner;`", "C": "Yanlış: Doğru cevap B seçeneğidir (`import java.util.Scanner;`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`import java.util.Scanner;`)."}}, {"id": 4024, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Orta]", "question": "Klavyeden girilen metinsel ifadenin yalnızca boşluğa kadar olan ilk kelimesini okuyan Scanner metodu hangisidir?", "code": null, "options": {"A": "nextLine()", "B": "next()", "C": "readWord()", "D": "nextInt()"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`next()` boşluğa kadar alır, `nextLine()` satırın tümünü).", "B": "Doğru: `next()` boşluğa kadar alır, `nextLine()` satırın tümünü", "C": "Yanlış: Doğru cevap B seçeneğidir (`next()` boşluğa kadar alır, `nextLine()` satırın tümünü).", "D": "Yanlış: Doğru cevap B seçeneğidir (`next()` boşluğa kadar alır, `nextLine()` satırın tümünü)."}}, {"id": 4025, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Orta]", "question": "if ve else bloklarına alternatif olarak kullanılan üçlü (ternary) operatörün genel kullanım kalıbı hangisidir?", "code": null, "options": {"A": "ifade : Sorgu1 ? Sorgu2", "B": "ifade ? Sorgu1 : Sorgu2", "C": "Sorgu1 ? ifade : Sorgu2", "D": "ifade -> Sorgu1 | Sorgu2"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`ifade ? Sorgu1 : Sorgu2`).", "B": "Doğru: `ifade ? Sorgu1 : Sorgu2`", "C": "Yanlış: Doğru cevap B seçeneğidir (`ifade ? Sorgu1 : Sorgu2`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`ifade ? Sorgu1 : Sorgu2`)."}}, {"id": 4026, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Orta]", "question": "Aşağıdaki satırlardan hangisi mantıksal bir hataya yol açarak if gövdesinin şarta bağlı olmadan anında sonlanmasına neden olur?", "code": null, "options": {"A": "if (sayi > 0) {", "B": "if (sayi > 0); {", "C": "if (sayi == 0)", "D": "if ((sayi % 2) == 0)"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`if (...);` noktalı virgül koşul gövdesini anında kapatır).", "B": "Doğru: `if (...);` noktalı virgül koşul gövdesini anında kapatır", "C": "Yanlış: Doğru cevap B seçeneğidir (`if (...);` noktalı virgül koşul gövdesini anında kapatır).", "D": "Yanlış: Doğru cevap B seçeneğidir (`if (...);` noktalı virgül koşul gövdesini anında kapatır)."}}, {"id": 4027, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Zor]", "question": "Aşağıdaki switch-case ifadesi çalıştırıldığında konsola ne yazdırılır?", "code": "int sayi = 2;\nswitch(sayi) {\n    case 1: System.out.print(\"A\");\n    case 2: System.out.print(\"B\");\n    case 3: System.out.print(\"C\"); break;\n    default: System.out.print(\"D\");\n}", "options": {"A": "B", "B": "BC", "C": "BCD", "D": "A"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (case 2 eşleşir, `break` olmadığı için case 3'e akar ve `BC` yazar).", "B": "Doğru: case 2 eşleşir, `break` olmadığı için case 3'e akar ve `BC` yazar", "C": "Yanlış: Doğru cevap B seçeneğidir (case 2 eşleşir, `break` olmadığı için case 3'e akar ve `BC` yazar).", "D": "Yanlış: Doğru cevap B seçeneğidir (case 2 eşleşir, `break` olmadığı için case 3'e akar ve `BC` yazar)."}}, {"id": 4028, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Zor]", "question": "Aşağıdaki veri tiplerinden hangisi geleneksel bir switch koşul ifadesinde doğrudan kontrol değeri olarak kullanılamaz?", "code": null, "options": {"A": "int", "B": "char", "C": "byte", "D": "double"}, "answer": "D", "explanations": {"A": "Yanlış: Doğru cevap D seçeneğidir (`double` geleneksel switch içinde doğrudan kullanılamaz).", "B": "Yanlış: Doğru cevap D seçeneğidir (`double` geleneksel switch içinde doğrudan kullanılamaz).", "C": "Yanlış: Doğru cevap D seçeneğidir (`double` geleneksel switch içinde doğrudan kullanılamaz).", "D": "Doğru: `double` geleneksel switch içinde doğrudan kullanılamaz"}}, {"id": 4029, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Zor]", "question": "Aşağıdaki iç içe (nested) ternary ifadesinin sonucunda b değişkeninin değeri ne olur?", "code": "int a = 15;\nint b = (a > 10) ? (a < 20 ? 1 : 2) : 3;", "options": {"A": "1", "B": "2", "C": "3", "D": "0"}, "answer": "A", "explanations": {"A": "Doğru: 15 > 10 doğrudur, 15 < 20 de doğru olduğu için 1 döner", "B": "Yanlış: Doğru cevap A seçeneğidir (15 > 10 doğrudur, 15 < 20 de doğru olduğu için 1 döner).", "C": "Yanlış: Doğru cevap A seçeneğidir (15 > 10 doğrudur, 15 < 20 de doğru olduğu için 1 döner).", "D": "Yanlış: Doğru cevap A seçeneğidir (15 > 10 doğrudur, 15 < 20 de doğru olduğu için 1 döner)."}}, {"id": 4030, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 3 - Java [Zor]", "question": "Aşağıdaki kod parçasının ekran çıktısı ne olur?", "code": " int puan = 75;\n boolean gectiMi = false;\n if (gectiMi = (puan >= 50)) {\n     System.out.println(\"Tebrikler\");\n } else {\n     System.out.println(\"Kaldiniz\");\n }", "options": {"A": "Kaldiniz", "B": "Tebrikler", "C": "Derleme hatası verir (= karşılaştırma değildir)", "D": "Hiçbir şey yazdırmaz"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Parantez içindeki atama `true` üretir, bu nedenle \"Tebrikler\" yazar).", "B": "Doğru: Parantez içindeki atama `true` üretir, bu nedenle \"Tebrikler\" yazar", "C": "Yanlış: Doğru cevap B seçeneğidir (Parantez içindeki atama `true` üretir, bu nedenle \"Tebrikler\" yazar).", "D": "Yanlış: Doğru cevap B seçeneğidir (Parantez içindeki atama `true` üretir, bu nedenle \"Tebrikler\" yazar)."}}, {"id": 5011, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 3 - Boşluk Doldurma", "question": "Bir kütüphane paketindeki tüm sınıfları tek seferde projeye dahil etmek için kullanılan .* simgesine __________ (wildcard) adı verilir.", "code": null, "answer": "DOGRU", "official_answer": "joker", "accepted": ["joker", "wildcard", "yıldız", "yildiz"], "explanation": "Doğru cevap: joker."}, {"id": 5012, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 3 - Boşluk Doldurma", "question": "Klavyeden girilen metni tam sayıya dönüştürerek okuyan Scanner yöntemi __________ metodudur.", "code": null, "answer": "DOGRU", "official_answer": "nextInt()", "accepted": ["nextint()", "nextint"], "explanation": "Doğru cevap: nextInt()."}, {"id": 5013, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 3 - Boşluk Doldurma", "question": "Bir if (kosul) ifadesinden sonra süslü parantez { } kullanılmazsa, koşula bağlı olarak yalnızca __________ satırlık ifade yürütülür.", "code": null, "answer": "DOGRU", "official_answer": "1 (tek)", "accepted": ["1 (tek)", "1", "tek", "bir", "ilk"], "explanation": "Doğru cevap: 1 (tek)."}, {"id": 5014, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 3 - Boşluk Doldurma", "question": "switch bloğunda verilen durum sabitlerinin hiçbiriyle eşleşme sağlanamadığında devreye giren alternatif durum etiketi __________ anahtar kelimesidir.", "code": null, "answer": "DOGRU", "official_answer": "default", "accepted": ["default", "default:"], "explanation": "Doğru cevap: default."}, {"id": 5015, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 3 - Boşluk Doldurma", "question": "Birbiriyle işlevsel olarak ilişkili sınıfların Java API'si altında bir arada tutulduğu dizin yapılarına __________ (package) adı verilir.", "code": null, "answer": "DOGRU", "official_answer": "paket", "accepted": ["paket", "package"], "explanation": "Doğru cevap: paket."}, {"id": 6005, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 3 - Klasik & Kod Yazma", "question": "Scanner sınıfı kullanarak kullanıcıdan yaşını tam sayı olarak alan; yaşı 18 veya daha büyükse \"Ehliyet alabilirsiniz\", küçükse \"Ehliyet alamazsiniz\" yazdıran Java programını yazınız.", "code": null, "answer": "DOGRU", "solution_code": "import java.util.Scanner;\n\npublic class YasKontrol {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        System.out.print(\"Yaşınızı giriniz: \");\n        int yas = scanner.nextInt();\n\n        if (yas >= 18) {\n            System.out.println(\"Ehliyet alabilirsiniz\");\n        } else {\n            System.out.println(\"Ehliyet alamazsiniz\");\n        }\n        scanner.close();\n    }\n}", "keywords": ["Scanner", "nextInt", "if", "18", "System.out.print"], "explanation": "Hafta 3 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 6006, "course": "nesne_vize", "lang": "java", "week": 3, "week_title": "Hafta 3: Klavye Giriş-Çıkışı (Scanner) ve Karar Yapıları", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 3 - Klasik & Kod Yazma", "question": "Kullanıcıdan iki adet ondalıklı sayı (double) ve yapmak istediği aritmetik işlemi (+, -, *, /) bir karakter (char) olarak alıp sonucu hesaplayan programı switch-case kullanarak yazınız (Sıfıra bölme hatasını kontrol ediniz).", "code": null, "answer": "DOGRU", "solution_code": "import java.util.Scanner;\n\npublic class HesapMakinesi {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print(\"1. Sayı: \");\n        double s1 = sc.nextDouble();\n        System.out.print(\"2. Sayı: \");\n        double s2 = sc.nextDouble();\n        System.out.print(\"İşlem (+, -, *, /): \");\n        char islem = sc.next().charAt(0);\n\n        switch (islem) {\n            case '+': System.out.println(\"Sonuç: \" + (s1 + s2)); break;\n            case '-': System.out.println(\"Sonuç: \" + (s1 - s2)); break;\n            case '*': System.out.println(\"Sonuç: \" + (s1 * s2)); break;\n            case '/':\n                if (s2 != 0) {\n                    System.out.println(\"Sonuç: \" + (s1 / s2));\n                } else {\n                    System.out.println(\"Hata: Sıfıra bölme yapılamaz!\");\n                }\n                break;\n            default:\n                System.out.println(\"Geçersiz işlem!\");\n        }\n        sc.close();\n    }\n}", "keywords": ["Scanner", "switch", "case", "break", "System.out.print"], "explanation": "Hafta 3 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 4031, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Kolay]", "question": "Java'da döngü kontrol mekanizmasında sayaç değişkenleri için geleneksel olarak en yaygın tercih edilen harfler hangileridir?", "code": null, "options": {"A": "a, b, c", "B": "x, y, z", "C": "i, j, k", "D": "m, n, p"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (i, j, k).", "B": "Yanlış: Doğru cevap C seçeneğidir (i, j, k).", "C": "Doğru: i, j, k", "D": "Yanlış: Doğru cevap C seçeneğidir (i, j, k)."}}, {"id": 4032, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Kolay]", "question": "Koşul en başta yanlış (false) olsa bile gövdesindeki kod bloğu en az bir kez kesinlikle çalıştırılan döngü hangisidir?", "code": null, "options": {"A": "for", "B": "while", "C": "do-while", "D": "for-each"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (`do-while` koşula bakılmaksızın en az 1 kez çalışır).", "B": "Yanlış: Doğru cevap C seçeneğidir (`do-while` koşula bakılmaksızın en az 1 kez çalışır).", "C": "Doğru: `do-while` koşula bakılmaksızın en az 1 kez çalışır", "D": "Yanlış: Doğru cevap C seçeneğidir (`do-while` koşula bakılmaksızın en az 1 kez çalışır)."}}, {"id": 4033, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Kolay]", "question": "Bir döngünün o anki adımını atlayıp döngünün bir sonraki iterasyonuna doğrudan geçmesini sağlayan anahtar kelime hangisidir?", "code": null, "options": {"A": "break", "B": "continue", "C": "return", "D": "goto"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`continue`).", "B": "Doğru: `continue`", "C": "Yanlış: Doğru cevap B seçeneğidir (`continue`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`continue`)."}}, {"id": 4034, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Orta]", "question": "Aşağıdaki for döngüsü konsola toplam kaç satır çıktı üretir?", "code": "for (int i = 1; i < 11; i++) {\n    System.out.println(\"Sayi: \" + i);\n}", "options": {"A": "9", "B": "10", "C": "11", "D": "Sonsuz döngü"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (1'den 10'a kadar 10 satır basar).", "B": "Doğru: 1'den 10'a kadar 10 satır basar", "C": "Yanlış: Doğru cevap B seçeneğidir (1'den 10'a kadar 10 satır basar).", "D": "Yanlış: Doğru cevap B seçeneğidir (1'den 10'a kadar 10 satır basar)."}}, {"id": 4035, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Orta]", "question": "Aşağıdaki while döngüsünün ekran çıktısı ne olur?", "code": "int count = 5;\nwhile (count > 2) {\n    System.out.print(count + \" \");\n    count--;\n}", "options": {"A": "5 4 3 2", "B": "5 4 3", "C": "4 3 2", "D": "5 4"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (5, 4, 3 basılır; 2 olunca koşul bozulur).", "B": "Doğru: 5, 4, 3 basılır; 2 olunca koşul bozulur", "C": "Yanlış: Doğru cevap B seçeneğidir (5, 4, 3 basılır; 2 olunca koşul bozulur).", "D": "Yanlış: Doğru cevap B seçeneğidir (5, 4, 3 basılır; 2 olunca koşul bozulur)."}}, {"id": 4036, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Orta]", "question": "for ( ; ; ) şeklindeki bir döngü bildirimi Java derleyicisi tarafından nasıl yorumlanır?", "code": null, "options": {"A": "Derleme hatası verir (Syntax Error).", "B": "Hiç çalışmadan döngüyü sonlandırır.", "C": "Koşulsuz bir sonsuz döngü (infinite loop) oluşturur.", "D": "Sadece 1 kez çalışır."}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (Koşulsuz sonsuz döngü).", "B": "Yanlış: Doğru cevap C seçeneğidir (Koşulsuz sonsuz döngü).", "C": "Doğru: Koşulsuz sonsuz döngü", "D": "Yanlış: Doğru cevap C seçeneğidir (Koşulsuz sonsuz döngü)."}}, {"id": 4037, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Zor]", "question": "Aşağıdaki kod parçasının çalışması bittiğinde toplam değişkeninin değeri kaç olur?", "code": "int toplam = 0;\nfor (int i = 1; i <= 5; i++) {\n    if (i % 2 == 0) continue;\n    toplam += i;\n}\nSystem.out.println(toplam);", "options": {"A": "15", "B": "6", "C": "9", "D": "8"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (Tek sayılar 1, 3, 5 toplanır: $1+3+5=9$).", "B": "Yanlış: Doğru cevap C seçeneğidir (Tek sayılar 1, 3, 5 toplanır: $1+3+5=9$).", "C": "Doğru: Tek sayılar 1, 3, 5 toplanır: $1+3+5=9$", "D": "Yanlış: Doğru cevap C seçeneğidir (Tek sayılar 1, 3, 5 toplanır: $1+3+5=9$)."}}, {"id": 4038, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Zor]", "question": "Aşağıdaki kod bloğunun konsol ekranındaki çıktısı nedir?", "code": "int i = 0;\nwhile (i < 5) {\n    if (i == 3) break;\n    i++;\n}\nSystem.out.println(i);", "options": {"A": "3", "B": "4", "C": "5", "D": "2"}, "answer": "A", "explanations": {"A": "Doğru: i değeri 0, 1, 2 olur; 3 olduğunda `break` ile çıkar ve 3 basılır", "B": "Yanlış: Doğru cevap A seçeneğidir (i değeri 0, 1, 2 olur; 3 olduğunda `break` ile çıkar ve 3 basılır).", "C": "Yanlış: Doğru cevap A seçeneğidir (i değeri 0, 1, 2 olur; 3 olduğunda `break` ile çıkar ve 3 basılır).", "D": "Yanlış: Doğru cevap A seçeneğidir (i değeri 0, 1, 2 olur; 3 olduğunda `break` ile çıkar ve 3 basılır)."}}, {"id": 4039, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Zor]", "question": "İç içe iki döngüde, en içteki döngünün gövdesinde çağrılan etiketsiz bir break; komutu hangi döngüyü sonlandırır?", "code": null, "options": {"A": "Sadece içinde bulunduğu en içteki döngüyü", "B": "Bütün iç içe döngüleri", "C": "main metodunu", "D": "Programın tamamını"}, "answer": "A", "explanations": {"A": "Doğru: Etiketsiz `break` yalnızca içinde yer aldığı ilk döngüyü kırar", "B": "Yanlış: Doğru cevap A seçeneğidir (Etiketsiz `break` yalnızca içinde yer aldığı ilk döngüyü kırar).", "C": "Yanlış: Doğru cevap A seçeneğidir (Etiketsiz `break` yalnızca içinde yer aldığı ilk döngüyü kırar).", "D": "Yanlış: Doğru cevap A seçeneğidir (Etiketsiz `break` yalnızca içinde yer aldığı ilk döngüyü kırar)."}}, {"id": 4040, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 4 - Java [Zor]", "question": "Aşağıdaki kod parçasının ekran çıktısı ne olur?", "code": " int x = 10;\n do {\n     x += 5;\n } while (x < 10);\n System.out.println(x);", "options": {"A": "10", "B": "15", "C": "20", "D": "Sonsuz döngüye girer"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Gövde bir kez çalışır: $10+5=15$, ardından $15 < 10$ yanlış olduğundan çıkar).", "B": "Doğru: Gövde bir kez çalışır: $10+5=15$, ardından $15 < 10$ yanlış olduğundan çıkar", "C": "Yanlış: Doğru cevap B seçeneğidir (Gövde bir kez çalışır: $10+5=15$, ardından $15 < 10$ yanlış olduğundan çıkar).", "D": "Yanlış: Doğru cevap B seçeneğidir (Gövde bir kez çalışır: $10+5=15$, ardından $15 < 10$ yanlış olduğundan çıkar)."}}, {"id": 5016, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 4 - Boşluk Doldurma", "question": "Bir for döngüsünün kontrol değişkeni parantez içinde (int i = 0) bildirilirse, bu değişkenin etki alanı (scope) sadece o __________ ile sınırlı kalır.", "code": null, "answer": "DOGRU", "official_answer": "döngü (for gövdesi)", "accepted": ["döngü (for gövdesi)", "döngü", "dongu", "for döngüsü", "for gövdesi", "blok"], "explanation": "Doğru cevap: döngü (for gövdesi)."}, {"id": 5017, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 4 - Boşluk Doldurma", "question": "while döngüsünde blok içerisindeki ifadeler, parantez içindeki mantıksal koşul __________ (true) olduğu sürece tekrarlanır.", "code": null, "answer": "DOGRU", "official_answer": "geçerli / doğru", "accepted": ["geçerli / doğru", "doğru", "dogru", "geçerli", "gecerli", "true"], "explanation": "Doğru cevap: geçerli / doğru."}, {"id": 5018, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 4 - Boşluk Doldurma", "question": "Çalışmakta olan bir döngüyü koşulun tamamlanmasını beklemeden tamamen kırmak ve döngü dışına çıkmak için __________ ifadesi kullanılır.", "code": null, "answer": "DOGRU", "official_answer": "break", "accepted": ["break", "break;"], "explanation": "Doğru cevap: break."}, {"id": 5019, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 4 - Boşluk Doldurma", "question": "do-while döngüsünün en sonundaki while (kosul) ifadesinden sonra mutlaka __________ işareti konulmalıdır.", "code": null, "answer": "DOGRU", "official_answer": "noktalı virgül (;)", "accepted": ["noktalı virgül (;)", ";", "noktalı virgül", "noktali virgul"], "explanation": "Doğru cevap: noktalı virgül (;)."}, {"id": 5020, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 4 - Boşluk Doldurma", "question": "Bir döngü gövdesinde sayaç değişkeninin güncellenmesi (artırma/azaltma) unutulursa program mantıksal olarak __________ döngüye girer.", "code": null, "answer": "DOGRU", "official_answer": "sonsuz", "accepted": ["sonsuz", "infinite", "sonsuz döngü"], "explanation": "Doğru cevap: sonsuz."}, {"id": 6007, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 4 - Klasik & Kod Yazma", "question": "while döngüsü kullanarak 1'den 100'e kadar olan sayılardan (1 ve 100 dahil) 7'ye tam bölünebilenlerin toplamını hesaplayan ve ekrana yazdıran Java kodunu yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class YediyeBolunenler {\n    public static void main(String[] args) {\n        int i = 1;\n        int toplam = 0;\n        while (i <= 100) {\n            if (i % 7 == 0) {\n                toplam += i;\n            }\n            i++;\n        }\n        System.out.println(\"7'ye bölünenlerin toplamı: \" + toplam);\n    }\n}", "keywords": ["while", "100", "% 7 == 0", "System.out.print"], "explanation": "Hafta 4 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 6008, "course": "nesne_vize", "lang": "java", "week": 4, "week_title": "Hafta 4: Döngü Yapıları (for, while, do-while) ve Akış Dallanmaları", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 4 - Klasik & Kod Yazma", "question": "Konsoldan pozitif bir tam sayı (n) alan; ardından iç içe for döngüleri kullanarak dik üçgen şeklinde yıldız deseni bastıran programı yazınız (Örneğin n=4 için 1. satırda 1, 4. satırda 4 yıldız olacak şekilde).", "code": null, "answer": "DOGRU", "solution_code": "import java.util.Scanner;\n\npublic class YildizUcgen {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print(\"Satır sayısı (n): \");\n        int n = sc.nextInt();\n\n        for (int i = 1; i <= n; i++) {\n            for (int j = 1; j <= i; j++) {\n                System.out.print(\"* \");\n            }\n            System.out.println();\n        }\n        sc.close();\n    }\n}", "keywords": ["Scanner", "for", "*", "System.out.print"], "explanation": "Hafta 4 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 4041, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Kolay]", "question": "Bir metodun geriye hiçbir değer döndürmeyeceğini bildiren anahtar kelime hangisidir?", "code": null, "options": {"A": "null", "B": "void", "C": "empty", "D": "static"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`void`).", "B": "Doğru: `void`", "C": "Yanlış: Doğru cevap B seçeneğidir (`void`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`void`)."}}, {"id": 4042, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Kolay]", "question": "Geriye bir değer döndüren metodun gövdesinde hesaplanan değeri çağıran noktaya iletmek için hangi anahtar kelime kullanılır?", "code": null, "options": {"A": "send", "B": "output", "C": "return", "D": "break"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (`return`).", "B": "Yanlış: Doğru cevap C seçeneğidir (`return`).", "C": "Doğru: `return`", "D": "Yanlış: Doğru cevap C seçeneğidir (`return`)."}}, {"id": 4043, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Kolay]", "question": "Java'da metot adlandırma kuralları ve geleneği (naming convention) nasıldır?", "code": null, "options": {"A": "Küçük harfle başlayan deve hörgücü (camelCase)", "B": "Tamamı büyük harf (UPPERCASE)", "C": "Büyük harfle başlayan Pascal tarzı (PascalCase)", "D": "Kelimeler arası alt tire (snake_case)"}, "answer": "A", "explanations": {"A": "Doğru: `camelCase`", "B": "Yanlış: Doğru cevap A seçeneğidir (`camelCase`).", "C": "Yanlış: Doğru cevap A seçeneğidir (`camelCase`).", "D": "Yanlış: Doğru cevap A seçeneğidir (`camelCase`)."}}, {"id": 4044, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Orta]", "question": "Aynı sınıf içinde aynı isme sahip fakat parametre sayısı ya da parametre veri tipleri farklı birden çok metot tanımlanmasına ne ad verilir?", "code": null, "options": {"A": "Metot Ezme (Overriding)", "B": "Metot Aşırı Yükleme (Overloading)", "C": "Kapsülleme (Encapsulation)", "D": "Çok Biçimlilik (Polymorphism)"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Metot Aşırı Yükleme / Overloading).", "B": "Doğru: Metot Aşırı Yükleme / Overloading", "C": "Yanlış: Doğru cevap B seçeneğidir (Metot Aşırı Yükleme / Overloading).", "D": "Yanlış: Doğru cevap B seçeneğidir (Metot Aşırı Yükleme / Overloading)."}}, {"id": 4045, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Orta]", "question": "Aşağıdaki metot bildirimlerinden hangisi Java sözdizimine göre geçerli ve eksiksiz bir metot başlığıdır?", "code": null, "options": {"A": "public static int topla(int a, int b)", "B": "public topla(int a, b)", "C": "void public static main()", "D": "int topla(int a; int b)"}, "answer": "A", "explanations": {"A": "Doğru: `public static int topla(int a, int b)`", "B": "Yanlış: Doğru cevap A seçeneğidir (`public static int topla(int a, int b)`).", "C": "Yanlış: Doğru cevap A seçeneğidir (`public static int topla(int a, int b)`).", "D": "Yanlış: Doğru cevap A seçeneğidir (`public static int topla(int a, int b)`)."}}, {"id": 4046, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Orta]", "question": "Java'da ilkel (primitive) veri tipleri metotlara parametre olarak aktarılırken hangi prensip geçerlidir?", "code": null, "options": {"A": "Değer ile çağırma (Pass-by-value / Değerin kopyası iletilir)", "B": "Referans ile çağırma (Pass-by-reference / Değişkenin adresi iletilir)", "C": "İşaretçi kopyalama (Pointer copy)", "D": "İsimle aktarma (Pass-by-name)"}, "answer": "A", "explanations": {"A": "Doğru: İlkel tipler Pass-by-value ile aktarılır", "B": "Yanlış: Doğru cevap A seçeneğidir (İlkel tipler Pass-by-value ile aktarılır).", "C": "Yanlış: Doğru cevap A seçeneğidir (İlkel tipler Pass-by-value ile aktarılır).", "D": "Yanlış: Doğru cevap A seçeneğidir (İlkel tipler Pass-by-value ile aktarılır)."}}, {"id": 4047, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Zor]", "question": "Aşağıdaki aşırı yüklenmiş metotlardan hangisi topla(5, 4.2) çağrısını en uygun şekilde karşılar?", "code": null, "options": {"A": "int topla(int a, int b)", "B": "double topla(double a, int b)", "C": "double topla(int a, double b)", "D": "void topla(float a, float b)"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (İlk parametre `int`, ikincisi `double`).", "B": "Yanlış: Doğru cevap C seçeneğidir (İlk parametre `int`, ikincisi `double`).", "C": "Doğru: İlk parametre `int`, ikincisi `double`", "D": "Yanlış: Doğru cevap C seçeneğidir (İlk parametre `int`, ikincisi `double`)."}}, {"id": 4048, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Zor]", "question": "Aşağıdaki kod parçasının konsol çıktısı ne olur?", "code": "public static void degistir(int x) {\n    x = x + 10;\n}\npublic static void main(String[] args) {\n    int sayi = 20;\n    degistir(sayi);\n    System.out.println(sayi);\n}", "options": {"A": "30", "B": "20", "C": "10", "D": "Derleme hatası"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (İlkel tip kopyalandığından metot içi artış `main`'deki sayıyı etkilemez: 20).", "B": "Doğru: İlkel tip kopyalandığından metot içi artış `main`'deki sayıyı etkilemez: 20", "C": "Yanlış: Doğru cevap B seçeneğidir (İlkel tip kopyalandığından metot içi artış `main`'deki sayıyı etkilemez: 20).", "D": "Yanlış: Doğru cevap B seçeneğidir (İlkel tip kopyalandığından metot içi artış `main`'deki sayıyı etkilemez: 20)."}}, {"id": 4049, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Zor]", "question": "Yalnızca geri dönüş tipleri (return type) farklı, ancak isimleri ve parametre listeleri tamamen aynı olan iki metot aynı sınıfta tanımlanırsa ne olur?", "code": null, "options": {"A": "Otomatik olarak aşırı yüklenmiş (overloaded) kabul edilir.", "B": "Java derleyicisi \"method already defined\" derleme hatası verir.", "C": "Çağrıldığında çalışma zamanında rastgele biri seçilir.", "D": "Büyük bellek kaplayan tipteki metot öncelik kazanır."}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Sadece dönüş tipi farkı aşırı yükleme sayılmaz, derleme hatası verir).", "B": "Doğru: Sadece dönüş tipi farkı aşırı yükleme sayılmaz, derleme hatası verir", "C": "Yanlış: Doğru cevap B seçeneğidir (Sadece dönüş tipi farkı aşırı yükleme sayılmaz, derleme hatası verir).", "D": "Yanlış: Doğru cevap B seçeneğidir (Sadece dönüş tipi farkı aşırı yükleme sayılmaz, derleme hatası verir)."}}, {"id": 4050, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 5 - Java [Zor]", "question": "Aşağıdakilerden hangisi bir metodun imzasını (method signature) oluşturan bileşenlerdendir?", "code": null, "options": {"A": "Metodun erişim belirteci (public, private)", "B": "Metodun dönüş tipi (int, void)", "C": "Metodun adı ve parametrelerinin veri tipleri/sırası", "D": "Metodun fırlattığı hatalar (throws Exception)"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (Metot adı ve parametre tipleri/sırası).", "B": "Yanlış: Doğru cevap C seçeneğidir (Metot adı ve parametre tipleri/sırası).", "C": "Doğru: Metot adı ve parametre tipleri/sırası", "D": "Yanlış: Doğru cevap C seçeneğidir (Metot adı ve parametre tipleri/sırası)."}}, {"id": 5021, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 5 - Boşluk Doldurma", "question": "Metot bildiriminde parantez içine yazılan değişkenlere __________, metot çağrılırken gönderilen gerçek değerlere ise argüman denir.", "code": null, "answer": "DOGRU", "official_answer": "parametre", "accepted": ["parametre", "parametreler", "parameter"], "explanation": "Doğru cevap: parametre."}, {"id": 5022, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 5 - Boşluk Doldurma", "question": "Bir metodun geri dönüş veri tipi void dışında tanımlanmışsa metot gövdesinde uygun değer ileten en az bir adet __________ ifadesi yer almak zorundadır.", "code": null, "answer": "DOGRU", "official_answer": "return", "accepted": ["return", "return;"], "explanation": "Doğru cevap: return."}, {"id": 5023, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 5 - Boşluk Doldurma", "question": "Bir sınıfın nesnesi oluşturulmadan doğrudan sınıf ismiyle çağrılabilen metotlara __________ metot denir.", "code": null, "answer": "DOGRU", "official_answer": "statik (static)", "accepted": ["statik (static)", "statik", "static"], "explanation": "Doğru cevap: statik (static)."}, {"id": 5024, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 5 - Boşluk Doldurma", "question": "Metot aşırı yüklemede (overloading), yalnızca metodun __________ tipini değiştirmek aşırı yükleme için yeterli değildir; parametre listesi farklı olmalıdır.", "code": null, "answer": "DOGRU", "official_answer": "dönüş (return)", "accepted": ["dönüş (return)", "dönüş", "donus", "geri dönüş", "return", "geri donus"], "explanation": "Doğru cevap: dönüş (return)."}, {"id": 5025, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 5 - Boşluk Doldurma", "question": "Bir metodun kendi kendini doğrudan veya dolaylı olarak çağırması prensibine dayanan programlama tekniğine __________ (özyineleme) adı verilir.", "code": null, "answer": "DOGRU", "official_answer": "rekürsif / özyineleme", "accepted": ["rekürsif / özyineleme", "rekürsif", "rekursif", "özyineleme", "ozyineleme", "özyinelemeli", "recursion", "recursive"], "explanation": "Doğru cevap: rekürsif / özyineleme."}, {"id": 6009, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 5 - Klasik & Kod Yazma", "question": "Kendisine parametre olarak gelen iki tam sayının en büyüğünü (max) bularak geriye döndüren public static int enBuyuk(int s1, int s2) metodunu ve bu metodu main içinde test eden kodu yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class EnBuyukBulucu {\n    public static int enBuyuk(int s1, int s2) {\n        if (s1 > s2) {\n            return s1;\n        } else {\n            return s2;\n        }\n    }\n\n    public static void main(String[] args) {\n        int sonuc = enBuyuk(45, 78);\n        System.out.println(\"En büyük sayı: \" + sonuc);\n    }\n}", "keywords": ["int enBuyuk", "if", "return", "main"], "explanation": "Hafta 5 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 6010, "course": "nesne_vize", "lang": "java", "week": 5, "week_title": "Hafta 5: Metotlar (Fonksiyonlar), Parametre Aktarımı ve Overloading", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 5 - Klasik & Kod Yazma", "question": "Kendisine parametre olarak gelen taban (a) ve üs (b) değerlerini alıp, döngü kullanarak a^b sonucunu hesaplayıp geriye döndüren public static long usAl(int taban, int us) metodunu yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class UsHesaplayici {\n    public static long usAl(int taban, int us) {\n        long sonuc = 1;\n        for (int i = 0; i < us; i++) {\n            sonuc *= taban;\n        }\n        return sonuc;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"2^5 = \" + usAl(2, 5));\n    }\n}", "keywords": ["long usAl", "for", "return"], "explanation": "Hafta 5 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 4051, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Kolay]", "question": "Java'da bir dizinin (array) ilk elemanının indisi (index) kaçtır?", "code": null, "options": {"A": "1", "B": "0", "C": "-1", "D": "Dizinin tanımlanan boyutuna göre değişir"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (İndis 0'dan başlar).", "B": "Doğru: İndis 0'dan başlar", "C": "Yanlış: Doğru cevap B seçeneğidir (İndis 0'dan başlar).", "D": "Yanlış: Doğru cevap B seçeneğidir (İndis 0'dan başlar)."}}, {"id": 4052, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Kolay]", "question": "N elemanlı bir dizinin son elemanına erişmek için kullanılan indis ifadesi hangisidir?", "code": null, "options": {"A": "N", "B": "N - 1", "C": "N + 1", "D": "0"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Son eleman $N-1$).", "B": "Doğru: Son eleman $N-1$", "C": "Yanlış: Doğru cevap B seçeneğidir (Son eleman $N-1$).", "D": "Yanlış: Doğru cevap B seçeneğidir (Son eleman $N-1$)."}}, {"id": 4053, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Kolay]", "question": "Bir dizinin toplam eleman sayısını öğrenmek için hangi özellikten faydalanılır?", "code": null, "options": {"A": "dizi.length()", "B": "dizi.size()", "C": "dizi.length", "D": "dizi.count"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (`dizi.length`).", "B": "Yanlış: Doğru cevap C seçeneğidir (`dizi.length`).", "C": "Doğru: `dizi.length`", "D": "Yanlış: Doğru cevap C seçeneğidir (`dizi.length`)."}}, {"id": 4054, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Orta]", "question": "int[] sayilar = new int[5]; satırı çalıştırıldığında bellekteki dizi elemanlarının varsayılan başlangıç değeri ne olur?", "code": null, "options": {"A": "0", "B": "null", "C": "-1", "D": "Rastgele çöp değerler"}, "answer": "A", "explanations": {"A": "Doğru: Sayısal ilkel diziler varsayılan 0 değerini alır", "B": "Yanlış: Doğru cevap A seçeneğidir (Sayısal ilkel diziler varsayılan 0 değerini alır).", "C": "Yanlış: Doğru cevap A seçeneğidir (Sayısal ilkel diziler varsayılan 0 değerini alır).", "D": "Yanlış: Doğru cevap A seçeneğidir (Sayısal ilkel diziler varsayılan 0 değerini alır)."}}, {"id": 4055, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Orta]", "question": "Aşağıdaki kod parçasının çalıştırılması durumunda hangi hata meydana gelir?", "code": "int[] dizi = {10, 20, 30};\nSystem.out.println(dizi[3]);", "options": {"A": "NullPointerException", "B": "ArrayIndexOutOfBoundsException", "C": "ArrayStoreException", "D": "Derleme hatası verir"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (3 elemanlı dizide geçerli indisler 0, 1, 2'dir; 3 sınır dışıdır).", "B": "Doğru: 3 elemanlı dizide geçerli indisler 0, 1, 2'dir; 3 sınır dışıdır", "C": "Yanlış: Doğru cevap B seçeneğidir (3 elemanlı dizide geçerli indisler 0, 1, 2'dir; 3 sınır dışıdır).", "D": "Yanlış: Doğru cevap B seçeneğidir (3 elemanlı dizide geçerli indisler 0, 1, 2'dir; 3 sınır dışıdır)."}}, {"id": 4056, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Orta]", "question": "Dizi elemanlarını baştan sona indis kullanmadan sırayla gezmeyi sağlayan gelişmiş döngü (enhanced for loop) yazımı hangisidir?", "code": null, "options": {"A": "for (int i in dizi)", "B": "for (int eleman : dizi)", "C": "foreach (eleman in dizi)", "D": "for (dizi : int eleman)"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`for (int eleman : dizi)`).", "B": "Doğru: `for (int eleman : dizi)`", "C": "Yanlış: Doğru cevap B seçeneğidir (`for (int eleman : dizi)`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`for (int eleman : dizi)`)."}}, {"id": 4057, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Zor]", "question": "Aşağıdaki iki boyutlu dizide matris[1][2] elemanının değeri kaçtır?", "code": "int[][] matris = {\n    {1, 2, 3},\n    {4, 5, 6},\n    {7, 8, 9}\n};", "options": {"A": "2", "B": "4", "C": "6", "D": "8"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (1. satır `{4, 5, 6}`, bu satırın 2. indisi 6'dır).", "B": "Yanlış: Doğru cevap C seçeneğidir (1. satır `{4, 5, 6}`, bu satırın 2. indisi 6'dır).", "C": "Doğru: 1. satır `{4, 5, 6}`, bu satırın 2. indisi 6'dır", "D": "Yanlış: Doğru cevap C seçeneğidir (1. satır `{4, 5, 6}`, bu satırın 2. indisi 6'dır)."}}, {"id": 4058, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Zor]", "question": "Aşağıdaki kod parçasının ekran çıktısı ne olur?", "code": "int[] a = {1, 2, 3};\nint[] b = a;\nb[0] = 99;\nSystem.out.println(a[0]);", "options": {"A": "1", "B": "99", "C": "0", "D": "NullPointerException"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Diziler referans tiptir, `b` adresi paylaştığı için `a[0]` da 99 olur).", "B": "Doğru: Diziler referans tiptir, `b` adresi paylaştığı için `a[0]` da 99 olur", "C": "Yanlış: Doğru cevap B seçeneğidir (Diziler referans tiptir, `b` adresi paylaştığı için `a[0]` da 99 olur).", "D": "Yanlış: Doğru cevap B seçeneğidir (Diziler referans tiptir, `b` adresi paylaştığı için `a[0]` da 99 olur)."}}, {"id": 4059, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Zor]", "question": "Sıralı bir tam sayı dizisinde aranan bir elemanı en verimli şekilde bulmak için kullanılan algoritma hangisidir?", "code": null, "options": {"A": "Doğrusal Arama (Linear Search)", "B": "İkili Arama (Binary Search)", "C": "Kabarcık Sıralama (Bubble Sort)", "D": "Araya Ekleme (Insertion Sort)"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Binary Search / İkili Arama).", "B": "Doğru: Binary Search / İkili Arama", "C": "Yanlış: Doğru cevap B seçeneğidir (Binary Search / İkili Arama).", "D": "Yanlış: Doğru cevap B seçeneğidir (Binary Search / İkili Arama)."}}, {"id": 4060, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 6 - Java [Zor]", "question": "Aşağıdaki kod bloğunun ekran çıktısı ne olur?", "code": " int[] d = {2, 4, 6};\n int toplam = 0;\n for (int x : d) {\n     toplam += x * 2;\n }\n System.out.println(toplam);", "options": {"A": "12", "B": "24", "C": "36", "D": "48"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir ($(2 \\times 2) + (4 \\times 2) + (6 \\times 2) = 4 + 8 + 12 = 24$).", "B": "Doğru: $(2 \\times 2) + (4 \\times 2) + (6 \\times 2) = 4 + 8 + 12 = 24$", "C": "Yanlış: Doğru cevap B seçeneğidir ($(2 \\times 2) + (4 \\times 2) + (6 \\times 2) = 4 + 8 + 12 = 24$).", "D": "Yanlış: Doğru cevap B seçeneğidir ($(2 \\times 2) + (4 \\times 2) + (6 \\times 2) = 4 + 8 + 12 = 24$)."}}, {"id": 5026, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 6 - Boşluk Doldurma", "question": "Java'da diziler ilkel bir veri tipi değil, Heap bellek bölgesinde oluşturulan birer __________ (referans) tipidir.", "code": null, "answer": "DOGRU", "official_answer": "nesne / referans", "accepted": ["nesne / referans", "nesne", "referans", "object", "reference"], "explanation": "Doğru cevap: nesne / referans."}, {"id": 5027, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 6 - Boşluk Doldurma", "question": "boolean[] kontrol = new boolean[4]; şeklinde oluşturulan bir dizinin elemanlarının varsayılan başlangıç değeri __________ olur.", "code": null, "answer": "DOGRU", "official_answer": "false", "accepted": ["false"], "explanation": "Doğru cevap: false."}, {"id": 5028, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 6 - Boşluk Doldurma", "question": "İki boyutlu bir matris tanımlamasında 0. satırın sütun sayısını (eleman adedini) veren ifade __________ ifadesidir.", "code": null, "answer": "DOGRU", "official_answer": "matris[0].length", "accepted": ["matris[0].length"], "explanation": "Doğru cevap: matris[0].length."}, {"id": 5029, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 6 - Boşluk Doldurma", "question": "Dizi elemanlarını değiştirmeden sadece okumak ve listelemek için en pratik döngü yapısı __________ döngüsüdür.", "code": null, "answer": "DOGRU", "official_answer": "for-each (gelişmiş for)", "accepted": ["for-each (gelişmiş for)", "for-each", "foreach", "gelişmiş for", "gelismis for", "enhanced for"], "explanation": "Doğru cevap: for-each (gelişmiş for)."}, {"id": 5030, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 6 - Boşluk Doldurma", "question": "Bir diziye boyutundan daha büyük bir indisle erişmeye çalışıldığında çalışma zamanında fırlatılan istisna __________ istisnasıdır.", "code": null, "answer": "DOGRU", "official_answer": "ArrayIndexOutOfBoundsException", "accepted": ["arrayindexoutofboundsexception"], "explanation": "Doğru cevap: ArrayIndexOutOfBoundsException."}, {"id": 6011, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 6 - Klasik & Kod Yazma", "question": "Elemanları {12, 45, 3, 89, 24, 67} olan bir tam sayı dizisindeki en küçük (min) ve en büyük (max) elemanı bularak ekrana yazdıran Java programını yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class MinMaxDizi {\n    public static void main(String[] args) {\n        int[] dizi = {12, 45, 3, 89, 24, 67};\n        int min = dizi[0];\n        int max = dizi[0];\n\n        for (int i = 1; i < dizi.length; i++) {\n            if (dizi[i] < min) min = dizi[i];\n            if (dizi[i] > max) max = dizi[i];\n        }\n\n        System.out.println(\"En küçük: \" + min);\n        System.out.println(\"En büyük: \" + max);\n    }\n}", "keywords": ["int[]", "for", "min", "max", "System.out.print"], "explanation": "Hafta 6 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 6012, "course": "nesne_vize", "lang": "java", "week": 6, "week_title": "Hafta 6: Diziler (Arrays), Çok Boyutlu Diziler ve Matris İşlemleri", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 6 - Klasik & Kod Yazma", "question": "3x3 boyutunda bir tamsayı matrisi oluşturup; asal köşegen (ana köşegen: matris[i][i]) üzerindeki elemanların toplamını hesaplayan ve konsola yazdıran Java kodunu yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class KosegenToplami {\n    public static void main(String[] args) {\n        int[][] matris = {\n            {3, 8, 1},\n            {5, 9, 2},\n            {4, 7, 6}\n        };\n\n        int toplam = 0;\n        for (int i = 0; i < matris.length; i++) {\n            toplam += matris[i][i];\n        }\n\n        System.out.println(\"Asal Köşegen Toplamı: \" + toplam); // 3 + 9 + 6 = 18\n    }\n}", "keywords": ["int[][]", "for", "[i][i]", "System.out.print"], "explanation": "Hafta 6 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 4061, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Kolay]", "question": "Bir sınıftan new anahtar kelimesi ile yeni bir nesne örneklendiğinde ilk çalışan ve nesneyi başlatan özel metot hangisidir?", "code": null, "options": {"A": "Yıkıcı Metot (Destructor)", "B": "Kurucu Metot (Constructor)", "C": "main Metodu", "D": "Getter Metodu"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Constructor / Kurucu Metot).", "B": "Doğru: Constructor / Kurucu Metot", "C": "Yanlış: Doğru cevap B seçeneğidir (Constructor / Kurucu Metot).", "D": "Yanlış: Doğru cevap B seçeneğidir (Constructor / Kurucu Metot)."}}, {"id": 4062, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Kolay]", "question": "Aşağıdakilerden hangisi bir kurucu metodun (Constructor) kesin kuralıdır?", "code": null, "options": {"A": "İsmi sınıf ismiyle tamamen aynı olmalı ve geri dönüş tipi (void dahil) bulunmamalıdır.", "B": "Her zaman static olarak tanımlanmalıdır.", "C": "Mutlaka en az 1 parametre almak zorundadır.", "D": "İsmi küçük harfle başlamalıdır."}, "answer": "A", "explanations": {"A": "Doğru: Sınıf ismiyle aynı olmalı ve geri dönüş tipi bulunmamalıdır", "B": "Yanlış: Doğru cevap A seçeneğidir (Sınıf ismiyle aynı olmalı ve geri dönüş tipi bulunmamalıdır).", "C": "Yanlış: Doğru cevap A seçeneğidir (Sınıf ismiyle aynı olmalı ve geri dönüş tipi bulunmamalıdır).", "D": "Yanlış: Doğru cevap A seçeneğidir (Sınıf ismiyle aynı olmalı ve geri dönüş tipi bulunmamalıdır)."}}, {"id": 4063, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Kolay", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Kolay]", "question": "Bir sınıfın veri alanlarını private yaparak dış dünyadan gizleme ve bu alanlara erişimi public get/set metotlarıyla denetleme ilkesine ne ad verilir?", "code": null, "options": {"A": "Kalıtım (Inheritance)", "B": "Kapsülleme (Encapsulation)", "C": "Çok Biçimlilik (Polymorphism)", "D": "Soyutlama (Abstraction)"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Kapsülleme / Encapsulation).", "B": "Doğru: Kapsülleme / Encapsulation", "C": "Yanlış: Doğru cevap B seçeneğidir (Kapsülleme / Encapsulation).", "D": "Yanlış: Doğru cevap B seçeneğidir (Kapsülleme / Encapsulation)."}}, {"id": 4064, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Orta]", "question": "Sınıfın o anki somut nesnesini temsil eden ve parametre ismi ile sınıf alanı ismi çakıştığında ayırt etmek için kullanılan referans anahtar kelime hangisidir?", "code": null, "options": {"A": "super", "B": "this", "C": "self", "D": "base"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`this`).", "B": "Doğru: `this`", "C": "Yanlış: Doğru cevap B seçeneğidir (`this`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`this`)."}}, {"id": 4065, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Orta]", "question": "static anahtar kelimesi ile tanımlanmış bir sınıf değişkeni (class variable) için aşağıdakilerden hangisi doğrudur?", "code": null, "options": {"A": "Her yeni nesne oluşturulduğunda sıfırdan kopyalanır.", "B": "Sınıftan türetilen tüm nesneler tarafından tek bir ortak kopya olarak paylaşılır.", "C": "Yalnızca döngülerin içinde tanımlanabilir.", "D": "Nesne yok edildiğinde değeri her zaman sıfırlanır."}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Tüm nesneler tarafından tek bir ortak kopya paylaşılır).", "B": "Doğru: Tüm nesneler tarafından tek bir ortak kopya paylaşılır", "C": "Yanlış: Doğru cevap B seçeneğidir (Tüm nesneler tarafından tek bir ortak kopya paylaşılır).", "D": "Yanlış: Doğru cevap B seçeneğidir (Tüm nesneler tarafından tek bir ortak kopya paylaşılır)."}}, {"id": 4066, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Orta", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Orta]", "question": "Java'da bir sınıfın başka bir üst sınıftan özellik ve metot miras almasını (inheritance) sağlayan anahtar kelime hangisidir?", "code": null, "options": {"A": "implements", "B": "extends", "C": "inherits", "D": "instanceof"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`extends`).", "B": "Doğru: `extends`", "C": "Yanlış: Doğru cevap B seçeneğidir (`extends`).", "D": "Yanlış: Doğru cevap B seçeneğidir (`extends`)."}}, {"id": 4067, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Zor]", "question": "Aşağıdaki özyinelemeli (rekürsif) faktöriyel metodunda taban durum (base case / durdurma koşulu) hangi satırdır?", "code": "public static int faktoriyel(int n) {\n    if (n == 0) return 1;\n    else return n * faktoriyel(n - 1);\n}", "options": {"A": "else return n * faktoriyel(n - 1);", "B": "if (n == 0) return 1;", "C": "public static int faktoriyel(int n)", "D": "Metodun static olması"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (`if (n == 0) return 1;` taban durumudur).", "B": "Doğru: `if (n == 0) return 1;` taban durumudur", "C": "Yanlış: Doğru cevap B seçeneğidir (`if (n == 0) return 1;` taban durumudur).", "D": "Yanlış: Doğru cevap B seçeneğidir (`if (n == 0) return 1;` taban durumudur)."}}, {"id": 4068, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Zor]", "question": "Aşağıdaki özyinelemeli metodun test(3) çağrısı sonucunda ekrana sırasıyla ne yazdırılır?", "code": "public static void test(int n) {\n    if (n > 0) {\n        test(n - 1);\n        System.out.print(n + \" \");\n    }\n}", "options": {"A": "3 2 1", "B": "1 2 3", "C": "3 2 1 0", "D": "0 1 2 3"}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Rekürsif çağrılar stack'te açılırken ekrana dönüşte 1 2 3 basılır).", "B": "Doğru: Rekürsif çağrılar stack'te açılırken ekrana dönüşte 1 2 3 basılır", "C": "Yanlış: Doğru cevap B seçeneğidir (Rekürsif çağrılar stack'te açılırken ekrana dönüşte 1 2 3 basılır).", "D": "Yanlış: Doğru cevap B seçeneğidir (Rekürsif çağrılar stack'te açılırken ekrana dönüşte 1 2 3 basılır)."}}, {"id": 4069, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Zor]", "question": "Sayısal integral (Riemann toplamı) yaklaşımında aralık adım sayısı (n) sonsuza (sonsuza (∞)) yaklaştıkça ne gerçekleşir?", "code": null, "options": {"A": "Dikdörtgenlerin genişliği (Δx) büyür, hata artar.", "B": "Dikdörtgenlerin genişliği (Δx) küçülür ve hesaplanan yaklaşık alan gerçek analitik integrasyon değerine yaklaşır.", "C": "Hesaplama tamamen tanımsız hale gelir.", "D": "Sonuç her zaman sıfıra eşitlenir."}, "answer": "B", "explanations": {"A": "Yanlış: Doğru cevap B seçeneğidir (Adım sayısı $n$ arttıkça dikdörtgen genişliği $\\Delta x$ küçülür ve integral yaklaşımı gerçeğe yakınsar).", "B": "Doğru: Adım sayısı $n$ arttıkça dikdörtgen genişliği $\\Delta x$ küçülür ve integral yaklaşımı gerçeğe yakınsar", "C": "Yanlış: Doğru cevap B seçeneğidir (Adım sayısı $n$ arttıkça dikdörtgen genişliği $\\Delta x$ küçülür ve integral yaklaşımı gerçeğe yakınsar).", "D": "Yanlış: Doğru cevap B seçeneğidir (Adım sayısı $n$ arttıkça dikdörtgen genişliği $\\Delta x$ küçülür ve integral yaklaşımı gerçeğe yakınsar)."}}, {"id": 4070, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "test", "difficulty": "Zor", "test_type": "Nesneye Dayalı Programlama - Test Soruları", "category": "Hafta 7 - Java [Zor]", "question": "Aşağıdaki kod parçasının ekran çıktısı ne olur?", "code": " class Sayac {\n     static int adet = 0;\n     Sayac() { adet++; }\n }\n public class Test {\n     public static void main(String[] args) {\n         new Sayac();\n         new Sayac();\n         Sayac s3 = new Sayac();\n         System.out.println(Sayac.adet);\n     }\n }", "options": {"A": "1", "B": "2", "C": "3", "D": "0"}, "answer": "C", "explanations": {"A": "Yanlış: Doğru cevap C seçeneğidir (`adet` static olduğu için her nesnede artarak 3 olur).", "B": "Yanlış: Doğru cevap C seçeneğidir (`adet` static olduğu için her nesnede artarak 3 olur).", "C": "Doğru: `adet` static olduğu için her nesnede artarak 3 olur", "D": "Yanlış: Doğru cevap C seçeneğidir (`adet` static olduğu için her nesnede artarak 3 olur)."}}, {"id": 5031, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 7 - Boşluk Doldurma", "question": "Bir alt sınıftan (subclass), miras aldığı üst sınıfın (superclass) kurucusuna veya metotlarına erişmek için __________ anahtar kelimesi kullanılır.", "code": null, "answer": "DOGRU", "official_answer": "super", "accepted": ["super", "super()"], "explanation": "Doğru cevap: super."}, {"id": 5032, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 7 - Boşluk Doldurma", "question": "Özyinelemeli (rekürsif) fonksiyonlarda sonsuz çağrıyı ve bellek yığıt taşmasını (StackOverflowError) önleyen koşula __________ durum (base case) denir.", "code": null, "answer": "DOGRU", "official_answer": "taban (base case)", "accepted": ["taban (base case)", "taban", "base", "base case", "temel", "durdurma"], "explanation": "Doğru cevap: taban (base case)."}, {"id": 5033, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 7 - Boşluk Doldurma", "question": "Sayısal integralde (Riemann toplamı) aralık genişliği formülü Δx = (bitis - baslangic) / n olup, buradaki n değeri __________ sayısını temsil eder.", "code": null, "answer": "DOGRU", "official_answer": "adım (veya aralık)", "accepted": ["adım (veya aralık)", "adım", "adim", "aralık", "aralik", "bölüm", "dikdörtgen"], "explanation": "Doğru cevap: adım (veya aralık)."}, {"id": 5034, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 7 - Boşluk Doldurma", "question": "Java'da bir nesne oluşturulduktan sonra o nesneye işaret eden hiçbir referans kalmazsa, nesne bellekten __________ tarafından temizlenir.", "code": null, "answer": "DOGRU", "official_answer": "Garbage Collector (Atık Veri Toplayıcı)", "accepted": ["garbage collector (atık veri toplayıcı)", "garbage collector", "atık veri toplayıcı", "çöp toplayıcı", "gc"], "explanation": "Doğru cevap: Garbage Collector (Atık Veri Toplayıcı)."}, {"id": 5035, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "fill", "difficulty": "Boşluk Doldurma", "test_type": "Nesneye Dayalı Programlama - Boşluk Doldurma", "category": "Hafta 7 - Boşluk Doldurma", "question": "Bir sınıfın değişkenlerini doğrudan erişime kapatıp metotlar vasıtasıyla kontrollü açma prensibine nesneye dayalı programlamada __________ (Encapsulation) adı verilir.", "code": null, "answer": "DOGRU", "official_answer": "Kapsülleme (Encapsulation)", "accepted": ["kapsülleme (encapsulation)", "kapsülleme", "kapsulleme", "encapsulation", "encapsulation"], "explanation": "Doğru cevap: Kapsülleme (Encapsulation)."}, {"id": 6013, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 7 - Klasik & Kod Yazma", "question": "Taban durumu if (us == 0) return 1; olan; kendisine parametre olarak gönderilen taban ve üs değerlerini özyinelemeli (rekürsif) olarak hesaplayıp geriye döndüren public static int usHesapla(int taban, int us) metodunu yazınız.", "code": null, "answer": "DOGRU", "solution_code": "public class RekursifUs {\n    public static int usHesapla(int taban, int us) {\n        if (us == 0) {\n            return 1; // Taban durum (Base case)\n        } else {\n            return taban * usHesapla(taban, us - 1); // Rekürsif adım\n        }\n    }\n\n    public static void main(String[] args) {\n        System.out.println(\"3^4 = \" + usHesapla(3, 4)); // 81\n    }\n}", "keywords": ["int usHesapla", "us == 0", "return 1", "usHesapla(taban, us - 1)"], "explanation": "Hafta 7 örnek Java çözüm kodu yukarıdaki gibidir."}, {"id": 6014, "course": "nesne_vize", "lang": "java", "week": 7, "week_title": "Hafta 7: OOP İlkeleri, Kurucular, Rekürsiyon ve Sayısal Uygulamalar", "qType": "code", "difficulty": "Klasik / Kod Yazma", "test_type": "Nesneye Dayalı Programlama - Klasik & Kod Yazma", "category": "Hafta 7 - Klasik & Kod Yazma", "question": "Ogrenci isimli bir sınıf oluşturunuz. Sınıf içerisinde private String ad; ve private double notOrtalamasi; alanları tanımlayınız. Bu alanları başlatan parametreli bir kurucu metot (Constructor) ile öğrencinin bilgilerini konsola yazdıran public void bilgileriYazdir() metodunu kodlayınız.", "code": null, "answer": "DOGRU", "solution_code": "public class Ogrenci {\n    private String ad;\n    private double notOrtalamasi;\n\n    // Parametreli Kurucu Metot (Constructor)\n    public Ogrenci(String ad, double notOrtalamasi) {\n        this.ad = ad;\n        this.notOrtalamasi = notOrtalamasi;\n    }\n\n    public void bilgileriYazdir() {\n        System.out.println(\"Öğrenci Adı: \" + this.ad + \" | Ortalama: \" + this.notOrtalamasi);\n    }\n\n    public static void main(String[] args) {\n        Ogrenci ogr1 = new Ogrenci(\"Zeynep\", 3.82);\n        ogr1.bilgileriYazdir();\n    }\n}", "keywords": ["class Ogrenci", "private String ad", "private double notOrtalamasi", "public Ogrenci", "void bilgileriYazdir"], "explanation": "Hafta 7 örnek Java çözüm kodu yukarıdaki gibidir."}];
+    const STORAGE_KEY_ANS = "nesne_user_answers";
+    const STORAGE_KEY_FAV = "nesne_user_favs";
+    const STORAGE_KEY_THEME = "app_theme_mode";
+
+    // STATE
+    let currentFilterType = "all";
+    let currentFilterWeek = 0;
+    let pool = [...ALL_QUESTIONS];
+    let currentIndex = 0;
+    let userAnswers = {};
+    let userFavs = new Set();
+    let currentFillInput = "";
+
+    // INIT STORAGE
+    try {
+      const savedAns = localStorage.getItem(STORAGE_KEY_ANS);
+      if (savedAns) userAnswers = JSON.parse(savedAns);
+      const savedFavs = localStorage.getItem(STORAGE_KEY_FAV);
+      if (savedFavs) userFavs = new Set(JSON.parse(savedFavs));
+      const savedTheme = localStorage.getItem(STORAGE_KEY_THEME);
+      if (savedTheme === "dark" || (!savedTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+        document.getElementById("btn-theme").textContent = "☀️";
+      }
+    } catch(e) {
+      console.log("Storage load warning:", e);
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY_ANS, JSON.stringify(userAnswers));
+        localStorage.setItem(STORAGE_KEY_FAV, JSON.stringify([...userFavs]));
+      } catch(e) {}
+      updateCounters();
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle("dark");
+      document.getElementById("btn-theme").textContent = isDark ? "☀️" : "🌙";
+      try { localStorage.setItem(STORAGE_KEY_THEME, isDark ? "dark" : "light"); } catch(e) {}
+    }
+
+    // TEXT NORMALIZER (TR SUPPORT)
+    function normTr(str) {
+      return (str || "").toString().trim().toLocaleLowerCase("tr-TR").replace(/i\u0307/g, "i").replace(/\s+/g, " ");
+    }
+
+    // FILTERS
+    function setFilter(type, week = 0) {
+      currentFilterType = type;
+      currentFilterWeek = week;
+      
+      // Update UI active buttons
+      const btns = document.querySelectorAll("#filters-container .filter-btn");
+      btns.forEach(b => b.classList.remove("active"));
+      
+      event && event.target && event.target.classList.add("active");
+
+      // Filter pool
+      pool = ALL_QUESTIONS.filter(q => {
+        if (type === "all") return week === 0 || q.week === week;
+        if (type === "test") return q.qType === "test";
+        if (type === "fill") return q.qType === "fill";
+        if (type === "code") return q.qType === "code";
+        if (type === "wrong") {
+          const a = userAnswers[q.id];
+          return a && a.status === "YANLIS";
+        }
+        if (type === "fav") return userFavs.has(q.id);
+        if (type === "week") return q.week === week;
+        return true;
+      });
+
+      if (pool.length === 0) {
+        alert("Bu filtreye uygun soru bulunamadı! Tümü gösteriliyor.");
+        pool = [...ALL_QUESTIONS];
+      }
+
+      currentIndex = 0;
+      currentFillInput = "";
+      renderQuestion();
+      updateCounters();
+    }
+
+    function updateCounters() {
+      let wrongCount = 0;
+      let correctCount = 0;
+      let answeredCount = 0;
+
+      ALL_QUESTIONS.forEach(q => {
+        const a = userAnswers[q.id];
+        if (a) {
+          answeredCount++;
+          if (a.status === "DOGRU") correctCount++;
+          else if (a.status === "YANLIS") wrongCount++;
+        }
+      });
+
+      document.getElementById("wrong-count").textContent = wrongCount;
+      document.getElementById("fav-count").textContent = userFavs.size;
+      document.getElementById("modal-correct-cnt").textContent = correctCount;
+      document.getElementById("modal-wrong-cnt").textContent = wrongCount;
+      document.getElementById("modal-unanswered-cnt").textContent = ALL_QUESTIONS.length - answeredCount;
+
+      const pct = Math.round((answeredCount / ALL_QUESTIONS.length) * 100);
+      document.getElementById("progress-bar").style.width = pct + "%";
+    }
+
+    // RENDER QUESTION
+    function renderQuestion() {
+      const q = pool[currentIndex];
+      if (!q) return;
+
+      const card = document.getElementById("q-card");
+      const ansObj = userAnswers[q.id];
+      const isAnswered = ansObj !== undefined;
+      const isFav = userFavs.has(q.id);
+
+      // Update Header & Fav button
+      document.getElementById("header-counter").textContent = (currentIndex + 1) + " / " + pool.length;
+      const btnFav = document.getElementById("btn-fav");
+      if (isFav) btnFav.classList.add("active");
+      else btnFav.classList.remove("active");
+
+      let typeBadge = "";
+      if (q.qType === "test") typeBadge = '<span class="badge badge-test">TEST SORUSU</span>';
+      else if (q.qType === "fill") typeBadge = '<span class="badge badge-fill">BOŞLUK DOLDURMA</span>';
+      else if (q.qType === "code") typeBadge = '<span class="badge badge-code">KOD YAZMA / KLASİK</span>';
+
+      let diffBadge = "";
+      if (q.difficulty === "Kolay") diffBadge = '<span class="badge" style="background:#ecfdf5; color:#047857;">Kolay</span>';
+      else if (q.difficulty === "Orta") diffBadge = '<span class="badge" style="background:#eff6ff; color:#1d4ed8;">Orta</span>';
+      else if (q.difficulty === "Zor") diffBadge = '<span class="badge" style="background:#fef2f2; color:#b91c1c;">Zor</span>';
+
+      let codeHtml = "";
+      if (q.code) {
+        codeHtml = `
+          <div class="code-box">
+            <div class="code-header">
+              <span>${q.lang === 'java' ? '☕ Java Kodu' : '🐍 Python Kodu'}</span>
+              <button class="code-copy" onclick="copyCode(this, \`${encodeURIComponent(q.code)}\`)">Kopyala</button>
+            </div>
+            <pre><code>${escapeHtml(q.code)}</code></pre>
+          </div>
+        `;
+      }
+
+      let interactiveHtml = "";
+
+      // 1. TEST SORULARI
+      if (q.qType === "test") {
+        let optsHtml = "";
+        for (const [key, val] of Object.entries(q.options || {})) {
+          let cls = "";
+          let iconChar = key;
+          if (isAnswered) {
+            if (key === q.answer) {
+              cls = "correct";
+              iconChar = "✓";
+            } else if (key === ansObj.selected) {
+              cls = "wrong";
+              iconChar = "✗";
+            }
+          }
+          optsHtml += `
+            <button class="option-btn ${cls}" onclick="answerTest('${key}')" ${isAnswered ? 'disabled' : ''}>
+              <span class="opt-key">${iconChar}</span>
+              <span class="opt-text">${escapeHtml(val)}</span>
+            </button>
+          `;
+        }
+        interactiveHtml = `<div class="options-list">${optsHtml}</div>`;
+
+        if (isAnswered) {
+          const isOk = ansObj.status === "DOGRU";
+          interactiveHtml += `
+            <div class="explanation-box ${isOk ? 'success' : 'danger'}">
+              <div style="font-weight:800; margin-bottom:4px;">${isOk ? '✓ Tebrikler! Doğru Cevap' : '✗ Yanlış Cevap!'}</div>
+              <div><strong>Doğru Cevap:</strong> ${q.answer} seçeneğidir (${escapeHtml(q.options[q.answer])}).</div>
+              <div style="margin-top:6px; opacity:0.95;">${escapeHtml(q.explanation)}</div>
+              <button class="btn btn-secondary" style="margin-top:10px; font-size:12px; padding:6px 10px;" onclick="resetCurrentQuestion()">Tekrar Dene</button>
+            </div>
+          `;
+        }
+      }
+      // 2. BOŞLUK DOLDURMA
+      else if (q.qType === "fill") {
+        if (!isAnswered) {
+          interactiveHtml = `
+            <div class="fill-box">
+              <input type="text" id="fill-input-field" class="fill-input" 
+                placeholder="Boşluğa gelecek cevabı yazın..." 
+                value="${escapeHtml(currentFillInput)}" 
+                autocapitalize="none" autocorrect="off" spellcheck="false"
+                onkeydown="if(event.key==='Enter') submitFillAnswer()">
+              <div class="btn-row">
+                <button class="btn btn-primary" onclick="submitFillAnswer()">Kontrol Et</button>
+                <button class="btn btn-secondary" onclick="revealFillAnswer()">Cevabı Göster</button>
+                <button class="btn btn-secondary" onclick="toggleFillHint()">💡 İpucu</button>
+              </div>
+              <div id="fill-hint-box" style="display:none; font-size:12px; background:rgba(79,70,229,0.1); color:var(--primary); padding:8px 12px; border-radius:8px; font-weight:600;">
+                İlk karakter: "${q.official_answer[0]}" • Uzunluk: ${q.official_answer.length} karakter
+              </div>
+            </div>
+          `;
+        } else {
+          const isOk = ansObj.status === "DOGRU";
+          interactiveHtml = `
+            <div class="explanation-box ${isOk ? 'success' : 'danger'}">
+              <div style="font-weight:800; margin-bottom:4px;">${isOk ? '✓ Doğru Bildiniz!' : '✗ Yanlış / Eksik!'}</div>
+              <div style="margin-bottom:4px;"><strong>Sizin Cevabınız:</strong> <span style="font-family:monospace;">${escapeHtml(ansObj.text || "(Boş bırakıldı)")}</span></div>
+              <div style="margin-bottom:4px;"><strong>Resmi Doğru Cevap:</strong> <span style="font-family:monospace; font-weight:800;">${escapeHtml(q.official_answer)}</span></div>
+              <div style="margin-top:6px; opacity:0.95;">${escapeHtml(q.explanation)}</div>
+              <button class="btn btn-secondary" style="margin-top:10px; font-size:12px; padding:6px 10px;" onclick="resetCurrentQuestion()">Tekrar Dene</button>
+            </div>
+          `;
+        }
+      }
+      // 3. KOD YAZMA / KLASİK
+      else if (q.qType === "code") {
+        interactiveHtml = `
+          <div class="fill-box">
+            <div style="font-size:12px; color:var(--text-muted); font-weight:600;">
+              Beklenen anahtar kavramlar: <span style="font-family:monospace; color:var(--text);">${escapeHtml((q.keywords || []).join(", "))}</span>
+            </div>
+            <textarea id="code-input-field" class="code-editor" placeholder="${q.lang === 'java' ? 'Java kodunuzu veya açıklamanızı yazın...' : 'Python kodunuzu veya cevabınızı yazın...'}">${escapeHtml(ansObj?.text || currentFillInput)}</textarea>
+            <div class="btn-row">
+              <button class="btn btn-primary" onclick="submitCodeAnswer()">Kodu Kontrol Et & Çözümü Gör</button>
+              <button class="btn btn-secondary" onclick="revealCodeAnswer()">Resmi Çözümü Aç</button>
+            </div>
+          </div>
+        `;
+
+        if (isAnswered) {
+          interactiveHtml += `
+            <div style="margin-top:16px;">
+              <div class="code-box">
+                <div class="code-header" style="background:#064e3b; color:#a7f3d0;">
+                  <span>✓ Resmi Çözüm Kodu</span>
+                  <button class="code-copy" onclick="copyCode(this, \`${encodeURIComponent(q.solution_code)}\`)">Kopyala</button>
+                </div>
+                <pre style="color:#6ee7b7;"><code>${escapeHtml(q.solution_code)}</code></pre>
+              </div>
+              <div style="font-size:12px; color:var(--text-muted); line-height:1.4; margin-bottom:10px;">
+                ${escapeHtml(q.explanation)}
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; background:var(--bg); border:1px solid var(--border); padding:8px 12px; border-radius:10px;">
+                <span style="font-size:12px; font-weight:600;">Kendinizi değerlendirin:</span>
+                <div style="display:flex; gap:6px;">
+                  <button class="btn" style="background:var(--correct); color:#fff; padding:6px 12px; font-size:12px;" onclick="rateCode('DOGRU')">✓ Doğru Yaptım</button>
+                  <button class="btn" style="background:var(--wrong); color:#fff; padding:6px 12px; font-size:12px;" onclick="rateCode('YANLIS')">✗ Tekrar Edeceğim</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      card.innerHTML = `
+        <div class="q-meta">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="badge badge-week">${q.week}. Hafta</span>
+            ${typeBadge}
+            ${diffBadge}
+          </div>
+          <span style="font-size:11px; color:var(--text-muted); font-weight:600;">#${q.id} • ${escapeHtml(q.category)}</span>
+        </div>
+        <div class="q-text">${escapeHtml(q.question)}</div>
+        ${codeHtml}
+        ${interactiveHtml}
+      `;
+
+      // Scroll card to top smoothly
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // ACTIONS
+    function answerTest(key) {
+      const q = pool[currentIndex];
+      const isOk = key === q.answer;
+      userAnswers[q.id] = {
+        status: isOk ? "DOGRU" : "YANLIS",
+        selected: key
+      };
+      saveState();
+      renderQuestion();
+    }
+
+    function submitFillAnswer() {
+      const q = pool[currentIndex];
+      const input = document.getElementById("fill-input-field");
+      const userClean = normTr(input ? input.value : "");
+      if (!userClean) return;
+
+      const isOk = (q.accepted || []).some(acc => {
+        const c = normTr(acc);
+        return c === userClean || userClean.includes(c);
+      });
+
+      userAnswers[q.id] = {
+        status: isOk ? "DOGRU" : "YANLIS",
+        text: input.value
+      };
+      currentFillInput = "";
+      saveState();
+      renderQuestion();
+    }
+
+    function revealFillAnswer() {
+      const q = pool[currentIndex];
+      userAnswers[q.id] = {
+        status: "DOGRU",
+        text: q.official_answer
+      };
+      saveState();
+      renderQuestion();
+    }
+
+    function toggleFillHint() {
+      const box = document.getElementById("fill-hint-box");
+      if (box) box.style.display = box.style.display === "none" ? "block" : "none";
+    }
+
+    function submitCodeAnswer() {
+      const q = pool[currentIndex];
+      const txt = document.getElementById("code-input-field")?.value || "";
+      const txtClean = txt.toLowerCase();
+      const matched = (q.keywords || []).filter(kw => txtClean.includes(kw.toLowerCase()));
+      const isOk = matched.length >= Math.ceil((q.keywords || []).length * 0.5);
+
+      userAnswers[q.id] = {
+        status: isOk ? "DOGRU" : "YANLIS",
+        text: txt
+      };
+      saveState();
+      renderQuestion();
+    }
+
+    function revealCodeAnswer() {
+      const q = pool[currentIndex];
+      userAnswers[q.id] = {
+        status: "DOGRU",
+        text: q.solution_code
+      };
+      saveState();
+      renderQuestion();
+    }
+
+    function rateCode(status) {
+      const q = pool[currentIndex];
+      if (userAnswers[q.id]) {
+        userAnswers[q.id].status = status;
+        saveState();
+        renderQuestion();
+      }
+    }
+
+    function resetCurrentQuestion() {
+      const q = pool[currentIndex];
+      delete userAnswers[q.id];
+      currentFillInput = "";
+      saveState();
+      renderQuestion();
+    }
+
+    function resetAllAnswers() {
+      if (confirm("Tüm verdiğiniz cevaplar sıfırlansın mı?")) {
+        userAnswers = {};
+        saveState();
+        closeGridModal();
+        renderQuestion();
+      }
+    }
+
+    function toggleFav() {
+      const q = pool[currentIndex];
+      if (userFavs.has(q.id)) userFavs.delete(q.id);
+      else userFavs.add(q.id);
+      saveState();
+      renderQuestion();
+    }
+
+    function nextQuestion() {
+      if (currentIndex < pool.length - 1) {
+        currentIndex++;
+        currentFillInput = "";
+        renderQuestion();
+      } else {
+        alert("Bu bölümdeki son soruya geldiniz!");
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        currentFillInput = "";
+        renderQuestion();
+      }
+    }
+
+    // MODAL GRID DRAWER
+    function openGridModal() {
+      const overlay = document.getElementById("modal-overlay");
+      const grid = document.getElementById("modal-grid");
+      grid.innerHTML = "";
+
+      pool.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "q-jump-btn";
+        if (idx === currentIndex) btn.classList.add("current");
+
+        const ans = userAnswers[q.id];
+        if (ans) {
+          if (ans.status === "DOGRU") btn.classList.add("correct");
+          else if (ans.status === "YANLIS") btn.classList.add("wrong");
+        }
+
+        btn.textContent = idx + 1;
+        btn.onclick = () => {
+          currentIndex = idx;
+          currentFillInput = "";
+          closeGridModal();
+          renderQuestion();
+        };
+        grid.appendChild(btn);
+      });
+
+      overlay.style.display = "block";
+    }
+
+    function closeGridModal(e) {
+      document.getElementById("modal-overlay").style.display = "none";
+    }
+
+    // UTILITIES
+    function copyCode(btn, encoded) {
+      const text = decodeURIComponent(encoded);
+      navigator.clipboard.writeText(text).then(() => {
+        const oldText = btn.textContent;
+        btn.textContent = "Kopyalandı!";
+        setTimeout(() => btn.textContent = oldText, 1500);
+      });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // INITIAL RENDER
+    renderQuestion();
+    updateCounters();
+  </script>
+</body>
+</html>
