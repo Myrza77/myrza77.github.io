@@ -1,9 +1,10 @@
-const CACHE_NAME = "algopy-v8";
+const CACHE_NAME = "algopy-v9";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
   "./gorsel.html",
   "./nesne.html",
+  "./mesleki.html",
   "./offline.html",
   "./manifest.json",
   "./favicon.svg",
@@ -11,9 +12,9 @@ const ASSETS_TO_CACHE = [
   "./icon-192.png",
   "./icon-512.png",
   "./assets/index-BmIPd1Bi.js",
-  "./assets/index-BmIPd1Bi.js?v=8",
+  "./assets/index-BmIPd1Bi.js?v=9",
   "./assets/index-Cz-Qj7UB.css",
-  "./assets/index-Cz-Qj7UB.css?v=8"
+  "./assets/index-Cz-Qj7UB.css?v=9"
 ];
 
 // Install Event

@@ -7021,5 +7021,2426 @@
     },
     "answer": "D",
     "explanation": "İpucu: print(Liste1) komutu doğrudan Liste1 değişkeninin içeriği olan ['Görsel Programlama'] ifadesini ekrana yazdırır."
+  },
+  {
+    "id": 7001,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] In computer science and software engineering, what is the technical meaning of the term \"Float\"?",
+    "code": null,
+    "options": {
+      "A": "An unordered, mutable collection of key-value pairs",
+      "B": "A built-in numerical data type representing numbers with a decimal point",
+      "C": "Unreferenced objects in memory that are no longer needed by the program and must be reclaimed",
+      "D": "An actual value, variable, or expression passed into a function or method upon invocation"
+    },
+    "answer": "B",
+    "explanation": "Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (A built-in numerical data type representing numbers with a decimal point). Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\".",
+      "B": "Correct! Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\".",
+      "C": "Incorrect. Correct answer is B (A built-in numerical data type representing numbers with a decimal point). Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\".",
+      "D": "Incorrect. Correct answer is B (A built-in numerical data type representing numbers with a decimal point). Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\"."
+    }
+  },
+  {
+    "id": 7002,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] Which core vocabulary term is defined technically as: \"An actual value, variable, or expression passed into a function or method upon invocation\"?",
+    "code": null,
+    "options": {
+      "A": "Argument",
+      "B": "Stream",
+      "C": "Dictionary",
+      "D": "Loop"
+    },
+    "answer": "A",
+    "explanation": "Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\".",
+    "explanations": {
+      "A": "Correct! Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\".",
+      "B": "Incorrect. Correct answer is A (Argument). Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\".",
+      "C": "Incorrect. Correct answer is A (Argument). Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\".",
+      "D": "Incorrect. Correct answer is A (Argument). Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\"."
+    }
+  },
+  {
+    "id": 7003,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] In computer science and software engineering, what is the technical meaning of the term \"Dictionary\"?",
+    "code": null,
+    "options": {
+      "A": "An unordered, mutable collection of key-value pairs",
+      "B": "An actual value, variable, or expression passed into a function or method upon invocation",
+      "C": "A built-in numerical data type representing numbers with a decimal point",
+      "D": "A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences"
+    },
+    "answer": "A",
+    "explanation": "Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\".",
+    "explanations": {
+      "A": "Correct! Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\".",
+      "B": "Incorrect. Correct answer is A (An unordered, mutable collection of key-value pairs). Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\".",
+      "C": "Incorrect. Correct answer is A (An unordered, mutable collection of key-value pairs). Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\".",
+      "D": "Incorrect. Correct answer is A (An unordered, mutable collection of key-value pairs). Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\"."
+    }
+  },
+  {
+    "id": 7004,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] Which core vocabulary term is defined technically as: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\"?",
+    "code": null,
+    "options": {
+      "A": "Stream",
+      "B": "Shell",
+      "C": "Parse",
+      "D": "Loop"
+    },
+    "answer": "D",
+    "explanation": "Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (Loop). Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\".",
+      "B": "Incorrect. Correct answer is D (Loop). Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\".",
+      "C": "Incorrect. Correct answer is D (Loop). Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\".",
+      "D": "Correct! Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\"."
+    }
+  },
+  {
+    "id": 7005,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] In computer science and software engineering, what is the technical meaning of the term \"Shell\"?",
+    "code": null,
+    "options": {
+      "A": "A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application",
+      "B": "A user interface that allows users to interact with the operating system kernel",
+      "C": "A built-in numerical data type representing numbers with a decimal point",
+      "D": "A sequence of data processing elements where the output of each stage serves as the input to the next"
+    },
+    "answer": "B",
+    "explanation": "Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (A user interface that allows users to interact with the operating system kernel). Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\".",
+      "B": "Correct! Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\".",
+      "C": "Incorrect. Correct answer is B (A user interface that allows users to interact with the operating system kernel). Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\".",
+      "D": "Incorrect. Correct answer is B (A user interface that allows users to interact with the operating system kernel). Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\"."
+    }
+  },
+  {
+    "id": 7006,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] Which core vocabulary term is defined technically as: \"A sequence of data processing elements where the output of each stage serves as the input to the next\"?",
+    "code": null,
+    "options": {
+      "A": "Dictionary",
+      "B": "Thread",
+      "C": "Pipeline",
+      "D": "Shell"
+    },
+    "answer": "C",
+    "explanation": "Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (Pipeline). Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\".",
+      "B": "Incorrect. Correct answer is C (Pipeline). Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\".",
+      "C": "Correct! Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\".",
+      "D": "Incorrect. Correct answer is C (Pipeline). Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\"."
+    }
+  },
+  {
+    "id": 7007,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] In computer science and software engineering, what is the technical meaning of the term \"Thread\"?",
+    "code": null,
+    "options": {
+      "A": "An actual value, variable, or expression passed into a function or method upon invocation",
+      "B": "The smallest unit of execution within an OS process that can run concurrently with other units",
+      "C": "A text input, question, or instruction given to a command-line interface or generative AI model",
+      "D": "A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences"
+    },
+    "answer": "B",
+    "explanation": "Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (The smallest unit of execution within an OS process that can run concurrently with other units). Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\".",
+      "B": "Correct! Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\".",
+      "C": "Incorrect. Correct answer is B (The smallest unit of execution within an OS process that can run concurrently with other units). Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\".",
+      "D": "Incorrect. Correct answer is B (The smallest unit of execution within an OS process that can run concurrently with other units). Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\"."
+    }
+  },
+  {
+    "id": 7008,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] Which core vocabulary term is defined technically as: \"A text input, question, or instruction given to a command-line interface or generative AI model\"?",
+    "code": null,
+    "options": {
+      "A": "Float",
+      "B": "Fork",
+      "C": "Stream",
+      "D": "Prompt"
+    },
+    "answer": "D",
+    "explanation": "Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (Prompt). Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\".",
+      "B": "Incorrect. Correct answer is D (Prompt). Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\".",
+      "C": "Incorrect. Correct answer is D (Prompt). Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\".",
+      "D": "Correct! Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\"."
+    }
+  },
+  {
+    "id": 7009,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] In computer science and software engineering, what is the technical meaning of the term \"Salt\"?",
+    "code": null,
+    "options": {
+      "A": "The smallest unit of execution within an OS process that can run concurrently with other units",
+      "B": "An actual value, variable, or expression passed into a function or method upon invocation",
+      "C": "Random data added to a password before hashing to protect against dictionary/rainbow table attacks",
+      "D": "To analyze a string or data stream into small, structured components"
+    },
+    "answer": "C",
+    "explanation": "Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (Random data added to a password before hashing to protect against dictionary/rainbow table attacks). Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\".",
+      "B": "Incorrect. Correct answer is C (Random data added to a password before hashing to protect against dictionary/rainbow table attacks). Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\".",
+      "C": "Correct! Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\".",
+      "D": "Incorrect. Correct answer is C (Random data added to a password before hashing to protect against dictionary/rainbow table attacks). Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\"."
+    }
+  },
+  {
+    "id": 7010,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] Which core vocabulary term is defined technically as: \"To analyze a string or data stream into small, structured components\"?",
+    "code": null,
+    "options": {
+      "A": "Loop",
+      "B": "Stream",
+      "C": "Parse",
+      "D": "Stack"
+    },
+    "answer": "C",
+    "explanation": "Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (Parse). Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\".",
+      "B": "Incorrect. Correct answer is C (Parse). Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\".",
+      "C": "Correct! Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\".",
+      "D": "Incorrect. Correct answer is C (Parse). Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\"."
+    }
+  },
+  {
+    "id": 7011,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] In computer science and software engineering, what is the technical meaning of the term \"Stack\"?",
+    "code": null,
+    "options": {
+      "A": "An actual value, variable, or expression passed into a function or method upon invocation",
+      "B": "A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application",
+      "C": "To create an independent copy of an open-source code repository, or a system call creating a child process",
+      "D": "A user interface that allows users to interact with the operating system kernel"
+    },
+    "answer": "B",
+    "explanation": "Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application). Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\".",
+      "B": "Correct! Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\".",
+      "C": "Incorrect. Correct answer is B (A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application). Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\".",
+      "D": "Incorrect. Correct answer is B (A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application). Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\"."
+    }
+  },
+  {
+    "id": 7012,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] Which core vocabulary term is defined technically as: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\"?",
+    "code": null,
+    "options": {
+      "A": "Garbage",
+      "B": "Prompt",
+      "C": "Shell",
+      "D": "Stack"
+    },
+    "answer": "A",
+    "explanation": "Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\".",
+    "explanations": {
+      "A": "Correct! Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\".",
+      "B": "Incorrect. Correct answer is A (Garbage). Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\".",
+      "C": "Incorrect. Correct answer is A (Garbage). Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\".",
+      "D": "Incorrect. Correct answer is A (Garbage). Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\"."
+    }
+  },
+  {
+    "id": 7013,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] In computer science and software engineering, what is the technical meaning of the term \"Stream\"?",
+    "code": null,
+    "options": {
+      "A": "A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes",
+      "B": "A sequence of data processing elements where the output of each stage serves as the input to the next",
+      "C": "A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download",
+      "D": "A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application"
+    },
+    "answer": "C",
+    "explanation": "Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download). Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\".",
+      "B": "Incorrect. Correct answer is C (A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download). Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\".",
+      "C": "Correct! Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\".",
+      "D": "Incorrect. Correct answer is C (A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download). Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\"."
+    }
+  },
+  {
+    "id": 7014,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] Which core vocabulary term is defined technically as: \"To create an independent copy of an open-source code repository, or a system call creating a child process\"?",
+    "code": null,
+    "options": {
+      "A": "Dictionary",
+      "B": "Fork",
+      "C": "Parse",
+      "D": "Stack"
+    },
+    "answer": "B",
+    "explanation": "Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (Fork). Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\".",
+      "B": "Correct! Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\".",
+      "C": "Incorrect. Correct answer is B (Fork). Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\".",
+      "D": "Incorrect. Correct answer is B (Fork). Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\"."
+    }
+  },
+  {
+    "id": 7015,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "Technical",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (Technical Meaning)",
+    "question": "[Technical Meaning] In computer science and software engineering, what is the technical meaning of the term \"Cookie\"?",
+    "code": null,
+    "options": {
+      "A": "The smallest unit of execution within an OS process that can run concurrently with other units",
+      "B": "A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences",
+      "C": "A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application",
+      "D": "A user interface that allows users to interact with the operating system kernel"
+    },
+    "answer": "B",
+    "explanation": "Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences). Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\".",
+      "B": "Correct! Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\".",
+      "C": "Incorrect. Correct answer is B (A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences). Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\".",
+      "D": "Incorrect. Correct answer is B (A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences). Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\"."
+    }
+  },
+  {
+    "id": 7016,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General Meaning] What is the general (everyday) meaning of the word \"Float\", which in technical contexts means \"A built-in numerical data type representing numbers with a decimal point\"?",
+    "code": null,
+    "options": {
+      "A": "An exchange of diverging or opposite views",
+      "B": "To stay/move on the surface of a liquid or drift in the air",
+      "C": "A small, sweet baked snack",
+      "D": "An eating utensil with prongs, or a place where a road/river divides"
+    },
+    "answer": "B",
+    "explanation": "Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B. Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\".",
+      "B": "Correct! Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\".",
+      "C": "Incorrect. Correct answer is B. Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\".",
+      "D": "Incorrect. Correct answer is B. Float — General: \"To stay/move on the surface of a liquid or drift in the air\". Technical: \"A built-in numerical data type representing numbers with a decimal point\"."
+    }
+  },
+  {
+    "id": 7017,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General & Technical Meaning] Which option correctly pairs both the General and Technical meanings of the word \"Argument\"?",
+    "code": null,
+    "options": {
+      "A": "General: Done without delay, or to encourage someone to do something | Technical: A text input, question, or instruction given to a command-line interface or generative AI model",
+      "B": "General: An exchange of diverging or opposite views | Technical: An actual value, variable, or expression passed into a function or method upon invocation",
+      "C": "General: A book/electronic resource listing words alphabetically with their meanings | Technical: An unordered, mutable collection of key-value pairs",
+      "D": "General: A long pipe or series of connected pipes used to transport liquids or gas | Technical: A sequence of data processing elements where the output of each stage serves as the input to the next"
+    },
+    "answer": "B",
+    "explanation": "Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B. Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\".",
+      "B": "Correct! Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\".",
+      "C": "Incorrect. Correct answer is B. Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\".",
+      "D": "Incorrect. Correct answer is B. Argument — General: \"An exchange of diverging or opposite views\". Technical: \"An actual value, variable, or expression passed into a function or method upon invocation\"."
+    }
+  },
+  {
+    "id": 7018,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General Meaning] What is the general (everyday) meaning of the word \"Dictionary\", which in technical contexts means \"An unordered, mutable collection of key-value pairs\"?",
+    "code": null,
+    "options": {
+      "A": "The hard outer cover of an egg, nut, or sea creature",
+      "B": "Waste material, trash, or unwanted refuse",
+      "C": "A white crystalline substance used for seasoning/preserving food",
+      "D": "A book/electronic resource listing words alphabetically with their meanings"
+    },
+    "answer": "D",
+    "explanation": "Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D. Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\".",
+      "B": "Incorrect. Correct answer is D. Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\".",
+      "C": "Incorrect. Correct answer is D. Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\".",
+      "D": "Correct! Dictionary — General: \"A book/electronic resource listing words alphabetically with their meanings\". Technical: \"An unordered, mutable collection of key-value pairs\"."
+    }
+  },
+  {
+    "id": 7019,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General & Technical Meaning] Which option correctly pairs both the General and Technical meanings of the word \"Loop\"?",
+    "code": null,
+    "options": {
+      "A": "General: A book/electronic resource listing words alphabetically with their meanings | Technical: An unordered, mutable collection of key-value pairs",
+      "B": "General: A curved shape produced by a curve bending around and crossing itself | Technical: A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes",
+      "C": "General: A small, sweet baked snack | Technical: A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences",
+      "D": "General: A long pipe or series of connected pipes used to transport liquids or gas | Technical: A sequence of data processing elements where the output of each stage serves as the input to the next"
+    },
+    "answer": "B",
+    "explanation": "Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B. Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\".",
+      "B": "Correct! Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\".",
+      "C": "Incorrect. Correct answer is B. Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\".",
+      "D": "Incorrect. Correct answer is B. Loop — General: \"A curved shape produced by a curve bending around and crossing itself\". Technical: \"A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes\"."
+    }
+  },
+  {
+    "id": 7020,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General Meaning] What is the general (everyday) meaning of the word \"Shell\", which in technical contexts means \"A user interface that allows users to interact with the operating system kernel\"?",
+    "code": null,
+    "options": {
+      "A": "Done without delay, or to encourage someone to do something",
+      "B": "A small, narrow river or continuous flow of liquid",
+      "C": "A neat pile of objects placed one on top of the other",
+      "D": "The hard outer cover of an egg, nut, or sea creature"
+    },
+    "answer": "D",
+    "explanation": "Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D. Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\".",
+      "B": "Incorrect. Correct answer is D. Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\".",
+      "C": "Incorrect. Correct answer is D. Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\".",
+      "D": "Correct! Shell — General: \"The hard outer cover of an egg, nut, or sea creature\". Technical: \"A user interface that allows users to interact with the operating system kernel\"."
+    }
+  },
+  {
+    "id": 7021,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General & Technical Meaning] Which option correctly pairs both the General and Technical meanings of the word \"Pipeline\"?",
+    "code": null,
+    "options": {
+      "A": "General: To analyze a sentence into its component parts | Technical: To analyze a string or data stream into small, structured components",
+      "B": "General: A white crystalline substance used for seasoning/preserving food | Technical: Random data added to a password before hashing to protect against dictionary/rainbow table attacks",
+      "C": "General: A long pipe or series of connected pipes used to transport liquids or gas | Technical: A sequence of data processing elements where the output of each stage serves as the input to the next",
+      "D": "General: A book/electronic resource listing words alphabetically with their meanings | Technical: An unordered, mutable collection of key-value pairs"
+    },
+    "answer": "C",
+    "explanation": "Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C. Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\".",
+      "B": "Incorrect. Correct answer is C. Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\".",
+      "C": "Correct! Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\".",
+      "D": "Incorrect. Correct answer is C. Pipeline — General: \"A long pipe or series of connected pipes used to transport liquids or gas\". Technical: \"A sequence of data processing elements where the output of each stage serves as the input to the next\"."
+    }
+  },
+  {
+    "id": 7022,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General Meaning] What is the general (everyday) meaning of the word \"Thread\", which in technical contexts means \"The smallest unit of execution within an OS process that can run concurrently with other units\"?",
+    "code": null,
+    "options": {
+      "A": "Waste material, trash, or unwanted refuse",
+      "B": "A book/electronic resource listing words alphabetically with their meanings",
+      "C": "A small, sweet baked snack",
+      "D": "A long, very thin strand of cotton, silk, or wool"
+    },
+    "answer": "D",
+    "explanation": "Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D. Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\".",
+      "B": "Incorrect. Correct answer is D. Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\".",
+      "C": "Incorrect. Correct answer is D. Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\".",
+      "D": "Correct! Thread — General: \"A long, very thin strand of cotton, silk, or wool\". Technical: \"The smallest unit of execution within an OS process that can run concurrently with other units\"."
+    }
+  },
+  {
+    "id": 7023,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General & Technical Meaning] Which option correctly pairs both the General and Technical meanings of the word \"Prompt\"?",
+    "code": null,
+    "options": {
+      "A": "General: A long, very thin strand of cotton, silk, or wool | Technical: The smallest unit of execution within an OS process that can run concurrently with other units",
+      "B": "General: A small, sweet baked snack | Technical: A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences",
+      "C": "General: A neat pile of objects placed one on top of the other | Technical: A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application",
+      "D": "General: Done without delay, or to encourage someone to do something | Technical: A text input, question, or instruction given to a command-line interface or generative AI model"
+    },
+    "answer": "D",
+    "explanation": "Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D. Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\".",
+      "B": "Incorrect. Correct answer is D. Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\".",
+      "C": "Incorrect. Correct answer is D. Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\".",
+      "D": "Correct! Prompt — General: \"Done without delay, or to encourage someone to do something\". Technical: \"A text input, question, or instruction given to a command-line interface or generative AI model\"."
+    }
+  },
+  {
+    "id": 7024,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General Meaning] What is the general (everyday) meaning of the word \"Salt\", which in technical contexts means \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\"?",
+    "code": null,
+    "options": {
+      "A": "A white crystalline substance used for seasoning/preserving food",
+      "B": "To stay/move on the surface of a liquid or drift in the air",
+      "C": "Waste material, trash, or unwanted refuse",
+      "D": "To analyze a sentence into its component parts"
+    },
+    "answer": "A",
+    "explanation": "Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\".",
+    "explanations": {
+      "A": "Correct! Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\".",
+      "B": "Incorrect. Correct answer is A. Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\".",
+      "C": "Incorrect. Correct answer is A. Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\".",
+      "D": "Incorrect. Correct answer is A. Salt — General: \"A white crystalline substance used for seasoning/preserving food\". Technical: \"Random data added to a password before hashing to protect against dictionary/rainbow table attacks\"."
+    }
+  },
+  {
+    "id": 7025,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General & Technical Meaning] Which option correctly pairs both the General and Technical meanings of the word \"Parse\"?",
+    "code": null,
+    "options": {
+      "A": "General: To analyze a sentence into its component parts | Technical: To analyze a string or data stream into small, structured components",
+      "B": "General: A long pipe or series of connected pipes used to transport liquids or gas | Technical: A sequence of data processing elements where the output of each stage serves as the input to the next",
+      "C": "General: Waste material, trash, or unwanted refuse | Technical: Unreferenced objects in memory that are no longer needed by the program and must be reclaimed",
+      "D": "General: An eating utensil with prongs, or a place where a road/river divides | Technical: To create an independent copy of an open-source code repository, or a system call creating a child process"
+    },
+    "answer": "A",
+    "explanation": "Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\".",
+    "explanations": {
+      "A": "Correct! Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\".",
+      "B": "Incorrect. Correct answer is A. Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\".",
+      "C": "Incorrect. Correct answer is A. Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\".",
+      "D": "Incorrect. Correct answer is A. Parse — General: \"To analyze a sentence into its component parts\". Technical: \"To analyze a string or data stream into small, structured components\"."
+    }
+  },
+  {
+    "id": 7026,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General Meaning] What is the general (everyday) meaning of the word \"Stack\", which in technical contexts means \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\"?",
+    "code": null,
+    "options": {
+      "A": "Done without delay, or to encourage someone to do something",
+      "B": "A book/electronic resource listing words alphabetically with their meanings",
+      "C": "A neat pile of objects placed one on top of the other",
+      "D": "To stay/move on the surface of a liquid or drift in the air"
+    },
+    "answer": "C",
+    "explanation": "Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C. Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\".",
+      "B": "Incorrect. Correct answer is C. Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\".",
+      "C": "Correct! Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\".",
+      "D": "Incorrect. Correct answer is C. Stack — General: \"A neat pile of objects placed one on top of the other\". Technical: \"A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application\"."
+    }
+  },
+  {
+    "id": 7027,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General & Technical Meaning] Which option correctly pairs both the General and Technical meanings of the word \"Garbage\"?",
+    "code": null,
+    "options": {
+      "A": "General: An exchange of diverging or opposite views | Technical: An actual value, variable, or expression passed into a function or method upon invocation",
+      "B": "General: A white crystalline substance used for seasoning/preserving food | Technical: Random data added to a password before hashing to protect against dictionary/rainbow table attacks",
+      "C": "General: Waste material, trash, or unwanted refuse | Technical: Unreferenced objects in memory that are no longer needed by the program and must be reclaimed",
+      "D": "General: A neat pile of objects placed one on top of the other | Technical: A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application"
+    },
+    "answer": "C",
+    "explanation": "Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C. Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\".",
+      "B": "Incorrect. Correct answer is C. Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\".",
+      "C": "Correct! Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\".",
+      "D": "Incorrect. Correct answer is C. Garbage — General: \"Waste material, trash, or unwanted refuse\". Technical: \"Unreferenced objects in memory that are no longer needed by the program and must be reclaimed\"."
+    }
+  },
+  {
+    "id": 7028,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General Meaning] What is the general (everyday) meaning of the word \"Stream\", which in technical contexts means \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\"?",
+    "code": null,
+    "options": {
+      "A": "A small, narrow river or continuous flow of liquid",
+      "B": "A long pipe or series of connected pipes used to transport liquids or gas",
+      "C": "A small, sweet baked snack",
+      "D": "A book/electronic resource listing words alphabetically with their meanings"
+    },
+    "answer": "A",
+    "explanation": "Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\".",
+    "explanations": {
+      "A": "Correct! Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\".",
+      "B": "Incorrect. Correct answer is A. Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\".",
+      "C": "Incorrect. Correct answer is A. Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\".",
+      "D": "Incorrect. Correct answer is A. Stream — General: \"A small, narrow river or continuous flow of liquid\". Technical: \"A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download\"."
+    }
+  },
+  {
+    "id": 7029,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General & Technical Meaning] Which option correctly pairs both the General and Technical meanings of the word \"Fork\"?",
+    "code": null,
+    "options": {
+      "A": "General: An eating utensil with prongs, or a place where a road/river divides | Technical: To create an independent copy of an open-source code repository, or a system call creating a child process",
+      "B": "General: Done without delay, or to encourage someone to do something | Technical: A text input, question, or instruction given to a command-line interface or generative AI model",
+      "C": "General: To stay/move on the surface of a liquid or drift in the air | Technical: A built-in numerical data type representing numbers with a decimal point",
+      "D": "General: An exchange of diverging or opposite views | Technical: An actual value, variable, or expression passed into a function or method upon invocation"
+    },
+    "answer": "A",
+    "explanation": "Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\".",
+    "explanations": {
+      "A": "Correct! Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\".",
+      "B": "Incorrect. Correct answer is A. Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\".",
+      "C": "Incorrect. Correct answer is A. Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\".",
+      "D": "Incorrect. Correct answer is A. Fork — General: \"An eating utensil with prongs, or a place where a road/river divides\". Technical: \"To create an independent copy of an open-source code repository, or a system call creating a child process\"."
+    }
+  },
+  {
+    "id": 7030,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 1,
+    "week_title": "1.1 Vocabulary Test (General & Technical Meaning)",
+    "qType": "test",
+    "subType": "vocab_test",
+    "difficulty": "General & Tech",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Test",
+    "category": "1.1 Vocabulary (General & Technical)",
+    "question": "[General Meaning] What is the general (everyday) meaning of the word \"Cookie\", which in technical contexts means \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\"?",
+    "code": null,
+    "options": {
+      "A": "To analyze a sentence into its component parts",
+      "B": "A curved shape produced by a curve bending around and crossing itself",
+      "C": "A small, sweet baked snack",
+      "D": "To stay/move on the surface of a liquid or drift in the air"
+    },
+    "answer": "C",
+    "explanation": "Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\".",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C. Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\".",
+      "B": "Incorrect. Correct answer is C. Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\".",
+      "C": "Correct! Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\".",
+      "D": "Incorrect. Correct answer is C. Cookie — General: \"A small, sweet baked snack\". Technical: \"A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences\"."
+    }
+  },
+  {
+    "id": 7031,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] What is the meaning of the phrasal verb \"Phase out\"?",
+    "code": null,
+    "options": {
+      "A": "To cause something to happen, or induce a notable change.",
+      "B": "To gradually stop using, providing, or producing something over time.",
+      "C": "To conduct, perform, or execute a task, study, or experiment.",
+      "D": "To represent, signify, or mean a word/phrase; to advocate a principle."
+    },
+    "answer": "B",
+    "explanation": "Phase out: To gradually stop using, providing, or producing something over time. (Synonyms: discontinue gradually, withdraw, eliminate step-by-step).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (To gradually stop using, providing, or producing something over time.). Phase out: To gradually stop using, providing, or producing something over time. (Synonyms: discontinue gradually, withdraw, eliminate step-by-step).",
+      "B": "Correct! Phase out: To gradually stop using, providing, or producing something over time. (Synonyms: discontinue gradually, withdraw, eliminate step-by-step).",
+      "C": "Incorrect. Correct answer is B (To gradually stop using, providing, or producing something over time.). Phase out: To gradually stop using, providing, or producing something over time. (Synonyms: discontinue gradually, withdraw, eliminate step-by-step).",
+      "D": "Incorrect. Correct answer is B (To gradually stop using, providing, or producing something over time.). Phase out: To gradually stop using, providing, or producing something over time. (Synonyms: discontinue gradually, withdraw, eliminate step-by-step)."
+    }
+  },
+  {
+    "id": 7032,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] Which phrasal verb means: \"To raise a child, or to introduce/mention a topic in a discussion.\"?",
+    "code": null,
+    "options": {
+      "A": "Cut down on",
+      "B": "Call off",
+      "C": "Rule out",
+      "D": "Bring up"
+    },
+    "answer": "D",
+    "explanation": "Bring up: To raise a child, or to introduce/mention a topic in a discussion. (Synonyms: raise, mention, introduce, propose, cite).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (Bring up). Bring up: To raise a child, or to introduce/mention a topic in a discussion. (Synonyms: raise, mention, introduce, propose, cite).",
+      "B": "Incorrect. Correct answer is D (Bring up). Bring up: To raise a child, or to introduce/mention a topic in a discussion. (Synonyms: raise, mention, introduce, propose, cite).",
+      "C": "Incorrect. Correct answer is D (Bring up). Bring up: To raise a child, or to introduce/mention a topic in a discussion. (Synonyms: raise, mention, introduce, propose, cite).",
+      "D": "Correct! Bring up: To raise a child, or to introduce/mention a topic in a discussion. (Synonyms: raise, mention, introduce, propose, cite)."
+    }
+  },
+  {
+    "id": 7033,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] What is the meaning of the phrasal verb \"Stand for\"?",
+    "code": null,
+    "options": {
+      "A": "To deal successfully with a difficult situation or heavy workload.",
+      "B": "To represent, signify, or mean a word/phrase; to advocate a principle.",
+      "C": "To cancel a planned event, meeting, or activity.",
+      "D": "To stop working due to a technical fault, or to divide something complex into smaller parts."
+    },
+    "answer": "B",
+    "explanation": "Stand for: To represent, signify, or mean a word/phrase; to advocate a principle. (Synonyms: represent, denote, signify, symbolize).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (To represent, signify, or mean a word/phrase; to advocate a principle.). Stand for: To represent, signify, or mean a word/phrase; to advocate a principle. (Synonyms: represent, denote, signify, symbolize).",
+      "B": "Correct! Stand for: To represent, signify, or mean a word/phrase; to advocate a principle. (Synonyms: represent, denote, signify, symbolize).",
+      "C": "Incorrect. Correct answer is B (To represent, signify, or mean a word/phrase; to advocate a principle.). Stand for: To represent, signify, or mean a word/phrase; to advocate a principle. (Synonyms: represent, denote, signify, symbolize).",
+      "D": "Incorrect. Correct answer is B (To represent, signify, or mean a word/phrase; to advocate a principle.). Stand for: To represent, signify, or mean a word/phrase; to advocate a principle. (Synonyms: represent, denote, signify, symbolize)."
+    }
+  },
+  {
+    "id": 7034,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] Which phrasal verb means: \"To reduce the size, amount, or consumption of something.\"?",
+    "code": null,
+    "options": {
+      "A": "Carry out",
+      "B": "Cut down on",
+      "C": "Stem from",
+      "D": "Bring up"
+    },
+    "answer": "B",
+    "explanation": "Cut down on: To reduce the size, amount, or consumption of something. (Synonyms: reduce, decrease, curtail, lessen, limit).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (Cut down on). Cut down on: To reduce the size, amount, or consumption of something. (Synonyms: reduce, decrease, curtail, lessen, limit).",
+      "B": "Correct! Cut down on: To reduce the size, amount, or consumption of something. (Synonyms: reduce, decrease, curtail, lessen, limit).",
+      "C": "Incorrect. Correct answer is B (Cut down on). Cut down on: To reduce the size, amount, or consumption of something. (Synonyms: reduce, decrease, curtail, lessen, limit).",
+      "D": "Incorrect. Correct answer is B (Cut down on). Cut down on: To reduce the size, amount, or consumption of something. (Synonyms: reduce, decrease, curtail, lessen, limit)."
+    }
+  },
+  {
+    "id": 7035,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] What is the meaning of the phrasal verb \"Stem from\"?",
+    "code": null,
+    "options": {
+      "A": "To originate from, be caused by, or be the result of a specific event.",
+      "B": "To reduce the size, amount, or consumption of something.",
+      "C": "To reject/refuse an offer, or to reduce the intensity/volume of something.",
+      "D": "To exclude something from consideration; to decide it is impossible."
+    },
+    "answer": "A",
+    "explanation": "Stem from: To originate from, be caused by, or be the result of a specific event. (Synonyms: originate from, arise from, derive from, result from).",
+    "explanations": {
+      "A": "Correct! Stem from: To originate from, be caused by, or be the result of a specific event. (Synonyms: originate from, arise from, derive from, result from).",
+      "B": "Incorrect. Correct answer is A (To originate from, be caused by, or be the result of a specific event.). Stem from: To originate from, be caused by, or be the result of a specific event. (Synonyms: originate from, arise from, derive from, result from).",
+      "C": "Incorrect. Correct answer is A (To originate from, be caused by, or be the result of a specific event.). Stem from: To originate from, be caused by, or be the result of a specific event. (Synonyms: originate from, arise from, derive from, result from).",
+      "D": "Incorrect. Correct answer is A (To originate from, be caused by, or be the result of a specific event.). Stem from: To originate from, be caused by, or be the result of a specific event. (Synonyms: originate from, arise from, derive from, result from)."
+    }
+  },
+  {
+    "id": 7036,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] Which phrasal verb means: \"To cancel a planned event, meeting, or activity.\"?",
+    "code": null,
+    "options": {
+      "A": "Call off",
+      "B": "Phase out",
+      "C": "Cope with",
+      "D": "Give in (to)"
+    },
+    "answer": "A",
+    "explanation": "Call off: To cancel a planned event, meeting, or activity. (Synonyms: cancel, abort, annul, withdraw).",
+    "explanations": {
+      "A": "Correct! Call off: To cancel a planned event, meeting, or activity. (Synonyms: cancel, abort, annul, withdraw).",
+      "B": "Incorrect. Correct answer is A (Call off). Call off: To cancel a planned event, meeting, or activity. (Synonyms: cancel, abort, annul, withdraw).",
+      "C": "Incorrect. Correct answer is A (Call off). Call off: To cancel a planned event, meeting, or activity. (Synonyms: cancel, abort, annul, withdraw).",
+      "D": "Incorrect. Correct answer is A (Call off). Call off: To cancel a planned event, meeting, or activity. (Synonyms: cancel, abort, annul, withdraw)."
+    }
+  },
+  {
+    "id": 7037,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] What is the meaning of the phrasal verb \"Wipe out\"?",
+    "code": null,
+    "options": {
+      "A": "To conduct, perform, or execute a task, study, or experiment.",
+      "B": "To raise a child, or to introduce/mention a topic in a discussion.",
+      "C": "To destroy, eliminate, or erase something completely.",
+      "D": "To cancel a planned event, meeting, or activity."
+    },
+    "answer": "C",
+    "explanation": "Wipe out: To destroy, eliminate, or erase something completely. (Synonyms: eradicate, eliminate, destroy, extinguish, erase).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (To destroy, eliminate, or erase something completely.). Wipe out: To destroy, eliminate, or erase something completely. (Synonyms: eradicate, eliminate, destroy, extinguish, erase).",
+      "B": "Incorrect. Correct answer is C (To destroy, eliminate, or erase something completely.). Wipe out: To destroy, eliminate, or erase something completely. (Synonyms: eradicate, eliminate, destroy, extinguish, erase).",
+      "C": "Correct! Wipe out: To destroy, eliminate, or erase something completely. (Synonyms: eradicate, eliminate, destroy, extinguish, erase).",
+      "D": "Incorrect. Correct answer is C (To destroy, eliminate, or erase something completely.). Wipe out: To destroy, eliminate, or erase something completely. (Synonyms: eradicate, eliminate, destroy, extinguish, erase)."
+    }
+  },
+  {
+    "id": 7038,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] Which phrasal verb means: \"To stop working due to a technical fault, or to divide something complex into smaller parts.\"?",
+    "code": null,
+    "options": {
+      "A": "Stand for",
+      "B": "Rule out",
+      "C": "Cut down on",
+      "D": "Break down"
+    },
+    "answer": "D",
+    "explanation": "Break down: To stop working due to a technical fault, or to divide something complex into smaller parts. (Synonyms: malfunction, fail, analyze, dissect, categorize).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (Break down). Break down: To stop working due to a technical fault, or to divide something complex into smaller parts. (Synonyms: malfunction, fail, analyze, dissect, categorize).",
+      "B": "Incorrect. Correct answer is D (Break down). Break down: To stop working due to a technical fault, or to divide something complex into smaller parts. (Synonyms: malfunction, fail, analyze, dissect, categorize).",
+      "C": "Incorrect. Correct answer is D (Break down). Break down: To stop working due to a technical fault, or to divide something complex into smaller parts. (Synonyms: malfunction, fail, analyze, dissect, categorize).",
+      "D": "Correct! Break down: To stop working due to a technical fault, or to divide something complex into smaller parts. (Synonyms: malfunction, fail, analyze, dissect, categorize)."
+    }
+  },
+  {
+    "id": 7039,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] What is the meaning of the phrasal verb \"Make up for\"?",
+    "code": null,
+    "options": {
+      "A": "To reduce the size, amount, or consumption of something.",
+      "B": "To destroy, eliminate, or erase something completely.",
+      "C": "To compensate for something lost, missed, or deficient.",
+      "D": "To cause something to happen, or induce a notable change."
+    },
+    "answer": "C",
+    "explanation": "Make up for: To compensate for something lost, missed, or deficient. (Synonyms: compensate for, offset, balance out, make amends).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (To compensate for something lost, missed, or deficient.). Make up for: To compensate for something lost, missed, or deficient. (Synonyms: compensate for, offset, balance out, make amends).",
+      "B": "Incorrect. Correct answer is C (To compensate for something lost, missed, or deficient.). Make up for: To compensate for something lost, missed, or deficient. (Synonyms: compensate for, offset, balance out, make amends).",
+      "C": "Correct! Make up for: To compensate for something lost, missed, or deficient. (Synonyms: compensate for, offset, balance out, make amends).",
+      "D": "Incorrect. Correct answer is C (To compensate for something lost, missed, or deficient.). Make up for: To compensate for something lost, missed, or deficient. (Synonyms: compensate for, offset, balance out, make amends)."
+    }
+  },
+  {
+    "id": 7040,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] Which phrasal verb means: \"To exclude something from consideration; to decide it is impossible.\"?",
+    "code": null,
+    "options": {
+      "A": "Wipe out",
+      "B": "Call off",
+      "C": "Carry out",
+      "D": "Rule out"
+    },
+    "answer": "D",
+    "explanation": "Rule out: To exclude something from consideration; to decide it is impossible. (Synonyms: exclude, eliminate, dismiss, preclude).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (Rule out). Rule out: To exclude something from consideration; to decide it is impossible. (Synonyms: exclude, eliminate, dismiss, preclude).",
+      "B": "Incorrect. Correct answer is D (Rule out). Rule out: To exclude something from consideration; to decide it is impossible. (Synonyms: exclude, eliminate, dismiss, preclude).",
+      "C": "Incorrect. Correct answer is D (Rule out). Rule out: To exclude something from consideration; to decide it is impossible. (Synonyms: exclude, eliminate, dismiss, preclude).",
+      "D": "Correct! Rule out: To exclude something from consideration; to decide it is impossible. (Synonyms: exclude, eliminate, dismiss, preclude)."
+    }
+  },
+  {
+    "id": 7041,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] What is the meaning of the phrasal verb \"Turn down\"?",
+    "code": null,
+    "options": {
+      "A": "To conduct, perform, or execute a task, study, or experiment.",
+      "B": "To explain a reason for something, or to make up a particular proportion of something.",
+      "C": "To reject/refuse an offer, or to reduce the intensity/volume of something.",
+      "D": "To reluctantly stop arguing or resisting; to surrender under pressure."
+    },
+    "answer": "C",
+    "explanation": "Turn down: To reject/refuse an offer, or to reduce the intensity/volume of something. (Synonyms: reject, decline, refuse, dismiss).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (To reject/refuse an offer, or to reduce the intensity/volume of something.). Turn down: To reject/refuse an offer, or to reduce the intensity/volume of something. (Synonyms: reject, decline, refuse, dismiss).",
+      "B": "Incorrect. Correct answer is C (To reject/refuse an offer, or to reduce the intensity/volume of something.). Turn down: To reject/refuse an offer, or to reduce the intensity/volume of something. (Synonyms: reject, decline, refuse, dismiss).",
+      "C": "Correct! Turn down: To reject/refuse an offer, or to reduce the intensity/volume of something. (Synonyms: reject, decline, refuse, dismiss).",
+      "D": "Incorrect. Correct answer is C (To reject/refuse an offer, or to reduce the intensity/volume of something.). Turn down: To reject/refuse an offer, or to reduce the intensity/volume of something. (Synonyms: reject, decline, refuse, dismiss)."
+    }
+  },
+  {
+    "id": 7042,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] Which phrasal verb means: \"To reluctantly stop arguing or resisting; to surrender under pressure.\"?",
+    "code": null,
+    "options": {
+      "A": "Call off",
+      "B": "Bring about",
+      "C": "Give in (to)",
+      "D": "Cope with"
+    },
+    "answer": "C",
+    "explanation": "Give in (to): To reluctantly stop arguing or resisting; to surrender under pressure. (Synonyms: yield to, surrender to, succumb to, concede).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (Give in (to)). Give in (to): To reluctantly stop arguing or resisting; to surrender under pressure. (Synonyms: yield to, surrender to, succumb to, concede).",
+      "B": "Incorrect. Correct answer is C (Give in (to)). Give in (to): To reluctantly stop arguing or resisting; to surrender under pressure. (Synonyms: yield to, surrender to, succumb to, concede).",
+      "C": "Correct! Give in (to): To reluctantly stop arguing or resisting; to surrender under pressure. (Synonyms: yield to, surrender to, succumb to, concede).",
+      "D": "Incorrect. Correct answer is C (Give in (to)). Give in (to): To reluctantly stop arguing or resisting; to surrender under pressure. (Synonyms: yield to, surrender to, succumb to, concede)."
+    }
+  },
+  {
+    "id": 7043,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] What is the meaning of the phrasal verb \"Cope with\"?",
+    "code": null,
+    "options": {
+      "A": "To stop working due to a technical fault, or to divide something complex into smaller parts.",
+      "B": "To reduce the size, amount, or consumption of something.",
+      "C": "To deal successfully with a difficult situation or heavy workload.",
+      "D": "To compensate for something lost, missed, or deficient."
+    },
+    "answer": "C",
+    "explanation": "Cope with: To deal successfully with a difficult situation or heavy workload. (Synonyms: deal with, tackle, handle, overcome, manage).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (To deal successfully with a difficult situation or heavy workload.). Cope with: To deal successfully with a difficult situation or heavy workload. (Synonyms: deal with, tackle, handle, overcome, manage).",
+      "B": "Incorrect. Correct answer is C (To deal successfully with a difficult situation or heavy workload.). Cope with: To deal successfully with a difficult situation or heavy workload. (Synonyms: deal with, tackle, handle, overcome, manage).",
+      "C": "Correct! Cope with: To deal successfully with a difficult situation or heavy workload. (Synonyms: deal with, tackle, handle, overcome, manage).",
+      "D": "Incorrect. Correct answer is C (To deal successfully with a difficult situation or heavy workload.). Cope with: To deal successfully with a difficult situation or heavy workload. (Synonyms: deal with, tackle, handle, overcome, manage)."
+    }
+  },
+  {
+    "id": 7044,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] Which phrasal verb means: \"To cause something to happen, or induce a notable change.\"?",
+    "code": null,
+    "options": {
+      "A": "Cut down on",
+      "B": "Bring about",
+      "C": "Break down",
+      "D": "Stem from"
+    },
+    "answer": "B",
+    "explanation": "Bring about: To cause something to happen, or induce a notable change. (Synonyms: cause, lead to, result in, trigger, induce).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (Bring about). Bring about: To cause something to happen, or induce a notable change. (Synonyms: cause, lead to, result in, trigger, induce).",
+      "B": "Correct! Bring about: To cause something to happen, or induce a notable change. (Synonyms: cause, lead to, result in, trigger, induce).",
+      "C": "Incorrect. Correct answer is B (Bring about). Bring about: To cause something to happen, or induce a notable change. (Synonyms: cause, lead to, result in, trigger, induce).",
+      "D": "Incorrect. Correct answer is B (Bring about). Bring about: To cause something to happen, or induce a notable change. (Synonyms: cause, lead to, result in, trigger, induce)."
+    }
+  },
+  {
+    "id": 7045,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] What is the meaning of the phrasal verb \"Carry out\"?",
+    "code": null,
+    "options": {
+      "A": "To reject/refuse an offer, or to reduce the intensity/volume of something.",
+      "B": "To compensate for something lost, missed, or deficient.",
+      "C": "To conduct, perform, or execute a task, study, or experiment.",
+      "D": "To gradually stop using, providing, or producing something over time."
+    },
+    "answer": "C",
+    "explanation": "Carry out: To conduct, perform, or execute a task, study, or experiment. (Synonyms: conduct, execute, perform, implement, realize).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (To conduct, perform, or execute a task, study, or experiment.). Carry out: To conduct, perform, or execute a task, study, or experiment. (Synonyms: conduct, execute, perform, implement, realize).",
+      "B": "Incorrect. Correct answer is C (To conduct, perform, or execute a task, study, or experiment.). Carry out: To conduct, perform, or execute a task, study, or experiment. (Synonyms: conduct, execute, perform, implement, realize).",
+      "C": "Correct! Carry out: To conduct, perform, or execute a task, study, or experiment. (Synonyms: conduct, execute, perform, implement, realize).",
+      "D": "Incorrect. Correct answer is C (To conduct, perform, or execute a task, study, or experiment.). Carry out: To conduct, perform, or execute a task, study, or experiment. (Synonyms: conduct, execute, perform, implement, realize)."
+    }
+  },
+  {
+    "id": 7046,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Meaning",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Meaning)",
+    "question": "[Phrasal Verb Meaning] Which phrasal verb means: \"To explain a reason for something, or to make up a particular proportion of something.\"?",
+    "code": null,
+    "options": {
+      "A": "Break down",
+      "B": "Wipe out",
+      "C": "Stand for",
+      "D": "Account for"
+    },
+    "answer": "D",
+    "explanation": "Account for: To explain a reason for something, or to make up a particular proportion of something. (Synonyms: explain, clarify, form, constitute, make up).",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (Account for). Account for: To explain a reason for something, or to make up a particular proportion of something. (Synonyms: explain, clarify, form, constitute, make up).",
+      "B": "Incorrect. Correct answer is D (Account for). Account for: To explain a reason for something, or to make up a particular proportion of something. (Synonyms: explain, clarify, form, constitute, make up).",
+      "C": "Incorrect. Correct answer is D (Account for). Account for: To explain a reason for something, or to make up a particular proportion of something. (Synonyms: explain, clarify, form, constitute, make up).",
+      "D": "Correct! Account for: To explain a reason for something, or to make up a particular proportion of something. (Synonyms: explain, clarify, form, constitute, make up)."
+    }
+  },
+  {
+    "id": 7047,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which set of synonyms corresponds to the phrasal verb \"Phase out\"?",
+    "code": null,
+    "options": {
+      "A": "reduce, decrease, curtail, lessen, limit",
+      "B": "raise, mention, introduce, propose, cite",
+      "C": "explain, clarify, form, constitute, make up",
+      "D": "discontinue gradually, withdraw, eliminate step-by-step"
+    },
+    "answer": "D",
+    "explanation": "Phase out — Meaning: To gradually stop using, providing, or producing something over time. | Synonyms: discontinue gradually, withdraw, eliminate step-by-step.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (discontinue gradually, withdraw, eliminate step-by-step). Phase out — Meaning: To gradually stop using, providing, or producing something over time. | Synonyms: discontinue gradually, withdraw, eliminate step-by-step.",
+      "B": "Incorrect. Correct answer is D (discontinue gradually, withdraw, eliminate step-by-step). Phase out — Meaning: To gradually stop using, providing, or producing something over time. | Synonyms: discontinue gradually, withdraw, eliminate step-by-step.",
+      "C": "Incorrect. Correct answer is D (discontinue gradually, withdraw, eliminate step-by-step). Phase out — Meaning: To gradually stop using, providing, or producing something over time. | Synonyms: discontinue gradually, withdraw, eliminate step-by-step.",
+      "D": "Correct! Phase out — Meaning: To gradually stop using, providing, or producing something over time. | Synonyms: discontinue gradually, withdraw, eliminate step-by-step."
+    }
+  },
+  {
+    "id": 7048,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which phrasal verb is synonymous with: \"raise, mention, introduce, propose, cite\"?",
+    "code": null,
+    "options": {
+      "A": "Call off",
+      "B": "Carry out",
+      "C": "Bring about",
+      "D": "Bring up"
+    },
+    "answer": "D",
+    "explanation": "Bring up — Meaning: To raise a child, or to introduce/mention a topic in a discussion. | Synonyms: raise, mention, introduce, propose, cite.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (Bring up). Bring up — Meaning: To raise a child, or to introduce/mention a topic in a discussion. | Synonyms: raise, mention, introduce, propose, cite.",
+      "B": "Incorrect. Correct answer is D (Bring up). Bring up — Meaning: To raise a child, or to introduce/mention a topic in a discussion. | Synonyms: raise, mention, introduce, propose, cite.",
+      "C": "Incorrect. Correct answer is D (Bring up). Bring up — Meaning: To raise a child, or to introduce/mention a topic in a discussion. | Synonyms: raise, mention, introduce, propose, cite.",
+      "D": "Correct! Bring up — Meaning: To raise a child, or to introduce/mention a topic in a discussion. | Synonyms: raise, mention, introduce, propose, cite."
+    }
+  },
+  {
+    "id": 7049,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which set of synonyms corresponds to the phrasal verb \"Stand for\"?",
+    "code": null,
+    "options": {
+      "A": "explain, clarify, form, constitute, make up",
+      "B": "cause, lead to, result in, trigger, induce",
+      "C": "deal with, tackle, handle, overcome, manage",
+      "D": "represent, denote, signify, symbolize"
+    },
+    "answer": "D",
+    "explanation": "Stand for — Meaning: To represent, signify, or mean a word/phrase; to advocate a principle. | Synonyms: represent, denote, signify, symbolize.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (represent, denote, signify, symbolize). Stand for — Meaning: To represent, signify, or mean a word/phrase; to advocate a principle. | Synonyms: represent, denote, signify, symbolize.",
+      "B": "Incorrect. Correct answer is D (represent, denote, signify, symbolize). Stand for — Meaning: To represent, signify, or mean a word/phrase; to advocate a principle. | Synonyms: represent, denote, signify, symbolize.",
+      "C": "Incorrect. Correct answer is D (represent, denote, signify, symbolize). Stand for — Meaning: To represent, signify, or mean a word/phrase; to advocate a principle. | Synonyms: represent, denote, signify, symbolize.",
+      "D": "Correct! Stand for — Meaning: To represent, signify, or mean a word/phrase; to advocate a principle. | Synonyms: represent, denote, signify, symbolize."
+    }
+  },
+  {
+    "id": 7050,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which phrasal verb is synonymous with: \"reduce, decrease, curtail, lessen, limit\"?",
+    "code": null,
+    "options": {
+      "A": "Cut down on",
+      "B": "Stem from",
+      "C": "Phase out",
+      "D": "Call off"
+    },
+    "answer": "A",
+    "explanation": "Cut down on — Meaning: To reduce the size, amount, or consumption of something. | Synonyms: reduce, decrease, curtail, lessen, limit.",
+    "explanations": {
+      "A": "Correct! Cut down on — Meaning: To reduce the size, amount, or consumption of something. | Synonyms: reduce, decrease, curtail, lessen, limit.",
+      "B": "Incorrect. Correct answer is A (Cut down on). Cut down on — Meaning: To reduce the size, amount, or consumption of something. | Synonyms: reduce, decrease, curtail, lessen, limit.",
+      "C": "Incorrect. Correct answer is A (Cut down on). Cut down on — Meaning: To reduce the size, amount, or consumption of something. | Synonyms: reduce, decrease, curtail, lessen, limit.",
+      "D": "Incorrect. Correct answer is A (Cut down on). Cut down on — Meaning: To reduce the size, amount, or consumption of something. | Synonyms: reduce, decrease, curtail, lessen, limit."
+    }
+  },
+  {
+    "id": 7051,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which set of synonyms corresponds to the phrasal verb \"Stem from\"?",
+    "code": null,
+    "options": {
+      "A": "explain, clarify, form, constitute, make up",
+      "B": "discontinue gradually, withdraw, eliminate step-by-step",
+      "C": "reject, decline, refuse, dismiss",
+      "D": "originate from, arise from, derive from, result from"
+    },
+    "answer": "D",
+    "explanation": "Stem from — Meaning: To originate from, be caused by, or be the result of a specific event. | Synonyms: originate from, arise from, derive from, result from.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (originate from, arise from, derive from, result from). Stem from — Meaning: To originate from, be caused by, or be the result of a specific event. | Synonyms: originate from, arise from, derive from, result from.",
+      "B": "Incorrect. Correct answer is D (originate from, arise from, derive from, result from). Stem from — Meaning: To originate from, be caused by, or be the result of a specific event. | Synonyms: originate from, arise from, derive from, result from.",
+      "C": "Incorrect. Correct answer is D (originate from, arise from, derive from, result from). Stem from — Meaning: To originate from, be caused by, or be the result of a specific event. | Synonyms: originate from, arise from, derive from, result from.",
+      "D": "Correct! Stem from — Meaning: To originate from, be caused by, or be the result of a specific event. | Synonyms: originate from, arise from, derive from, result from."
+    }
+  },
+  {
+    "id": 7052,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which phrasal verb is synonymous with: \"cancel, abort, annul, withdraw\"?",
+    "code": null,
+    "options": {
+      "A": "Call off",
+      "B": "Bring up",
+      "C": "Phase out",
+      "D": "Rule out"
+    },
+    "answer": "A",
+    "explanation": "Call off — Meaning: To cancel a planned event, meeting, or activity. | Synonyms: cancel, abort, annul, withdraw.",
+    "explanations": {
+      "A": "Correct! Call off — Meaning: To cancel a planned event, meeting, or activity. | Synonyms: cancel, abort, annul, withdraw.",
+      "B": "Incorrect. Correct answer is A (Call off). Call off — Meaning: To cancel a planned event, meeting, or activity. | Synonyms: cancel, abort, annul, withdraw.",
+      "C": "Incorrect. Correct answer is A (Call off). Call off — Meaning: To cancel a planned event, meeting, or activity. | Synonyms: cancel, abort, annul, withdraw.",
+      "D": "Incorrect. Correct answer is A (Call off). Call off — Meaning: To cancel a planned event, meeting, or activity. | Synonyms: cancel, abort, annul, withdraw."
+    }
+  },
+  {
+    "id": 7053,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which set of synonyms corresponds to the phrasal verb \"Wipe out\"?",
+    "code": null,
+    "options": {
+      "A": "conduct, execute, perform, implement, realize",
+      "B": "reduce, decrease, curtail, lessen, limit",
+      "C": "yield to, surrender to, succumb to, concede",
+      "D": "eradicate, eliminate, destroy, extinguish, erase"
+    },
+    "answer": "D",
+    "explanation": "Wipe out — Meaning: To destroy, eliminate, or erase something completely. | Synonyms: eradicate, eliminate, destroy, extinguish, erase.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is D (eradicate, eliminate, destroy, extinguish, erase). Wipe out — Meaning: To destroy, eliminate, or erase something completely. | Synonyms: eradicate, eliminate, destroy, extinguish, erase.",
+      "B": "Incorrect. Correct answer is D (eradicate, eliminate, destroy, extinguish, erase). Wipe out — Meaning: To destroy, eliminate, or erase something completely. | Synonyms: eradicate, eliminate, destroy, extinguish, erase.",
+      "C": "Incorrect. Correct answer is D (eradicate, eliminate, destroy, extinguish, erase). Wipe out — Meaning: To destroy, eliminate, or erase something completely. | Synonyms: eradicate, eliminate, destroy, extinguish, erase.",
+      "D": "Correct! Wipe out — Meaning: To destroy, eliminate, or erase something completely. | Synonyms: eradicate, eliminate, destroy, extinguish, erase."
+    }
+  },
+  {
+    "id": 7054,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which phrasal verb is synonymous with: \"malfunction, fail, analyze, dissect, categorize\"?",
+    "code": null,
+    "options": {
+      "A": "Break down",
+      "B": "Phase out",
+      "C": "Account for",
+      "D": "Turn down"
+    },
+    "answer": "A",
+    "explanation": "Break down — Meaning: To stop working due to a technical fault, or to divide something complex into smaller parts. | Synonyms: malfunction, fail, analyze, dissect, categorize.",
+    "explanations": {
+      "A": "Correct! Break down — Meaning: To stop working due to a technical fault, or to divide something complex into smaller parts. | Synonyms: malfunction, fail, analyze, dissect, categorize.",
+      "B": "Incorrect. Correct answer is A (Break down). Break down — Meaning: To stop working due to a technical fault, or to divide something complex into smaller parts. | Synonyms: malfunction, fail, analyze, dissect, categorize.",
+      "C": "Incorrect. Correct answer is A (Break down). Break down — Meaning: To stop working due to a technical fault, or to divide something complex into smaller parts. | Synonyms: malfunction, fail, analyze, dissect, categorize.",
+      "D": "Incorrect. Correct answer is A (Break down). Break down — Meaning: To stop working due to a technical fault, or to divide something complex into smaller parts. | Synonyms: malfunction, fail, analyze, dissect, categorize."
+    }
+  },
+  {
+    "id": 7055,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which set of synonyms corresponds to the phrasal verb \"Make up for\"?",
+    "code": null,
+    "options": {
+      "A": "compensate for, offset, balance out, make amends",
+      "B": "originate from, arise from, derive from, result from",
+      "C": "explain, clarify, form, constitute, make up",
+      "D": "reduce, decrease, curtail, lessen, limit"
+    },
+    "answer": "A",
+    "explanation": "Make up for — Meaning: To compensate for something lost, missed, or deficient. | Synonyms: compensate for, offset, balance out, make amends.",
+    "explanations": {
+      "A": "Correct! Make up for — Meaning: To compensate for something lost, missed, or deficient. | Synonyms: compensate for, offset, balance out, make amends.",
+      "B": "Incorrect. Correct answer is A (compensate for, offset, balance out, make amends). Make up for — Meaning: To compensate for something lost, missed, or deficient. | Synonyms: compensate for, offset, balance out, make amends.",
+      "C": "Incorrect. Correct answer is A (compensate for, offset, balance out, make amends). Make up for — Meaning: To compensate for something lost, missed, or deficient. | Synonyms: compensate for, offset, balance out, make amends.",
+      "D": "Incorrect. Correct answer is A (compensate for, offset, balance out, make amends). Make up for — Meaning: To compensate for something lost, missed, or deficient. | Synonyms: compensate for, offset, balance out, make amends."
+    }
+  },
+  {
+    "id": 7056,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which phrasal verb is synonymous with: \"exclude, eliminate, dismiss, preclude\"?",
+    "code": null,
+    "options": {
+      "A": "Wipe out",
+      "B": "Rule out",
+      "C": "Stand for",
+      "D": "Give in (to)"
+    },
+    "answer": "B",
+    "explanation": "Rule out — Meaning: To exclude something from consideration; to decide it is impossible. | Synonyms: exclude, eliminate, dismiss, preclude.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (Rule out). Rule out — Meaning: To exclude something from consideration; to decide it is impossible. | Synonyms: exclude, eliminate, dismiss, preclude.",
+      "B": "Correct! Rule out — Meaning: To exclude something from consideration; to decide it is impossible. | Synonyms: exclude, eliminate, dismiss, preclude.",
+      "C": "Incorrect. Correct answer is B (Rule out). Rule out — Meaning: To exclude something from consideration; to decide it is impossible. | Synonyms: exclude, eliminate, dismiss, preclude.",
+      "D": "Incorrect. Correct answer is B (Rule out). Rule out — Meaning: To exclude something from consideration; to decide it is impossible. | Synonyms: exclude, eliminate, dismiss, preclude."
+    }
+  },
+  {
+    "id": 7057,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which set of synonyms corresponds to the phrasal verb \"Turn down\"?",
+    "code": null,
+    "options": {
+      "A": "raise, mention, introduce, propose, cite",
+      "B": "reject, decline, refuse, dismiss",
+      "C": "cause, lead to, result in, trigger, induce",
+      "D": "explain, clarify, form, constitute, make up"
+    },
+    "answer": "B",
+    "explanation": "Turn down — Meaning: To reject/refuse an offer, or to reduce the intensity/volume of something. | Synonyms: reject, decline, refuse, dismiss.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is B (reject, decline, refuse, dismiss). Turn down — Meaning: To reject/refuse an offer, or to reduce the intensity/volume of something. | Synonyms: reject, decline, refuse, dismiss.",
+      "B": "Correct! Turn down — Meaning: To reject/refuse an offer, or to reduce the intensity/volume of something. | Synonyms: reject, decline, refuse, dismiss.",
+      "C": "Incorrect. Correct answer is B (reject, decline, refuse, dismiss). Turn down — Meaning: To reject/refuse an offer, or to reduce the intensity/volume of something. | Synonyms: reject, decline, refuse, dismiss.",
+      "D": "Incorrect. Correct answer is B (reject, decline, refuse, dismiss). Turn down — Meaning: To reject/refuse an offer, or to reduce the intensity/volume of something. | Synonyms: reject, decline, refuse, dismiss."
+    }
+  },
+  {
+    "id": 7058,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which phrasal verb is synonymous with: \"yield to, surrender to, succumb to, concede\"?",
+    "code": null,
+    "options": {
+      "A": "Give in (to)",
+      "B": "Make up for",
+      "C": "Bring up",
+      "D": "Cut down on"
+    },
+    "answer": "A",
+    "explanation": "Give in (to) — Meaning: To reluctantly stop arguing or resisting; to surrender under pressure. | Synonyms: yield to, surrender to, succumb to, concede.",
+    "explanations": {
+      "A": "Correct! Give in (to) — Meaning: To reluctantly stop arguing or resisting; to surrender under pressure. | Synonyms: yield to, surrender to, succumb to, concede.",
+      "B": "Incorrect. Correct answer is A (Give in (to)). Give in (to) — Meaning: To reluctantly stop arguing or resisting; to surrender under pressure. | Synonyms: yield to, surrender to, succumb to, concede.",
+      "C": "Incorrect. Correct answer is A (Give in (to)). Give in (to) — Meaning: To reluctantly stop arguing or resisting; to surrender under pressure. | Synonyms: yield to, surrender to, succumb to, concede.",
+      "D": "Incorrect. Correct answer is A (Give in (to)). Give in (to) — Meaning: To reluctantly stop arguing or resisting; to surrender under pressure. | Synonyms: yield to, surrender to, succumb to, concede."
+    }
+  },
+  {
+    "id": 7059,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which set of synonyms corresponds to the phrasal verb \"Cope with\"?",
+    "code": null,
+    "options": {
+      "A": "deal with, tackle, handle, overcome, manage",
+      "B": "explain, clarify, form, constitute, make up",
+      "C": "raise, mention, introduce, propose, cite",
+      "D": "reduce, decrease, curtail, lessen, limit"
+    },
+    "answer": "A",
+    "explanation": "Cope with — Meaning: To deal successfully with a difficult situation or heavy workload. | Synonyms: deal with, tackle, handle, overcome, manage.",
+    "explanations": {
+      "A": "Correct! Cope with — Meaning: To deal successfully with a difficult situation or heavy workload. | Synonyms: deal with, tackle, handle, overcome, manage.",
+      "B": "Incorrect. Correct answer is A (deal with, tackle, handle, overcome, manage). Cope with — Meaning: To deal successfully with a difficult situation or heavy workload. | Synonyms: deal with, tackle, handle, overcome, manage.",
+      "C": "Incorrect. Correct answer is A (deal with, tackle, handle, overcome, manage). Cope with — Meaning: To deal successfully with a difficult situation or heavy workload. | Synonyms: deal with, tackle, handle, overcome, manage.",
+      "D": "Incorrect. Correct answer is A (deal with, tackle, handle, overcome, manage). Cope with — Meaning: To deal successfully with a difficult situation or heavy workload. | Synonyms: deal with, tackle, handle, overcome, manage."
+    }
+  },
+  {
+    "id": 7060,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which phrasal verb is synonymous with: \"cause, lead to, result in, trigger, induce\"?",
+    "code": null,
+    "options": {
+      "A": "Carry out",
+      "B": "Break down",
+      "C": "Bring about",
+      "D": "Make up for"
+    },
+    "answer": "C",
+    "explanation": "Bring about — Meaning: To cause something to happen, or induce a notable change. | Synonyms: cause, lead to, result in, trigger, induce.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (Bring about). Bring about — Meaning: To cause something to happen, or induce a notable change. | Synonyms: cause, lead to, result in, trigger, induce.",
+      "B": "Incorrect. Correct answer is C (Bring about). Bring about — Meaning: To cause something to happen, or induce a notable change. | Synonyms: cause, lead to, result in, trigger, induce.",
+      "C": "Correct! Bring about — Meaning: To cause something to happen, or induce a notable change. | Synonyms: cause, lead to, result in, trigger, induce.",
+      "D": "Incorrect. Correct answer is C (Bring about). Bring about — Meaning: To cause something to happen, or induce a notable change. | Synonyms: cause, lead to, result in, trigger, induce."
+    }
+  },
+  {
+    "id": 7061,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which set of synonyms corresponds to the phrasal verb \"Carry out\"?",
+    "code": null,
+    "options": {
+      "A": "cause, lead to, result in, trigger, induce",
+      "B": "reject, decline, refuse, dismiss",
+      "C": "conduct, execute, perform, implement, realize",
+      "D": "compensate for, offset, balance out, make amends"
+    },
+    "answer": "C",
+    "explanation": "Carry out — Meaning: To conduct, perform, or execute a task, study, or experiment. | Synonyms: conduct, execute, perform, implement, realize.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (conduct, execute, perform, implement, realize). Carry out — Meaning: To conduct, perform, or execute a task, study, or experiment. | Synonyms: conduct, execute, perform, implement, realize.",
+      "B": "Incorrect. Correct answer is C (conduct, execute, perform, implement, realize). Carry out — Meaning: To conduct, perform, or execute a task, study, or experiment. | Synonyms: conduct, execute, perform, implement, realize.",
+      "C": "Correct! Carry out — Meaning: To conduct, perform, or execute a task, study, or experiment. | Synonyms: conduct, execute, perform, implement, realize.",
+      "D": "Incorrect. Correct answer is C (conduct, execute, perform, implement, realize). Carry out — Meaning: To conduct, perform, or execute a task, study, or experiment. | Synonyms: conduct, execute, perform, implement, realize."
+    }
+  },
+  {
+    "id": 7062,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 2,
+    "week_title": "1.2 Phrasal Verbs Test (Meaning & Synonyms)",
+    "qType": "test",
+    "subType": "phrasal_test",
+    "difficulty": "Synonyms",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Test",
+    "category": "1.2 Phrasal Verbs (Synonyms)",
+    "question": "[Phrasal Verb Synonyms] Which phrasal verb is synonymous with: \"explain, clarify, form, constitute, make up\"?",
+    "code": null,
+    "options": {
+      "A": "Stand for",
+      "B": "Stem from",
+      "C": "Account for",
+      "D": "Carry out"
+    },
+    "answer": "C",
+    "explanation": "Account for — Meaning: To explain a reason for something, or to make up a particular proportion of something. | Synonyms: explain, clarify, form, constitute, make up.",
+    "explanations": {
+      "A": "Incorrect. Correct answer is C (Account for). Account for — Meaning: To explain a reason for something, or to make up a particular proportion of something. | Synonyms: explain, clarify, form, constitute, make up.",
+      "B": "Incorrect. Correct answer is C (Account for). Account for — Meaning: To explain a reason for something, or to make up a particular proportion of something. | Synonyms: explain, clarify, form, constitute, make up.",
+      "C": "Correct! Account for — Meaning: To explain a reason for something, or to make up a particular proportion of something. | Synonyms: explain, clarify, form, constitute, make up.",
+      "D": "Incorrect. Correct answer is C (Account for). Account for — Meaning: To explain a reason for something, or to make up a particular proportion of something. | Synonyms: explain, clarify, form, constitute, make up."
+    }
+  },
+  {
+    "id": 7063,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q16)",
+    "question": "Tech companies plan to ________ legacy software systems in favor of cloud-based infrastructure.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "phase out",
+    "accepted": [
+      "phase out",
+      "phased out",
+      "phasing out"
+    ],
+    "hint_extra": "Synonyms: discontinue gradually, withdraw, eliminate step-by-step",
+    "explanation": "Answer: \"phase out\" (Base form: Phase out). Meaning: To gradually stop using, providing, or producing something over time. Synonyms: discontinue gradually, withdraw, eliminate step-by-step."
+  },
+  {
+    "id": 7064,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q17)",
+    "question": "During the department board meeting, the instructor decided to ________ the urgent need for new laboratory equipment.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "bring up",
+    "accepted": [
+      "bring up",
+      "brought up",
+      "bringing up"
+    ],
+    "hint_extra": "Synonyms: raise, mention, introduce, propose, cite",
+    "explanation": "Answer: \"bring up\" (Base form: Bring up). Meaning: To raise a child, or to introduce/mention a topic in a discussion. Synonyms: raise, mention, introduce, propose, cite."
+  },
+  {
+    "id": 7065,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q18)",
+    "question": "In computer networking, the acronym HTTP ________ Hypertext Transfer Protocol.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "stands for",
+    "accepted": [
+      "stands for",
+      "stand for"
+    ],
+    "hint_extra": "Synonyms: represent, denote, signify, symbolize",
+    "explanation": "Answer: \"stands for\" (Base form: Stand for). Meaning: To represent, signify, or mean a word/phrase; to advocate a principle. Synonyms: represent, denote, signify, symbolize."
+  },
+  {
+    "id": 7066,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q19)",
+    "question": "By optimizing database queries, backend engineers managed to ________ server response times.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "cut down on",
+    "accepted": [
+      "cut down on",
+      "cutting down on"
+    ],
+    "hint_extra": "Synonyms: reduce, decrease, curtail, lessen, limit",
+    "explanation": "Answer: \"cut down on\" (Base form: Cut down on). Meaning: To reduce the size, amount, or consumption of something. Synonyms: reduce, decrease, curtail, lessen, limit."
+  },
+  {
+    "id": 7067,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q20)",
+    "question": "Most runtime errors in Python applications ________ improper data type conversions.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "stem from",
+    "accepted": [
+      "stem from",
+      "stems from",
+      "stemmed from"
+    ],
+    "hint_extra": "Synonyms: originate from, arise from, derive from, result from",
+    "explanation": "Answer: \"stem from\" (Base form: Stem from). Meaning: To originate from, be caused by, or be the result of a specific event. Synonyms: originate from, arise from, derive from, result from."
+  },
+  {
+    "id": 7068,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q21)",
+    "question": "The university board decided to ________ the international symposium due to severe weather conditions.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "call off",
+    "accepted": [
+      "call off",
+      "called off",
+      "calling off"
+    ],
+    "hint_extra": "Synonyms: cancel, abort, annul, withdraw",
+    "explanation": "Answer: \"call off\" (Base form: Call off). Meaning: To cancel a planned event, meeting, or activity. Synonyms: cancel, abort, annul, withdraw."
+  },
+  {
+    "id": 7069,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q22)",
+    "question": "A sudden power surge can ________ all unsaved data on an unbuffered storage drive.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "wipe out",
+    "accepted": [
+      "wipe out",
+      "wiped out",
+      "wiping out"
+    ],
+    "hint_extra": "Synonyms: eradicate, eliminate, destroy, extinguish, erase",
+    "explanation": "Answer: \"wipe out\" (Base form: Wipe out). Meaning: To destroy, eliminate, or erase something completely. Synonyms: eradicate, eliminate, destroy, extinguish, erase."
+  },
+  {
+    "id": 7070,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q23)",
+    "question": "Data analysts often ________ complex demographic statistics into smaller sub-categories to identify underlying trends.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "break down",
+    "accepted": [
+      "break down",
+      "breaks down",
+      "broke down"
+    ],
+    "hint_extra": "Synonyms: malfunction, fail, analyze, dissect, categorize",
+    "explanation": "Answer: \"break down\" (Base form: Break down). Meaning: To stop working due to a technical fault, or to divide something complex into smaller parts. Synonyms: malfunction, fail, analyze, dissect, categorize."
+  },
+  {
+    "id": 7071,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q24)",
+    "question": "Advancements in high-efficiency solar panels are intended to ________ the declining reserves of fossil fuels.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "make up for",
+    "accepted": [
+      "make up for",
+      "makes up for",
+      "made up for"
+    ],
+    "hint_extra": "Synonyms: compensate for, offset, balance out, make amends",
+    "explanation": "Answer: \"make up for\" (Base form: Make up for). Meaning: To compensate for something lost, missed, or deficient. Synonyms: compensate for, offset, balance out, make amends."
+  },
+  {
+    "id": 7072,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q25)",
+    "question": "The cybersecurity investigators have ________ external network attacks as the primary cause of the server failure.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "ruled out",
+    "accepted": [
+      "ruled out",
+      "rule out",
+      "rules out"
+    ],
+    "hint_extra": "Synonyms: exclude, eliminate, dismiss, preclude",
+    "explanation": "Answer: \"ruled out\" (Base form: Rule out). Meaning: To exclude something from consideration; to decide it is impossible. Synonyms: exclude, eliminate, dismiss, preclude."
+  },
+  {
+    "id": 7073,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q26)",
+    "question": "The university board decided to ________ the proposed curriculum revision due to budget constraints.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "turn down",
+    "accepted": [
+      "turn down",
+      "turned down",
+      "turning down"
+    ],
+    "hint_extra": "Synonyms: reject, decline, refuse, dismiss",
+    "explanation": "Answer: \"turn down\" (Base form: Turn down). Meaning: To reject/refuse an offer, or to reduce the intensity/volume of something. Synonyms: reject, decline, refuse, dismiss."
+  },
+  {
+    "id": 7074,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q27)",
+    "question": "Despite facing severe criticism from public authorities, the scientist refused to ________ political pressure.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "give in to",
+    "accepted": [
+      "give in to",
+      "give in",
+      "give in (to)",
+      "gave in to",
+      "gave in"
+    ],
+    "hint_extra": "Synonyms: yield to, surrender to, succumb to, concede",
+    "explanation": "Answer: \"give in to\" (Base form: Give in (to)). Meaning: To reluctantly stop arguing or resisting; to surrender under pressure. Synonyms: yield to, surrender to, succumb to, concede."
+  },
+  {
+    "id": 7075,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q28)",
+    "question": "Many developing countries are struggling to ________ the economic impacts of sudden climate disruptions.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "cope with",
+    "accepted": [
+      "cope with",
+      "coped with",
+      "coping with"
+    ],
+    "hint_extra": "Synonyms: deal with, tackle, handle, overcome, manage",
+    "explanation": "Answer: \"cope with\" (Base form: Cope with). Meaning: To deal successfully with a difficult situation or heavy workload. Synonyms: deal with, tackle, handle, overcome, manage."
+  },
+  {
+    "id": 7076,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q29)",
+    "question": "The rapid rise of AI has ________ significant changes in cybersecurity strategies.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "brought about",
+    "accepted": [
+      "brought about",
+      "bring about",
+      "brings about"
+    ],
+    "hint_extra": "Synonyms: cause, lead to, result in, trigger, induce",
+    "explanation": "Answer: \"brought about\" (Base form: Bring about). Meaning: To cause something to happen, or induce a notable change. Synonyms: cause, lead to, result in, trigger, induce."
+  },
+  {
+    "id": 7077,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q30)",
+    "question": "A team of researchers ________ an extensive study to determine the long-term effects of microplastics on marine ecosystems.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "carried out",
+    "accepted": [
+      "carried out",
+      "carry out",
+      "carries out"
+    ],
+    "hint_extra": "Synonyms: conduct, execute, perform, implement, realize",
+    "explanation": "Answer: \"carried out\" (Base form: Carry out). Meaning: To conduct, perform, or execute a task, study, or experiment. Synonyms: conduct, execute, perform, implement, realize."
+  },
+  {
+    "id": 7078,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 3,
+    "week_title": "2.1 Phrasal Verbs Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "phrasal_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Phrasal Verbs Fill-in-the-Blank",
+    "category": "2.1 Phrasal Verbs Fill-in-the-Blank (Q31)",
+    "question": "Renewable energy sources currently ________ approximately 30% of global electricity production.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "account for",
+    "accepted": [
+      "account for",
+      "accounts for",
+      "accounted for"
+    ],
+    "hint_extra": "Synonyms: explain, clarify, form, constitute, make up",
+    "explanation": "Answer: \"account for\" (Base form: Account for). Meaning: To explain a reason for something, or to make up a particular proportion of something. Synonyms: explain, clarify, form, constitute, make up."
+  },
+  {
+    "id": 7079,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q1)",
+    "question": "Python automatically manages memory using a built-in ________ collector.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "garbage",
+    "accepted": [
+      "garbage"
+    ],
+    "hint_extra": "Technical Meaning: Unreferenced objects in memory that are no longer needed by the program and must be reclaimed",
+    "explanation": "Answer: \"garbage\" (Garbage). Technical: Unreferenced objects in memory that are no longer needed by the program and must be reclaimed. General: Waste material, trash, or unwanted refuse."
+  },
+  {
+    "id": 7080,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q2)",
+    "question": "Always generate a unique ________ for every password before hashing it in the database.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "salt",
+    "accepted": [
+      "salt"
+    ],
+    "hint_extra": "Technical Meaning: Random data added to a password before hashing to protect against dictionary/rainbow table attacks",
+    "explanation": "Answer: \"salt\" (Salt). Technical: Random data added to a password before hashing to protect against dictionary/rainbow table attacks. General: A white crystalline substance used for seasoning/preserving food."
+  },
+  {
+    "id": 7081,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q3)",
+    "question": "You can execute custom Bash scripts directly within the Linux ________.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "shell",
+    "accepted": [
+      "shell"
+    ],
+    "hint_extra": "Technical Meaning: A user interface that allows users to interact with the operating system kernel",
+    "explanation": "Answer: \"shell\" (Shell). Technical: A user interface that allows users to interact with the operating system kernel. General: The hard outer cover of an egg, nut, or sea creature."
+  },
+  {
+    "id": 7082,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q4)",
+    "question": "A Python ________ allows constant-time complexity for key lookups.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "dictionary",
+    "accepted": [
+      "dictionary",
+      "dict"
+    ],
+    "hint_extra": "Technical Meaning: An unordered, mutable collection of key-value pairs",
+    "explanation": "Answer: \"dictionary\" (Dictionary). Technical: An unordered, mutable collection of key-value pairs. General: A book/electronic resource listing words alphabetically with their meanings."
+  },
+  {
+    "id": 7083,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q5)",
+    "question": "We built a machine learning ________ to automate data cleaning, feature scaling, and model training.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "pipeline",
+    "accepted": [
+      "pipeline"
+    ],
+    "hint_extra": "Technical Meaning: A sequence of data processing elements where the output of each stage serves as the input to the next",
+    "explanation": "Answer: \"pipeline\" (Pipeline). Technical: A sequence of data processing elements where the output of each stage serves as the input to the next. General: A long pipe or series of connected pipes used to transport liquids or gas."
+  },
+  {
+    "id": 7084,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q6)",
+    "question": "The web server spawns a separate ________ for each incoming client request to handle concurrent connections.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "thread",
+    "accepted": [
+      "thread"
+    ],
+    "hint_extra": "Technical Meaning: The smallest unit of execution within an OS process that can run concurrently with other units",
+    "explanation": "Answer: \"thread\" (Thread). Technical: The smallest unit of execution within an OS process that can run concurrently with other units. General: A long, very thin strand of cotton, silk, or wool."
+  },
+  {
+    "id": 7085,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q7)",
+    "question": "Instead of loading the entire video into RAM, the media application processes the incoming data ________ in real time.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "stream",
+    "accepted": [
+      "stream"
+    ],
+    "hint_extra": "Technical Meaning: A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download",
+    "explanation": "Answer: \"stream\" (Stream). Technical: A continuous sequence of data elements made available over time and transmitted without waiting for the entire file to download. General: A small, narrow river or continuous flow of liquid."
+  },
+  {
+    "id": 7086,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q8)",
+    "question": "In Python, if you divide 5 by 2, the result is stored as a ________ (2.5).",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "float",
+    "accepted": [
+      "float"
+    ],
+    "hint_extra": "Technical Meaning: A built-in numerical data type representing numbers with a decimal point",
+    "explanation": "Answer: \"float\" (Float). Technical: A built-in numerical data type representing numbers with a decimal point. General: To stay/move on the surface of a liquid or drift in the air."
+  },
+  {
+    "id": 7087,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q9)",
+    "question": "The function expects a string ________, but an integer was provided.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "argument",
+    "accepted": [
+      "argument"
+    ],
+    "hint_extra": "Technical Meaning: An actual value, variable, or expression passed into a function or method upon invocation",
+    "explanation": "Answer: \"argument\" (Argument). Technical: An actual value, variable, or expression passed into a function or method upon invocation. General: An exchange of diverging or opposite views."
+  },
+  {
+    "id": 7088,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q10)",
+    "question": "A while ________ continues execution as long as the boolean expression evaluates to True.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "loop",
+    "accepted": [
+      "loop"
+    ],
+    "hint_extra": "Technical Meaning: A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes",
+    "explanation": "Answer: \"loop\" (Loop). Technical: A control flow structure designed to repeatedly execute a targeted block of instructions until a condition changes. General: A curved shape produced by a curve bending around and crossing itself."
+  },
+  {
+    "id": 7089,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q11)",
+    "question": "Crafting a clear and well-structured ________ is essential to obtain accurate outputs from large language models.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "prompt",
+    "accepted": [
+      "prompt"
+    ],
+    "hint_extra": "Technical Meaning: A text input, question, or instruction given to a command-line interface or generative AI model",
+    "explanation": "Answer: \"prompt\" (Prompt). Technical: A text input, question, or instruction given to a command-line interface or generative AI model. General: Done without delay, or to encourage someone to do something."
+  },
+  {
+    "id": 7090,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q12)",
+    "question": "We use a Python library to ________ the incoming JSON response from the API.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "parse",
+    "accepted": [
+      "parse"
+    ],
+    "hint_extra": "Technical Meaning: To analyze a string or data stream into small, structured components",
+    "explanation": "Answer: \"parse\" (Parse). Technical: To analyze a string or data stream into small, structured components. General: To analyze a sentence into its component parts."
+  },
+  {
+    "id": 7091,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q13)",
+    "question": "Our development team decided to adopt the Python-Django tech ________ for the new web service.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "stack",
+    "accepted": [
+      "stack"
+    ],
+    "hint_extra": "Technical Meaning: A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application",
+    "explanation": "Answer: \"stack\" (Stack). Technical: A Last-In, First-Out (LIFO) data structure, or a combination of programming languages/frameworks used to build an application. General: A neat pile of objects placed one on top of the other."
+  },
+  {
+    "id": 7092,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q14)",
+    "question": "You can ________ the original repository on GitHub to make custom modifications without affecting the main project.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "fork",
+    "accepted": [
+      "fork"
+    ],
+    "hint_extra": "Technical Meaning: To create an independent copy of an open-source code repository, or a system call creating a child process",
+    "explanation": "Answer: \"fork\" (Fork). Technical: To create an independent copy of an open-source code repository, or a system call creating a child process. General: An eating utensil with prongs, or a place where a road/river divides."
+  },
+  {
+    "id": 7093,
+    "course": "mesleki_vize",
+    "lang": "en",
+    "week": 4,
+    "week_title": "2.2 Core Vocabulary Fill-in-the-Blank",
+    "qType": "fill",
+    "subType": "vocab_fill",
+    "difficulty": "Boşluk Doldurma",
+    "test_type": "Mesleki Yabancı Dil - Vocabulary Fill-in-the-Blank",
+    "category": "2.2 Core Vocabulary Fill-in-the-Blank (Q15)",
+    "question": "Websites use session ________ to keep users logged in while navigating between different pages.",
+    "code": null,
+    "answer": "DOGRU",
+    "official_answer": "cookies",
+    "accepted": [
+      "cookies",
+      "cookie"
+    ],
+    "hint_extra": "Technical Meaning: A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences",
+    "explanation": "Answer: \"cookies\" (Cookie). Technical: A small piece of data stored on the user's web browser by the server to remember state, sessions, or preferences. General: A small, sweet baked snack."
   }
 ]
