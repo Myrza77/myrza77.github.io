@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#059669" />
+  <title>E-Ticaret (BTS321) - Sınav & Şık Analiz Portalı</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-hover: #047857;
+      --primary-light: rgba(5, 150, 105, 0.12);
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --correct: #10b981;
+      --correct-bg: #ecfdf5;
+      --correct-border: #a7f3d0;
+      --wrong: #ef4444;
+      --wrong-bg: #fef2f2;
+      --wrong-border: #fecaca;
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .dark {
+      --primary: #10b981;
+      --primary-hover: #059669;
+      --primary-light: rgba(16, 185, 129, 0.15);
+      --bg: #090d16;
+      --card-bg: #131b2e;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #1e293b;
+      --correct: #10b981;
+      --correct-bg: rgba(16, 185, 129, 0.15);
+      --correct-border: rgba(16, 185, 129, 0.4);
+      --wrong: #f43f5e;
+      --wrong-bg: rgba(244, 63, 94, 0.15);
+      --wrong-border: rgba(244, 63, 94, 0.4);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 100px;
+    }
+    header {
+      position: sticky; top: 0; z-index: 40;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      backdrop-filter: blur(12px);
+    }
+    .header-row {
+      max-width: 840px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .title-box { display: flex; align-items: center; gap: 10px; overflow: hidden; }
+    .title-box .icon {
+      font-size: 22px; background: var(--primary-light);
+      padding: 6px 8px; border-radius: 12px; border: 1px solid rgba(16,185,129,0.25);
+    }
+    .title-box h1 { font-size: 16px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .title-box p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .nav-link-pill {
+      text-decoration: none; font-size: 12px; font-weight: 700;
+      padding: 6px 10px; border-radius: 10px;
+      background: var(--border); color: var(--text);
+      transition: all 0.2s;
+    }
+    .nav-link-pill:hover { background: var(--primary); color: #fff; }
+    .btn-icon {
+      background: var(--border); color: var(--text); border: none;
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; cursor: pointer;
+    }
+    .progress-pill {
+      background: var(--primary-light); color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-weight: 800; font-size: 12px; padding: 6px 12px;
+      border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px;
+    }
+    .progress-bar-bg {
+      max-width: 840px; margin: 8px auto 0 auto;
+      height: 5px; background: var(--border); border-radius: 3px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; background: linear-gradient(90deg, #059669, #4f46e5);
+      width: 0%; transition: width 0.3s ease;
+    }
+    .sub-bar {
+      max-width: 840px; width: 100%; margin: 0 auto; padding: 10px 16px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .mode-toggle-group {
+      display: inline-flex; background: var(--card-bg);
+      border: 1px solid var(--border); padding: 3px; border-radius: 12px;
+    }
+    .mode-btn {
+      padding: 6px 11px; font-size: 12px; font-weight: 700;
+      border-radius: 9px; border: none; background: transparent;
+      color: var(--text-muted); cursor: pointer;
+    }
+    .mode-btn.active { background: var(--primary); color: #fff; }
+    .filters-wrap {
+      display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; white-space: nowrap;
+    }
+    .filters-wrap::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      border: 1px solid var(--border); background: var(--card-bg); color: var(--text-muted);
+      font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; cursor: pointer;
+    }
+    .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .score-banner {
+      display: none; max-width: 840px; margin: 10px auto; padding: 16px 20px;
+      background: var(--card-bg); border: 2px solid var(--primary); border-radius: 18px;
+    }
+    .score-banner.show { display: block; }
+    .score-banner-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+    .score-badge-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .score-item {
+      padding: 8px 14px; border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; font-weight: 700; font-size: 13px;
+    }
+    .score-item.correct { background: var(--correct-bg); color: #065f46; border: 1px solid var(--correct-border); }
+    .score-item.wrong { background: var(--wrong-bg); color: #991b1b; border: 1px solid var(--wrong-border); }
+    .score-item.empty { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); }
+    .score-item.total { background: var(--primary-light); color: var(--primary); border: 1px solid rgba(16,185,129,0.3); }
+    .dark .score-item.correct { color: #6ee7b7; }
+    .dark .score-item.wrong { color: #fca5a5; }
+    main { max-width: 840px; width: 100%; margin: 0 auto; padding: 12px 16px; flex: 1; }
+    .card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 18px; padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow);
+    }
+    .card.evaluated.is-correct { border-color: var(--correct); }
+    .card.evaluated.is-wrong { border-color: var(--wrong); }
+    .q-meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .badge { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
+    .badge-subject { background: #d1fae5; color: #065f46; }
+    .dark .badge-subject { background: #064e3b; color: #a7f3d0; }
+    .badge-status { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
+    .badge-status.c { background: var(--correct); color: #fff; }
+    .badge-status.w { background: var(--wrong); color: #fff; }
+    .q-text { font-size: 15px; font-weight: 700; line-height: 1.55; color: var(--text); margin-bottom: 14px; white-space: pre-line; }
+    .options-list { display: flex; flex-direction: column; gap: 10px; }
+    .option-btn {
+      display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px;
+      border: 1.5px solid var(--border); border-radius: 12px;
+      background: var(--card-bg); color: var(--text); font-size: 14px;
+      text-align: left; cursor: pointer; transition: all 0.15s ease; width: 100%;
+    }
+    .option-btn:hover { border-color: var(--primary); background: var(--primary-light); }
+    .option-btn.selected { border-color: var(--primary); background: var(--primary-light); font-weight: 600; }
+    .opt-key {
+      width: 28px; height: 28px; border-radius: 8px; background: var(--bg); color: var(--text-muted);
+      font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border: 1px solid var(--border);
+    }
+    .option-btn.selected .opt-key { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .opt-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .opt-text { line-height: 1.45; padding-top: 2px; }
+    .opt-reason { font-size: 12px; line-height: 1.4; opacity: 0.92; font-weight: 500; padding-top: 2px; border-top: 1px dashed rgba(148,163,184,0.3); margin-top: 2px; }
+    .option-btn.correct-highlight {
+      border-color: var(--correct) !important; background: var(--correct-bg) !important; color: #065f46 !important; font-weight: 700;
+    }
+    .dark .option-btn.correct-highlight { color: #6ee7b7 !important; }
+    .option-btn.correct-highlight .opt-key { background: var(--correct) !important; color: #fff !important; border-color: var(--correct) !important; }
+    .option-btn.wrong-highlight {
+      border-color: var(--wrong) !important; background: var(--wrong-bg) !important; color: #991b1b !important; font-weight: 700;
+    }
+    .dark .option-btn.wrong-highlight { color: #fca5a5 !important; }
+    .option-btn.wrong-highlight .opt-key { background: var(--wrong) !important; color: #fff !important; border-color: var(--wrong) !important; }
+    .explanation-box {
+      margin-top: 14px; padding: 14px 16px; border-radius: 12px; font-size: 13px; line-height: 1.6;
+    }
+    .explanation-box.success { background: var(--correct-bg); border: 1px solid var(--correct-border); color: #065f46; }
+    .dark .explanation-box.success { color: #6ee7b7; }
+    .explanation-box.danger { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: #991b1b; }
+    .dark .explanation-box.danger { color: #fca5a5; }
+    footer {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--card-bg); border-top: 1px solid var(--border);
+      padding: 10px 16px; z-index: 40;
+    }
+    .footer-inner { max-width: 840px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .btn {
+      padding: 12px 18px; font-size: 14px; font-weight: 700; border-radius: 12px;
+      border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { background: var(--border); color: var(--text); }
+    .btn-full { flex: 1; }
+    .modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.55); z-index: 100; backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      position: absolute; bottom: 0; left: 0; right: 0; max-height: 85vh;
+      background: var(--card-bg); border-top-left-radius: 22px; border-top-right-radius: 22px;
+      padding: 18px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px;
+      max-width: 840px; margin: 0 auto;
+    }
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 8px; }
+    .q-jump-btn {
+      height: 44px; border-radius: 10px; border: 1.5px solid var(--border);
+      background: var(--bg); color: var(--text); font-weight: 800; font-size: 13px; cursor: pointer;
+    }
+    .q-jump-btn.answered { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    .q-jump-btn.correct { background: var(--correct); color: #fff; border-color: var(--correct); }
+    .q-jump-btn.wrong { background: var(--wrong); color: #fff; border-color: var(--wrong); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-row">
+      <div class="title-box">
+        <span class="icon">🛒</span>
+        <div>
+          <h1>E-Ticaret (BTS321) Sınav Portalı</h1>
+          <p>30 Çıkmış Test + 8 Ek Görsel Sorusu • Şık Analizli</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="./index.html" class="nav-link-pill">🏠 Ana Portal</a>
+        <a href="./isletim.html" class="nav-link-pill">💻 İşletim Sis.</a>
+        <button class="progress-pill" onclick="openGridModal()">
+          <span id="header-counter">0 / 38</span>
+          <span>▾</span>
+        </button>
+        <button class="btn-icon" id="btn-theme" onclick="toggleTheme()">🌙</button>
+      </div>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-bar"></div></div>
+  </header>
+
+  <div class="sub-bar">
+    <div class="mode-toggle-group">
+      <button class="mode-btn active" id="mode-btn-list" onclick="setMode('list')">Tüm Sorular (Liste)</button>
+      <button class="mode-btn" id="mode-btn-card" onclick="setMode('card')">Tek Soru (Kart)</button>
+      <button class="mode-btn" id="mode-btn-guide" onclick="setMode('guide')">📖 Diğer Şıklar Neden Yanlış? (18 Özet)</button>
+    </div>
+    <div class="filters-wrap" id="filters-container">
+      <button class="filter-btn active" onclick="setFilter('week1', event)">🔥 30 Çıkmış Test Sorusu (30)</button>
+      <button class="filter-btn" onclick="setFilter('week2', event)">📸 Ek Görsel Soruları (8)</button>
+      <button class="filter-btn" onclick="setFilter('all', event)">Tümü (38)</button>
+      <button class="filter-btn" onclick="setFilter('wrong', event)">✗ Yanlışlarım (<span id="cnt-filter-wrong">0</span>)</button>
+      <button class="filter-btn" onclick="setFilter('fav', event)">⭐ Favoriler (<span id="cnt-filter-fav">0</span>)</button>
+    </div>
+  </div>
+
+  <div class="score-banner" id="score-banner">
+    <div class="score-banner-row">
+      <div>
+        <h3 id="score-title" style="font-size: 18px; font-weight: 800;">Sınav Sonucu</h3>
+        <p id="score-msg" style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Tüm şıkların neden doğru/yanlış olduğu aşağıda açılmıştır.</p>
+      </div>
+      <div class="score-badge-group">
+        <div class="score-item total"><span>Başarı</span><span id="score-pct" style="font-size: 18px;">%0</span></div>
+        <div class="score-item correct"><span>Doğru</span><span id="score-c-cnt" style="font-size: 18px;">0</span></div>
+        <div class="score-item wrong"><span>Yanlış</span><span id="score-w-cnt" style="font-size: 18px;">0</span></div>
+        <div class="score-item empty"><span>Boş</span><span id="score-e-cnt" style="font-size: 18px;">30</span></div>
+      </div>
+    </div>
+  </div>
+
+  <main id="app"></main>
+
+  <footer>
+    <div class="footer-inner" id="footer-actions"></div>
+  </footer>
+
+  <div class="modal-overlay" id="modal-overlay" onclick="closeGridModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <div style="font-size:17px; font-weight:800;">Sorular Listesi</div>
+        <button class="btn-icon" onclick="closeGridModal()">✕</button>
+      </div>
+      <div class="grid-container" id="modal-grid"></div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-secondary" style="flex:1;" onclick="resetAllAnswers()">Cevapları Sıfırla</button>
+        <button class="btn btn-primary" style="flex:1;" onclick="closeGridModal()">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const QUESTIONS = [{"id": 8001, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "1. Mobil Kuşak Sınıflandırmaları", "question": "Aşağıdakilerden hangisi mobil kuşak sınıflandırmaları içerisinde yer almaz?", "code": null, "options": {"A": "1G", "B": "2G", "C": "3G", "D": "3.5G", "E": "4G"}, "answer": "D", "explanation": "Doğru Cevap: 3.5G. 1G, 2G, 3G, 4G, 5G ve 6G mobil iletişimin standart ana nesilleridir (kuşaklarıdır). 3.5G (HSPA gibi), 3G ile 4G arasında geçişi sağlayan bir ara teknoloji formudur; temel mobil kuşak sınıflandırması içerisinde yer almaz.", "explanations": {"A": "Yanlış: 1G (Birinci Nesil), analog ses iletimine dayanan temel ana mobil kuşaklardan biridir.", "B": "Yanlış: 2G (İkinci Nesil), dijital ses ve SMS iletimini getiren (GSM) temel ana mobil kuşaklardan biridir.", "C": "Yanlış: 3G (Üçüncü Nesil), görüntülü görüşme ve mobil interneti getiren standart ana kuşaklardan biridir.", "D": "DOĞRU YANIT: 3.5G, 3G ile 4G arasındaki bir ara geçiş teknolojisidir; ana mobil kuşak sınıflandırmalarında (1G, 2G, 3G, 4G, 5G, 6G) yer almaz.", "E": "Yanlış: 4G (Dördüncü Nesil), yüksek hızlı genişbant IP tabanlı mobil iletişimi sağlayan standart ana kuşaktır."}}, {"id": 8002, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "2. GSM Cihaz Kimliği (IMEI)", "question": "GSM sisteminde uluslararası mobil cihaz kimliğini ifade eden kısaltma aşağıdakilerden hangisidir?", "code": null, "options": {"A": "SIM", "B": "IMSI", "C": "IMEI", "D": "ISMI", "E": "UMTS"}, "answer": "C", "explanation": "Doğru Cevap: IMEI (International Mobile Equipment Identity - Uluslararası Mobil Cihaz Kodu). Her mobil cihaza üretim aşamasında verilen 15 haneli benzersiz donanım kimlik numarasıdır. SIM abone kimlik kartıdır, IMSI abonenin (hattın) kimliğidir, UMTS ise 3G ağ teknolojisidir.", "explanations": {"A": "Yanlış: SIM (Subscriber Identity Module), telefona takılan abone kimlik modülüdür (karttır), cihazın donanım kimliği değildir.", "B": "Yanlış: IMSI (International Mobile Subscriber Identity), cihazın değil SIM karttaki abonenin (hattın/kişinin) uluslararası kimliğidir.", "C": "DOĞRU YANIT: IMEI (International Mobile Equipment Identity), GSM sisteminde uluslararası mobil cihaz kimliğini ifade eder.", "D": "Yanlış: ISMI, IMSI kısaltmasının harflerinin değiştirilmesiyle oluşturulmuş çeldirici bir ifadedir.", "E": "Yanlış: UMTS (Universal Mobile Telecommunications System), bir kimlik numarası değil 3G mobil iletişim ağ teknolojisidir."}}, {"id": 8003, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "3. GSM Altyapısı Bileşenleri", "question": "Bir GSM abonesinin şebekeye girişini ve cep telefonu ile santral arasındaki bağlantıyı sağlayan sisteme ne ad verilir?", "code": null, "options": {"A": "Mobil istasyon", "B": "Anahtarlama sistemi", "C": "Destek Sistemi", "D": "Baz istasyonu", "E": "Bilgi sistemi"}, "answer": "D", "explanation": "Doğru Cevap: Baz istasyonu. GSM mimarisinde abonenin şebekeye radyo dalgalarıyla erişimini ve cep telefonu (mobil istasyon) ile santral (anahtarlama sistemi) arasındaki bağlantıyı sağlayan birim Baz İstasyonu sistemidir.", "explanations": {"A": "Yanlış: Mobil istasyon, kullanıcının elindeki cep telefonu (ME) ve içindeki SIM kartın bütününe verilen addır.", "B": "Yanlış: Anahtarlama sistemi, çağrıları yönlendiren, abone verilerini (HLR/VLR) tutan ve sanal kanalları oluşturan santral sistemidir.", "C": "Yanlış: Destek sistemi (OSS), tüm GSM şebekesinin izlenmesi, bakımı ve denetlenmesini yapan sistemdir.", "D": "DOĞRU YANIT: Baz istasyonu, abonenin şebekeye girişini ve cep telefonu ile santral arasındaki radyo bağlantısını sağlar.", "E": "Yanlış: Bilgi sistemi genel bir kavramdır, GSM şebeke mimarisinin 4 temel bileşeninden (Mobil İstasyon, Baz İstasyonu, Anahtarlama, Destek) biri değildir."}}, {"id": 8004, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "4. İnternet Protokolleri (FTP)", "question": "İnternete bağlı bir bilgisayardan diğerine iki yönlü olarak dosya aktarımı yapmak için geliştirilen bir internet protokolü ve bu işi yapan uygulama programlarına verilen genel ad hangisidir?", "code": null, "options": {"A": "File Transfer Protocol (FTP)", "B": "World Wide Web (WWW)", "C": "Hyper Text Murkup Language (HTML)", "D": "Network News Transfer Protocol (NNTP)", "E": "Post Office Protocol (POP)"}, "answer": "A", "explanation": "Doğru Cevap: File Transfer Protocol (FTP - Dosya Aktarım Protokolü). İnternete bağlı bilgisayarlar arasında çift yönlü dosya yükleme (upload) ve indirme (download) işlemlerini gerçekleştiren protokoldür.", "explanations": {"A": "DOĞRU YANIT: File Transfer Protocol (FTP), bilgisayarlar arasında iki yönlü dosya aktarımı yapan protokol ve uygulama programlarının genel adıdır.", "B": "Yanlış: WWW (World Wide Web), metin, resim, ses ve videoları hiper metin (HTTP) yapısıyla sunan çoklu ortam web sistemidir.", "C": "Yanlış: HTML, dosya aktarım protokolü değil, web sayfalarını oluşturmaya yarayan işaretleme (kodlama) dilidir.", "D": "Yanlış: NNTP, internet üzerindeki tartışma ve haber grupları (Usenet) mesajlarını ileten protokoldür.", "E": "Yanlış: POP (Post Office Protocol), gelen e-postaları posta sunucusundan bilgisayara indirmeye yarayan e-posta protokolüdür."}}, {"id": 8005, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "5. Bluetooth'un Özellikleri", "question": "I. Gerçek zamanlı konum belirlemek için kullanılabilir.\nII. Farklı üretici firmaların farklı cihazları aynı profili ve standartları kullanarak birlikte çalışabilir.\nIII. Telif haklarıyla korunan bir teknolojidir.\nBluetooth teknolojisiyle ilgili yukarıdaki ifadelerden hangisi ya da hangileri doğrudur?", "code": null, "options": {"A": "Yalnız I", "B": "Yalnız II", "C": "I ve III", "D": "II ve III", "E": "I ve II"}, "answer": "E", "explanation": "Doğru Cevap: I ve II (E). Bluetooth gerçek zamanlı konum belirleme (Beacon/RTLS) için kullanılabilir ve küresel açık standartları sayesinde farklı üreticilerin cihazları birbiriyle uyumlu çalışır. III. madde yanlıştır çünkü Bluetooth telif haklarıyla korunan (ücretli/lisanslı) bir teknoloji değil, açık standartlı bir teknolojidir.", "explanations": {"A": "Yanlış: I. öncül doğrudur ancak II. öncül de doğrudur (farklı üreticilerin cihazları aynı standartla birlikte çalışır).", "B": "Yanlış: II. öncül doğrudur ancak I. öncül de doğrudur (Bluetooth gerçek zamanlı konum belirlemek için de kullanılır).", "C": "Yanlış: III. madde yanlıştır; Bluetooth telif haklarıyla korunan kapalı bir teknoloji değil, açık standartlı bir teknolojidir.", "D": "Yanlış: III. madde yanlıştır; Bluetooth telif hakkı/lisans ücreti gerektirmeyen açık bir standarttır.", "E": "DOĞRU YANIT: I ve II doğrudur. III. ifade yanlıştır çünkü Bluetooth telif haklarıyla korunan bir teknoloji değildir."}}, {"id": 8006, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "6. Wi-Fi Teknolojisinin Avantajları", "question": "I. WEP, WPA gibi şifreleme yöntemleriyle yüksek güvenlik sağlar.\nII. Global bir sistem olduğundan dolayı dünyanın her yerinde aynı şekilde çalışır.\nIII. Diğer kablosuz ağ olanağı sağlayan teknolojilere göre daha az güç tüketir.\nWi-Fi teknolojisinin avantajları ile ilgili olarak yukarıdakilerden hangisi ya da hangileri doğrudur?", "code": null, "options": {"A": "I ve II", "B": "Yalnız II", "C": "Yalnız III", "D": "I ve III", "E": "I, II ve III"}, "answer": "A", "explanation": "Doğru Cevap: I ve II (A). Wi-Fi WEP/WPA/WPA2 şifreleme sunar ve IEEE 802.11 global standardı ile dünyanın her yerinde aynı şekilde çalışır. III. madde yanlıştır: Wi-Fi diğer kısa mesafeli kablosuz ağlara (Bluetooth, ZigBee vb.) göre daha AZ değil, daha FAZLA güç tüketir (bu durum Wi-Fi'ın dezavantajıdır).", "explanations": {"A": "DOĞRU YANIT: I ve II doğrudur. III. madde yanlıştır çünkü yüksek güç tüketimi Wi-Fi'ın avantajı değil dezavantajıdır.", "B": "Yanlış: II. öncülün yanında I. öncül (WEP, WPA şifreleme güvenliği) de Wi-Fi'ın avantajları arasındadır.", "C": "Yanlış: III. madde yanlıştır; Wi-Fi diğer kablosuz teknolojilere (Bluetooth vb.) kıyasla daha fazla enerji tüketir.", "D": "Yanlış: III. madde yanlıştır; Wi-Fi mobil cihazların pilini hızla tükettiği için yüksek güç tüketimi bir dezavantajdır.", "E": "Yanlış: III. madde yanlış olduğu için I, II ve III seçeneği elenir."}}, {"id": 8007, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "7. Kablo TV'nin Özellikleri", "question": "Aşağıdakilerden hangisi Kablo TV'nin özellikleri arasında sayılmaz?", "code": null, "options": {"A": "Frekans kirlenmesinden etkilenmemesi", "B": "Yüksek kalitede ses ve görüntü iletimi sunması", "C": "Ücretsiz kullanılabilmesi", "D": "Hareket ve sesli denetim sunması", "E": "Etkileşimli (interaktif) hizmetler sunması"}, "answer": "C", "explanation": "Doğru Cevap: Ücretsiz kullanılabilmesi (C). Kablo TV, koaksiyel/fiber kablolar üzerinden abonelik ücreti karşılığında sunulan ücretli bir yayın sistemidir; ücretsiz değildir.", "explanations": {"A": "Yanlış (Kablo TV özelliğidir): Kablo üzerinden iletildiği için havadaki elektromanyetik frekans kirlenmesinden etkilenmez.", "B": "Yanlış (Kablo TV özelliğidir): Kablolu altyapı sayesinde yüksek kalitede ses ve görüntü iletimi sunar.", "C": "DOĞRU YANIT: Kablo TV ücretsiz değil, abonelik ücreti karşılığında kullanılan bir sistemdir.", "D": "Yanlış (Kablo TV özelliğidir): Gelişmiş alıcı kutuları ile hareket ve sesli denetim olanakları sunabilir.", "E": "Yanlış (Kablo TV özelliğidir): Çift yönlü kablo altyapısı sayesinde etkileşimli (interaktif) hizmetler ve internet sunar."}}, {"id": 8008, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "8. Dijital Yayın Uygulamaları", "question": "Aşağıdakilerden hangisi dijital yayın uygulamalarının özelliklerinden biri değildir?", "code": null, "options": {"A": "Çevrimiçi oyunlar oynama imkânı sunması", "B": "Bankacılık hizmetlerine imkân sağlaması", "C": "Film seçip izleme imkânı sunması", "D": "Evden alışveriş imkânı sunması", "E": "Sadece tek yönlü iletişime imkân vermesi"}, "answer": "E", "explanation": "Doğru Cevap: Sadece tek yönlü iletişime imkân vermesi (E). Sadece tek yönlü iletişim, geleneksel Analog TV yayınlarının özelliğidir. Dijital (Sayısal) yayın uygulamaları çift yönlü (etkileşimli/interaktif) iletişim sağlayarak evden alışveriş, bankacılık, VOD (film seçip izleme) ve oyun imkânı sunar.", "explanations": {"A": "Yanlış (Özelliğidir): Dijital yayın platformları interaktif yapısı sayesinde çevrimiçi oyun oynama imkânı sunar.", "B": "Yanlış (Özelliğidir): Çift yönlü veri iletimi ile TV üzerinden bankacılık işlemlerine imkân sağlar.", "C": "Yanlış (Özelliğidir): İsteğe bağlı video (VOD / Pay-Per-View) ile film seçip izleme imkânı sunar.", "D": "Yanlış (Özelliğidir): İnteraktif TV uygulamaları üzerinden evden alışveriş (t-ticaret) imkânı sunar.", "E": "DOĞRU YANIT: Dijital yayınlar tek yönlü değil çift yönlü (etkileşimli) iletişim sağlar; sadece tek yönlü olması Analog TV özelliğidir."}}, {"id": 8009, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "9. İntranetin Özellikleri", "question": "Aşağıdakilerden hangisi intranetin özellikleri arasında yer almaz?", "code": null, "options": {"A": "Sınırsız erişimli özel bir ağ olarak faaliyet gösterir", "B": "Açık ve esnek bağlantı yapısı sağlar", "C": "Kuruma özel bilgiyle sınırlıdır", "D": "Yetkili kişiler arasında iş birliği sağlar", "E": "Esnek bir bağlantı yapısı vardır"}, "answer": "A", "explanation": "Doğru Cevap: Sınırsız erişimli özel bir ağ olarak faaliyet gösterir (A). İntranet 'sınırsız erişimli' değildir; yalnızca kurum içindeki yetkili çalışanların erişimine izin veren, dış dünyaya (Firewall ile) kapalı/sınırlı bir kurum içi özel ağdır.", "explanations": {"A": "DOĞRU YANIT: İntranet sınırsız erişimli değildir; sadece kurum çalışanlarına ve yetkililere açık, erişimi sınırlandırılmış özel bir ağdır.", "B": "Yanlış (İntranet özelliğidir): Kurum içinde TCP/IP ve web standartlarıyla açık ve esnek bir bağlantı yapısı sağlar.", "C": "Yanlış (İntranet özelliğidir): İçeriği sadece ilgili kuruma özel bilgi ve dokümanlarla sınırlıdır.", "D": "Yanlış (İntranet özelliğidir): Kurum içindeki yetkili personel ve departmanlar arasında iş birliği sağlar.", "E": "Yanlış (İntranet özelliğidir): Web tabanlı mimarisi sayesinde kurum içinde esnek bir bağlantı yapısına sahiptir."}}, {"id": 8010, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "10. E-Ticaretin Alıcıya Dezavantajları", "question": "Aşağıdakilerden hangisi e-ticaretin alıcı açısından dezavantajları arasında yer almaz?", "code": null, "options": {"A": "Kredi kartı olmaması", "B": "Karşılıklı güven sorunu", "C": "Bazı mal ve hizmetlerin online alışverişinin zorluğu", "D": "Bazı malların gönderme sırasında özelliğini kaybetmesi", "E": "Reklamcılık ve pazarlama harcaması gerektirebilmesi"}, "answer": "E", "explanation": "Doğru Cevap: Reklamcılık ve pazarlama harcaması gerektirebilmesi (E). Reklam ve pazarlama bütçesi ayırmak alıcının (müşterinin) değil, malı satmak isteyen SATICININ (işletmenin) katlandığı bir maliyet/dezavantajdır.", "explanations": {"A": "Yanlış (Alıcı dezavantajıdır): Kredi kartı veya dijital ödeme aracı olmayan tüketicilerin e-ticaretten yararlanması zordur.", "B": "Yanlış (Alıcı dezavantajıdır): Alıcının sanal mağazaya ve ödeme güvenliğine duyduğu güven endişesi alıcı açısından dezavantajdır.", "C": "Yanlış (Alıcı dezavantajıdır): Denenerek alınması gereken bazı ürünlerin internetten incelenmesinin zorluğu alıcı dezavantajıdır.", "D": "Yanlış (Alıcı dezavantajıdır): Kargo/taşıma sürecinde bozulabilecek gıda vb. ürünlerin özelliğini kaybetmesi alıcı için dezavantajdır.", "E": "DOĞRU YANIT: Reklamcılık ve pazarlama harcaması yapmak alıcıyı değil, SATICIYI (işletmeyi) ilgilendiren bir unsurdur."}}, {"id": 8011, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "11. WWW (World Wide Web)", "question": "Aşağıdakilerden hangisi \"internet üzerinden metin, resim, ses, video ve animasyon gibi farklı yapılardaki verileri bir arada işleyen ve etkileşimli olarak kullanımını sağlayan çoklu ortam sistemi\"ne verilen addır?", "code": null, "options": {"A": "TELNET", "B": "WWW", "C": "FTP", "D": "GSM", "E": "E-POSTA"}, "answer": "B", "explanation": "Doğru Cevap: WWW (World Wide Web - B). Metin, grafik, ses, video ve animasyon gibi çoklu ortam (multimedya) bileşenlerini hiper metin (HTTP/HTML) yapısıyla etkileşimli olarak sunan bilgi sistemine WWW denir.", "explanations": {"A": "Yanlış: TELNET, uzaktaki bir bilgisayara metin tabanlı komut satırı (terminal) üzerinden bağlanmayı sağlayan protokoldür.", "B": "DOĞRU YANIT: WWW (World Wide Web), metin, resim, ses, video ve animasyonu etkileşimli sunan çoklu ortam sistemidir.", "C": "Yanlış: FTP (File Transfer Protocol), bilgisayarlar arasında yalnızca dosya transferi yapmaya yarayan protokoldür.", "D": "Yanlış: GSM (Global System for Mobile Communications), hücresel mobil telefon iletişim standardıdır.", "E": "Yanlış: E-POSTA, elektronik mektup gönderip alma (SMTP/POP3/IMAP) sistemidir."}}, {"id": 8012, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "12. GPRS Teknolojisi", "question": "I. İletişim hızı 171.2 kbps' e çıkan teknolojidir.\nII. Dial-up bağlantı gerekli değildir.\nIII. GPRS ile WAP a bağlanmak mümkündür.\nGPRS ile ilgili yukarıdaki ifadelerden hangisi ya da hangileri doğrudur?", "code": null, "options": {"A": "Yalnız I", "B": "I ve II", "C": "I ve III", "D": "II ve III", "E": "I, II ve III"}, "answer": "E", "explanation": "Doğru Cevap: I, II ve III (E). GPRS (General Packet Radio Service - 2.5G), paket anahtarlamalı veri iletimi sayesinde hızı teorik olarak 171.2 kbps'e çıkarır, sürekli bağlı (always-on) olduğu için çevirmeli (dial-up) bağlantı gerektirmez ve WAP üzerinden mobil internet erişimi sağlar.", "explanations": {"A": "Yanlış: I. öncül doğrudur ancak II ve III. öncüller de GPRS için doğrudur.", "B": "Yanlış: I ve II'nin yanında III. öncül de doğrudur (GPRS ile WAP sayfalarına bağlanılabilir).", "C": "Yanlış: II. öncül de doğrudur; GPRS paket anahtarlamalı olduğundan dial-up bağlantı gerektirmez.", "D": "Yanlış: I. öncül de doğrudur; GPRS'in maksimum veri iletişim hızı 171.2 kbps'tir.", "E": "DOĞRU YANIT: Her üç ifade de (171.2 kbps hız, dial-up gerektirmemesi ve WAP bağlantısı sağlaması) GPRS için doğrudur."}}, {"id": 8013, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "13. GSM Standartları (EDGE)", "question": "Aşağıdakilerden hangisi bir kablosuz ağ içerisinde kablosuz veri transfer ve uygulamalarına olanak veren GSM standartlarından biridir?", "code": null, "options": {"A": "IMEI", "B": "Bluetooth", "C": "Wi-Fi", "D": "EDGE", "E": "PDA"}, "answer": "D", "explanation": "Doğru Cevap: EDGE (Enhanced Data Rates for GSM Evolution - D). GSM şebekesi üzerinde (CSD, HSCSD, GPRS ile birlikte) kablosuz veri transferini 384 kbps hıza çıkaran hücresel GSM standardı EDGE'dir (2.75G).", "explanations": {"A": "Yanlış: IMEI bir veri transfer standardı değil, mobil cihazların 15 haneli uluslararası donanım kimlik numarasıdır.", "B": "Yanlış: Bluetooth bir GSM (hücresel) standardı değil, kısa mesafeli kişisel alan ağı (WPAN) teknolojisidir.", "C": "Yanlış: Wi-Fi bir GSM standardı değil, kablosuz yerel alan ağı (WLAN - IEEE 802.11) teknolojisidir.", "D": "DOĞRU YANIT: EDGE, GSM şebekeleri içerisinde yüksek hızlı kablosuz veri transferine olanak veren GSM standardıdır.", "E": "Yanlış: PDA (Personal Digital Assistant), bir iletişim standardı değil, cep bilgisayarı (donanım cihazı) türüdür."}}, {"id": 8014, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "14. 5G İndirme Hızı", "question": "5G teknolojisiyle indirme hızlarının saniyede kaç Gigabite çıkması beklenmektedir?", "code": null, "options": {"A": "1 Gigabit", "B": "2 Gigabit", "C": "3 Gigabit", "D": "5 Gigabit", "E": "10 Gigabit"}, "answer": "E", "explanation": "Doğru Cevap: 10 Gigabit (E). BTS321 ders notlarına göre 4G'de 100 Mbps – 1 Gbps seviyesinde olan indirme hızlarının, 5G teknolojisiyle birlikte saniyede 10 Gigabit (10 Gbps) seviyesine çıkması hedeflenmektedir.", "explanations": {"A": "Yanlış: 1 Gigabit hız 4G / LTE-Advanced teknolojisinde ulaşılan teorik hız sınırıdır.", "B": "Yanlış: 5G'nin hedeflediği maksimum indirme hızı 2 Gigabit'ten çok daha yüksektir (10 Gigabit).", "C": "Yanlış: 3 Gigabit, ders kitabında belirtilen 5G tepe indirme hızı değildir.", "D": "Yanlış: 5 Gigabit ('5G' isminden türetilmiş çeldiricidir); 5G'de '5' nesli ifade eder, hız hedefi 10 Gigabit'tir.", "E": "DOĞRU YANIT: 5G teknolojisiyle veri indirme hızlarının saniyede 10 Gigabite (10 Gbps) çıkması beklenmektedir."}}, {"id": 8015, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "15. HTTP Protokolü Açılımı", "question": "Web ortamında iletişimi sağlayan protokole verilen isim olan HTTP-Hiper Metin Transfer Protokolü'nün açılımı aşağıdakilerden hangisidir?", "code": null, "options": {"A": "Hyper Test Transfer Language", "B": "Hyper Test Transport Language", "C": "Hyper Text Transport Protocol", "D": "Hyper Text Transfer Protocol", "E": "Hyper Test Transfer Protocol"}, "answer": "D", "explanation": "Doğru Cevap: Hyper Text Transfer Protocol (D). Kelime karşılıkları: Hyper Text = Hiper Metin, Transfer = Transfer/Aktarım, Protocol = Protokol.", "explanations": {"A": "Yanlış: 'Test' değil 'Text' (Metin), 'Language' (Dil) değil 'Protocol' (Protokol) olmalıdır.", "B": "Yanlış: 'Test', 'Transport' ve 'Language' kelimelerinin tamamı hatalıdır.", "C": "Yanlış: 'Transport' değil 'Transfer' olmalıdır.", "D": "DOĞRU YANIT: HTTP'nin doğru açılımı 'Hyper Text Transfer Protocol'dür.", "E": "Yanlış: 'Hyper Test' yazıldığı için yanlıştır ('Hyper Text' olmalıdır)."}}, {"id": 8016, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "16. Yönlendirici (Router)", "question": "\"..., büyük ve değişik protokollere sahip bilgisayar ağlarını birleştirir, ağ üzerindeki tüm bilgisayarların adreslerini bilir ve buna göre kendilerine gelen paketi en uygun şekilde hedefe yollar.\" Cümlede boş bırakılan yere getirilebilecek en iyi ifade hangisidir?", "code": null, "options": {"A": "Alan Adı", "B": "İç Geçit", "C": "Dış Geçit", "D": "Host", "E": "Yönlendirici"}, "answer": "E", "explanation": "Doğru Cevap: Yönlendirici (Router - E). Ağlar arası trafik polisi görevi görerek gelen veri paketlerinin IP adreslerine bakıp en uygun rotadan hedefe ileten ağ cihazı Yönlendiricidir.", "explanations": {"A": "Yanlış: Alan Adı (Domain Name), IP adreslerinin insanlar tarafından kolay hatırlanmasını sağlayan web adres ismidir.", "B": "Yanlış: İç Geçit (Interior Gateway), aynı otonom sistem içindeki yönlendirme protokolü kavramıdır.", "C": "Yanlış: Dış Geçit (Exterior Gateway), farklı otonom sistemler arası yönlendirme protokolü kavramıdır.", "D": "Yanlış: Host, ağa bağlı olan her bir uç bilgisayarın/sunucunun kendisidir; paketleri yönlendiren ara cihaz değildir.", "E": "DOĞRU YANIT: Yönlendirici (Router), ağları birleştirir ve gelen paketleri adreslerine göre en uygun yoldan hedefe yollar."}}, {"id": 8017, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "17. İlk İnternet Telefon Teknolojisi", "question": "İlk İnternet telefon teknolojisinin kullanılmaya başlandığı yıl hangisidir?", "code": null, "options": {"A": "1996", "B": "1997", "C": "1998", "D": "1999", "E": "2000"}, "answer": "A", "explanation": "Doğru Cevap: 1996 (A). BTS321 ders notlarında İnternetin Tarihsel Gelişimi kronolojisinde 'İlk İnternet telefon teknolojisi 1996 yılında kullanılmaya başlanmıştır' bilgisi yer almaktadır.", "explanations": {"A": "DOĞRU YANIT: İlk İnternet telefon (VoIP) teknolojisi 1996 yılında kullanılmaya başlanmıştır.", "B": "Yanlış: 1997 yılı değil, ders notlarındaki resmi tarihsel kronolojiye göre 1996 yılıdır.", "C": "Yanlış: 1998 yılında internet üzerinden ticari faaliyetler hız kazanmıştır ancak ilk internet telefonu 1996'dadır.", "D": "Yanlış: 1999 yılı çeldirici seçenektir.", "E": "Yanlış: 2000 yılı çeldirici seçenektir."}}, {"id": 8018, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "18. E-Ticaretin Yöneticilere Yararları", "question": "Aşağıdakilerden hangisi e-ticaretin yöneticilere yararları arasında yer almaz?", "code": null, "options": {"A": "Elektronikleşme", "B": "Hareketlilik", "C": "Yönetsel kararlar için bilgiye hızlı erişim", "D": "Yaşam standardının yükselmesi", "E": "Çalışma grupları oluşturma imkânı"}, "answer": "D", "explanation": "Doğru Cevap: Yaşam standardının yükselmesi (D). Yaşam standardının yükselmesi e-ticaretin 'yöneticilere' özel bir yararı değil, tüm 'TOPLUMA' sağladığı toplumsal yararlar (Hafta-2) arasındadır.", "explanations": {"A": "Yanlış (Yöneticilere yararıdır): Yönetsel süreçlerin elektronikleşmesi yöneticilere hız ve denetim kolaylığı sağlar.", "B": "Yanlış (Yöneticilere yararıdır): Yöneticilere ofis dışından da işleri yönetebilme (hareketlilik/mobilite) olanağı tanır.", "C": "Yanlış (Yöneticilere yararıdır): Yönetsel kararlar için gerekli rapor ve bilgilere anında erişim sağlar.", "D": "DOĞRU YANIT: Yaşam standardının yükselmesi yöneticilere özgü değil, e-ticaretin 'toplumsal yararları' arasındadır.", "E": "Yanlış (Yöneticilere yararıdır): Yöneticilerin farklı yerlerdeki çalışanlarla sanal çalışma grupları oluşturmasına imkân verir."}}, {"id": 8019, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "19. E-Ticaretin Satıcıya Dezavantajları", "question": "Aşağıdakilerden hangisi e-ticaretin satıcı açısından dezavantajlarından biri değildir?", "code": null, "options": {"A": "Müşteri devamlılığını sağlamak", "B": "Sunulan tekliflerin sık sık değiştirilmesi", "C": "Piyasada iyi bir izlenim bırakma gerekliliği", "D": "Durumsal olarak farklı fiyat ve teklif verme zorluğu", "E": "Ürünler arasından seçim yapma zorluğu"}, "answer": "E", "explanation": "Doğru Cevap: Ürünler arasından seçim yapma zorluğu (E). İnternetteki binlerce ürün ve bilgi yoğunluğu karşısında seçim yapma zorluğu yaşamak SATICININ değil, ALICININ (tüketicinin) yaşadığı bir dezavantajdır.", "explanations": {"A": "Yanlış (Satıcı dezavantajıdır): Rakip sitelere bir tıkla geçilebildiği için müşteri sadakati/devamlılığı sağlamak satıcı için zordur.", "B": "Yanlış (Satıcı dezavantajıdır): Dinamik rekabet yüzünden teklif ve kampanyaları sürekli güncelleme zorunluluğu satıcı dezavantajıdır.", "C": "Yanlış (Satıcı dezavantajıdır): Dijital ortamda marka imajı ve iyi izlenim bırakma baskısı satıcı açısından bir zorluktur.", "D": "Yanlış (Satıcı dezavantajıdır): Web sitesinde sabit fiyatlar göründüğünden müşteriye göre durumsal pazarlık/fiyat verme zorluğu satıcıya aittir.", "E": "DOĞRU YANIT: Ürünler arasından seçim yapma zorluğu (karar felci) satıcının değil, ALICININ (müşterinin) dezavantajıdır."}}, {"id": 8020, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "20. E-Ticaretin Ekonomik Hayata Etkileri", "question": "Aşağıdakilerden hangisi e-ticaretin ekonomik hayatta etkilediği faaliyetler arasında yer almaz?", "code": null, "options": {"A": "Pazarlama", "B": "Finansman ve sigorta", "C": "Tedarik", "D": "Ticari işlemler", "E": "Örgütsel iletişim"}, "answer": "E", "explanation": "Doğru Cevap: Örgütsel iletişim (E). Pazarlama, finansman/sigorta, tedarik ve ticari işlemler doğrudan ekonomik hayattaki ticari faaliyetlerdir. Örgütsel iletişim ise ekonomik faaliyet değil, işletme içi yönetsel/örgütsel bir süreçtir.", "explanations": {"A": "Yanlış (Ekonomik faaliyettir): Pazarlama ve reklamcılık e-ticaretin doğrudan dönüştürdüğü ekonomik faaliyetlerdendir.", "B": "Yanlış (Ekonomik faaliyettir): Finansman, bankacılık ve sigorta işlemleri ekonomik faaliyetler arasında yer alır.", "C": "Yanlış (Ekonomik faaliyettir): Tedarik ve lojistik faaliyetleri ekonomik hayatın temel halkalarındandır.", "D": "Yanlış (Ekonomik faaliyettir): Sipariş, alım-satım ve ödeme gibi ticari işlemler doğrudan ekonomik faaliyettir.", "E": "DOĞRU YANIT: Örgütsel iletişim, makro ekonomik bir ticari faaliyet değil, kurum içi yönetsel bir iletişim sürecidir."}}, {"id": 8021, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "21. E-Ticaretin Örgütlere Yararları", "question": "Aşağıdakilerden hangisi e-ticaretin örgütlere yararları arasında yer almaz?", "code": null, "options": {"A": "Yer sınırsızlığı ve kitlesel erişim olanağı", "B": "Rekabeti zorlaştırması", "C": "Maliyet azalımı", "D": "İş süreçlerinin reorganizasyonu", "E": "Rekabetin yaygınlaşması"}, "answer": "B", "explanation": "Doğru Cevap: Rekabeti zorlaştırması (B). Rekabetin zorlaşması bir işletme (örgüt) için 'yarar' (avantaj) değil, katlanılması gereken bir zorluk/tehdittir.", "explanations": {"A": "Yanlış (Örgütlere yararıdır): Fiziksel mağaza sınırı olmadan küresel pazara erişim olanağı sağlar.", "B": "DOĞRU YANIT: Rekabeti zorlaştırması örgütler için bir yarar değil, olumsuz bir baskı/dezavantajdır.", "C": "Yanlış (Örgütlere yararıdır): İşlem, stok, kırtasiye ve dağıtım maliyetlerinde önemli azalım sağlar.", "D": "Yanlış (Örgütlere yararıdır): İş süreçlerinin yeniden yapılandırılarak (reorganizasyon) verimliliğin artırılmasını sağlar.", "E": "Yanlış (Örgütlere yararıdır): Küçük ve orta ölçekli işletmelerin de pazara girmesiyle rekabetin yaygınlaşmasını sağlar."}}, {"id": 8022, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "22. EDI'nin Dezavantajları", "question": "Aşağıdakilerden hangisi EDI'nin dezavantajlarından biri değildir?", "code": null, "options": {"A": "Yüksek maliyet", "B": "Sınırlı erişim", "C": "Yaygın kullanım", "D": "Kısmi çözümler sunması", "E": "Kapalı dünya"}, "answer": "C", "explanation": "Doğru Cevap: Yaygın kullanım (C). EDI (Elektronik Veri Değişimi) kurulumu çok pahalı, katı standartlı ve kapalı bir ağ yapısı gerektirdiğinden KOBİ'ler tarafından yaygın kullanılamaz. Dolayısıyla 'yaygın kullanım' EDI'nin bir dezavantajı değildir.", "explanations": {"A": "Yanlış (EDI dezavantajıdır): Özel ağ (VAN) ve yazılım yatırımı gerektirdiği için kurulum/işletim maliyeti yüksektir.", "B": "Yanlış (EDI dezavantajıdır): Sadece sisteme dahil olan anlaşmalı ticari ortaklar arasında sınırlı erişim sunar.", "C": "DOĞRU YANIT: Yaygın kullanım bir dezavantaj değildir; kaldı ki EDI yüksek maliyeti nedeniyle yaygın kullanıma sahip değildir.", "D": "Yanlış (EDI dezavantajıdır): Süreçlerin tamamını değil yalnızca standartlaştırılmış belge değişimini kapsayan kısmi çözümler sunar.", "E": "Yanlış (EDI dezavantajıdır): Dışarıya kapalı, esnek olmayan bir 'kapalı dünya' yapısına sahiptir."}}, {"id": 8023, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "23. E-Ticaretin Teknik Dezavantajları", "question": "Aşağıdakilerden hangisi e-ticaretin teknik dezavantajları arasında yer almaz?", "code": null, "options": {"A": "Karşılıklı güven sorunu", "B": "Güvenlik", "C": "Bant genişliğinin sınırlı olması", "D": "Özel web sunucuları gereksinimi", "E": "Yazılım ve donanım uyumsuzluğu"}, "answer": "A", "explanation": "Doğru Cevap: Karşılıklı güven sorunu (A). Karşılıklı güven sorunu donanımsal veya yazılımsal bir 'teknik' sorun değil; alıcı ve satıcı arasındaki psikolojik, sosyal ve hukuki (teknik olmayan) bir dezavantajdır.", "explanations": {"A": "DOĞRU YANIT: Karşılıklı güven sorunu teknik bir dezavantaj değil, sosyal/psikolojik (teknik olmayan) bir dezavantajdır.", "B": "Yanlış (Teknik dezavantajdır): Sistem güvenliği, şifreleme ve siber saldırı açıkları teknik dezavantajlar arasındadır.", "C": "Yanlış (Teknik dezavantajdır): Telekomünikasyon altyapısı ve bant genişliği yetersizliği doğrudan teknik bir sorundur.", "D": "Yanlış (Teknik dezavantajdır): Yüksek trafikli işlemler için özel web sunucuları gereksinimi teknik bir unsurdur.", "E": "Yanlış (Teknik dezavantajdır): Hızla değişen yazılım/protokollerle mevcut donanımların uyumsuzluğu teknik dezavantajdır."}}, {"id": 8024, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "24. 5G Teknolojisinin Yaygınlaşma Dönemi", "question": "Dünyada 5G teknolojilerinin hangi yıllarda yaygınlık olarak zirve yapması beklenmektedir?", "code": null, "options": {"A": "2020'li yıllarda", "B": "2030'lu yıllarda", "C": "2040'lı yıllarda", "D": "2050'li yıllarda", "E": "2060'lı yıllarda"}, "answer": "A", "explanation": "Doğru Cevap: 2020'li yıllarda (A). Ders notlarında (Hafta-5 5G bölümü) 2020'li yıllarda yaygınlaşarak zirve yapmasının beklendiği ifade edilmektedir (Not: Sınıf içi Forms görüntüsünde imleç 2040'lı yıllar üzerinde de görüntülenmiştir; ancak 5G'nin küresel yayılım dönemi 2020'li yıllardır).", "explanations": {"A": "DOĞRU YANIT: 5G teknolojilerinin 2020'li yıllarda dünya genelinde yaygınlaşarak zirve yapması beklenmektedir.", "B": "Yanlış: 2030'lu yıllar 6G teknolojisinin ticarileşme ve yaygınlaşma dönemi olarak öngörülmektedir.", "C": "Yanlış: 2040'lı yıllar 5G için çok geç bir dönemdir (Sınıf fotoğrafında işaretli görünse de teknik ve ders notu karşılığı 2020'li yıllardır).", "D": "Yanlış: 2050'li yıllar çeldirici seçenektir.", "E": "Yanlış: 2060'lı yıllar çeldirici seçenektir."}}, {"id": 8025, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "25. E-Ticaretin Tüketicilere Yararları", "question": "Aşağıdakilerden hangisi e-ticaretin tüketicilere yararları arasında yer almaz?", "code": null, "options": {"A": "Kesintisiz hizmet alma", "B": "Yer bağımsızlığı", "C": "Etkileşimli tedarik zinciri yönetimi", "D": "Seçim yapma olanağı", "E": "Sanal açık artırma katılımı"}, "answer": "C", "explanation": "Doğru Cevap: Etkileşimli tedarik zinciri yönetimi (C). Tedarik zinciri yönetimi bireysel tüketicinin (müşterinin) değil, mal üreten ve satan ÖRGÜTLERİN (işletmelerin) kendi aralarında (B2B) elde ettiği örgütsel bir yarardır.", "explanations": {"A": "Yanlış (Tüketiciye yararıdır): Tüketiciler 7 gün 24 saat kesintisiz alışveriş hizmeti alabilir.", "B": "Yanlış (Tüketiciye yararıdır): Tüketiciler evlerinden veya istedikleri her yerden (yer bağımsız) alışveriş yapabilir.", "C": "DOĞRU YANIT: Etkileşimli tedarik zinciri yönetimi tüketicilere değil, ÖRGÜTLERE (firmalara) sağlanan bir yarardır.", "D": "Yanlış (Tüketiciye yararıdır): Tüketicilere çok sayıda ürün ve satıcı arasından karşılaştırmalı seçim yapma olanağı sunar.", "E": "Yanlış (Tüketiciye yararıdır): Tüketicilerin sanal açık artırmalara katılarak uygun fiyatla ürün almasını sağlar."}}, {"id": 8026, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "26. E-Ticaretin Toplumsal Yararları", "question": "Aşağıdakilerden hangisi e-ticaretin toplumsal yararları arasında yer almaz?", "code": null, "options": {"A": "Trafik yoğunluğu ve hava kirliliğinin azalmasına katkı", "B": "Yaşam standardının yükselmesi", "C": "Etkileşimli stok yönetimi", "D": "Fiziksel olarak ulaşılması mümkün olmayan mal ve hizmetlere erişim", "E": "Kamu hizmetlerinin ulaştırılması"}, "answer": "C", "explanation": "Doğru Cevap: Etkileşimli stok yönetimi (C). Etkileşimli stok yönetimi toplumsal bir yarar değil, işletmelerin maliyetlerini düşüren ÖRGÜTSEL bir yarardır (Hafta-2 Konu Özeti).", "explanations": {"A": "Yanlış (Toplumsal yarardır): İnsanların alışveriş için trafiğe çıkmaması hava kirliliği ve trafik yoğunluğunu azaltır.", "B": "Yanlış (Toplumsal yarardır): Daha ucuz ürünlere kolay erişim toplumun genel yaşam standardını yükseltir.", "C": "DOĞRU YANIT: Etkileşimli stok yönetimi topluma değil, işletmelere (örgütlere) sağlanan örgütsel bir yarardır.", "D": "Yanlış (Toplumsal yarardır): Uzak bölgelerdeki insanların fiziksel olarak ulaşamadığı ürün/eğitim/sağlık hizmetlerine erişimini sağlar.", "E": "Yanlış (Toplumsal yarardır): E-devlet uygulamalarıyla sağlık, eğitim ve vergi gibi kamu hizmetlerinin topluma etkin ulaştırılmasını sağlar."}}, {"id": 8027, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "27. Dünyada E-Ticaret Pazar Payı (2018)", "question": "2018 yılı verilerine göre dünyada e-ticaret pazar payı en yüksek olan ülke hangisidir?", "code": null, "options": {"A": "Çin", "B": "Amerika Birleşik Devletleri", "C": "Birleşik Krallık", "D": "Almanya", "E": "Hindistan"}, "answer": "A", "explanation": "Doğru Cevap: Çin (A). BTS321 Hafta-2 ders notlarındaki 2018 yılı küresel e-ticaret verilerine göre Çin, yaklaşık 636 milyar dolarlık hacim ve en yüksek pazar payı ile dünyada 1. sıradadır (2. sırada ABD, 3. sırada Birleşik Krallık yer alır).", "explanations": {"A": "DOĞRU YANIT: 2018 yılı verilerine göre dünyada e-ticaret pazar payı en yüksek olan ülke Çin'dir.", "B": "Yanlış: Amerika Birleşik Devletleri (ABD), Çin'in ardından dünyada 2. sırada yer almaktadır.", "C": "Yanlış: Birleşik Krallık, Avrupa'da lider olmakla birlikte dünya sıralamasında Çin ve ABD'nin gerisindedir.", "D": "Yanlış: Almanya, Avrupa'nın önde gelen pazarlarından biridir ancak dünyada 1. sırada değildir.", "E": "Yanlış: Hindistan hızla büyüyen bir pazardır ancak 2018 verilerinde pazar payı lideri Çin'dir."}}, {"id": 8028, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "28. EDI'nin Faydaları", "question": "Aşağıdakilerden hangisi EDI'nin faydaları arasında değildir?", "code": null, "options": {"A": "Hızlı ve doğru veri akışı", "B": "Daha etkin denetim yöntemlerinin geliştirilmesi", "C": "Üretkenliğin ve karlılığın artması", "D": "Bilgi yoğunluğu", "E": "İş ilişkilerinin geliştirilmesi"}, "answer": "D", "explanation": "Doğru Cevap: Bilgi yoğunluğu (D). EDI (Elektronik Veri Değişimi), kağıt evrak karmaşasını ve gereksiz bilgi yığınını azaltarak standart ve yalın veri akışı sağlamak için kullanılır; 'bilgi yoğunluğu' bir fayda değil, kaçınılan bir sorundur.", "explanations": {"A": "Yanlış (EDI faydasıdır): İnsan müdahalesi olmadan bilgisayarlar arası hızlı ve hatasız veri akışı sağlar.", "B": "Yanlış (EDI faydasıdır): Kayıtların elektronik izlenebilirliği sayesinde daha etkin denetim yöntemleri geliştirilmesini sağlar.", "C": "Yanlış (EDI faydasıdır): Zaman ve maliyet tasarrufu sağlayarak işletmenin üretkenliğini ve karlılığını artırır.", "D": "DOĞRU YANIT: Bilgi yoğunluğu EDI'nin bir faydası değildir; EDI aksine evrak ve bilgi karmaşasını ortadan kaldırır.", "E": "Yanlış (EDI faydasıdır): Tedarikçi ve alıcı firmalar arasındaki ticari iş ilişkilerinin geliştirilmesini sağlar."}}, {"id": 8029, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "29. Smart TV (Akıllı TV)", "question": "Farklı bir televizyon teknolojisi olmayıp sahip olduğu işletim sistemi sayesinde ekstra özelliklerin kullanılabilmesine olanak sağlayan görüntüleme sistemine ne ad verilir?", "code": null, "options": {"A": "Analog TV", "B": "Dijital TV", "C": "Sayısal TV", "D": "Smart TV", "E": "İnteraktif TV"}, "answer": "D", "explanation": "Doğru Cevap: Smart TV (D). Smart TV (Akıllı TV), başlı başına farklı bir yayıncılık/ekran teknolojisi olmayıp, içerisine entegre edilen işletim sistemi (Android TV, Tizen, webOS vb.) sayesinde internete bağlanma ve uygulama çalıştırma gibi ekstra özellikler sunan sistemdir.", "explanations": {"A": "Yanlış: Analog TV, radyo dalgalarıyla tek yönlü ses ve görüntü ileten geleneksel televizyon yayıncılığıdır.", "B": "Yanlış: Dijital TV, yayın sinyallerinin 0 ve 1'lerle (sayısal) kodlanarak iletildiği yayın teknolojisidir.", "C": "Yanlış: Sayısal TV, Dijital TV'nin Türkçe karşılığıdır; yayın iletim teknolojisini ifade eder.", "D": "DOĞRU YANIT: Smart TV, sahip olduğu işletim sistemi sayesinde ekstra uygulama ve internet özelliklerinin kullanılmasını sağlar.", "E": "Yanlış: İnteraktif TV, izleyicinin yayınla etkileşime geçebildiği yayıncılık kavramıdır; işletim sistemi tanımı doğrudan Smart TV'ye aittir."}}, {"id": 8030, "course": "eticaret_vize", "week": 1, "week_title": "Bölüm 1: 30 Çıkmış Test Sorusu", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - 30 Çıkmış Test Sorusu", "category": "30. İnternetin Temeli (ARPANET)", "question": "İnternet'in temelini oluşturan ilk bilgisayar ağı aşağıdakilerden hangisidir?", "code": null, "options": {"A": "BBN", "B": "NSFNET", "C": "DARPA", "D": "ARPANET", "E": "NWG"}, "answer": "D", "explanation": "Doğru Cevap: ARPANET (D). 1969 yılında ABD Savunma Bakanlığı bünyesinde paket anahtarlama teknolojisiyle kurulan ve günümüz İnternet'inin temelini (atasını) oluşturan ilk bilgisayar ağı ARPANET'tir.", "explanations": {"A": "Yanlış: BBN, ARPANET için IMP (Interface Message Processor) yönlendirici donanımlarını geliştiren teknoloji şirketidir.", "B": "Yanlış: NSFNET, 1980'lerde Ulusal Bilim Vakfı tarafından ARPANET sonrasında üniversiteleri bağlamak için kurulan omurga ağdır.", "C": "Yanlış: DARPA, ağın kendisi değil, projeyi finanse eden ABD Savunma Bakanlığı İleri Araştırma Projeleri Ajansıdır (kurumdur).", "D": "DOĞRU YANIT: ARPANET, 1969'da kurulan ve İnternet'in temelini oluşturan ilk paket anahtarlamalı bilgisayar ağıdır.", "E": "Yanlış: NWG (Network Working Group), protokol standartlarını (RFC) hazırlayan çalışma grubudur."}}, {"id": 8031, "course": "eticaret_vize", "week": 2, "week_title": "Bölüm 2: Görsellerdeki Ek Sınav Soruları", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - Görsellerdeki Ek Sorular", "category": "Ek Soru 1: Bant Genişliği (Hafta-2)", "question": "\"Bant genişliği\" kavramı aşağıdakilerden hangisiyle ilişkilidir?", "code": null, "options": {"A": "Pazarlama", "B": "Hız", "C": "Güvenlik", "D": "Stok yönetimi", "E": "Kredi kartı"}, "answer": "B", "explanation": "Doğru Cevap: Hız (B). Bant genişliği (Bandwidth), bir iletişim kanalının birim zamanda (saniyede) taşıyabileceği maksimum veri miktarını (bps, Mbps, Gbps) yani veri iletim HIZINI ifade eder.", "explanations": {"A": "Yanlış: Pazarlama ticari bir faaliyettir, ağ iletişim kapasitesi olan bant genişliği ile ilişkili değildir.", "B": "DOĞRU YANIT: Bant genişliği (Bandwidth), internet ve ağ bağlantılarındaki veri aktarım hızı ve kapasitesiyle ilişkilidir.", "C": "Yanlış: Güvenlik şifreleme ve erişim denetimiyle ilgilidir.", "D": "Yanlış: Stok yönetimi lojistik ve tedarik zinciri kavramıdır.", "E": "Yanlış: Kredi kartı elektronik ödeme aracıdır."}}, {"id": 8032, "course": "eticaret_vize", "week": 2, "week_title": "Bölüm 2: Görsellerdeki Ek Sınav Soruları", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - Görsellerdeki Ek Sorular", "category": "Ek Soru 2: Tek Taraflı TV Yayınları (Hafta-3)", "question": "Aşağıdakilerden hangisi tek taraflı televizyon yayınları ile yapılabilen elektronik ticaret faaliyetleri arasında yer almaz?", "code": null, "options": {"A": "Reklam", "B": "Fatura ödeme", "C": "Tanıtım", "D": "Tele alış veriş", "E": "Bilgilendirme"}, "answer": "B", "explanation": "Doğru Cevap: Fatura ödeme (B). Geleneksel tek yönlü televizyon yayınlarıyla mal/hizmet reklamı, tanıtımı, bilgilendirme ve ekrandaki telefon numarasını arayarak tele-alışveriş yapılabilir; ancak TV üzerinden doğrudan 'fatura ödeme' yapılabilmesi için çift yönlü (etkileşimli/dijital) yayın altyapısı gerekir.", "explanations": {"A": "Yanlış: Tek taraflı TV yayınlarında ürün ve hizmet reklamları yaygın olarak yapılır.", "B": "DOĞRU YANIT: Fatura ödeme işlemi çift yönlü veri iletişimi gerektirdiğinden tek taraflı TV yayınlarıyla doğrudan yapılamaz.", "C": "Yanlış: Ürünlerin görsel ve işitsel tanıtımı tek taraflı TV yayınlarıyla yapılabilir.", "D": "Yanlış: TV'de tanıtılan ürünün telefonla sipariş edildiği tele-alışveriş tek taraflı TV yayınlarıyla gerçekleştirilir.", "E": "Yanlış: Tüketicileri ürün/hizmet hakkında bilgilendirme tek taraflı TV yayınlarıyla yapılabilir."}}, {"id": 8033, "course": "eticaret_vize", "week": 2, "week_title": "Bölüm 2: Görsellerdeki Ek Sınav Soruları", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - Görsellerdeki Ek Sorular", "category": "Ek Soru 3: Elektronik Veri Değişimi Tanımı (Hafta-3)", "question": "\"......................., ticaret yapan kurumlar arasında iş bilgilerinin ve dokümanlarının tüm taraflar tarafından kullanılabilecek şekilde elektronik iletişim araçlarıyla iletilmesini sağlayan bir araçtır.\"\nCümlede boş bırakılan yere gelecek en uygun ifade aşağıdakilerden hangisidir?", "code": null, "options": {"A": "Extranet", "B": "Televizyon", "C": "Sayısal (digital) televizyon", "D": "Smart TV", "E": "Elektronik veri değişimi"}, "answer": "E", "explanation": "Doğru Cevap: Elektronik veri değişimi (EDI - E). Ticaret yapan iki kurum (B2B) arasında sipariş formu, fatura, irsaliye gibi standart iş dokümanlarının elektronik iletişim araçlarıyla doğrudan bilgisayarlar arasında iletilmesini sağlayan araca Elektronik Veri Değişimi (EDI) denir.", "explanations": {"A": "Yanlış: Extranet, farklı yerlerdeki intranetleri internet/VPN üzerinden birbirine bağlayan ağ yapısıdır.", "B": "Yanlış: Televizyon görsel/işitsel yayın aracıdır, kurumlar arası doküman değişim standardı değildir.", "C": "Yanlış: Sayısal televizyon dijital TV yayın teknolojisidir.", "D": "Yanlış: Smart TV işletim sistemli televizyondur.", "E": "DOĞRU YANIT: Elektronik veri değişimi (EDI), ticaret yapan kurumlar arasında standart iş dokümanlarının elektronik iletimini sağlar."}}, {"id": 8034, "course": "eticaret_vize", "week": 2, "week_title": "Bölüm 2: Görsellerdeki Ek Sınav Soruları", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - Görsellerdeki Ek Sorular", "category": "Ek Soru 4: Alan Adı Sistemi - DNS (Hafta-4)", "question": "İnternete bağlı bilgisayarlara ve bilgisayar sistemlerine hiyerarşik bir şekilde isimlerin verilmesini sağlayan sisteme ne ad verilir?", "code": null, "options": {"A": "Web isimlendirme sistemi", "B": "İnternet isimlendirme sistemi", "C": "Web adres sistemi", "D": "Alan adı sistemi", "E": "Hiyerarşik isimlendirme sistemi"}, "answer": "D", "explanation": "Doğru Cevap: Alan adı sistemi (DNS - Domain Name System - D). İnternete bağlı bilgisayarların IP adreslerinin insanlar tarafından kolayca hatırlanabilmesi için hiyerarşik bir yapıda (.com, .edu.tr vb.) isimlendirilmesini sağlayan sisteme Alan Adı Sistemi (DNS) denir.", "explanations": {"A": "Yanlış: Resmi teknik terim 'Web isimlendirme sistemi' değil 'Alan adı sistemi'dir (DNS).", "B": "Yanlış: Çeldirici seçenektir; doğru kavram Alan Adı Sistemi'dir.", "C": "Yanlış: Çeldirici seçenektir.", "D": "DOĞRU YANIT: Alan adı sistemi (DNS - Domain Name System), bilgisayarlara hiyerarşik isimler verilmesini ve IP'ye çevrilmesini sağlar.", "E": "Yanlış: Soru kökündeki 'hiyerarşik' kelimesinden türetilmiş çeldirici seçenektir."}}, {"id": 8035, "course": "eticaret_vize", "week": 2, "week_title": "Bölüm 2: Görsellerdeki Ek Sınav Soruları", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - Görsellerdeki Ek Sorular", "category": "Ek Soru 5: IP Adres Sınıfları (Hafta-4)", "question": "Aşağıdaki ağ adreslerinden hangisi A sınıfı adresleme biçimine bir örnek teşkil eder?", "code": null, "options": {"A": "200.12.23.145", "B": "143.191.47.137", "C": "194.27.49.12", "D": "100.191.224.136", "E": "224.254.1.177"}, "answer": "D", "explanation": "Doğru Cevap: 100.191.224.136 (D). IPv4 adres sınıflarında ilk oktet (ilk sayı) aralığı: A Sınıfı: 1 – 126 (0-127), B Sınıfı: 128 – 191, C Sınıfı: 192 – 223, D Sınıfı: 224 – 239'dur. İlk sayısı 100 olan '100.191.224.136' adresi 1 ile 126 arasında olduğu için A sınıfı bir IP adresidir.", "explanations": {"A": "Yanlış: İlk okteti 200 (192-223 aralığında) olduğu için C sınıfı bir IP adresidir.", "B": "Yanlış: İlk okteti 143 (128-191 aralığında) olduğu için B sınıfı bir IP adresidir.", "C": "Yanlış: İlk okteti 194 (192-223 aralığında) olduğu için C sınıfı bir IP adresidir.", "D": "DOĞRU YANIT: İlk okteti 100 (1-126 aralığında) olduğu için A sınıfı adresleme biçimine örnektir.", "E": "Yanlış: İlk okteti 224 (224-239 aralığında) olduğu için D sınıfı (Multicast) bir IP adresidir."}}, {"id": 8036, "course": "eticaret_vize", "week": 2, "week_title": "Bölüm 2: Görsellerdeki Ek Sınav Soruları", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - Görsellerdeki Ek Sorular", "category": "Ek Soru 6: İntranet Altyapı Bileşenleri (Hafta-4)", "question": "Aşağıdakilerden hangisi intranet kurmak için gerekli altyapı bileşenlerinden biri değildir?", "code": null, "options": {"A": "Web sunucuları", "B": "Web tarayıcılar", "C": "Veri tabanları", "D": "Firewall", "E": "Hosting"}, "answer": "E", "explanation": "Doğru Cevap: Hosting (E). Hafta-4 ders özetine göre bir İntranet kurmak için gereken bileşenler: TCP/IP ağı, Web sunucuları, Web tarayıcılar, Veri tabanları ve Güvenlik duvarı (Firewall) sistemidir. Dışarıdan kiralanan ticari web barındırma (Hosting) hizmeti kurum içi özel ağ olan İntranet için gerekli değildir.", "explanations": {"A": "Yanlış (Gereklidir): Kurum içi web sayfalarını ve uygulamaları yayınlamak için Web sunucusu gereklidir.", "B": "Yanlış (Gereklidir): Çalışanların intranet sayfalarını görüntülemesi için Web tarayıcılar gereklidir.", "C": "Yanlış (Gereklidir): Kurumsal verilerin saklanması ve işlenmesi için Veri tabanları gereklidir.", "D": "Yanlış (Gereklidir): Kurum içi özel ağı dış dünyadan korumak için Firewall (Güvenlik Duvarı) şarttır.", "E": "DOĞRU YANIT: Hosting (dış web barındırma hizmeti), kurum içi yerel sunucularda çalışan İntranet bileşenlerinden biri değildir."}}, {"id": 8037, "course": "eticaret_vize", "week": 2, "week_title": "Bölüm 2: Görsellerdeki Ek Sınav Soruları", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - Görsellerdeki Ek Sorular", "category": "Ek Soru 7: Extranet Özellikleri (Hafta-4)", "question": "Extranetler ile ilgili olarak aşağıdakilerden hangisi yanlıştır?", "code": null, "options": {"A": "Farklı yerlerdeki İntranetleri TCP/IP protokolleri ile bağlayan ağlardır", "B": "VPN (Virtually Private Network-Sanal Özel Ağ) olarak isimlendirilen internet Tünel Teknolojisi kullanır", "C": "Bir firmanın kendi içindeki interneti olarak hizmet verir", "D": "Çalışma grupları arasındaki iş birliğini daha verimli hâle getirir", "E": "Etkin pazarlama, satış ve müşteri desteği sağlar"}, "answer": "C", "explanation": "Doğru Cevap: Bir firmanın kendi içindeki interneti olarak hizmet verir (C). 'Bir firmanın kendi içindeki interneti' tanımı Extranet'e değil, İNTRANET'e aittir. Extranet ise işletmenin tedarikçileri, bayileri, iş ortakları ve müşterileriyle güvenli bağlantı kurduğu dışa uzanan özel iş ağıdır.", "explanations": {"A": "Yanlış (Extranet için doğrudur): Farklı coğrafi yerlerdeki İntranetleri TCP/IP ile birbirine bağlar.", "B": "Yanlış (Extranet için doğrudur): Güvenli veri iletimi için VPN (Sanal Özel Ağ / Tünel Teknolojisi) kullanır.", "C": "DOĞRU YANIT (Yanlış olan ifadedir): Sadece bir firmanın kendi içindeki interneti olarak hizmet veren ağ Extranet değil, İntranet'tir.", "D": "Yanlış (Extranet için doğrudur): İş ortakları ve çalışma grupları arasındaki iş birliğini verimli hale getirir.", "E": "Yanlış (Extranet için doğrudur): Bayi ve müşterilerle etkin pazarlama, satış ve destek iletişimi sağlar."}}, {"id": 8038, "course": "eticaret_vize", "week": 2, "week_title": "Bölüm 2: Görsellerdeki Ek Sınav Soruları", "qType": "test", "difficulty": "Çıkmış Soru", "test_type": "E-Ticaret - Görsellerdeki Ek Sorular", "category": "Ek Soru 8: Kısa Mesafeli Kablosuz İletişim (Hafta-5)", "question": "Taşınabilir bilgisayarlar, kişisel bilgisayarlar, el bilgisayarları, mobil telefonlar, çevre birimleri ve diğer aygıtların birbiriyle etkileşimine olanak sağlayan kısa mesafeli kablosuz iletişim standardına verilen isim aşağıdakilerden hangisidir?", "code": null, "options": {"A": "Bluetooth", "B": "Wi-Fi", "C": "i-Mode", "D": "Mobil web", "E": "WAP"}, "answer": "A", "explanation": "Doğru Cevap: Bluetooth (A). Hafta-5 ders slaytlarında (Slayt 22) birebir geçen bu tanım, 10–100 metre kısa mesafede bilgisayarlar, mobil telefonlar ve çevre birimlerinin (kulaklık, fare, yazıcı vb.) kablosuz etkileşimini sağlayan WPAN standardı Bluetooth'a aittir.", "explanations": {"A": "DOĞRU YANIT: Cihazların ve çevre birimlerinin kısa mesafeli (WPAN) kablosuz etkileşimini sağlayan standart Bluetooth'tur.", "B": "Yanlış: Wi-Fi, cihaz-çevre birimi eşleşmesinden ziyade kablosuz yerel alan ağı (WLAN) ve internet erişimi standardıdır.", "C": "Yanlış: i-Mode, Japonya'da NTT DoCoMo tarafından geliştirilen mobil internet web servisidir.", "D": "Yanlış: Mobil web, mobil cihaz tarayıcıları üzerinden erişilen web siteleri bütünüdür.", "E": "Yanlış: WAP (Wireless Application Protocol), mobil cihazların internete erişmesi için geliştirilmiş uygulama protokolüdür."}}];
+    const SUMMARY_TOPICS = [["1. Mobil Kuşak Sınıflandırmaları", "Doğru Cevap: 3.5G", "1G, 2G, 3G, 4G, 5G ve 6G mobil iletişimin standart ana nesilleridir (kuşaklarıdır). 3.5G (HSPA gibi), 3G ile 4G arasında bir ara geçiş formudur; temel kuşak sınıflandırması olarak kabul edilmez."], ["2. GSM Cihaz Kimliği Kısaltmaları", "Doğru Cevap: IMEI (Uluslararası Mobil Cihaz Kodu)", "• SIM: Telefona takılan abone kimlik modülüdür (karttır).\n• IMSI: Abonenin uluslararası kimliğidir (cihazın değil, kişinin/hattın).\n• UMTS: Bir 3G ağ teknolojisidir, kimlik numarası değildir."], ["3. GSM Altyapısı Bileşenleri", "Doğru Cevap: Baz İstasyonu", "• Mobil İstasyon: Cep telefonunuz ve içindeki SIM kartın bütününe verilen addır.\n• Anahtarlama Sistemi: Aramaları yönlendiren ve sanal kanalları oluşturan santral sistemidir.\n• Destek Sistemi: Tüm ağın izlenmesi, bakımı ve denetlenmesini yapar."], ["4. İnternet Protokolleri (Dosya Aktarımı)", "Doğru Cevap: FTP (File Transfer Protocol)", "• WWW: İnternet üzerindeki zengin içerikli çoklu ortam web sistemidir.\n• HTML: Web sayfalarını oluşturmaya yarayan işaretleme dilidir.\n• NNTP: İnternet üzerindeki haber grupları protokolüdür.\n• POP: E-postaları sunucudan bilgisayara indirmeye yarayan protokoldür."], ["5. Bluetooth'un Özellikleri", "Doğru Cevap: I ve II", "III. Madde neden yanlış? Bluetooth telif haklarıyla korunan (lisanslı/ücretli) bir teknoloji değil; açık standartlı ve telif hakkı/lisans gerektirmeyen radyo frekanslarında çalışan bir teknolojidir."], ["6. Wi-Fi'ın Özellikleri", "Doğru Cevap: I ve II", "III. Madde neden yanlış? Wi-Fi diğer kablosuz WPAN ağlarına (örneğin Bluetooth veya ZigBee'ye) göre daha az değil, daha FAZLA güç tüketir. Mobil cihazların şarjını hızla tüketmesinin sebebi budur."], ["7. Kablo TV'nin Özellikleri", "Doğru Cevap: Ücretsiz kullanılabilmesi", "Kablo TV ücretli bir abonelik sistemidir. Frekans kirlenmemesi, yüksek görüntü/ses kalitesi, sesli/hareketli denetim ve interaktif altyapı sunması Kablo TV'nin gerçek teknik özellikleridir."], ["8. Dijital Yayın Uygulamaları", "Doğru Cevap: Sadece tek yönlü iletişime imkân vermesi", "Sadece tek yönlü iletişim dijital değil, Analog TV'nin özelliğidir. Dijital TV oyun, bankacılık, VOD (film seç-izle) ve evden alışveriş gibi çift yönlü etkileşim (interaktif) imkânları sağlar."], ["9. İntranetin Özellikleri", "Doğru Cevap: Sınırsız erişimli özel bir ağ olarak faaliyet gösterir", "İntranet 'sınırsız' değildir; kurum içine kapalıdır, kuruma özel bilgiyle sınırlıdır ve sadece yetkili çalışanların girmesine izin veren özel bir ağdır."], ["10. E-Ticaretin Alıcıya Dezavantajları", "Doğru Cevap: Reklamcılık ve pazarlama harcaması gerektirmesi", "Reklama para harcamak satıcıyı/işletmeyi ilgilendiren bir maliyettir, alıcı (müşteri) reklam parası ödemez. Kredi kartı olmaması, güven sorunu, malı canlı görememe ve kargo hasarı alıcının yaşadığı dezavantajlardır."], ["11. WWW (World Wide Web)", "Doğru Cevap: WWW", "TELNET başka bir bilgisayara uzaktan komutla bağlanmayı, FTP dosya aktarmayı sağlar. Metin, resim, ses, video ve animasyonu etkileşimli çoklu ortam olarak sunan sistem WWW'dir."], ["12. GSM Standartları (Kablosuz Veri Transferi)", "Doğru Cevap: EDGE", "IMEI bir cihaz kodudur. Bluetooth ve Wi-Fi hücresel (GSM) ağları değil WPAN/WLAN ağlarıdır. PDA ise eski cep bilgisayarı cihazıdır. EDGE (ve GPRS) ise GSM hücresel veri aktarım standartlarıdır."], ["13. Yönlendirici (Router)", "Doğru Cevap: Yönlendirici", "Host ağa bağlı cihazın kendisidir, Alan adı (DNS) cihazın ismidir. Gelen veri paketlerinin adreslerine bakıp en uygun yoldan hedefe yollayan trafik polisi görevi gören cihaz Yönlendiricidir (Router)."], ["14. Yöneticilere / Örgütlere / Tüketicilere / Topluma Faydaların Ayrımı", "Faydanın 'Kime' Sağlandığına Odaklanın", "• Yaşam standardının yükselmesi -> TOPLUMSAL yarardır (sadece yöneticinin değil).\n• Ürün seçme zorluğu -> ALICININ (tüketicinin) dezavantajıdır (satıcının değil).\n• Rekabetin zorlaşması -> Örgüt için yarar değil, bir tehdittir.\n• Etkileşimli tedarik zinciri ve stok yönetimi -> ÖRGÜTSEL (B2B) yarardır; bireysel tüketicinin veya toplumun doğrudan yararı değildir."], ["15. E-Ticaretin Teknik ve Ekonomik Boyutu", "Doğru Cevap: Karşılıklı güven sorunu / Örgütsel iletişim", "• Karşılıklı güven sorunu: Teknolojik/teknik bir sorun değil, psikolojik/sosyal/hukuki bir sorundur.\n• Örgütsel iletişim: Pazarlama, finansman ve tedarik ekonomik faaliyetlerdir; şirket içi örgütsel iletişim ise yönetimsel bir süreçtir."], ["16. EDI (Elektronik Veri Değişimi)", "Dezavantaj olmayan: Yaygın Kullanım | Fayda olmayan: Bilgi Yoğunluğu", "• EDI pahalı ve kapalı bir sistem olduğundan KOBİ'lerce yaygın kullanılamaz ('yaygın kullanım' dezavantajı değildir).\n• EDI evrak ve bilgi karmaşasını azaltmak için vardır ('bilgi yoğunluğu' bir fayda olamaz)."], ["17. Smart TV (Akıllı TV)", "Doğru Cevap: Smart TV", "Analog veya Dijital TV yayın sinyal teknolojisini ifade eder. İçine işletim sistemi (Android, Tizen, webOS) konmuş ve ekstra uygulamalar çalıştırabilen görüntüleme sistemine Smart TV denir."], ["18. İlk Bilgisayar Ağı (ARPANET)", "Doğru Cevap: ARPANET", "DARPA projeyi kuran ABD savunma kurumu, BBN donanımı üreten şirket, NSFNET ise daha sonra kurulan üniversite ağıdır. İnternetin gerçek atası olan ilk bilgisayar ağı ARPANET'tir."]];
+    const STORAGE_KEY_ANS = "eticaret_answers_v1";
+    const STORAGE_KEY_FAV = "eticaret_favs_v1";
+    const STORAGE_KEY_THEME = "app_theme_mode";
+
+    let currentMode = "list";
+    let currentFilter = "week1";
+    let userAnswers = {};
+    let userFavs = new Set();
+    let isEvaluated = false;
+    let cardCurrentIndex = 0;
+
+    try {
+      const sAns = localStorage.getItem(STORAGE_KEY_ANS);
+      if (sAns) userAnswers = JSON.parse(sAns);
+      const sFav = localStorage.getItem(STORAGE_KEY_FAV);
+      if (sFav) userFavs = new Set(JSON.parse(sFav));
+      const sTheme = localStorage.getItem(STORAGE_KEY_THEME) || localStorage.getItem("algopy_theme");
+      if (sTheme === "dark" || (!sTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+        document.getElementById("btn-theme").textContent = "☀️";
+      }
+    } catch(e) {}
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY_ANS, JSON.stringify(userAnswers));
+        localStorage.setItem(STORAGE_KEY_FAV, JSON.stringify([...userFavs]));
+      } catch(e) {}
+      updateCounters();
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle("dark");
+      document.getElementById("btn-theme").textContent = isDark ? "☀️" : "🌙";
+      try {
+        localStorage.setItem(STORAGE_KEY_THEME, isDark ? "dark" : "light");
+        localStorage.setItem("algopy_theme", isDark ? "dark" : "light");
+      } catch(e) {}
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      document.getElementById("mode-btn-list").classList.toggle("active", mode === "list");
+      document.getElementById("mode-btn-card").classList.toggle("active", mode === "card");
+      const gBtn = document.getElementById("mode-btn-guide");
+      if (gBtn) gBtn.classList.toggle("active", mode === "guide");
+      renderApp();
+    }
+
+    function setFilter(filter, ev) {
+      currentFilter = filter;
+      document.querySelectorAll("#filters-container .filter-btn").forEach(b => b.classList.remove("active"));
+      if (ev && ev.target) ev.target.classList.add("active");
+      cardCurrentIndex = 0;
+      if (currentMode === "guide") setMode("list");
+      else renderApp();
+    }
+
+    function getFilteredQuestions() {
+      return QUESTIONS.filter(q => {
+        const ans = userAnswers[q.id];
+        const hasAns = ans !== undefined;
+        const isCorrect = hasAns && ans.toUpperCase() === q.answer.toUpperCase();
+        if (currentFilter === "week1") return q.week === 1;
+        if (currentFilter === "week2") return q.week === 2;
+        if (currentFilter === "all") return true;
+        if (currentFilter === "wrong") return hasAns && !isCorrect;
+        if (currentFilter === "fav") return userFavs.has(q.id);
+        return true;
+      });
+    }
+
+    function updateCounters() {
+      const activeList = getFilteredQuestions();
+      let cCnt = 0, wCnt = 0, aCnt = 0;
+      activeList.forEach(q => {
+        const a = userAnswers[q.id];
+        if (a !== undefined) {
+          aCnt++;
+          if (a.toUpperCase() === q.answer.toUpperCase()) cCnt++;
+          else wCnt++;
+        }
+      });
+      let totalWrong = 0;
+      QUESTIONS.forEach(q => {
+        const a = userAnswers[q.id];
+        if (a !== undefined && a.toUpperCase() !== q.answer.toUpperCase()) totalWrong++;
+      });
+      document.getElementById("header-counter").textContent = aCnt + " / " + activeList.length;
+      document.getElementById("cnt-filter-wrong").textContent = totalWrong;
+      document.getElementById("cnt-filter-fav").textContent = userFavs.size;
+      const pct = activeList.length > 0 ? Math.round((aCnt / activeList.length) * 100) : 0;
+      document.getElementById("progress-bar").style.width = pct + "%";
+
+      if (isEvaluated && activeList.length > 0) {
+        const scorePct = Math.round((cCnt / activeList.length) * 100);
+        document.getElementById("score-pct").textContent = "%" + scorePct;
+        document.getElementById("score-c-cnt").textContent = cCnt;
+        document.getElementById("score-w-cnt").textContent = wCnt;
+        document.getElementById("score-e-cnt").textContent = activeList.length - aCnt;
+        document.getElementById("score-banner").classList.add("show");
+      }
+    }
+
+    function selectOption(qId, key) {
+      userAnswers[qId] = key;
+      saveState();
+      renderApp();
+    }
+
+    function toggleFav(qId) {
+      if (userFavs.has(qId)) userFavs.delete(qId);
+      else userFavs.add(qId);
+      saveState();
+      renderApp();
+    }
+
+    function finishTest() {
+      isEvaluated = true;
+      saveState();
+      renderApp();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function resetAllAnswers() {
+      if (confirm("Tüm cevaplarınız sıfırlansın mı?")) {
+        userAnswers = {};
+        isEvaluated = false;
+        document.getElementById("score-banner").classList.remove("show");
+        saveState();
+        closeGridModal();
+        renderApp();
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+    }
+
+    function renderQuestionCard(q, idxLabel) {
+      const userSel = userAnswers[q.id];
+      const hasSel = userSel !== undefined;
+      const isFav = userFavs.has(q.id);
+      const isCorrect = hasSel && userSel.toUpperCase() === q.answer.toUpperCase();
+      const showDetails = isEvaluated || hasSel;
+
+      let cardClass = "card";
+      if (showDetails) cardClass += " evaluated " + (isCorrect ? "is-correct" : "is-wrong");
+
+      let optionsHtml = '<div class="options-list">';
+      for (const [key, text] of Object.entries(q.options)) {
+        const isSelected = hasSel && userSel.toUpperCase() === key.toUpperCase();
+        const isRight = key.toUpperCase() === q.answer.toUpperCase();
+        let optClass = "option-btn";
+        let icon = key;
+        if (showDetails) {
+          if (isRight) { optClass += " correct-highlight"; icon = "✓"; }
+          else if (isSelected) { optClass += " wrong-highlight"; icon = "✗"; }
+        } else if (isSelected) {
+          optClass += " selected";
+        }
+        const optReason = (showDetails && q.explanations && q.explanations[key])
+          ? `<div class="opt-reason">${escapeHtml(q.explanations[key])}</div>`
+          : "";
+        optionsHtml += `
+          <button class="${optClass}" onclick="selectOption(${q.id}, '${key}')">
+            <span class="opt-key">${icon}</span>
+            <div class="opt-content">
+              <span class="opt-text">${escapeHtml(text)}</span>
+              ${optReason}
+            </div>
+          </button>
+        `;
+      }
+      optionsHtml += '</div>';
+
+      let expHtml = "";
+      if (showDetails) {
+        const boxClass = isCorrect ? "success" : "danger";
+        expHtml = `
+          <div class="explanation-box ${boxClass}">
+            <div style="font-weight:800; margin-bottom:6px; display:flex; justify-content:space-between;">
+              <span>${isCorrect ? '✓ Doğru Yanıt!' : '✗ Yanlış Yanıt — Doğru Cevap: ' + q.answer}</span>
+              <span>Şık Analizi & Neden Diğerleri Değil?</span>
+            </div>
+            <div style="white-space:pre-line;">${escapeHtml(q.explanation)}</div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="${cardClass}" id="q-card-${q.id}">
+          <div class="q-meta">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="badge badge-subject">${escapeHtml(idxLabel)} • ${escapeHtml(q.category)}</span>
+            </div>
+            <button class="btn-icon" style="width:30px; height:30px; font-size:14px;" onclick="toggleFav(${q.id})">
+              ${isFav ? '⭐' : '☆'}
+            </button>
+          </div>
+          <div class="q-text">${escapeHtml(q.question)}</div>
+          ${optionsHtml}
+          ${expHtml}
+        </div>
+      `;
+    }
+
+    function renderApp() {
+      const container = document.getElementById("app");
+      const footer = document.getElementById("footer-actions");
+
+      if (currentMode === "guide") {
+        let html = '<div class="card"><h2 style="font-size:18px; font-weight:800; margin-bottom:8px;">📖 Testteki Soruların Mantığı ve Diğer Şıklar Neden Yanlış? (18 Başlık)</h2><p style="font-size:13px; color:var(--text-muted);">Sınavdaki 30 sorunun konu bazlı çeldirici şık analizi:</p></div>';
+        SUMMARY_TOPICS.forEach(([title, rightAns, body]) => {
+          html += `
+            <div class="card">
+              <div style="font-size:15px; font-weight:800; color:var(--primary); margin-bottom:4px;">${escapeHtml(title)}</div>
+              <div style="font-size:13px; font-weight:700; margin-bottom:6px;">✓ ${escapeHtml(rightAns)}</div>
+              <div style="font-size:13px; color:var(--text); white-space:pre-line; line-height:1.55;">${escapeHtml(body)}</div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+        footer.innerHTML = `<button class="btn btn-primary btn-full" onclick="setMode('list')">🔥 Test Sorularına Dön</button>`;
+        updateCounters();
+        return;
+      }
+
+      const list = getFilteredQuestions();
+      if (list.length === 0) {
+        container.innerHTML = `<div class="card" style="text-align:center; padding:36px;"><p style="font-weight:700; margin-bottom:10px;">Bu filtrede soru bulunamadı.</p><button class="btn btn-primary" onclick="setFilter('week1')">30 Çıkmış Soruyu Göster</button></div>`;
+        footer.innerHTML = "";
+        updateCounters();
+        return;
+      }
+
+      if (currentMode === "list") {
+        let html = "";
+        list.forEach((q, i) => { html += renderQuestionCard(q, `Soru ${i + 1}`); });
+        container.innerHTML = html;
+        footer.innerHTML = `
+          <button class="btn btn-secondary" onclick="resetAllAnswers()">Sıfırla</button>
+          <button class="btn btn-primary btn-full" onclick="finishTest()">
+            Testi Bitir / Tüm Şık Analizlerini Gör
+          </button>
+        `;
+      } else {
+        if (cardCurrentIndex >= list.length) cardCurrentIndex = 0;
+        const q = list[cardCurrentIndex];
+        container.innerHTML = renderQuestionCard(q, `Soru ${cardCurrentIndex + 1} / ${list.length}`);
+        footer.innerHTML = `
+          <button class="btn btn-secondary" style="flex:1;" onclick="if(cardCurrentIndex>0){cardCurrentIndex--;renderApp();window.scrollTo(0,0);}">◄ Önceki</button>
+          <button class="btn btn-primary" style="flex:1;" onclick="if(cardCurrentIndex<${list.length-1}){cardCurrentIndex++;renderApp();window.scrollTo(0,0);}else{finishTest();}">Sonraki ►</button>
+        `;
+      }
+      updateCounters();
+    }
+
+    function openGridModal() {
+      const list = getFilteredQuestions();
+      const grid = document.getElementById("modal-grid");
+      grid.innerHTML = "";
+      list.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "q-jump-btn";
+        const ans = userAnswers[q.id];
+        if (ans !== undefined) {
+          if (ans.toUpperCase() === q.answer.toUpperCase()) btn.classList.add("correct");
+          else btn.classList.add("wrong");
+        }
+        btn.textContent = idx + 1;
+        btn.onclick = () => {
+          closeGridModal();
+          if (currentMode === "card") { cardCurrentIndex = idx; renderApp(); }
+          else {
+            const el = document.getElementById("q-card-" + q.id);
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        };
+        grid.appendChild(btn);
+      });
+      document.getElementById("modal-overlay").style.display = "block";
+    }
+
+    function closeGridModal() { document.getElementById("modal-overlay").style.display = "none"; }
+
+    renderApp();
+  </script>
+</body>
+</html>

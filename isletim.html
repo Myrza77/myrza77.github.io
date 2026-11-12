@@ -4,60 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#4f46e5" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>İşletim Sistemleri - Mobil Sınav Portalı</title>
-  
-  <!-- Google Fonts Outfit & Fira Code -->
+  <title>İşletim Sistemleri - Vize Sınav & Şık Analiz Portalı</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --primary: #4f46e5;
       --primary-hover: #4338ca;
-      --primary-light: rgba(79, 70, 229, 0.1);
+      --primary-light: rgba(79, 70, 229, 0.12);
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --code-bg: #0f172a;
-      --code-text: #f1f5f9;
       --correct: #10b981;
       --correct-bg: #ecfdf5;
       --correct-border: #a7f3d0;
       --wrong: #ef4444;
       --wrong-bg: #fef2f2;
       --wrong-border: #fecaca;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
     }
     .dark {
-      --primary: #6366f1;
+      --primary: #10b981;
       --primary-hover: #4f46e5;
-      --primary-light: rgba(99, 102, 241, 0.15);
+      --primary-light: rgba(16, 185, 129, 0.15);
       --bg: #090d16;
       --card-bg: #131b2e;
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --border: #1e293b;
-      --code-bg: #050811;
-      --code-text: #e2e8f0;
       --correct: #10b981;
       --correct-bg: rgba(16, 185, 129, 0.15);
       --correct-border: rgba(16, 185, 129, 0.4);
       --wrong: #f43f5e;
       --wrong-bg: rgba(244, 63, 94, 0.15);
       --wrong-border: rgba(244, 63, 94, 0.4);
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
     }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
@@ -65,1013 +51,273 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      touch-action: manipulation;
-      overflow-x: hidden;
       padding-bottom: 100px;
     }
-
-    /* Top Sticky Header */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
+      position: sticky; top: 0; z-index: 40;
       background: var(--card-bg);
       border-bottom: 1px solid var(--border);
       padding: 10px 16px;
-      padding-top: max(10px, env(safe-area-inset-top));
       backdrop-filter: blur(12px);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
     .header-row {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      max-width: 840px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
     }
-    .title-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      overflow: hidden;
-    }
+    .title-box { display: flex; align-items: center; gap: 10px; overflow: hidden; }
     .title-box .icon {
-      font-size: 24px;
-      line-height: 1;
-      background: var(--primary-light);
-      padding: 6px;
-      border-radius: 12px;
-      border: 1px solid rgba(79, 70, 229, 0.2);
+      font-size: 22px; background: var(--primary-light);
+      padding: 6px 8px; border-radius: 12px; border: 1px solid rgba(16,185,129,0.25);
     }
-    .title-box h1 {
-      font-size: 16px;
-      font-weight: 800;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--text);
-      letter-spacing: -0.3px;
-    }
-    .title-box p {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-icon {
-      background: var(--border);
-      color: var(--text);
-      border: none;
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .btn-icon:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-    .progress-pill {
-      background: var(--primary-light);
-      color: var(--primary);
-      border: 1px solid rgba(79, 70, 229, 0.2);
-      font-weight: 800;
-      font-size: 12px;
-      padding: 6px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .progress-pill:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-    .progress-bar-bg {
-      max-width: 800px;
-      margin: 8px auto 0 auto;
-      height: 5px;
-      background: var(--border);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #4f46e5, #10b981);
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-
-    /* Sub-nav Mode & Filter Bar */
-    .sub-bar {
-      max-width: 800px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 10px 16px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .mode-toggle-group {
-      display: inline-flex;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      padding: 3px;
-      border-radius: 12px;
-    }
-    .mode-btn {
-      padding: 6px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      border-radius: 9px;
-      border: none;
-      background: transparent;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .mode-btn.active {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 2px 4px rgba(79,70,229,0.2);
-    }
-    .filters-wrap {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      white-space: nowrap;
-    }
-    .filters-wrap::-webkit-scrollbar {
-      display: none;
-    }
-    .filter-btn {
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--text-muted);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 5px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      flex-shrink: 0;
+    .title-box h1 { font-size: 16px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .title-box p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .nav-link-pill {
+      text-decoration: none; font-size: 12px; font-weight: 700;
+      padding: 6px 10px; border-radius: 10px;
+      background: var(--border); color: var(--text);
       transition: all 0.2s;
     }
-    .filter-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
+    .nav-link-pill:hover { background: var(--primary); color: #fff; }
+    .btn-icon {
+      background: var(--border); color: var(--text); border: none;
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; cursor: pointer;
     }
-
-    /* Score Summary Banner (Shown after test is evaluated) */
+    .progress-pill {
+      background: var(--primary-light); color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-weight: 800; font-size: 12px; padding: 6px 12px;
+      border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px;
+    }
+    .progress-bar-bg {
+      max-width: 840px; margin: 8px auto 0 auto;
+      height: 5px; background: var(--border); border-radius: 3px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; background: linear-gradient(90deg, #4f46e5, #4f46e5);
+      width: 0%; transition: width 0.3s ease;
+    }
+    .sub-bar {
+      max-width: 840px; width: 100%; margin: 0 auto; padding: 10px 16px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .mode-toggle-group {
+      display: inline-flex; background: var(--card-bg);
+      border: 1px solid var(--border); padding: 3px; border-radius: 12px;
+    }
+    .mode-btn {
+      padding: 6px 11px; font-size: 12px; font-weight: 700;
+      border-radius: 9px; border: none; background: transparent;
+      color: var(--text-muted); cursor: pointer;
+    }
+    .mode-btn.active { background: var(--primary); color: #fff; }
+    .filters-wrap {
+      display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; white-space: nowrap;
+    }
+    .filters-wrap::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      border: 1px solid var(--border); background: var(--card-bg); color: var(--text-muted);
+      font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; cursor: pointer;
+    }
+    .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
     .score-banner {
-      display: none;
-      max-width: 800px;
-      margin: 12px auto;
-      padding: 16px 20px;
-      background: var(--card-bg);
-      border: 2px solid var(--primary);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      animation: fadeIn 0.3s ease;
+      display: none; max-width: 840px; margin: 10px auto; padding: 16px 20px;
+      background: var(--card-bg); border: 2px solid var(--primary); border-radius: 18px;
     }
-    .score-banner.show {
-      display: block;
-    }
-    .score-banner-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .score-badge-group {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .score-banner.show { display: block; }
+    .score-banner-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+    .score-badge-group { display: flex; gap: 10px; flex-wrap: wrap; }
     .score-item {
-      padding: 8px 14px;
-      border-radius: 12px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-weight: 700;
-      font-size: 13px;
+      padding: 8px 14px; border-radius: 12px; display: flex; flex-direction: column;
+      align-items: center; font-weight: 700; font-size: 13px;
     }
     .score-item.correct { background: var(--correct-bg); color: #065f46; border: 1px solid var(--correct-border); }
     .score-item.wrong { background: var(--wrong-bg); color: #991b1b; border: 1px solid var(--wrong-border); }
     .score-item.empty { background: var(--bg); color: var(--text-muted); border: 1px solid var(--border); }
-    .score-item.total { background: var(--primary-light); color: var(--primary); border: 1px solid rgba(79, 70, 229, 0.3); }
+    .score-item.total { background: var(--primary-light); color: var(--primary); border: 1px solid rgba(16,185,129,0.3); }
     .dark .score-item.correct { color: #6ee7b7; }
     .dark .score-item.wrong { color: #fca5a5; }
-
-    /* Main Container */
-    main {
-      max-width: 800px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 12px 16px;
-      flex: 1;
-    }
-
-    /* Question Card */
+    main { max-width: 840px; width: 100%; margin: 0 auto; padding: 12px 16px; flex: 1; }
     .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 18px; padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow);
     }
-    .card.evaluated.is-correct {
-      border-color: var(--correct);
-    }
-    .card.evaluated.is-wrong {
-      border-color: var(--wrong);
-    }
-    .q-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-    .badge {
-      font-size: 11px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .badge-subject { background: #e0e7ff; color: #3730a3; }
-    .dark .badge-subject { background: #312e81; color: #c7d2fe; }
-    .badge-status {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
+    .card.evaluated.is-correct { border-color: var(--correct); }
+    .card.evaluated.is-wrong { border-color: var(--wrong); }
+    .q-meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .badge { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; }
+    .badge-subject { background: #d1fae5; color: #065f46; }
+    .dark .badge-subject { background: #064e3b; color: #a7f3d0; }
+    .badge-status { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
     .badge-status.c { background: var(--correct); color: #fff; }
     .badge-status.w { background: var(--wrong); color: #fff; }
-
-    .q-text {
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.55;
-      color: var(--text);
-      margin-bottom: 14px;
-      white-space: pre-line;
-    }
-
-    /* Table in questions (10, 19) */
-    .table-container {
-      margin: 12px 0 16px 0;
-      overflow-x: auto;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      font-family: 'Fira Code', monospace;
-      text-align: left;
-    }
-    .data-table th {
-      background: var(--bg);
-      color: var(--text);
-      padding: 8px 12px;
-      font-weight: 700;
-      border-bottom: 1px solid var(--border);
-    }
-    .data-table td {
-      padding: 8px 12px;
-      border-bottom: 1px solid var(--border);
-      color: var(--text);
-    }
-    .data-table tr:last-child td {
-      border-bottom: none;
-    }
-    .data-table tr:nth-child(even) {
-      background: rgba(0,0,0,0.015);
-    }
-    .dark .data-table tr:nth-child(even) {
-      background: rgba(255,255,255,0.02);
-    }
-
-    /* Options List */
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .q-text { font-size: 15px; font-weight: 700; line-height: 1.55; color: var(--text); margin-bottom: 14px; white-space: pre-line; }
+    .options-list { display: flex; flex-direction: column; gap: 10px; }
     .option-btn {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      background: var(--card-bg);
-      color: var(--text);
-      font-size: 14px;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      min-height: 48px;
-      user-select: none;
+      display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px;
+      border: 1.5px solid var(--border); border-radius: 12px;
+      background: var(--card-bg); color: var(--text); font-size: 14px;
+      text-align: left; cursor: pointer; transition: all 0.15s ease; width: 100%;
     }
-    .option-btn:hover:not(:disabled) {
-      border-color: var(--primary);
-      background: var(--primary-light);
-    }
-    .option-btn:active:not(:disabled) {
-      transform: scale(0.99);
-    }
-    .option-btn.selected {
-      border-color: var(--primary);
-      background: var(--primary-light);
-      font-weight: 600;
-    }
+    .option-btn:hover { border-color: var(--primary); background: var(--primary-light); }
+    .option-btn.selected { border-color: var(--primary); background: var(--primary-light); font-weight: 600; }
     .opt-key {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      background: var(--bg);
-      color: var(--text-muted);
-      font-weight: 800;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.15s ease;
-      border: 1px solid var(--border);
-      text-transform: uppercase;
+      width: 28px; height: 28px; border-radius: 8px; background: var(--bg); color: var(--text-muted);
+      font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border: 1px solid var(--border);
     }
-    .option-btn.selected .opt-key {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-    .opt-text {
-      flex: 1;
-      line-height: 1.45;
-      padding-top: 3px;
-    }
-
-    /* Evaluation Styles on Options */
+    .option-btn.selected .opt-key { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .opt-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .opt-text { line-height: 1.45; padding-top: 2px; }
+    .opt-reason { font-size: 12px; line-height: 1.4; opacity: 0.92; font-weight: 500; padding-top: 2px; border-top: 1px dashed rgba(148,163,184,0.3); margin-top: 2px; }
     .option-btn.correct-highlight {
-      border-color: var(--correct) !important;
-      background: var(--correct-bg) !important;
-      color: #065f46 !important;
-      font-weight: 700;
+      border-color: var(--correct) !important; background: var(--correct-bg) !important; color: #065f46 !important; font-weight: 700;
     }
-    .dark .option-btn.correct-highlight {
-      color: #6ee7b7 !important;
-    }
-    .option-btn.correct-highlight .opt-key {
-      background: var(--correct) !important;
-      color: #fff !important;
-      border-color: var(--correct) !important;
-    }
+    .dark .option-btn.correct-highlight { color: #6ee7b7 !important; }
+    .option-btn.correct-highlight .opt-key { background: var(--correct) !important; color: #fff !important; border-color: var(--correct) !important; }
     .option-btn.wrong-highlight {
-      border-color: var(--wrong) !important;
-      background: var(--wrong-bg) !important;
-      color: #991b1b !important;
-      font-weight: 700;
+      border-color: var(--wrong) !important; background: var(--wrong-bg) !important; color: #991b1b !important; font-weight: 700;
     }
-    .dark .option-btn.wrong-highlight {
-      color: #fca5a5 !important;
-    }
-    .option-btn.wrong-highlight .opt-key {
-      background: var(--wrong) !important;
-      color: #fff !important;
-      border-color: var(--wrong) !important;
-    }
-    .option-btn.faded {
-      opacity: 0.55;
-    }
-
-    /* Detailed Explanation Box */
+    .dark .option-btn.wrong-highlight { color: #fca5a5 !important; }
+    .option-btn.wrong-highlight .opt-key { background: var(--wrong) !important; color: #fff !important; border-color: var(--wrong) !important; }
     .explanation-box {
-      margin-top: 14px;
-      padding: 14px 16px;
-      border-radius: 12px;
-      font-size: 13px;
-      line-height: 1.6;
-      animation: fadeIn 0.25s ease;
-      display: none;
+      margin-top: 14px; padding: 14px 16px; border-radius: 12px; font-size: 13px; line-height: 1.6;
     }
-    .explanation-box.show {
-      display: block;
-    }
-    .explanation-box.success {
-      background: var(--correct-bg);
-      border: 1px solid var(--correct-border);
-      color: #065f46;
-    }
-    .dark .explanation-box.success {
-      color: #6ee7b7;
-    }
-    .explanation-box.danger {
-      background: var(--wrong-bg);
-      border: 1px solid var(--wrong-border);
-      color: #991b1b;
-    }
-    .dark .explanation-box.danger {
-      color: #fca5a5;
-    }
-
-    /* Sticky Bottom Action Bar */
+    .explanation-box.success { background: var(--correct-bg); border: 1px solid var(--correct-border); color: #065f46; }
+    .dark .explanation-box.success { color: #6ee7b7; }
+    .explanation-box.danger { background: var(--wrong-bg); border: 1px solid var(--wrong-border); color: #991b1b; }
+    .dark .explanation-box.danger { color: #fca5a5; }
     footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--card-bg);
-      border-top: 1px solid var(--border);
-      padding: 10px 16px;
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
-      z-index: 40;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--card-bg); border-top: 1px solid var(--border);
+      padding: 10px 16px; z-index: 40;
     }
-    .footer-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
+    .footer-inner { max-width: 840px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .btn {
-      padding: 12px 18px;
-      font-size: 14px;
-      font-weight: 700;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      font-family: inherit;
+      padding: 12px 18px; font-size: 14px; font-weight: 700; border-radius: 12px;
+      border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     }
-    .btn:active {
-      transform: scale(0.98);
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
-    }
-    .btn-primary:hover {
-      background: var(--primary-hover);
-    }
-    .btn-secondary {
-      background: var(--border);
-      color: var(--text);
-    }
-    .btn-secondary:hover {
-      background: var(--primary-light);
-      color: var(--primary);
-    }
-    .btn-success {
-      background: var(--correct);
-      color: #fff;
-    }
-    .btn-full {
-      flex: 1;
-    }
-
-    /* Single Question Navigation */
-    .single-nav-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-    }
-    .single-nav-btn {
-      flex: 1;
-      padding: 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-size: 13px;
-    }
-
-    /* Modal Grid for jumping to questions */
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-secondary { background: var(--border); color: var(--text); }
+    .btn-full { flex: 1; }
     .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 100;
-      backdrop-filter: blur(4px);
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.55); z-index: 100; backdrop-filter: blur(4px);
     }
     .modal-content {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      max-height: 85vh;
-      background: var(--card-bg);
-      border-top-left-radius: 22px;
-      border-top-right-radius: 22px;
-      padding: 18px 20px;
-      padding-bottom: max(20px, env(safe-area-inset-bottom));
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-width: 800px;
-      margin: 0 auto;
+      position: absolute; bottom: 0; left: 0; right: 0; max-height: 85vh;
+      background: var(--card-bg); border-top-left-radius: 22px; border-top-right-radius: 22px;
+      padding: 18px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px;
+      max-width: 840px; margin: 0 auto;
     }
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .modal-title {
-      font-size: 17px;
-      font-weight: 800;
-    }
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(46px, 1fr));
-      gap: 8px;
-      padding: 6px 0;
-    }
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 8px; }
     .q-jump-btn {
-      height: 46px;
-      border-radius: 10px;
-      border: 1.5px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      font-weight: 800;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.15s ease;
+      height: 44px; border-radius: 10px; border: 1.5px solid var(--border);
+      background: var(--bg); color: var(--text); font-weight: 800; font-size: 13px; cursor: pointer;
     }
-    .q-jump-btn.answered {
-      background: var(--primary-light);
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-    .q-jump-btn.correct {
-      background: var(--correct);
-      color: #fff;
-      border-color: var(--correct);
-    }
-    .q-jump-btn.wrong {
-      background: var(--wrong);
-      color: #fff;
-      border-color: var(--wrong);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .q-jump-btn.answered { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    .q-jump-btn.correct { background: var(--correct); color: #fff; border-color: var(--correct); }
+    .q-jump-btn.wrong { background: var(--wrong); color: #fff; border-color: var(--wrong); }
   </style>
 </head>
 <body>
-
-  <!-- SAFE LOCALSTORAGE POLYFILL -->
-  <script>
-    (function() {
-      try {
-        var test = '__ls_test__';
-        window.localStorage.setItem(test, test);
-        window.localStorage.removeItem(test);
-      } catch(e) {
-        console.warn('Storage sandboxed or file:// active. Polyfilling memory storage.');
-        var mem = {};
-        window.localStorage = {
-          getItem: function(k) { return mem.hasOwnProperty(k) ? mem[k] : null; },
-          setItem: function(k, v) { mem[k] = String(v); },
-          removeItem: function(k) { delete mem[k]; },
-          clear: function() { mem = {}; }
-        };
-      }
-    })();
-  </script>
-
-  <!-- TOP STICKY HEADER -->
   <header>
     <div class="header-row">
       <div class="title-box">
         <span class="icon">💻</span>
         <div>
-          <h1>İşletim Sistemleri</h1>
-          <p>Vize Sınavı Test Portalı (20 Soru)</p>
+          <h1>İşletim Sistemleri Sınav Portalı</h1>
+          <p>20 Vize Test Sorusu • Hesaplamalı & Şık Analizli</p>
         </div>
       </div>
       <div class="header-actions">
-        <button class="progress-pill" id="btn-jump-modal" onclick="openGridModal()">
+        <a href="./index.html" class="nav-link-pill">🏠 Ana Portal</a>
+        <a href="./eticaret.html" class="nav-link-pill">🛒 E-Ticaret</a>
+        <button class="progress-pill" onclick="openGridModal()">
           <span id="header-counter">0 / 20</span>
           <span>▾</span>
         </button>
-        <button class="btn-icon" id="btn-theme" onclick="toggleTheme()" title="Karanlık/Aydınlık Tema">🌙</button>
+        <button class="btn-icon" id="btn-theme" onclick="toggleTheme()">🌙</button>
       </div>
     </div>
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="progress-bar"></div>
-    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-bar"></div></div>
   </header>
 
-  <!-- SUB-BAR: MODE SWITCH & FILTERS -->
   <div class="sub-bar">
     <div class="mode-toggle-group">
       <button class="mode-btn active" id="mode-btn-list" onclick="setMode('list')">Tüm Sorular (Liste)</button>
       <button class="mode-btn" id="mode-btn-card" onclick="setMode('card')">Tek Soru (Kart)</button>
+      
     </div>
     <div class="filters-wrap" id="filters-container">
-      <button class="filter-btn active" onclick="setFilter('all')">Tümü (20)</button>
-      <button class="filter-btn" onclick="setFilter('wrong')">✗ Yanlışlarım (<span id="cnt-filter-wrong">0</span>)</button>
-      <button class="filter-btn" onclick="setFilter('correct')">✓ Doğrularım (<span id="cnt-filter-correct">0</span>)</button>
-      <button class="filter-btn" onclick="setFilter('empty')">Boş Kalanlar (<span id="cnt-filter-empty">20</span>)</button>
-      <button class="filter-btn" onclick="setFilter('fav')">⭐ Favoriler (<span id="cnt-filter-fav">0</span>)</button>
+      <button class="filter-btn active" onclick="setFilter('all', event)">🔥 Tüm Sorular (20)</button>
+      <button class="filter-btn" onclick="setFilter('wrong', event)">✗ Yanlışlarım (<span id="cnt-filter-wrong">0</span>)</button>
+      <button class="filter-btn" onclick="setFilter('fav', event)">⭐ Favoriler (<span id="cnt-filter-fav">0</span>)</button>
     </div>
   </div>
 
-  <!-- SCORE SUMMARY BANNER (Appears upon evaluation) -->
   <div class="score-banner" id="score-banner">
     <div class="score-banner-row">
       <div>
         <h3 id="score-title" style="font-size: 18px; font-weight: 800;">Sınav Sonucu</h3>
-        <p id="score-msg" style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Cevaplarınız kontrol edildi.</p>
+        <p id="score-msg" style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Tüm şıkların neden doğru/yanlış olduğu aşağıda açılmıştır.</p>
       </div>
       <div class="score-badge-group">
-        <div class="score-item total">
-          <span style="font-size: 11px; text-transform: uppercase;">Başarı</span>
-          <span id="score-pct" style="font-size: 18px;">%0</span>
-        </div>
-        <div class="score-item correct">
-          <span style="font-size: 11px; text-transform: uppercase;">Doğru</span>
-          <span id="score-c-cnt" style="font-size: 18px;">0</span>
-        </div>
-        <div class="score-item wrong">
-          <span style="font-size: 11px; text-transform: uppercase;">Yanlış</span>
-          <span id="score-w-cnt" style="font-size: 18px;">0</span>
-        </div>
-        <div class="score-item empty">
-          <span style="font-size: 11px; text-transform: uppercase;">Boş</span>
-          <span id="score-e-cnt" style="font-size: 18px;">20</span>
-        </div>
+        <div class="score-item total"><span>Başarı</span><span id="score-pct" style="font-size: 18px;">%0</span></div>
+        <div class="score-item correct"><span>Doğru</span><span id="score-c-cnt" style="font-size: 18px;">0</span></div>
+        <div class="score-item wrong"><span>Yanlış</span><span id="score-w-cnt" style="font-size: 18px;">0</span></div>
+        <div class="score-item empty"><span>Boş</span><span id="score-e-cnt" style="font-size: 18px;">30</span></div>
       </div>
     </div>
   </div>
 
-  <!-- MAIN APP CONTAINER -->
-  <main id="app">
-    <!-- Questions Rendered Here via JS -->
-  </main>
+  <main id="app"></main>
 
-  <!-- FIXED BOTTOM FOOTER -->
   <footer>
-    <div class="footer-inner" id="footer-actions">
-      <!-- Dynamic Footer based on mode -->
-    </div>
+    <div class="footer-inner" id="footer-actions"></div>
   </footer>
 
-  <!-- QUESTION JUMP MODAL -->
-  <div class="modal-overlay" id="modal-overlay" onclick="closeGridModal(event)">
+  <div class="modal-overlay" id="modal-overlay" onclick="closeGridModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <div class="modal-title">Sorular Listesi (20 Soru)</div>
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <div style="font-size:17px; font-weight:800;">Sorular Listesi</div>
         <button class="btn-icon" onclick="closeGridModal()">✕</button>
       </div>
-      <div style="font-size: 12px; color: var(--text-muted); display:flex; gap:12px; flex-wrap:wrap;">
-        <span style="display:flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--correct);"></span> Doğru: <strong id="modal-correct-cnt">0</strong></span>
-        <span style="display:flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--wrong);"></span> Yanlış: <strong id="modal-wrong-cnt">0</strong></span>
-        <span style="display:flex; align-items:center; gap:4px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--primary-light); border:1px solid var(--primary);"></span> İşaretlenen: <strong id="modal-answered-cnt">0</strong></span>
-      </div>
-      <div class="grid-container" id="modal-grid">
-        <!-- Injected by JS -->
-      </div>
-      <div style="display:flex; gap:8px; margin-top:8px;">
+      <div class="grid-container" id="modal-grid"></div>
+      <div style="display:flex; gap:8px;">
         <button class="btn btn-secondary" style="flex:1;" onclick="resetAllAnswers()">Cevapları Sıfırla</button>
         <button class="btn btn-primary" style="flex:1;" onclick="closeGridModal()">Kapat</button>
       </div>
     </div>
   </div>
 
-  <!-- LOAD EMBEDDED OR MODULAR QUESTIONS DATA -->
-  <script src="./questions.js"></script>
   <script>
-    // Fallback embedded dataset in case questions.js isn't found
-    const FALLBACK_QUESTIONS = [
-      {
-        "id": 1,
-        "question": "İşletim sisteminde bir işlemin bittiği işlemciye ................... aracılığıyla bildirilir.\nYukarıdaki ifadede yer alan boşluğa uygun olan terim hangisidir?",
-        "options": {
-          "a": "Tampon",
-          "b": "İş parçacıkları",
-          "c": "Kesinti",
-          "d": "Yazmaç"
-        },
-        "answer": "c",
-        "explanation": "İşlemciye bir donanım veya yazılım olayının (örneğin işlemin tamamlanması, I/O bitişi vb.) haber verilmesi 'Kesinti' (Interrupt) mekanizması ile gerçekleştirilir. Tampon (Buffer) geçici veri alanıdır, iş parçacıkları (Threads) yürütme birimidir, yazmaçlar (Registers) CPU içi en hızlı bellek hücreleridir."
-      },
-      {
-        "id": 2,
-        "question": "Aşağıdaki işletim sistemlerinden hangisi kaynak kodunu genel olarak kamuoyuna açık bir şekilde paylaşır?",
-        "options": {
-          "a": "Windows",
-          "b": "Linux",
-          "c": "Unix",
-          "d": "MacOS"
-        },
-        "answer": "b",
-        "explanation": "Linux, açık kaynak kodlu (Open Source) ve GPL (Genel Kamu Lisansı) lisanslı bir işletim sistemi çekirdeğidir; kaynak kodları tüm kamuoyuyla açıkça paylaşılır. Windows ve MacOS kapalı kaynaklı ve tescillidir. Unix ise ağırlıklı olarak tescilli/ticari lisanslarla geliştirilmiştir."
-      },
-      {
-        "id": 3,
-        "question": "Aşağıdakilerden hangisi işletim sisteminin fonksiyonlarından biri olmak zorunda değildir?",
-        "options": {
-          "a": "İşlem yönetimi",
-          "b": "Disk yönetimi",
-          "c": "Güvenlik",
-          "d": "Hafıza yönetimi"
-        },
-        "answer": "c",
-        "explanation": "Basit tek kullanıcılı veya erken dönem gömülü işletim sistemlerinde (örneğin ilk MS-DOS sürümlerinde) kullanıcı kimlik doğrulaması ve güvenlik zorunlu bir bileşen değildi. Ancak işlem yönetimi, bellek yönetimi ve disk/dosya yönetimi donanımın çalışabilmesi için zorunlu temel fonksiyonlardır."
-      },
-      {
-        "id": 4,
-        "question": "Eğer bir iş giriş-çıkış işlemlerine ihtiyaç duyuyorsa ...... durumuna geçer. Boşluk için uygun terimi işaretleyiniz.",
-        "options": {
-          "a": "Askıya al/Bekle",
-          "b": "Yeni",
-          "c": "Hazır",
-          "d": "Bekleme/Bloklama"
-        },
-        "answer": "d",
-        "explanation": "Çalışmakta olan (Running) bir işlem, disk okuma veya klavye girişi gibi bir G/Ç (I/O) işlemine ihtiyaç duyduğunda CPU'yu bırakır ve I/O işlemi tamamlanana kadar 'Bekleme/Bloklama' (Waiting/Blocked) durumuna geçer."
-      },
-      {
-        "id": 5,
-        "question": "Aşağıdaki belleklerden hangisine CPU tarafından doğrudan erişim sağlanamaz?",
-        "options": {
-          "a": "RAM",
-          "b": "Sanal bellek",
-          "c": "Yazmaç",
-          "d": "Ön bellek"
-        },
-        "answer": "b",
-        "explanation": "CPU doğrudan Yazmaçlara (Registers), Ön Belleğe (L1/L2/L3 Cache) ve Ana Belleğe (RAM) bellek yolu (bus) üzerinden adresleme ile doğrudan erişebilir. Sanal bellek ise ikincil depolama (Hard Disk / SSD) üzerinde oluşturulur ve CPU disk adresine doğrudan komut işletemez; ilgili sayfalar (pages) önce RAM'e yüklenir (Swap-in)."
-      },
-      {
-        "id": 6,
-        "question": "Bir process'e ait kodlar döngü içerisinde 1-10 arası sayıların ortalamasını hesaplarken işlemcideki durumu ne olur?",
-        "options": {
-          "a": "Bekliyor",
-          "b": "Çalışıyor",
-          "c": "Hazır",
-          "d": "Yeni"
-        },
-        "answer": "b",
-        "explanation": "Döngü ve aritmetik hesaplamalar CPU'nun doğrudan yürüttüğü aktif komutlardır. Herhangi bir I/O beklemesi olmadığı için process CPU üzerinde anlık olarak 'Çalışıyor' (Running) durumundadır."
-      },
-      {
-        "id": 7,
-        "question": "Aşağıdakilerden hangisi temel işletim sistemi katmanlarından değildir?",
-        "options": {
-          "a": "Uygulama",
-          "b": "Oturum",
-          "c": "Çekirdek",
-          "d": "Kabuk"
-        },
-        "answer": "b",
-        "explanation": "İşletim sistemi mimarisinde Donanım, Çekirdek (Kernel), Kabuk/Kullanıcı Arayüzü (Shell/UI) ve Uygulama (Application) temel katmanlardır. 'Oturum' (Session) katmanı ise OSI ağ modelinin 5. katmanıdır, işletim sistemi mimari katmanı değildir."
-      },
-      {
-        "id": 8,
-        "question": "Aşağıdakilerden hangisi sistem çağrısının tanımıdır?",
-        "options": {
-          "a": "E-posta servislerinin birbiriyle haberleşmesidir.",
-          "b": "Bilgisayar donanımlarının birbiriyle etkileşimidir.",
-          "c": "İki uygulamanın birbiriyle haberleşmesidir.",
-          "d": "Çalışan bir uygulamayla işletim sisteminin iletişimidir."
-        },
-        "answer": "d",
-        "explanation": "Sistem çağrısı (System Call), kullanıcı modundaki (User Mode) bir uygulamanın çekirdek modundaki (Kernel Mode) işletim sistemi servislerine (dosya açma/kapama, bellek ayırma, donanım kontrolü vb.) erişmek için kullandığı programlama arayüzüdür."
-      },
-      {
-        "id": 9,
-        "question": "Çoklu işlemciler hakkında aşağıdaki ifadelerden hangisi doğrudur?",
-        "options": {
-          "a": "Asimetrik çoklu işlemcilerde görev dağıtan bir işlemci vardır.",
-          "b": "Asimetrik çoklu işlemcilerde tüm işlemciler eşit olarak görev alır.",
-          "c": "Simetrik çoklu işlemcilerde bir işlemci diğer işlemcilere görev dağıtan bir yapı içerisindedir.",
-          "d": "Simetrik çoklu işlemciler özellikle ilk zamanlarda kullanılmıştır."
-        },
-        "answer": "a",
-        "explanation": "Asimetrik Çoklu İşlemci (AMP) mimarisinde bir ana işlemci (Master CPU) işletim sistemini yönetir ve görevleri diğer yardımcı işlemcilere (Slave CPU) paylaştırır. Simetrikte (SMP) ise her işlemci eşittir ve işletim sistemi kodunu bağımsız olarak yürütebilir."
-      },
-      {
-        "id": 10,
-        "question": "Aşağıdaki işler FIFO (First In First Out) algoritmasıyla planlanmaktadır:\n\nİşlem | Varış Zamanı | İşlem Süresi\n--- | --- | ---\nİşlem A | 0 ms | 6 ms\nİşlem B | 1 ms | 2 ms\nİşlem C | 3 ms | 8 ms\nİşlem D | 4 ms | 3 ms\n\nBu işler için ortalama bekleme süresi nedir?",
-        "table": [
-          {"İşlem": "İşlem A", "Varış Zamanı": "0 ms", "İşlem Süresi": "6 ms"},
-          {"İşlem": "İşlem B", "Varış Zamanı": "1 ms", "İşlem Süresi": "2 ms"},
-          {"İşlem": "İşlem C", "Varış Zamanı": "3 ms", "İşlem Süresi": "8 ms"},
-          {"İşlem": "İşlem D", "Varış Zamanı": "4 ms", "İşlem Süresi": "3 ms"}
-        ],
-        "options": {
-          "a": "7.25 ms.",
-          "b": "5.5 ms.",
-          "c": "7.5 ms.",
-          "d": "6 ms."
-        },
-        "answer": "b",
-        "explanation": "FIFO Sıralaması: A (0-6 ms), B (6-8 ms), C (8-16 ms), D (16-19 ms).\nBekleme Süresi = Başlama Zamanı - Varış Zamanı:\n• İşlem A: 0 - 0 = 0 ms\n• İşlem B: 6 - 1 = 5 ms\n• İşlem C: 8 - 3 = 5 ms\n• İşlem D: 16 - 4 = 12 ms\nToplam Bekleme = 0 + 5 + 5 + 12 = 22 ms.\nOrtalama Bekleme = 22 / 4 = 5.5 ms."
-      },
-      {
-        "id": 11,
-        "question": "Bir işlemin yaşam döngüsünde aşağıdaki hangi geçiş doğrudan gerçekleşmez?",
-        "options": {
-          "a": "Çalışıyor-Hazır",
-          "b": "Çalışıyor-Sonlandı",
-          "c": "Yeni-Hazır",
-          "d": "Hazır-Bekliyor"
-        },
-        "answer": "d",
-        "explanation": "Bir işlem 'Hazır' (Ready) durumundayken CPU almayı beklemektedir; henüz çalışmadığı için G/Ç talebinde bulunamaz. Dolayısıyla Hazır -> Bekliyor geçişi doğrudan yapılamaz; işlem önce CPU alıp 'Çalışıyor' durumuna geçmeli, sonra I/O isteğiyle 'Bekliyor' durumuna geçmelidir."
-      },
-      {
-        "id": 12,
-        "question": "10. soruda yer alan tablodaki işler için Kesintili SRTF (Shortest Remaining Time First) algoritmasına göre işlem sırası ve ortalama bekleme süresi kaçtır?",
-        "options": {
-          "a": "A -> B -> A -> D -> A -> C | 3.25 ms",
-          "b": "A -> B -> D -> A -> C | 3.75 ms",
-          "c": "A -> B -> C -> D -> A | 5.00 ms",
-          "d": "A -> B -> A -> D -> C | 4.25 ms"
-        },
-        "answer": "a",
-        "explanation": "Kesintili SRTF Planlaması:\n• t=0: A (6 ms) başlar.\n• t=1: B (2 ms) gelir. Kalan A (5 ms) > B (2 ms) olduğu için A kesilir, B çalışır.\n• t=3: B biter. C (8 ms) gelir. Kalanlar: A(5 ms), C(8 ms). A çalışır.\n• t=4: D (3 ms) gelir. Kalan A (4 ms) > D (3 ms) olduğu için A kesilir, D çalışır.\n• t=7: D biter. Kalanlar: A(4 ms), C(8 ms). A çalışır.\n• t=11: A biter. C çalışır.\n• t=19: C biter.\nİşlem sırası: A -> B -> A -> D -> A -> C.\nBekleme Süreleri: B = 0 ms, D = 0 ms, A = 11 - 6 - 0 = 5 ms, C = 19 - 8 - 3 = 8 ms.\nOrtalama Bekleme = (0 + 0 + 5 + 8) / 4 = 13 / 4 = 3.25 ms."
-      },
-      {
-        "id": 13,
-        "question": "Aşağıdakilerden hangisi Von-Neumann mimarisinin bileşenlerinden biridir?",
-        "options": {
-          "a": "Bellek",
-          "b": "Çekirdek",
-          "c": "Arayüz",
-          "d": "Yazdırma birimi"
-        },
-        "answer": "a",
-        "explanation": "Von-Neumann mimarisinin temel donanım bileşenleri: Merkezi İşlem Birimi (İşlemci / CPU: ALU ve Kontrol Birimi), Bellek Birimi (Memory) ve Giriş/Çıkış (I/O) mekanizmasıdır. Çekirdek ve Arayüz yazılımsal katmanlardır."
-      },
-      {
-        "id": 14,
-        "question": "Tüm işletim sistemindeki kaynakların paylaşılmasından ve düzenlenmesinden sorumlu katman hangisidir?",
-        "options": {
-          "a": "G/Ç sistemi",
-          "b": "Çekirdek",
-          "c": "Arayüz",
-          "d": "Bellek yönetimi"
-        },
-        "answer": "b",
-        "explanation": "Çekirdek (Kernel), işletim sisteminin merkezinde yer alır ve CPU, bellek, disk, I/O gibi tüm donanım ve yazılım kaynaklarının güvenli, adil ve senkronize paylaşımını yönetir."
-      },
-      {
-        "id": 15,
-        "question": "Merkezi işlem birimlerinin içinde yer alan küçük boyutlu ve çok hızlı erişilebilen bellek türü hangisidir?",
-        "options": {
-          "a": "Yazmaç-Register",
-          "b": "RAM",
-          "c": "Mantık birimi",
-          "d": "Veri yolu"
-        },
-        "answer": "a",
-        "explanation": "Yazmaçlar (Registers), CPU çekirdeği içerisine entegre edilmiş, en hızlı ve doğrudan saat çevrimiyle erişilen küçük kapasiteli geçici veri saklama alanlarıdır."
-      },
-      {
-        "id": 16,
-        "question": "Aşağıdakilerden hangisi işlem kontrol bloğunda (PCB - Process Control Block) yer almaz?",
-        "options": {
-          "a": "İşlem durumu",
-          "b": "Bellek yönetimi bilgisi",
-          "c": "İşlem numarası",
-          "d": "İşletim sisteminin performans bilgileri"
-        },
-        "answer": "d",
-        "explanation": "İşlem Kontrol Bloğu (PCB), belirli tek bir sürecin yönetim bilgilerini (PID, işlem durumu, Program Counter, CPU yazmaçları, bellek sınırları vb.) içerir. Genel işletim sistemi performans bilgileri PCB içinde tutulmaz."
-      },
-      {
-        "id": 17,
-        "question": "Aşağıda verilen görevlerden hangisi tüm işletim sistemi yazılımlarının temel sorumluluklarından biri değildir?",
-        "options": {
-          "a": "Ağ yönetimi",
-          "b": "Dosya yönetimi",
-          "c": "İş yönetimi",
-          "d": "Sunucu yönetimi"
-        },
-        "answer": "a",
-        "explanation": "Her işletim sistemi bir ağa bağlı olmak veya ağ yönetimi sunmak zorunda değildir (örneğin izole gömülü sistemler veya ilk kişisel bilgisayar işletim sistemleri). Dosya, iş ve bellek yönetimi ise her sistem için temeldir."
-      },
-      {
-        "id": 18,
-        "question": "Diskten ana belleğin boş bir alanına işlem veya iş parçacığı taşınmasına ---- denir. Boşluk için uygun terimi işaretleyiniz.",
-        "options": {
-          "a": "Swap out",
-          "b": "Disk yönetimi",
-          "c": "Swap in",
-          "d": "Öncelik ataması"
-        },
-        "answer": "c",
-        "explanation": "Sanal bellek mekanizmasında diskteki takas alanından ana belleğe (RAM) işlem getirilmesine 'Swap in'; ana bellekten diske çıkarılmasına ise 'Swap out' denir."
-      },
-      {
-        "id": 19,
-        "question": "Aşağıdaki tabloda verilen işlemler için:\n\nİşlem | Varış Zamanı | İşlem Süresi\n--- | --- | ---\nP1 | 0 ms | 7 ms\nP2 | 1 ms | 4 ms\nP3 | 2 ms | 8 ms\n\nPreemptive Shortest Job First (PSJF / Kesintili) ve Non-Preemptive Shortest Job First (SJF / Kesintisiz) algoritmaları için işlem sırası nasıldır?",
-        "table": [
-          {"İşlem": "P1", "Varış Zamanı": "0 ms", "İşlem Süresi": "7 ms"},
-          {"İşlem": "P2", "Varış Zamanı": "1 ms", "İşlem Süresi": "4 ms"},
-          {"İşlem": "P3", "Varış Zamanı": "2 ms", "İşlem Süresi": "8 ms"}
-        ],
-        "options": {
-          "A": "PSJF: P1 -> P2 -> P1 -> P3 | SJF: P1 -> P2 -> P3",
-          "B": "PSJF: P1 -> P2 -> P3 -> P1 | SJF: P1 -> P3 -> P2",
-          "C": "PSJF: P2 -> P1 -> P3 | SJF: P2 -> P1 -> P3",
-          "D": "PSJF: P1 -> P2 -> P3 | SJF: P1 -> P2 -> P3"
-        },
-        "answer": "A",
-        "explanation": "• PSJF (Kesintili): t=0'da P1 başlar. t=1'de P2 (4 ms) gelir, P1'in kalan süresi 6 ms > 4 ms olduğundan P1 kesilir, P2 çalışır (t=5'e kadar). Sonra hazırda bekleyen P1 (6 ms) ve P3 (8 ms) arasından P1 seçilir (t=11'e kadar). Son olarak P3 çalışır. Sıra: P1 -> P2 -> P1 -> P3.\n• SJF (Kesintisiz): t=0'da P1 başlar ve bitene kadar kesilmez (t=7). t=7'de bekleyen P2 (4 ms) ve P3 (8 ms) arasından kısa olan P2 çalışır (t=11), ardından P3 çalışır. Sıra: P1 -> P2 -> P3."
-      },
-      {
-        "id": 20,
-        "question": "İşlem 1: 3 ms  | İşlem 2: 6 ms\nİşlem 3: 2 ms | İşlem 4: 8 ms\n(Tüm işlemlerin varış zamanı 0 kabul edildiğinde)\nBu işlemler FIFO ve SJF algoritmalarına göre sıralandığında, hangi algoritmada ortalama bekleme süresi daha düşüktür ve bu süre nedir?",
-        "options": {
-          "a": "FIFO - 6.5 ms",
-          "b": "SJF - 4.5 ms",
-          "c": "SJF - 5.5 ms",
-          "d": "FIFO - 5.75 ms"
-        },
-        "answer": "b",
-        "explanation": "SJF Sıralaması (Kısadan uzuna): İşlem 3 (2 ms) -> İşlem 1 (3 ms) -> İşlem 2 (6 ms) -> İşlem 4 (8 ms).\nBekleme Süreleri:\n• İşlem 3: 0 ms\n• İşlem 1: 2 ms\n• İşlem 2: 2 + 3 = 5 ms\n• İşlem 4: 5 + 6 = 11 ms\nToplam Bekleme = 0 + 2 + 5 + 11 = 18 ms.\nOrtalama Bekleme = 18 / 4 = 4.5 ms.\n(FIFO'da 1->2->3->4 sırasıyla ortalama bekleme (0 + 3 + 9 + 11)/4 = 5.75 ms olur. SJF 4.5 ms ile daha düşüktür)."
-      }
-    ];
-
-    const QUESTIONS = (window.ISLETIM_QUESTIONS && window.ISLETIM_QUESTIONS.length > 0) 
-      ? window.ISLETIM_QUESTIONS 
-      : FALLBACK_QUESTIONS;
-
+    const QUESTIONS = [{"id": 9001, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 1 • Kesintiler (Interrupts)", "question": "İşletim sisteminde bir işlemin bittiği işlemciye ................... aracılığıyla bildirilir.\nYukarıdaki ifadede yer alan boşluğa uygun olan terim hangisidir?", "code": null, "options": {"A": "Tampon", "B": "İş parçacıkları", "C": "Kesinti", "D": "Yazmaç"}, "answer": "C", "explanation": "Doğru Cevap: C (Kesinti). İşlemciye bir donanım veya yazılım olayının (örneğin işlemin tamamlanması, I/O bitişi vb.) haber verilmesi 'Kesinti' (Interrupt) mekanizması ile gerçekleştirilir.", "explanations": {"A": "Yanlış: Tampon (Buffer), cihazlar veya süreçler arasında hız farkını dengelemek için kullanılan geçici veri saklama alanıdır.", "B": "Yanlış: İş parçacıkları (Threads), bir process içindeki eşzamanlı yürütme birimleridir.", "C": "DOĞRU YANIT: Kesinti (Interrupt), bir işlemin veya G/Ç olayının tamamlandığını işlemciye bildiren sinyaldir.", "D": "Yanlış: Yazmaç (Register), CPU içinde yer alan en hızlı ve küçük boyutlu bellek birimidir."}}, {"id": 9002, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 2 • Açık Kaynak İşletim Sistemleri", "question": "Aşağıdaki işletim sistemlerinden hangisi kaynak kodunu genel olarak kamuoyuna açık bir şekilde paylaşır?", "code": null, "options": {"A": "Windows", "B": "Linux", "C": "Unix", "D": "MacOS"}, "answer": "B", "explanation": "Doğru Cevap: B (Linux). Linux, açık kaynak kodlu (Open Source) ve GPL (Genel Kamu Lisansı) lisanslı bir işletim sistemidir; kaynak kodları tüm kamuoyuyla açıkça paylaşılır.", "explanations": {"A": "Yanlış: Microsoft Windows kapalı kaynak kodlu (propietary/tescilli) ticari bir işletim sistemidir.", "B": "DOĞRU YANIT: Linux, kaynak kodunu kamuoyuna açık olarak paylaşan (Open Source) bir işletim sistemidir.", "C": "Yanlış: Orijinal AT&T Unix ve ticari türevleri (AIX, HP-UX, Solaris) kapalı kaynaklı/tescilli sistemlerdir.", "D": "Yanlış: Apple macOS kapalı kaynak kodlu ve yalnızca Apple donanımlarında lisanslı çalışan tescilli bir sistemdir."}}, {"id": 9003, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 3 • İşletim Sistemi Fonksiyonları", "question": "Aşağıdakilerden hangisi işletim sisteminin fonksiyonlarından biri olmak zorunda değildir?", "code": null, "options": {"A": "İşlem yönetimi", "B": "Disk yönetimi", "C": "Güvenlik", "D": "Hafıza yönetimi"}, "answer": "C", "explanation": "Doğru Cevap: C (Güvenlik). Basit tek kullanıcılı veya erken dönem gömülü işletim sistemlerinde (örneğin ilk MS-DOS sürümlerinde) kullanıcı kimlik doğrulaması ve güvenlik zorunlu bir bileşen değildi. İşlem, hafıza ve disk yönetimi ise temel zorunlu fonksiyonlardır.", "explanations": {"A": "Yanlış: İşlem (Process) yönetimi, CPU üzerinde programların çalıştırılması için her işletim sisteminde zorunludur.", "B": "Yanlış: Disk ve dosya yönetimi, verilerin depolanması ve okunması için temel fonksiyonlardandır.", "C": "DOĞRU YANIT: Güvenlik, tek kullanıcılı veya izole basit işletim sistemlerinde zorunlu bir fonksiyon değildir.", "D": "Yanlış: Hafıza (Bellek) yönetimi, çalışan programlara RAM tahsisi yapmak için her işletim sisteminde zorunludur."}}, {"id": 9004, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 4 • İşlem Durumları (Process States)", "question": "Eğer bir iş giriş-çıkış işlemlerine ihtiyaç duyuyorsa ...... durumuna geçer. Boşluk için uygun terimi işaretleyiniz.", "code": null, "options": {"A": "Askıya al/Bekle", "B": "Yeni", "C": "Hazır", "D": "Bekleme/Bloklama"}, "answer": "D", "explanation": "Doğru Cevap: D (Bekleme/Bloklama). Çalışmakta olan (Running) bir işlem, disk okuma veya klavye girişi gibi bir G/Ç (I/O) işlemine ihtiyaç duyduğunda CPU'yu bırakır ve I/O tamamlanana kadar 'Bekleme/Bloklama' (Waiting/Blocked) durumuna geçer.", "explanations": {"A": "Yanlış: Standart 5 durumlu süreç diyagramında G/Ç bekleyen süreç 'Bekleme/Bloklama' (Waiting/Blocked) olarak adlandırılır.", "B": "Yanlış: Yeni (New), sürecin henüz oluşturulmakta olduğu ilk başlangıç durumudur.", "C": "Yanlış: Hazır (Ready), G/Ç eksiği olmayan ve sadece CPU sırası bekleyen süreçlerin durumudur.", "D": "DOĞRU YANIT: Giriş-çıkış (I/O) işlemine ihtiyaç duyan süreç 'Bekleme/Bloklama' (Waiting/Blocked) durumuna geçer."}}, {"id": 9005, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 5 • Bellek Hiyerarşisi", "question": "Aşağıdaki belleklerden hangisine CPU tarafından doğrudan erişim sağlanamaz?", "code": null, "options": {"A": "RAM", "B": "Sanal bellek", "C": "Yazmaç", "D": "Ön bellek"}, "answer": "B", "explanation": "Doğru Cevap: B (Sanal bellek). CPU doğrudan Yazmaçlara (Registers), Ön Belleğe (Cache) ve Ana Belleğe (RAM) erişebilir. Sanal bellek ise disk (HDD/SSD) üzerinde tutulur; CPU diske doğrudan erişemez, veriler önce RAM'e taşınmalıdır (Swap-in).", "explanations": {"A": "Yanlış: RAM (Ana Bellek), CPU'nun bellek veri yolu üzerinden doğrudan okuyup yazabildiği birincil bellektir.", "B": "DOĞRU YANIT: Sanal bellek sabit disk üzerinde yer aldığı için CPU tarafından doğrudan erişilemez; önce RAM'e yüklenir.", "C": "Yanlış: Yazmaçlar (Registers) bizzat CPU'nun kendi içindeki bellek birimleridir, doğrudan erişilir.", "D": "Yanlış: Ön bellek (L1/L2/L3 Cache) CPU içinde veya hemen yanında yer alır ve CPU tarafından doğrudan erişilir."}}, {"id": 9006, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 6 • İşlem Durumları (Running)", "question": "Bir process'e ait kodlar döngü içerisinde 1-10 arası sayıların ortalamasını hesaplarken işlemcideki durumu ne olur?", "code": null, "options": {"A": "Bekliyor", "B": "Çalışıyor", "C": "Hazır", "D": "Yeni"}, "answer": "B", "explanation": "Doğru Cevap: B (Çalışıyor). Döngü ve aritmetik ortalama hesaplaması CPU'nun ALU birimi tarafından aktif olarak yürütülen komutlardır. Dolayısıyla process o anda işlemcide 'Çalışıyor' (Running) durumundadır.", "explanations": {"A": "Yanlış: Bekliyor (Waiting), sürecin CPU'da değil G/Ç (disk, klavye vb.) beklediği durumdur.", "B": "DOĞRU YANIT: Aritmetik döngü hesaplaması CPU üzerinde aktif yürütüldüğü için süreç 'Çalışıyor' (Running) durumundadır.", "C": "Yanlış: Hazır (Ready), sürecin çalışmaya hazır olup kuyrukta CPU sırası beklediği durumdur.", "D": "Yanlış: Yeni (New), sürecin henüz belleğe yüklenmekte olduğu başlangıç durumudur."}}, {"id": 9007, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 7 • İşletim Sistemi Katmanları", "question": "Aşağıdakilerden hangisi temel işletim sistemi katmanlarından değildir?", "code": null, "options": {"A": "Uygulama", "B": "Oturum", "C": "Çekirdek", "D": "Kabuk"}, "answer": "B", "explanation": "Doğru Cevap: B (Oturum). Temel işletim sistemi katmanları: Donanım -> Çekirdek (Kernel) -> Kabuk (Shell) -> Uygulama (Application) şeklindedir. 'Oturum' (Session) katmanı ise bilgisayar ağlarındaki OSI referans modelinin 5. katmanıdır.", "explanations": {"A": "Yanlış: Uygulama (Application) katmanı, son kullanıcı programlarının çalıştığı en üst katmandır.", "B": "DOĞRU YANIT: Oturum (Session) katmanı işletim sistemi mimarisinde değil, OSI ağ modelinde yer alır.", "C": "Yanlış: Çekirdek (Kernel), donanımı doğrudan yöneten en temel işletim sistemi katmanıdır.", "D": "Yanlış: Kabuk (Shell), kullanıcı ile çekirdek arasındaki komut/arayüz katmanıdır."}}, {"id": 9008, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 8 • Sistem Çağrısı (System Call)", "question": "Aşağıdakilerden hangisi sistem çağrısının tanımıdır?", "code": null, "options": {"A": "E-posta servislerinin birbiriyle haberleşmesidir.", "B": "Bilgisayar donanımlarının birbiriyle etkileşimidir.", "C": "İki uygulamanın birbiriyle haberleşmesidir.", "D": "Çalışan bir uygulamayla işletim sisteminin iletişimidir."}, "answer": "D", "explanation": "Doğru Cevap: D (Çalışan bir uygulamayla işletim sisteminin iletişimidir). Sistem çağrısı (System Call), kullanıcı modunda çalışan bir programın, çekirdek modundaki işletim sistemi hizmetlerinden (dosya okuma, süreç oluşturma, bellek tahsisi vb.) yararlanmak için işletim sistemiyle kurduğu iletişimdir.", "explanations": {"A": "Yanlış: E-posta servislerinin haberleşmesi SMTP/POP/IMAP gibi ağ protokolleriyle gerçekleşir.", "B": "Yanlış: Donanımların birbiriyle etkileşimi veri yolları (bus) ve donanım denetleyicileriyle yapılır.", "C": "Yanlış: İki uygulamanın haberleşmesi Süreçler Arası İletişim (IPC - Inter-Process Communication) olarak adlandırılır.", "D": "DOĞRU YANIT: Sistem çağrısı (System Call), çalışan bir uygulama ile işletim sistemi çekirdeği arasındaki iletişim arayüzüdür."}}, {"id": 9009, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 9 • Çoklu İşlemciler (AMP & SMP)", "question": "Çoklu işlemciler hakkında aşağıdaki ifadelerden hangisi doğrudur?", "code": null, "options": {"A": "Asimetrik çoklu işlemcilerde görev dağıtan bir işlemci vardır.", "B": "Asimetrik çoklu işlemcilerde tüm işlemciler eşit olarak görev alır.", "C": "Simetrik çoklu işlemcilerde bir işlemci diğer işlemcilere görev dağıtan bir yapı içerisindedir.", "D": "Simetrik çoklu işlemciler özellikle ilk zamanlarda kullanılmıştır."}, "answer": "A", "explanation": "Doğru Cevap: A (Asimetrik çoklu işlemcilerde görev dağıtan bir işlemci vardır). Asimetrik Çoklu İşleme (AMP) yapısında bir 'Master' (Ana) işlemci sistemi kontrol eder ve 'Slave' (Uydu) işlemcilere görev dağıtır. Simetrik Çoklu İşlemede (SMP) ise tüm işlemciler eşittir.", "explanations": {"A": "DOĞRU YANIT: Asimetrik çoklu işlemcilerde (AMP) işleri kontrol eden ve diğerlerine görev dağıtan bir ana (master) işlemci vardır.", "B": "Yanlış: Tüm işlemcilerin eşit görev aldığı yapı Asimetrik değil, Simetrik Çoklu İşleme (SMP) yapısıdır.", "C": "Yanlış: Simetrik çoklu işlemcilerde patron-işçi (master-slave) hiyerarşisi yoktur, tüm işlemciler akbandır.", "D": "Yanlış: İlk zamanlarda donanım ve işletim sistemi tasarımı daha basit olduğu için Asimetrik çoklu işlemciler kullanılmıştır; günümüzde SMP yaygındır."}}, {"id": 9010, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 10 • FIFO CPU Zamanlama Algoritması", "question": "FIFO algoritmasıyla aşağıdaki tabloda verilen işler için ortalama bekleme süresi nedir?", "code": "İşlem    Varış Zamanı    İşlem Süresi\n-------------------------------------\nİşlem A      0 ms            6 ms\nİşlem B      1 ms            2 ms\nİşlem C      3 ms            8 ms\nİşlem D      4 ms            3 ms", "options": {"A": "7.25 ms.", "B": "5.5 ms.", "C": "7.5 ms.", "D": "6 ms."}, "answer": "B", "explanation": "Doğru Cevap: B (5.5 ms). FIFO (First-In First-Out) Sıralaması: A (0-6 ms), B (6-8 ms), C (8-16 ms), D (16-19 ms). Bekleme Süresi = Başlama - Varış: A = 0-0 = 0 ms; B = 6-1 = 5 ms; C = 8-3 = 5 ms; D = 16-4 = 12 ms. Toplam = 0 + 5 + 5 + 12 = 22 ms. Ortalama = 22 / 4 = 5.5 ms.", "explanations": {"A": "Yanlış: Toplam bekleme süresi 29 ms değil 22 ms'dir (22 / 4 = 5.5 ms).", "B": "DOĞRU YANIT: Bekleme süreleri A=0, B=5, C=5, D=12 ms olup ortalaması (0+5+5+12)/4 = 5.5 ms'dir.", "C": "Yanlış: Varış zamanları çıkarılmadan hesaplandığında bulunan hatalı değerdir.", "D": "Yanlış: Ortalama bekleme süresi 22 / 4 = 5.5 ms'dir."}}, {"id": 9011, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 11 • İşlem Yaşam Döngüsü Geçişleri", "question": "Bir işlemin yaşam döngüsünde aşağıdaki hangi geçiş doğrudan gerçekleşmez?", "code": null, "options": {"A": "Çalışıyor-Hazır", "B": "Çalışıyor-Sonlandı", "C": "Yeni-Hazır", "D": "Hazır-Bekliyor"}, "answer": "D", "explanation": "Doğru Cevap: D (Hazır-Bekliyor). 'Hazır' (Ready) kuyruğundaki bir işlem henüz CPU'da çalışmadığı için G/Ç (I/O) isteği yapamaz ve doğrudan 'Bekliyor' (Waiting) durumuna geçemez. Sadece 'Çalışıyor' (Running) durumundaki bir işlem G/Ç isteği yaparak 'Bekliyor' durumuna geçebilir.", "explanations": {"A": "Yanlış (Gerçekleşir): Süresi (time slice) dolan veya kesintiye uğrayan işlem Çalışıyor -> Hazır durumuna doğrudan geçer.", "B": "Yanlış (Gerçekleşir): Görevini tamamlayan işlem Çalışıyor -> Sonlandı (Terminated) durumuna doğrudan geçer.", "C": "Yanlış (Gerçekleşir): Belleğe kabul edilen yeni bir süreç Yeni -> Hazır kuyruğuna doğrudan geçer.", "D": "DOĞRU YANIT: Hazır durumundaki işlem CPU'da olmadığı için G/Ç talep edemez; Hazır -> Bekliyor geçişi doğrudan gerçekleşmez."}}, {"id": 9012, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 12 • Kesintili SRTF Algoritması", "question": "10. soruda yer alan tablodaki işler için Kesintili SRTF algoritmasına göre işlem sırası ve ortalama bekleme süresi kaçtır?", "code": "İşlem    Varış Zamanı    İşlem Süresi\n-------------------------------------\nİşlem A      0 ms            6 ms\nİşlem B      1 ms            2 ms\nİşlem C      3 ms            8 ms\nİşlem D      4 ms            3 ms", "options": {"A": "A -> B -> A -> D -> A -> C | 3.25 ms", "B": "A -> B -> D -> A -> C | 3.75 ms", "C": "A -> B -> C -> D -> A | 5.00 ms", "D": "A -> B -> A -> D -> C | 4.25 ms"}, "answer": "A", "explanation": "Doğru Cevap: A (A -> B -> A -> D -> A -> C | 3.25 ms). t=0'da A(6) başlar. t=1'de B(2) gelir, A(kalan 5) kesilir, B çalışır (1-3 ms). t=3'te B biter, C(8) gelir, A(5) < C(8) olduğundan A çalışır (3-4 ms). t=4'te D(3) gelir, A(kalan 4) kesilir, D çalışır (4-7 ms). t=7'de D biter, A(4) çalışır (7-11 ms). t=11-19 arası C(8) çalışır. Beklemeler: B=0, D=0, A=11-6-0=5, C=19-8-3=8 ms. Ortalama = (0+0+5+8)/4 = 3.25 ms.", "explanations": {"A": "DOĞRU YANIT: t=3 ile t=4 arasında A 1 ms çalıştığı için sıra A -> B -> A -> D -> A -> C olur ve ortalama bekleme 13/4 = 3.25 ms'dir.", "B": "Yanlış: t=3'te B bittiğinde D henüz gelmemiştir (D t=4'te gelir), bu yüzden t=3..4 arasında A çalışır.", "C": "Yanlış: C'nin süresi 8 ms olduğu için en son çalışmalıdır.", "D": "Yanlış: D bittikten sonra (t=7) kalan süresi 4 ms olan A tekrar çalışıp bitmeli, C en son çalışmalıdır."}}, {"id": 9013, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 13 • Von-Neumann Mimarisi", "question": "Aşağıdakilerden hangisi Von-Neumann mimarisinin bileşenlerinden biridir?", "code": null, "options": {"A": "Bellek", "B": "Çekirdek", "C": "Arayüz", "D": "Yazdırma birimi"}, "answer": "A", "explanation": "Doğru Cevap: A (Bellek). Von-Neumann bilgisayar mimarisinin temel donanım bileşenleri: Merkezi İşlem Birimi (CPU: ALU + Kontrol Birimi), Bellek Birimi (Memory) ve Giriş/Çıkış (I/O) birimleridir.", "explanations": {"A": "DOĞRU YANIT: Bellek (Memory Unit), komutların ve verilerin birlikte saklandığı temel Von-Neumann donanım bileşenidir.", "B": "Yanlış: Çekirdek (Kernel), donanım mimarisi bileşeni değil işletim sisteminin yazılım katmanıdır.", "C": "Yanlış: Kullanıcı arayüzü (UI/GUI), işletim sisteminin yazılımsal etkileşim katmanıdır.", "D": "Yanlış: Yazdırma birimi harici bir çevre birimidir, temel Von-Neumann mimari bloklarından biri değildir."}}, {"id": 9014, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 14 • Çekirdek (Kernel) Görevleri", "question": "Tüm işletim sistemindeki kaynakların paylaşılmasından ve düzenlenmesinden sorumlu katman hangisidir?", "code": null, "options": {"A": "G/Ç sistemi", "B": "Çekirdek", "C": "Arayüz", "D": "Bellek yönetimi"}, "answer": "B", "explanation": "Doğru Cevap: B (Çekirdek). Çekirdek (Kernel), işletim sisteminin kalbidir; donanım ile yazılım arasında köprü kurarak tüm sistem kaynaklarının (CPU, bellek, G/Ç aygıtları) paylaşılmasından ve düzenlenmesinden sorumludur.", "explanations": {"A": "Yanlış: G/Ç sistemi yalnızca giriş-çıkış aygıtlarının iletişiminden sorumludur, tüm kaynakları yönetmez.", "B": "DOĞRU YANIT: Çekirdek (Kernel), işletim sistemindeki tüm donanım ve sistem kaynaklarının paylaşımından sorumlu ana katmandır.", "C": "Yanlış: Arayüz (Shell/GUI), yalnızca kullanıcının sistemle etkileşim kurmasını sağlar.", "D": "Yanlış: Bellek yönetimi, çekirdeğin alt bileşenlerinden sadece biridir ve yalnızca RAM tahsisini yönetir."}}, {"id": 9015, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 15 • Yazmaçlar (Registers)", "question": "Merkezi işlem birimlerinin içinde yer alan küçük boyutlu ve çok hızlı erişilebilen bellek türü hangisidir?", "code": null, "options": {"A": "Yazmaç-Register", "B": "RAM", "C": "Mantık birimi", "D": "Veri yolu"}, "answer": "A", "explanation": "Doğru Cevap: A (Yazmaç-Register). Merkezi İşlem Birimi (CPU) içerisinde bulunan, o an işlenen komut ve verileri tutan en küçük boyutlu ve en yüksek hızlı bellek birimi Yazmaçtır (Register).", "explanations": {"A": "DOĞRU YANIT: Yazmaç (Register), doğrudan CPU içinde yer alan, çok küçük boyutlu ve en hızlı erişilebilen bellek türüdür.", "B": "Yanlış: RAM, CPU'nun dışında anakart üzerinde yer alan büyük kapasiteli ana bellektir.", "C": "Yanlış: Mantık birimi (ALU - Aritmetik Mantık Birimi), bellek değil toplama/karşılaştırma işlemlerini yapan işlem birimidir.", "D": "Yanlış: Veri yolu (Bus), bellek değil bileşenler arasında veri taşıyan iletim hattıdır."}}, {"id": 9016, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 16 • İşlem Kontrol Bloğu (PCB)", "question": "Aşağıdakilerden hangisi işlem kontrol bloğunda yer almaz?", "code": null, "options": {"A": "İşlem durumu", "B": "Bellek yönetimi bilgisi", "C": "İşlem numarası", "D": "İşletim sisteminin performans bilgileri"}, "answer": "D", "explanation": "Doğru Cevap: D (İşletim sisteminin performans bilgileri). İşlem Kontrol Bloğu (PCB - Process Control Block), yalnızca ilgili tekil işleme (process) ait bilgileri (İşlem numarası/PID, işlem durumu, program sayacı, yazmaçlar, bellek sınırları vb.) tutar; tüm işletim sisteminin genel performans bilgilerini içermez.", "explanations": {"A": "Yanlış (PCB'de yer alır): Sürecin o anki durumu (Hazır, Çalışıyor, Bekliyor) PCB içinde tutulur.", "B": "Yanlış (PCB'de yer alır): Sürece tahsis edilen sayfa tabloları ve bellek sınırları PCB'de yer alır.", "C": "Yanlış (PCB'de yer alır): Her sürecin benzersiz kimlik numarası (PID) PCB'de kayıtlıdır.", "D": "DOĞRU YANIT: İşletim sisteminin genel performans bilgileri tek bir sürecin PCB bloğunda yer almaz."}}, {"id": 9017, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 17 • İşletim Sistemi Sorumlulukları", "question": "Aşağıda verilen görevlerden hangisi tüm işletim sistemi yazılımlarının temel sorumluluklarından biri değildir?", "code": null, "options": {"A": "Ağ yönetimi", "B": "Dosya yönetimi", "C": "İş yönetimi", "D": "Sunucu yönetimi"}, "answer": "A", "explanation": "Doğru Cevap: A (Ağ yönetimi). Tüm işletim sistemleri bir ağa bağlı olmak zorunda değildir (örneğin bağımsız/stand-alone çalışan sistemler veya erken dönem işletim sistemleri). Bu nedenle sorunun resmi cevap anahtarında 'Ağ yönetimi' doğru yanıt olarak kabul edilmektedir.", "explanations": {"A": "DOĞRU YANIT: Ağ yönetimi, ağ bağlantısı olmayan tekil/bağımsız işletim sistemlerinde temel zorunluluk değildir (Cevap anahtarı: A).", "B": "Yanlış: Dosya yönetimi, verilerin saklanması ve organize edilmesi için temel sorumluluktur.", "C": "Yanlış: İş (Süreç/Process) yönetimi, tüm işletim sistemlerinin en temel görevidir.", "D": "Yanlış: Çeldirici seçenektir (Sınav cevap anahtarında A şıkkı doğru cevap olarak tanımlanmıştır)."}}, {"id": 9018, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 18 • Bellek Takası (Swap In / Swap Out)", "question": "Diskten ana belleğin boş bir alanına işlem veya iş parçacığı taşınmasına ---- denir. Boşluk için uygun terimi işaretleyiniz.", "code": null, "options": {"A": "Swap out", "B": "Disk yönetimi", "C": "Swap in", "D": "Öncelik ataması"}, "answer": "C", "explanation": "Doğru Cevap: C (Swap in). Diskteki sanal bellek/takas alanından ana belleğe (RAM) işlem yüklenmesine 'Swap in' (İçeri takas), ana bellekten (RAM) diske taşınmasına ise 'Swap out' (Dışarı takas) denir.", "explanations": {"A": "Yanlış: Swap out, işlemin ana bellekten (RAM) çıkarılıp diske yazılması işlemidir.", "B": "Yanlış: Disk yönetimi, sabit diskteki sektörlerin ve dosya sisteminin genel yönetimidir.", "C": "DOĞRU YANIT: Swap in, diskten ana belleğin (RAM) boş bir alanına işlem/iş parçacığı taşınmasıdır.", "D": "Yanlış: Öncelik ataması, CPU zamanlayıcısının süreçlere önem derecesi vermesidir."}}, {"id": 9019, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 19 • PSJF ve SJF Algoritmaları", "question": "Tablodaki process'ler için Preemptive Shortest Job First (PSJF/Kesintili) ve Non-Preemptive Shortest Remaining Time First (SJF/Kesintisiz) algoritmaları kullanılacaktır. Algoritmalar için işlem sırası nasıldır?", "code": "İşlem    Varış Zamanı    İşlem Süresi\n-------------------------------------\nP1           0 ms            7 ms\nP2           1 ms            4 ms\nP3           2 ms            8 ms", "options": {"A": "PSJF: P1 -> P2 -> P1 -> P3 | SJF: P1 -> P2 -> P3", "B": "PSJF: P1 -> P2 -> P3 -> P1 | SJF: P1 -> P3 -> P2", "C": "PSJF: P2 -> P1 -> P3 | SJF: P2 -> P1 -> P3", "D": "PSJF: P1 -> P2 -> P3 | SJF: P1 -> P2 -> P3"}, "answer": "A", "explanation": "Doğru Cevap: A (PSJF: P1 -> P2 -> P1 -> P3 | SJF: P1 -> P2 -> P3). Kesintili PSJF'de t=0'da P1(7) başlar; t=1'de P2(4) geldiğinde P1'in kalan süresi 6 ms > 4 ms olduğu için P1 kesilir ve P2 çalışır (1-5 ms). Ardından P1(6) < P3(8) olduğundan P1 tamamlanır, en son P3 çalışır. Kesintisiz SJF'de ise t=0'da başlayan P1 bitene kadar (7 ms) kesilmez, sonra kısa olan P2(4) ve en son P3(8) çalışır.", "explanations": {"A": "DOĞRU YANIT: Kesintili PSJF'de P1 -> P2 -> P1 -> P3, kesintisiz SJF'de ise P1 -> P2 -> P3 sırasıyla çalışır.", "B": "Yanlış: P3'ün süresi (8 ms) en uzun olduğu için P1 veya P2'den önce çalışamaz.", "C": "Yanlış: t=0 anında sistemde sadece P1 olduğu için her iki algoritmada da ilk başlayan süreç P1 olmalıdır.", "D": "Yanlış: PSJF kesintili (preemptive) olduğundan t=1'de gelen P2(4 ms), P1'i (kalan 6 ms) keserek araya girer."}}, {"id": 9020, "course": "isletim_vize", "week": 1, "week_title": "İşletim Sistemleri Vize Testi (20 Soru)", "qType": "test", "difficulty": "Vize Sorusu", "test_type": "İşletim Sistemleri - Vize Test Soruları", "category": "Soru 20 • FIFO ve SJF Karşılaştırması", "question": "İşlem 1: 3 ms  | İşlem 2: 6 ms\nİşlem 3: 2 ms | İşlem 4: 8 ms\nBu işlemler FIFO ve SJF algoritmalarına göre sıralandığında, hangi algoritmada ortalama bekleme süresi daha düşüktür ve bu süre nedir?", "code": "İşlem 1: 3 ms  |  İşlem 2: 6 ms\nİşlem 3: 2 ms  |  İşlem 4: 8 ms", "options": {"A": "FIFO - 6.5 ms", "B": "SJF - 4.5 ms", "C": "SJF - 5.5 ms", "D": "FIFO - 5.75 ms"}, "answer": "B", "explanation": "Doğru Cevap: B (SJF - 4.5 ms). SJF algoritması işleri en kısadan en uzuna sıralar: İşlem 3 (2 ms) -> İşlem 1 (3 ms) -> İşlem 2 (6 ms) -> İşlem 4 (8 ms). Bekleme süreleri: İşlem 3 = 0 ms, İşlem 1 = 2 ms, İşlem 2 = 2+3 = 5 ms, İşlem 4 = 2+3+6 = 11 ms. Ortalama bekleme = (0 + 2 + 5 + 11) / 4 = 18 / 4 = 4.5 ms. (FIFO'da ise (0 + 3 + 9 + 11) / 4 = 5.75 ms olur; SJF 4.5 ms ile daha düşüktür).", "explanations": {"A": "Yanlış: FIFO ortalama bekleme süresi 5.75 ms'dir ve SJF'den daha yüksektir.", "B": "DOĞRU YANIT: SJF sıralamasında (2ms -> 3ms -> 6ms -> 8ms) ortalama bekleme süresi (0+2+5+11)/4 = 4.5 ms ile en düşüktür.", "C": "Yanlış: SJF ortalama bekleme süresi 5.5 ms değil, 18 / 4 = 4.5 ms'dir.", "D": "Yanlış: FIFO'nun süresi gerçekten 5.75 ms'dir ancak soru 'hangisinde daha düşüktür' dediği için 4.5 ms olan SJF doğrudur."}}];
+    const SUMMARY_TOPICS = [["1. Mobil Kuşak Sınıflandırmaları", "Doğru Cevap: 3.5G", "1G, 2G, 3G, 4G, 5G ve 6G mobil iletişimin standart ana nesilleridir (kuşaklarıdır). 3.5G (HSPA gibi), 3G ile 4G arasında bir ara geçiş formudur; temel kuşak sınıflandırması olarak kabul edilmez."], ["2. GSM Cihaz Kimliği Kısaltmaları", "Doğru Cevap: IMEI (Uluslararası Mobil Cihaz Kodu)", "• SIM: Telefona takılan abone kimlik modülüdür (karttır).\n• IMSI: Abonenin uluslararası kimliğidir (cihazın değil, kişinin/hattın).\n• UMTS: Bir 3G ağ teknolojisidir, kimlik numarası değildir."], ["3. GSM Altyapısı Bileşenleri", "Doğru Cevap: Baz İstasyonu", "• Mobil İstasyon: Cep telefonunuz ve içindeki SIM kartın bütününe verilen addır.\n• Anahtarlama Sistemi: Aramaları yönlendiren ve sanal kanalları oluşturan santral sistemidir.\n• Destek Sistemi: Tüm ağın izlenmesi, bakımı ve denetlenmesini yapar."], ["4. İnternet Protokolleri (Dosya Aktarımı)", "Doğru Cevap: FTP (File Transfer Protocol)", "• WWW: İnternet üzerindeki zengin içerikli çoklu ortam web sistemidir.\n• HTML: Web sayfalarını oluşturmaya yarayan işaretleme dilidir.\n• NNTP: İnternet üzerindeki haber grupları protokolüdür.\n• POP: E-postaları sunucudan bilgisayara indirmeye yarayan protokoldür."], ["5. Bluetooth'un Özellikleri", "Doğru Cevap: I ve II", "III. Madde neden yanlış? Bluetooth telif haklarıyla korunan (lisanslı/ücretli) bir teknoloji değil; açık standartlı ve telif hakkı/lisans gerektirmeyen radyo frekanslarında çalışan bir teknolojidir."], ["6. Wi-Fi'ın Özellikleri", "Doğru Cevap: I ve II", "III. Madde neden yanlış? Wi-Fi diğer kablosuz WPAN ağlarına (örneğin Bluetooth veya ZigBee'ye) göre daha az değil, daha FAZLA güç tüketir. Mobil cihazların şarjını hızla tüketmesinin sebebi budur."], ["7. Kablo TV'nin Özellikleri", "Doğru Cevap: Ücretsiz kullanılabilmesi", "Kablo TV ücretli bir abonelik sistemidir. Frekans kirlenmemesi, yüksek görüntü/ses kalitesi, sesli/hareketli denetim ve interaktif altyapı sunması Kablo TV'nin gerçek teknik özellikleridir."], ["8. Dijital Yayın Uygulamaları", "Doğru Cevap: Sadece tek yönlü iletişime imkân vermesi", "Sadece tek yönlü iletişim dijital değil, Analog TV'nin özelliğidir. Dijital TV oyun, bankacılık, VOD (film seç-izle) ve evden alışveriş gibi çift yönlü etkileşim (interaktif) imkânları sağlar."], ["9. İntranetin Özellikleri", "Doğru Cevap: Sınırsız erişimli özel bir ağ olarak faaliyet gösterir", "İntranet 'sınırsız' değildir; kurum içine kapalıdır, kuruma özel bilgiyle sınırlıdır ve sadece yetkili çalışanların girmesine izin veren özel bir ağdır."], ["10. E-Ticaretin Alıcıya Dezavantajları", "Doğru Cevap: Reklamcılık ve pazarlama harcaması gerektirmesi", "Reklama para harcamak satıcıyı/işletmeyi ilgilendiren bir maliyettir, alıcı (müşteri) reklam parası ödemez. Kredi kartı olmaması, güven sorunu, malı canlı görememe ve kargo hasarı alıcının yaşadığı dezavantajlardır."], ["11. WWW (World Wide Web)", "Doğru Cevap: WWW", "TELNET başka bir bilgisayara uzaktan komutla bağlanmayı, FTP dosya aktarmayı sağlar. Metin, resim, ses, video ve animasyonu etkileşimli çoklu ortam olarak sunan sistem WWW'dir."], ["12. GSM Standartları (Kablosuz Veri Transferi)", "Doğru Cevap: EDGE", "IMEI bir cihaz kodudur. Bluetooth ve Wi-Fi hücresel (GSM) ağları değil WPAN/WLAN ağlarıdır. PDA ise eski cep bilgisayarı cihazıdır. EDGE (ve GPRS) ise GSM hücresel veri aktarım standartlarıdır."], ["13. Yönlendirici (Router)", "Doğru Cevap: Yönlendirici", "Host ağa bağlı cihazın kendisidir, Alan adı (DNS) cihazın ismidir. Gelen veri paketlerinin adreslerine bakıp en uygun yoldan hedefe yollayan trafik polisi görevi gören cihaz Yönlendiricidir (Router)."], ["14. Yöneticilere / Örgütlere / Tüketicilere / Topluma Faydaların Ayrımı", "Faydanın 'Kime' Sağlandığına Odaklanın", "• Yaşam standardının yükselmesi -> TOPLUMSAL yarardır (sadece yöneticinin değil).\n• Ürün seçme zorluğu -> ALICININ (tüketicinin) dezavantajıdır (satıcının değil).\n• Rekabetin zorlaşması -> Örgüt için yarar değil, bir tehdittir.\n• Etkileşimli tedarik zinciri ve stok yönetimi -> ÖRGÜTSEL (B2B) yarardır; bireysel tüketicinin veya toplumun doğrudan yararı değildir."], ["15. E-Ticaretin Teknik ve Ekonomik Boyutu", "Doğru Cevap: Karşılıklı güven sorunu / Örgütsel iletişim", "• Karşılıklı güven sorunu: Teknolojik/teknik bir sorun değil, psikolojik/sosyal/hukuki bir sorundur.\n• Örgütsel iletişim: Pazarlama, finansman ve tedarik ekonomik faaliyetlerdir; şirket içi örgütsel iletişim ise yönetimsel bir süreçtir."], ["16. EDI (Elektronik Veri Değişimi)", "Dezavantaj olmayan: Yaygın Kullanım | Fayda olmayan: Bilgi Yoğunluğu", "• EDI pahalı ve kapalı bir sistem olduğundan KOBİ'lerce yaygın kullanılamaz ('yaygın kullanım' dezavantajı değildir).\n• EDI evrak ve bilgi karmaşasını azaltmak için vardır ('bilgi yoğunluğu' bir fayda olamaz)."], ["17. Smart TV (Akıllı TV)", "Doğru Cevap: Smart TV", "Analog veya Dijital TV yayın sinyal teknolojisini ifade eder. İçine işletim sistemi (Android, Tizen, webOS) konmuş ve ekstra uygulamalar çalıştırabilen görüntüleme sistemine Smart TV denir."], ["18. İlk Bilgisayar Ağı (ARPANET)", "Doğru Cevap: ARPANET", "DARPA projeyi kuran ABD savunma kurumu, BBN donanımı üreten şirket, NSFNET ise daha sonra kurulan üniversite ağıdır. İnternetin gerçek atası olan ilk bilgisayar ağı ARPANET'tir."]];
     const STORAGE_KEY_ANS = "isletim_answers_v1";
     const STORAGE_KEY_FAV = "isletim_favs_v1";
     const STORAGE_KEY_THEME = "app_theme_mode";
 
-    let currentMode = "list"; // "list" or "card"
-    let currentFilter = "all"; // "all", "wrong", "correct", "empty", "fav"
-    let userAnswers = {}; // { qId: "c" }
+    let currentMode = "list";
+    let currentFilter = "all";
+    let userAnswers = {};
     let userFavs = new Set();
     let isEvaluated = false;
     let cardCurrentIndex = 0;
 
-    // Load from storage
     try {
-      const savedAns = localStorage.getItem(STORAGE_KEY_ANS);
-      if (savedAns) userAnswers = JSON.parse(savedAns);
-      const savedFavs = localStorage.getItem(STORAGE_KEY_FAV);
-      if (savedFavs) userFavs = new Set(JSON.parse(savedFavs));
-      const savedTheme = localStorage.getItem(STORAGE_KEY_THEME) || localStorage.getItem("algopy_theme");
-      if (savedTheme === "dark" || (!savedTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      const sAns = localStorage.getItem(STORAGE_KEY_ANS);
+      if (sAns) userAnswers = JSON.parse(sAns);
+      const sFav = localStorage.getItem(STORAGE_KEY_FAV);
+      if (sFav) userFavs = new Set(JSON.parse(sFav));
+      const sTheme = localStorage.getItem(STORAGE_KEY_THEME) || localStorage.getItem("algopy_theme");
+      if (sTheme === "dark" || (!sTheme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
         document.documentElement.classList.add("dark");
         document.getElementById("btn-theme").textContent = "☀️";
       }
-    } catch(e) {
-      console.warn("Storage load:", e);
-    }
+    } catch(e) {}
 
     function saveState() {
       try {
@@ -1084,9 +330,9 @@
     function toggleTheme() {
       const isDark = document.documentElement.classList.toggle("dark");
       document.getElementById("btn-theme").textContent = isDark ? "☀️" : "🌙";
-      try { 
-        localStorage.setItem(STORAGE_KEY_THEME, isDark ? "dark" : "light"); 
-        localStorage.setItem("algopy_theme", isDark ? "dark" : "light"); 
+      try {
+        localStorage.setItem(STORAGE_KEY_THEME, isDark ? "dark" : "light");
+        localStorage.setItem("algopy_theme", isDark ? "dark" : "light");
       } catch(e) {}
     }
 
@@ -1094,81 +340,62 @@
       currentMode = mode;
       document.getElementById("mode-btn-list").classList.toggle("active", mode === "list");
       document.getElementById("mode-btn-card").classList.toggle("active", mode === "card");
+      const gBtn = document.getElementById("mode-btn-guide");
+      if (gBtn) gBtn.classList.toggle("active", mode === "guide");
       renderApp();
     }
 
-    function setFilter(filter) {
+    function setFilter(filter, ev) {
       currentFilter = filter;
       document.querySelectorAll("#filters-container .filter-btn").forEach(b => b.classList.remove("active"));
-      event && event.target && event.target.classList.add("active");
-      renderApp();
+      if (ev && ev.target) ev.target.classList.add("active");
+      cardCurrentIndex = 0;
+      if (currentMode === "guide") setMode("list");
+      else renderApp();
     }
 
     function getFilteredQuestions() {
       return QUESTIONS.filter(q => {
         const ans = userAnswers[q.id];
         const hasAns = ans !== undefined;
-        const isCorrect = hasAns && ans.toLowerCase() === q.answer.toLowerCase();
-
+        const isCorrect = hasAns && ans.toUpperCase() === q.answer.toUpperCase();
+        if (currentFilter === "week1") return q.week === 1;
+        if (currentFilter === "week2") return q.week === 2;
         if (currentFilter === "all") return true;
         if (currentFilter === "wrong") return hasAns && !isCorrect;
-        if (currentFilter === "correct") return hasAns && isCorrect;
-        if (currentFilter === "empty") return !hasAns;
         if (currentFilter === "fav") return userFavs.has(q.id);
         return true;
       });
     }
 
     function updateCounters() {
-      let correctCnt = 0;
-      let wrongCnt = 0;
-      let answeredCnt = 0;
-
-      QUESTIONS.forEach(q => {
+      const activeList = getFilteredQuestions();
+      let cCnt = 0, wCnt = 0, aCnt = 0;
+      activeList.forEach(q => {
         const a = userAnswers[q.id];
         if (a !== undefined) {
-          answeredCnt++;
-          if (a.toLowerCase() === q.answer.toLowerCase()) correctCnt++;
-          else wrongCnt++;
+          aCnt++;
+          if (a.toUpperCase() === q.answer.toUpperCase()) cCnt++;
+          else wCnt++;
         }
       });
-
-      const emptyCnt = QUESTIONS.length - answeredCnt;
-
-      document.getElementById("header-counter").textContent = answeredCnt + " / " + QUESTIONS.length;
-      document.getElementById("cnt-filter-wrong").textContent = wrongCnt;
-      document.getElementById("cnt-filter-correct").textContent = correctCnt;
-      document.getElementById("cnt-filter-empty").textContent = emptyCnt;
+      let totalWrong = 0;
+      QUESTIONS.forEach(q => {
+        const a = userAnswers[q.id];
+        if (a !== undefined && a.toUpperCase() !== q.answer.toUpperCase()) totalWrong++;
+      });
+      document.getElementById("header-counter").textContent = aCnt + " / " + activeList.length;
+      document.getElementById("cnt-filter-wrong").textContent = totalWrong;
       document.getElementById("cnt-filter-fav").textContent = userFavs.size;
-
-      document.getElementById("modal-correct-cnt").textContent = correctCnt;
-      document.getElementById("modal-wrong-cnt").textContent = wrongCnt;
-      document.getElementById("modal-answered-cnt").textContent = answeredCnt;
-
-      const pct = Math.round((answeredCnt / QUESTIONS.length) * 100);
+      const pct = activeList.length > 0 ? Math.round((aCnt / activeList.length) * 100) : 0;
       document.getElementById("progress-bar").style.width = pct + "%";
 
-      if (isEvaluated) {
-        const scorePct = Math.round((correctCnt / QUESTIONS.length) * 100);
+      if (isEvaluated && activeList.length > 0) {
+        const scorePct = Math.round((cCnt / activeList.length) * 100);
         document.getElementById("score-pct").textContent = "%" + scorePct;
-        document.getElementById("score-c-cnt").textContent = correctCnt;
-        document.getElementById("score-w-cnt").textContent = wrongCnt;
-        document.getElementById("score-e-cnt").textContent = emptyCnt;
-        
-        let title = "Sınav Sonucu";
-        let msg = "Cevaplarınız değerlendirildi.";
-        if (scorePct >= 85) {
-          title = "Mükemmel Başarı! 🎉";
-          msg = "Harika bir performans, işletim sistemleri konularına oldukça hakimsin!";
-        } else if (scorePct >= 60) {
-          title = "Tebrikler, Geçtiniz! 👍";
-          msg = "İyi gidiyorsunuz, hatalı soruların açıklamalarını inceleyerek pekiştirebilirsiniz.";
-        } else {
-          title = "Tekrar Çalışmalısınız! 📚";
-          msg = "Algoritmaları ve bekleme süresi hesaplamalarını tekrar gözden geçirmeniz önerilir.";
-        }
-        document.getElementById("score-title").textContent = title;
-        document.getElementById("score-msg").textContent = msg;
+        document.getElementById("score-c-cnt").textContent = cCnt;
+        document.getElementById("score-w-cnt").textContent = wCnt;
+        document.getElementById("score-e-cnt").textContent = activeList.length - aCnt;
         document.getElementById("score-banner").classList.add("show");
       }
     }
@@ -1176,12 +403,7 @@
     function selectOption(qId, key) {
       userAnswers[qId] = key;
       saveState();
-      
-      if (currentMode === "list") {
-        updateSingleQuestionUI(qId);
-      } else {
-        renderCardMode();
-      }
+      renderApp();
     }
 
     function toggleFav(qId) {
@@ -1199,7 +421,7 @@
     }
 
     function resetAllAnswers() {
-      if (confirm("Tüm verdiğiniz cevaplar ve sınav sonucu sıfırlansın mı?")) {
+      if (confirm("Tüm cevaplarınız sıfırlansın mı?")) {
         userAnswers = {};
         isEvaluated = false;
         document.getElementById("score-banner").classList.remove("show");
@@ -1209,283 +431,158 @@
       }
     }
 
-    function renderTableHtml(tableData) {
-      if (!tableData || tableData.length === 0) return "";
-      const headers = Object.keys(tableData[0]);
-      let html = '<div class="table-container"><table class="data-table"><thead><tr>';
-      headers.forEach(h => { html += `<th>${escapeHtml(h)}</th>`; });
-      html += '</tr></thead><tbody>';
-      tableData.forEach(row => {
-        html += '<tr>';
-        headers.forEach(h => { html += `<td>${escapeHtml(row[h])}</td>`; });
-        html += '</tr>';
-      });
-      html += '</tbody></table></div>';
-      return html;
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
     }
 
-    function renderQuestionCard(q, indexNumber) {
+    function renderQuestionCard(q, idxLabel) {
       const userSel = userAnswers[q.id];
       const hasSel = userSel !== undefined;
       const isFav = userFavs.has(q.id);
-      const isCorrect = hasSel && userSel.toLowerCase() === q.answer.toLowerCase();
+      const isCorrect = hasSel && userSel.toUpperCase() === q.answer.toUpperCase();
+      const showDetails = isEvaluated || hasSel;
 
       let cardClass = "card";
-      if (isEvaluated) {
-        cardClass += " evaluated " + (isCorrect ? "is-correct" : "is-wrong");
-      }
+      if (showDetails) cardClass += " evaluated " + (isCorrect ? "is-correct" : "is-wrong");
 
       let optionsHtml = '<div class="options-list">';
       for (const [key, text] of Object.entries(q.options)) {
-        const isThisSelected = hasSel && userSel.toLowerCase() === key.toLowerCase();
-        const isThisRightAnswer = key.toLowerCase() === q.answer.toLowerCase();
-
+        const isSelected = hasSel && userSel.toUpperCase() === key.toUpperCase();
+        const isRight = key.toUpperCase() === q.answer.toUpperCase();
         let optClass = "option-btn";
-        let optIcon = key.toUpperCase();
-
-        if (isEvaluated) {
-          if (isThisRightAnswer) {
-            optClass += " correct-highlight";
-            optIcon = "✓";
-          } else if (isThisSelected) {
-            optClass += " wrong-highlight";
-            optIcon = "✗";
-          } else {
-            optClass += " faded";
-          }
-        } else if (isThisSelected) {
+        let icon = key;
+        if (showDetails) {
+          if (isRight) { optClass += " correct-highlight"; icon = "✓"; }
+          else if (isSelected) { optClass += " wrong-highlight"; icon = "✗"; }
+        } else if (isSelected) {
           optClass += " selected";
         }
-
+        const optReason = (showDetails && q.explanations && q.explanations[key])
+          ? `<div class="opt-reason">${escapeHtml(q.explanations[key])}</div>`
+          : "";
         optionsHtml += `
           <button class="${optClass}" onclick="selectOption(${q.id}, '${key}')">
-            <span class="opt-key">${optIcon}</span>
-            <span class="opt-text">${escapeHtml(text)}</span>
+            <span class="opt-key">${icon}</span>
+            <div class="opt-content">
+              <span class="opt-text">${escapeHtml(text)}</span>
+              ${optReason}
+            </div>
           </button>
         `;
       }
       optionsHtml += '</div>';
 
-      // Explanation box (shown when evaluated, or user can toggle)
-      let explanationHtml = "";
-      if (isEvaluated || (currentMode === "card" && hasSel)) {
+      let expHtml = "";
+      if (showDetails) {
         const boxClass = isCorrect ? "success" : "danger";
-        explanationHtml = `
-          <div class="explanation-box show ${boxClass}">
-            <div style="font-weight:800; margin-bottom:4px; display:flex; align-items:center; justify-content:space-between;">
-              <span>${isCorrect ? '✓ Doğru Yanıt' : '✗ Hatalı / Yanlış Yanıt'}</span>
-              <span style="font-size:11px; text-transform:uppercase;">Doğru Şık: <strong>${q.answer.toUpperCase()}</strong></span>
+        expHtml = `
+          <div class="explanation-box ${boxClass}">
+            <div style="font-weight:800; margin-bottom:6px; display:flex; justify-content:space-between;">
+              <span>${isCorrect ? '✓ Doğru Yanıt!' : '✗ Yanlış Yanıt — Doğru Cevap: ' + q.answer}</span>
+              <span>Şık Analizi & Neden Diğerleri Değil?</span>
             </div>
-            <div style="opacity:0.95; white-space:pre-line;">${escapeHtml(q.explanation)}</div>
+            <div style="white-space:pre-line;">${escapeHtml(q.explanation)}</div>
           </div>
         `;
-      }
-
-      let statusBadge = "";
-      if (isEvaluated) {
-        statusBadge = isCorrect 
-          ? '<span class="badge-status c">✓ Doğru</span>' 
-          : '<span class="badge-status w">✗ Yanlış</span>';
       }
 
       return `
         <div class="${cardClass}" id="q-card-${q.id}">
           <div class="q-meta">
             <div style="display:flex; align-items:center; gap:8px;">
-              <span class="badge badge-subject">Soru ${indexNumber}</span>
-              ${statusBadge}
+              <span class="badge badge-subject">${escapeHtml(idxLabel)} • ${escapeHtml(q.category)}</span>
             </div>
-            <div style="display:flex; align-items:center; gap:6px;">
-              <button class="btn-icon" style="width:30px; height:30px; font-size:14px;" 
-                onclick="toggleFav(${q.id})" title="Favori">
-                ${isFav ? '⭐' : '☆'}
-              </button>
-              <span style="font-size:11px; color:var(--text-muted); font-weight:700;">#${q.id}</span>
-            </div>
+            <button class="btn-icon" style="width:30px; height:30px; font-size:14px;" onclick="toggleFav(${q.id})">
+              ${isFav ? '⭐' : '☆'}
+            </button>
           </div>
-          <div class="q-text">${escapeHtml(q.question)}</div>
-          ${renderTableHtml(q.table)}
+          <div class="q-text">${escapeHtml(q.question)}</div>${q.code ? `<pre style="background:var(--bg); border:1px solid var(--border); padding:12px; border-radius:10px; font-family:'Fira Code',monospace; font-size:12px; overflow-x:auto; margin-bottom:14px;">${escapeHtml(q.code)}</pre>` : ""}
           ${optionsHtml}
-          ${explanationHtml}
+          ${expHtml}
         </div>
       `;
-    }
-
-    function updateSingleQuestionUI(qId) {
-      const q = QUESTIONS.find(item => item.id === qId);
-      if (!q) return;
-      const idx = QUESTIONS.indexOf(q) + 1;
-      const el = document.getElementById("q-card-" + qId);
-      if (el) {
-        el.outerHTML = renderQuestionCard(q, idx);
-      }
-    }
-
-    function renderListMode() {
-      const container = document.getElementById("app");
-      const list = getFilteredQuestions();
-
-      if (list.length === 0) {
-        container.innerHTML = `
-          <div class="card" style="text-align:center; padding:40px 20px;">
-            <p style="font-size:16px; font-weight:700; margin-bottom:8px;">Bu filtrede soru bulunamadı.</p>
-            <button class="btn btn-primary" onclick="setFilter('all')">Tüm Soruları Göster</button>
-          </div>
-        `;
-        renderFooterList();
-        return;
-      }
-
-      let html = "";
-      list.forEach(q => {
-        const fullIndex = QUESTIONS.indexOf(q) + 1;
-        html += renderQuestionCard(q, fullIndex);
-      });
-      container.innerHTML = html;
-      renderFooterList();
-    }
-
-    function renderCardMode() {
-      const container = document.getElementById("app");
-      const list = getFilteredQuestions();
-
-      if (list.length === 0) {
-        container.innerHTML = `
-          <div class="card" style="text-align:center; padding:40px 20px;">
-            <p style="font-size:16px; font-weight:700; margin-bottom:8px;">Bu filtrede soru bulunamadı.</p>
-            <button class="btn btn-primary" onclick="setFilter('all')">Tüm Soruları Göster</button>
-          </div>
-        `;
-        renderFooterCard(0, 0);
-        return;
-      }
-
-      if (cardCurrentIndex >= list.length) cardCurrentIndex = 0;
-      const q = list[cardCurrentIndex];
-      const fullIndex = QUESTIONS.indexOf(q) + 1;
-
-      container.innerHTML = renderQuestionCard(q, `${cardCurrentIndex + 1}/${list.length} (Soru ${fullIndex})`);
-      renderFooterCard(cardCurrentIndex, list.length);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function renderFooterList() {
-      const footer = document.getElementById("footer-actions");
-      const answeredCnt = Object.keys(userAnswers).length;
-      
-      footer.innerHTML = `
-        <button class="btn btn-secondary" onclick="resetAllAnswers()">Sıfırla</button>
-        <button class="btn btn-primary btn-full" onclick="finishTest()">
-          ${isEvaluated ? '✓ Sonuçları Yenile' : `Testi Bitir / Sonucu Gör (${answeredCnt}/${QUESTIONS.length})`}
-        </button>
-      `;
-    }
-
-    function renderFooterCard(curIdx, totalLen) {
-      const footer = document.getElementById("footer-actions");
-      footer.innerHTML = `
-        <div class="single-nav-row">
-          <button class="btn btn-secondary single-nav-btn" onclick="prevCard()" ${curIdx === 0 ? 'disabled style="opacity:0.5;"' : ''}>
-            ◄ Önceki
-          </button>
-          <button class="btn btn-primary single-nav-btn" onclick="nextCard()">
-            ${curIdx === totalLen - 1 ? 'Son Soru' : 'Sonraki ►'}
-          </button>
-        </div>
-      `;
-    }
-
-    function nextCard() {
-      const list = getFilteredQuestions();
-      if (cardCurrentIndex < list.length - 1) {
-        cardCurrentIndex++;
-        renderCardMode();
-      } else {
-        if (!isEvaluated && confirm("Tüm soruları tamamladınız! Testi değerlendirmek ve sonucu görmek ister misiniz?")) {
-          finishTest();
-        }
-      }
-    }
-
-    function prevCard() {
-      if (cardCurrentIndex > 0) {
-        cardCurrentIndex--;
-        renderCardMode();
-      }
     }
 
     function renderApp() {
+      const container = document.getElementById("app");
+      const footer = document.getElementById("footer-actions");
+
+      if (currentMode === "guide") {
+        let html = '<div class="card"><h2 style="font-size:18px; font-weight:800; margin-bottom:8px;">📖 Testteki Soruların Mantığı ve Diğer Şıklar Neden Yanlış? (18 Başlık)</h2><p style="font-size:13px; color:var(--text-muted);">Sınavdaki 30 sorunun konu bazlı çeldirici şık analizi:</p></div>';
+        SUMMARY_TOPICS.forEach(([title, rightAns, body]) => {
+          html += `
+            <div class="card">
+              <div style="font-size:15px; font-weight:800; color:var(--primary); margin-bottom:4px;">${escapeHtml(title)}</div>
+              <div style="font-size:13px; font-weight:700; margin-bottom:6px;">✓ ${escapeHtml(rightAns)}</div>
+              <div style="font-size:13px; color:var(--text); white-space:pre-line; line-height:1.55;">${escapeHtml(body)}</div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+        footer.innerHTML = `<button class="btn btn-primary btn-full" onclick="setMode('list')">🔥 Test Sorularına Dön</button>`;
+        updateCounters();
+        return;
+      }
+
+      const list = getFilteredQuestions();
+      if (list.length === 0) {
+        container.innerHTML = `<div class="card" style="text-align:center; padding:36px;"><p style="font-weight:700; margin-bottom:10px;">Bu filtrede soru bulunamadı.</p><button class="btn btn-primary" onclick="setFilter('week1')">30 Çıkmış Soruyu Göster</button></div>`;
+        footer.innerHTML = "";
+        updateCounters();
+        return;
+      }
+
       if (currentMode === "list") {
-        renderListMode();
+        let html = "";
+        list.forEach((q, i) => { html += renderQuestionCard(q, `Soru ${i + 1}`); });
+        container.innerHTML = html;
+        footer.innerHTML = `
+          <button class="btn btn-secondary" onclick="resetAllAnswers()">Sıfırla</button>
+          <button class="btn btn-primary btn-full" onclick="finishTest()">
+            Testi Bitir / Tüm Şık Analizlerini Gör
+          </button>
+        `;
       } else {
-        renderCardMode();
+        if (cardCurrentIndex >= list.length) cardCurrentIndex = 0;
+        const q = list[cardCurrentIndex];
+        container.innerHTML = renderQuestionCard(q, `Soru ${cardCurrentIndex + 1} / ${list.length}`);
+        footer.innerHTML = `
+          <button class="btn btn-secondary" style="flex:1;" onclick="if(cardCurrentIndex>0){cardCurrentIndex--;renderApp();window.scrollTo(0,0);}">◄ Önceki</button>
+          <button class="btn btn-primary" style="flex:1;" onclick="if(cardCurrentIndex<${list.length-1}){cardCurrentIndex++;renderApp();window.scrollTo(0,0);}else{finishTest();}">Sonraki ►</button>
+        `;
       }
       updateCounters();
     }
 
-    // Modal Grid Navigation
     function openGridModal() {
-      const overlay = document.getElementById("modal-overlay");
+      const list = getFilteredQuestions();
       const grid = document.getElementById("modal-grid");
       grid.innerHTML = "";
-
-      QUESTIONS.forEach((q, idx) => {
+      list.forEach((q, idx) => {
         const btn = document.createElement("button");
         btn.className = "q-jump-btn";
-        
         const ans = userAnswers[q.id];
         if (ans !== undefined) {
-          if (isEvaluated) {
-            if (ans.toLowerCase() === q.answer.toLowerCase()) btn.classList.add("correct");
-            else btn.classList.add("wrong");
-          } else {
-            btn.classList.add("answered");
-          }
+          if (ans.toUpperCase() === q.answer.toUpperCase()) btn.classList.add("correct");
+          else btn.classList.add("wrong");
         }
-
         btn.textContent = idx + 1;
         btn.onclick = () => {
           closeGridModal();
-          if (currentMode === "card") {
-            const list = getFilteredQuestions();
-            const pos = list.indexOf(q);
-            if (pos !== -1) {
-              cardCurrentIndex = pos;
-            } else {
-              setFilter("all");
-              cardCurrentIndex = idx;
-            }
-            renderCardMode();
-          } else {
-            const targetEl = document.getElementById("q-card-" + q.id);
-            if (targetEl) {
-              targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
-              targetEl.style.boxShadow = "0 0 0 3px var(--primary)";
-              setTimeout(() => { targetEl.style.boxShadow = ""; }, 1500);
-            }
+          if (currentMode === "card") { cardCurrentIndex = idx; renderApp(); }
+          else {
+            const el = document.getElementById("q-card-" + q.id);
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
           }
         };
         grid.appendChild(btn);
       });
-
-      overlay.style.display = "block";
+      document.getElementById("modal-overlay").style.display = "block";
     }
 
-    function closeGridModal(e) {
-      document.getElementById("modal-overlay").style.display = "none";
-    }
+    function closeGridModal() { document.getElementById("modal-overlay").style.display = "none"; }
 
-    function escapeHtml(str) {
-      if (!str) return "";
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    // Initial load
     renderApp();
   </script>
 </body>
